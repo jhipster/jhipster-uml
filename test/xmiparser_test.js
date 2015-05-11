@@ -202,10 +202,6 @@ describe('XMIParser', function() {
           expect(firstElementKeys).to.include('type');
         });
 
-        it('has a flag telling if it has a lower value', function() {
-          expect(firstElementKeys).to.include('isLowerValuePresent');
-        });
-
         it('has a flag telling if it has an upper value', function() {
           expect(firstElementKeys).to.include('isUpperValuePresent');
         });
@@ -286,10 +282,6 @@ describe('XMIParser', function() {
               expect(firstElementKeys).to.include('type');
             });
 
-            it('has a aggregation', function() {
-              expect(firstElementKeys).to.include('aggregation');
-            });
-
             it('has a association', function() {
               expect(firstElementKeys).to.include('association');
             });
@@ -297,11 +289,7 @@ describe('XMIParser', function() {
             it('has a class', function() {
               expect(firstElementKeys).to.include('class');
             });
-
-            it('has a flag if the lower value is present', function() {
-              expect(firstElementKeys).to.include('isLowerValuePresent');
-            });
-
+            
             it('has a flag if the upper value is present', function() {
               expect(firstElementKeys).to.include('isUpperValuePresent');
             });
@@ -352,77 +340,17 @@ describe('XMIParser', function() {
               describe('#isOneToMany', function() {
                 describe('when passing valid parameters', function() {
                   it('returns true', function() {
-                    expect(
-                      parser.isOneToMany('shared', true, true, true, false)
-                    ).to.equal(true);
+                    expect(parser.isOneToMany(true, false)).to.equal(true);
 
-                    expect(
-                      parser.isOneToMany('shared', true, false, true, true)
-                    ).to.equal(true);
+                    expect(parser.isOneToMany(false, true)).to.equal(true);
                   });
                 });
 
                 describe('when passing invalid parameters', function() {
                   it('returns false', function() {
-                    expect(
-                      parser.isOneToMany('composition', true, true, true, false)
-                    ).to.equal(false);
+                    expect(parser.isOneToMany(true, true)).to.equal(false);
 
-                    expect(
-                      parser.isOneToMany('shared', false, false, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, false, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, false, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, false, true, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, true, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, true, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, true, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', false, true, true, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, false, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, false, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, false, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, true, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, true, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isOneToMany('shared', true, true, true, true)
-                    ).to.equal(false);
+                    expect(parser.isOneToMany(false, false)).to.equal(false);
                   });
                 });
               });
@@ -430,73 +358,17 @@ describe('XMIParser', function() {
               describe('#isManyToMany', function() {
                 describe('when passing valid parameters', function() {
                   it('returns true', function() {
-                    expect(
-                      parser.isManyToMany('shared', true, true, true, true)
-                    ).to.equal(true);
+                    expect(parser.isManyToMany(true, true)).to.equal(true);
                   });
                 });
 
                 describe('when passing invalid parameters', function() {
                   it('returns false', function() {
-                    expect(
-                      parser.isManyToMany('shared', false, false, false, false)
-                    ).to.equal(false);
+                    expect(parser.isManyToMany(false, false)).to.equal(false);
 
-                    expect(
-                      parser.isManyToMany('shared', false, false, false, true)
-                    ).to.equal(false);
+                    expect(parser.isManyToMany(false, true)).to.equal(false);
 
-                    expect(
-                      parser.isManyToMany('shared', false, false, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', false, false, true, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', false, true, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', false, true, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', false, true, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', false, true, true, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, false, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, false, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, false, true, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, false, true, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, true, false, false)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, true, false, true)
-                    ).to.equal(false);
-
-                    expect(
-                      parser.isManyToMany('shared', true, true, true, false)
-                    ).to.equal(false);
+                    expect(parser.isManyToMany(true, false)).to.equal(false);
                   });
                 });
               });

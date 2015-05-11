@@ -120,6 +120,9 @@ XMIParser.prototype.findRawPackagedElements = function() {
  * Gets the elements named 'OwnedRule' in order to gather the validation ids.
  */
 XMIParser.prototype.findRawOwnedRules = function() {
+  if (!this.root.ownedRule) {
+    return;
+  }
   for (var i = 0, n = this.root.ownedRule.length; i < n; i++) {
     switch (this.root.ownedRule[i].$['xmi:type']) {
       case 'uml:Constraint':
@@ -154,11 +157,18 @@ XMIParser.prototype.fillPrimitiveTypes = function() {
 XMIParser.prototype.fillAssociations = function() {
   for (var i = 0; i < this.rawAssociationsIndexes.length; i++) {
     var element = this.root.packagedElement[this.rawAssociationsIndexes[i]];
+    var name = (element['ownedEnd'] != null) 
+                 ? element['ownedEnd'][0].$['name'] 
+                 : '';
+    var type = (element['ownedEnd'] != null) 
+                 ? element['ownedEnd'][0].$['type'] 
+                 : '';
+
     this.associations[element.$['xmi:id']] = {
-      isLowerValuePresent: element['ownedEnd'][0]['lowerValue'] != null,
-      isUpperValuePresent: element['ownedEnd'][0]['upperValue'] != null,
-      name: element['ownedEnd'][0].$['name'],
-      type: element['ownedEnd'][0].$['type']
+      isUpperValuePresent: element['ownedEnd'] != null 
+                            && element['ownedEnd'][0]['upperValue'] != null,
+      name: name,
+      type: type
     }
   }
 }
@@ -199,7 +209,7 @@ XMIParser.prototype.addClass = function(element) {
  * @param {string} classId the encapsulating class' id.
  */
 XMIParser.prototype.addField = function(element, classId) {
-  if (element.$['aggregation'] || element.$['association']) {
+  if (element.$['association']) {
     this.addInjectedField(element, classId);
   } else {
     this.addRegularField(element, classId);
@@ -240,12 +250,16 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
   this.injectedFields[element.$['xmi:id']] = {
     name: element.$['name'],
     type: element.$['type'],
-    aggregation: element.$['aggregation'],
     association: element.$['association'],
     'class': classId,
-    isLowerValuePresent: element['lowerValue'] != null,
-    isUpperValuePresent: element['upperValue'] != null
+    isUpperValuePresent: false
   }
+  if (element['upperValue'] != null 
+      && element['upperValue'][0].$['value'] != null) {
+    this.injectedFields[element.$['xmi:id']]['isUpperValuePresent'] =
+      element['upperValue'][0].$['value'] == '*';
+  }
+
   this.injectedFields[element.$['xmi:id']]['cardinality'] =
     this.getCardinality(this.injectedFields[element.$['xmi:id']]);
   this.classes[classId].injectedFields.push(element.$['xmi:id']);
@@ -324,17 +338,11 @@ XMIParser.prototype.getCardinality = function(injectedField) {
       this.associations[injectedField.association].isUpperValuePresent)) {
     return ONE_TO_ONE;
   } else if (this.isOneToMany(
-      injectedField.aggregation,
-      injectedField.isLowerValuePresent,
       injectedField.isUpperValuePresent,
-      this.associations[injectedField.association].isLowerValuePresent,
       this.associations[injectedField.association].isUpperValuePresent)) {
     return ONE_TO_MANY;
   } else if (this.isManyToMany(
-      injectedField.aggregation,
-      injectedField.isLowerValuePresent,
       injectedField.isUpperValuePresent,
-      this.associations[injectedField.association].isLowerValuePresent,
       this.associations[injectedField.association].isUpperValuePresent)) {
     return MANY_TO_MANY;
   }
@@ -361,48 +369,29 @@ XMIParser.prototype.isOneToOne = function(
 
 /**
  * Checks whether the relationship is a "one-to-many".
- * @param {string} aggregation the aggregation type.
- * @param {boolean} injectedFieldLowerValuePresence if the LowerValue flag is
- *                                                  set in the injected field.
  * @param {boolean} injectedFieldUpperValuePresence if the UpperValue flag is
  *                                                  set in the injected field.
- * @param {boolean} associationLowerValuePresence if the LowerValue flag is set
- *                                                in the association.
  * @param {boolean} associationUpperValuePresence if the UpperValue flag is set
  *                                                in the association.
  * @return {boolean} the result.
  */
 XMIParser.prototype.isOneToMany = function(
-    aggregation, injectedFieldLowerValuePresence, 
-    injectedFieldUpperValuePresence, associationLowerValuePresence, 
-    associationUpperValuePresence) {
-  return aggregation == 'shared' 
-    && (injectedFieldLowerValuePresence && injectedFieldUpperValuePresence 
-    && associationLowerValuePresence && !associationUpperValuePresence) 
-    || (injectedFieldLowerValuePresence && !injectedFieldUpperValuePresence 
-    && associationLowerValuePresence && associationUpperValuePresence);
+    injectedFieldUpperValuePresence, associationUpperValuePresence) {
+  return (injectedFieldUpperValuePresence && !associationUpperValuePresence)
+         || !injectedFieldUpperValuePresence && associationUpperValuePresence;
 }
 
 /**
  * Checks whether the relationship is a "many-to-many".
- * @param {string} aggregation the aggregation type.
- * @param {boolean} injectedFieldLowerValuePresence if the LowerValue flag is
- *                                                  set in the injected field.
  * @param {boolean} injectedFieldUpperValuePresence if the UpperValue flag is
  *                                                  set in the injected field.
- * @param {boolean} associationLowerValuePresence if the LowerValue flag is set
- *                                                in the association.
  * @param {boolean} associationUpperValuePresence if the UpperValue flag is set
  *                                                in the association.
  * @return {boolean} the result.
  */
 XMIParser.prototype.isManyToMany = function(
-    aggregation, injectedFieldLowerValuePresence, 
-    injectedFieldUpperValuePresence, associationLowerValuePresence, 
-    associationUpperValuePresence) {
-  return aggregation == 'shared'
-    && injectedFieldLowerValuePresence && injectedFieldUpperValuePresence 
-    && associationLowerValuePresence && associationUpperValuePresence;
+    injectedFieldUpperValuePresence, associationUpperValuePresence) {
+  return injectedFieldUpperValuePresence && associationUpperValuePresence;
 }
 
 /**
@@ -447,6 +436,8 @@ function getRootElement(content) {
   var result = parser.parseString(content, function (err, result) {
     if (result.hasOwnProperty('uml:Model')) {
       root = result['uml:Model'];
+    } else if (result.hasOwnProperty('xmi:XMI')) {
+      root = result['xmi:XMI']['uml:Model'][0];
     } else { // TODO: find the root, if there is one at all.
       throw new NoRootElementException(
         'The passed document has no immediate root element,'
@@ -522,6 +513,12 @@ function WrongValidationException(message) {
   this.message = (message || '');
 }
 WrongValidationException.prototype = new Error();
+
+function WrongCardinalityException(message) {
+  this.name = 'WrongCardinalityException';
+  this.message = (message || '');
+}
+WrongCardinalityException.prototype = new Error();
 
 function NoCardinalityException(message) {
   this.name = 'NoCardinalityException';
