@@ -79,7 +79,7 @@ XMIParser.prototype.getAssociations = function() {
  * Parses the XMI document.
  */
 XMIParser.prototype.parse = function() {
-  this.getElements();
+  this.findElements();
   this.fillPrimitiveTypes();
   this.fillAssociations();
   this.fillClassesAndFields();
@@ -90,16 +90,16 @@ XMIParser.prototype.parse = function() {
  * Parses the document from the root, and gathers the index of each relevent
  * element in the document(classes, types, associations, etc.).
  */
-XMIParser.prototype.getElements = function() {
-  this.getRawPackagedElements();
-  this.getRawOwnedRules();
+XMIParser.prototype.findElements = function() {
+  this.findRawPackagedElements();
+  this.findRawOwnedRules();
 };
 
 /**
  * Gets the elements named 'PackagedElement' in order to gather the ids of
  * classes, types and associations.
  */
-XMIParser.prototype.getRawPackagedElements = function() {
+XMIParser.prototype.findRawPackagedElements = function() {
   for (var i = 0, n = this.root.packagedElement.length; i < n; i++) {
     switch (this.root.packagedElement[i].$['xmi:type']) {
       case 'uml:PrimitiveType':
@@ -119,7 +119,7 @@ XMIParser.prototype.getRawPackagedElements = function() {
 /**
  * Gets the elements named 'OwnedRule' in order to gather the validation ids.
  */
-XMIParser.prototype.getRawOwnedRules = function() {
+XMIParser.prototype.findRawOwnedRules = function() {
   for (var i = 0, n = this.root.ownedRule.length; i < n; i++) {
     switch (this.root.ownedRule[i].$['xmi:type']) {
       case 'uml:Constraint':

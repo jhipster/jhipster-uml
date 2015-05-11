@@ -112,12 +112,12 @@ describe('XMIParser', function() {
   });
 
   describe('#parse', function() {
-    describe('#getElements', function() {
+    describe('#findElements', function() {
       before(function() {
-        parser.getElements();
+        parser.findElements();
       });
 
-      describe('#getRawPackagedElements', function() {
+      describe('#findRawPackagedElements', function() {
         it('correctly fills the index arrays', function() {
           expect(parser.rawPrimitiveTypesIndexes).to.deep.equal([ 19, 20, 21] );
           expect(
@@ -129,7 +129,7 @@ describe('XMIParser', function() {
         });
       });
 
-      describe('#getRawOwnedRules', function() {
+      describe('#findRawOwnedRules', function() {
         it('correctly fills the validation index array', function() {
           expect(parser.rawValidationRulesIndexes).to.deep.equal([ 0 ]);
         });
