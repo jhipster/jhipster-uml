@@ -288,6 +288,8 @@ XMIParser.prototype.fillValidationRules = function() {
         "The validation value '"
         + value
         + "' does not belong to any validation.");
+    } else if (!name && !value) {
+      continue;
     }
 
     if (!this.types.isValidationSupportedForType(
