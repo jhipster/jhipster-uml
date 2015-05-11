@@ -1,0 +1,54 @@
+{
+  "name": "jhipster-uml",
+  "version": "0.0.1",
+  "description": "UML support for JHipster via XMI files",
+  "keywords": [
+    "generator-jhipster",
+    "UML",
+    "XMI",
+    "JSON",
+    "Mocha"
+  ],
+  "homepage": "https://github.com/jhipster/jhipster-uml",
+  "bugs": "https://github.com/jhipster/jhipster-uml/issues",
+  "author": {
+    "name": "Mathieu Abou-Aichi",
+    "email": "",
+    "url": "https://github.com/MathieuAA"
+  },
+  "main": "app/jhipsteruml.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jhipster/jhipster-uml.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "chai": "2.3.0",
+    "chalk": "1.0.0",
+    "selfish": "1.0.2",
+    "xml2js": "0.4.8",
+    "underscore.string": "3.0.3",
+    "jsonfile": "2.0.0",
+    "should": "6.0.1"
+  },
+
+  "devDependencies": {
+    "mocha": "2.2.4",
+    "jsdoc": "3.3.0"
+  },
+
+  "peerDependencies": {
+    
+  },
+  "engines": {
+    "node": ">=0.10.25",
+    "npm": ">=1.4.21"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0"
+    }
+  ]
+}
