@@ -87,7 +87,6 @@ XMIParser.prototype.parse = function() {
 };
 
 /**
- * @private
  * Parses the document from the root, and gathers the index of each relevent
  * element in the document(classes, types, associations, etc.).
  */
@@ -97,7 +96,6 @@ XMIParser.prototype.getElements = function() {
 };
 
 /**
- * @private
  * Gets the elements named 'PackagedElement' in order to gather the ids of
  * classes, types and associations.
  */
@@ -119,7 +117,6 @@ XMIParser.prototype.getRawPackagedElements = function() {
 };
 
 /**
- * @private
  * Gets the elements named 'OwnedRule' in order to gather the validation ids.
  */
 XMIParser.prototype.getRawOwnedRules = function() {
@@ -134,7 +131,6 @@ XMIParser.prototype.getRawOwnedRules = function() {
 };
 
 /**
- * @private
  * Fills the primitiveTypes map with type names.
  * @throws InvalidTypeException if the type isn't supported by JHipster.
  */
@@ -153,7 +149,6 @@ XMIParser.prototype.fillPrimitiveTypes = function() {
 };
 
 /**
- * @private
  * Fills the association map with the extracted associations from the document.
  */
 XMIParser.prototype.fillAssociations = function() {
@@ -169,7 +164,6 @@ XMIParser.prototype.fillAssociations = function() {
 }
 
 /**
- * @private
  * Fills the classes and the fields that compose them.
  */
 XMIParser.prototype.fillClassesAndFields = function() {
@@ -188,7 +182,6 @@ XMIParser.prototype.fillClassesAndFields = function() {
 }
 
 /**
- * @private
  * Adds a new class in the class map.
  * @param {Object} element the class to add.
  */
@@ -201,7 +194,6 @@ XMIParser.prototype.addClass = function(element) {
 }
 
 /**
- * @private
  * Adds a new field to the field map.
  * @param {Object} element the field to add.
  * @param {string} classId the encapsulating class' id.
@@ -215,7 +207,6 @@ XMIParser.prototype.addField = function(element, classId) {
 }
 
 /**
- * @private
  * Adds a (regular, not injected) field to the field map.
  * @param {Object} element the new field to add.
  */
@@ -241,7 +232,6 @@ XMIParser.prototype.addRegularField = function(element, classId) {
 }
 
 /**
- * @private
  * Adds an injected field to the corresponding map.
  * @param {Object} element the field to add.
  * @param {string} classId the id of the class containing this field.
@@ -262,7 +252,6 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
 }
 
 /**
- * @private
  * Fills the existing fields with the present validations 
  * (no iteration is performed over the fields).
  * @throws NoValidationNameForValueException if no validation name exists for
@@ -309,7 +298,6 @@ XMIParser.prototype.fillValidationRules = function() {
 }
 
 /**
- * @private
  * Checks whether the passed name is an id.
  * @param {string} name the field's name.
  * @param {string} className the name of the class possessing the field.
@@ -322,7 +310,6 @@ XMIParser.prototype.isAnId = function(name, className) {
 }
 
 /**
- * @private
  * Returns field's cardinality based on the association and the field's
  * attributes.
  * @param {Object} the field.
@@ -359,7 +346,6 @@ XMIParser.prototype.getCardinality = function(injectedField) {
 }
 
 /**
- * @private
  * Checks whether the relationship is a "one-to-one".
  * @param {boolean} injectedFieldUpperValuePresence if the UpperValue flag is 
  *                                                  set in the injected field. 
@@ -374,7 +360,6 @@ XMIParser.prototype.isOneToOne = function(
 }
 
 /**
- * @private
  * Checks whether the relationship is a "one-to-many".
  * @param {string} aggregation the aggregation type.
  * @param {boolean} injectedFieldLowerValuePresence if the LowerValue flag is
@@ -399,7 +384,6 @@ XMIParser.prototype.isOneToMany = function(
 }
 
 /**
- * @private
  * Checks whether the relationship is a "many-to-many".
  * @param {string} aggregation the aggregation type.
  * @param {boolean} injectedFieldLowerValuePresence if the LowerValue flag is
@@ -422,7 +406,6 @@ XMIParser.prototype.isManyToMany = function(
 }
 
 /**
- * @private
  * Extracts a type's name from a URI (URL or path).
  * @param {string} uri the string containing the type.
  * @return {string} the type's name.
