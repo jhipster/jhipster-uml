@@ -86,7 +86,6 @@ var AbstractMappedTypes = Types.extend({
     },
 
     /**
-     * @protected
      * Method implementation from Type.
      */
     getValidationsForType: function(type) {
