@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml)
+
 Welcome to JHipster-UML!
 
 This project's main goal is to bring support of UML (more precisely, XMI) files (from various editors) to JHipster so that it can read the files, without you answering the questions.
