@@ -16,10 +16,10 @@ var Types = base.extend({
      *                                         implemented by the subclass.
      */
     getTypes: function() {
-        console.log(chalk.red(
-            'This method must be implemented by a subclass to be called.'));
-        throw new UnimplementedOperationException(
-            'This method must be implemented by a subclass to be called.');
+      console.log(chalk.red(
+          'This method must be implemented by a subclass to be called.'));
+      throw new UnimplementedOperationException(
+          'This method must be implemented by a subclass to be called.');
     },
 
     /**
@@ -31,10 +31,10 @@ var Types = base.extend({
      * @throws NoElementFoundException if no type exists for the passed type. 
      */
     getValidationsForType: function(type) {
-        console.log(chalk.red(
-            'This method must be implemented by a subclass to be called.'));
-        throw new UnimplementedOperationException(
-            'This method must be implemented by a subclass to be called.');
+      console.log(chalk.red(
+          'This method must be implemented by a subclass to be called.'));
+      throw new UnimplementedOperationException(
+          'This method must be implemented by a subclass to be called.');
     },
 
     /**
@@ -45,14 +45,14 @@ var Types = base.extend({
      * @return {array} the new array.
      */
     toValueNameObjectArray: function() {
-        var array = [];
-        for (var key in this.getTypes()) {
-            var object = {};
-            object['value'] = this.getTypes()[key];
-            object['name'] = this.getTypes()[key];            
-            array.push(object);
-        }
-        return array;
+      var array = [];
+      for (var key in this.getTypes()) {
+          var object = {};
+          object['value'] = this.getTypes()[key];
+          object['name'] = this.getTypes()[key];            
+          array.push(object);
+      }
+      return array;
     },
 
     /**
@@ -61,7 +61,7 @@ var Types = base.extend({
      * @return {boolean} whether the type is contained in the supported types.
      */
     contains: function(type) {
-        return this.getTypes().indexOf(type) != -1;
+      return this.getTypes().indexOf(type) != -1;
     },
 
     /**
@@ -72,7 +72,7 @@ var Types = base.extend({
      * @throws NoElementFoundException if no type exists for the passed type.
      */
     isValidationSupportedForType: function(type, validation) {
-        return this.getValidationsForType(type).indexOf(validation) != -1;
+      return this.getValidationsForType(type).indexOf(validation) != -1;
     }
 });
 
@@ -82,24 +82,24 @@ var AbstractMappedTypes = Types.extend({
      * Method implementation from Type.
      */
     getTypes: function() {
-        return Object.keys(this.types);
+      return Object.keys(this.types);
     },
 
     /**
      * Method implementation from Type.
      */
     getValidationsForType: function(type) {
-        if (!this.contains(type)) {
-            console.log(chalk.red(
-                "The passed type: '" 
-                + type 
-                + "' is not contained in the supported types."));
-            throw new NoElementFoundException(
-                "The passed type: '" 
-                + type 
-                + "' is not contained in the supported types.");
-        }
-        return this.types[type];
+      if (!this.contains(type)) {
+          console.log(chalk.red(
+              "The passed type: '" 
+              + type 
+              + "' is not contained in the supported types."));
+          throw new NoElementFoundException(
+              "The passed type: '" 
+              + type 
+              + "' is not contained in the supported types.");
+      }
+      return this.types[type];
     }
 });
 
@@ -109,20 +109,20 @@ var AbstractMappedTypes = Types.extend({
  */
 exports.SQLTypes = AbstractMappedTypes.extend({
 
-    /**
-     * Default constructor.
-     */
-    initialize: function() {
-        // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
-        this.types = {
-            'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-            'Integer': [ 'required', 'min', 'max' ],
-            'Long': [ 'required', 'min', 'max' ],
-            'BigDecimal': [ 'required', 'min', 'max' ],
-            'LocalDate' : [ 'required' ],
-            'DateTime' : [ 'required' ],
-            'Boolean' : []
-        };
+  /**
+   * Default constructor.
+   */
+  initialize: function() {
+      // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
+      this.types = {
+          'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
+          'Integer': [ 'required', 'min', 'max' ],
+          'Long': [ 'required', 'min', 'max' ],
+          'BigDecimal': [ 'required', 'min', 'max' ],
+          'LocalDate' : [ 'required' ],
+          'DateTime' : [ 'required' ],
+          'Boolean' : []
+      };
     }
 });
 
@@ -133,20 +133,20 @@ exports.SQLTypes = AbstractMappedTypes.extend({
 
 exports.MongoDBTypes = AbstractMappedTypes.extend({
 
-    /**
-     * Default constructor.
-     */
-    initialize: function() {
-        // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
-        this.types = {
-            'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-            'Integer': [ 'required', 'min', 'max' ],
-            'Long': [ 'required', 'min', 'max' ],
-            'BigDecimal': [ 'required', 'min', 'max' ],
-            'LocalDate' : [ 'required' ],
-            'DateTime' : [ 'required' ],
-            'Boolean' : []
-        };
+  /**
+   * Default constructor.
+   */
+  initialize: function() {
+      // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
+      this.types = {
+          'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
+          'Integer': [ 'required', 'min', 'max' ],
+          'Long': [ 'required', 'min', 'max' ],
+          'BigDecimal': [ 'required', 'min', 'max' ],
+          'LocalDate' : [ 'required' ],
+          'DateTime' : [ 'required' ],
+          'Boolean' : []
+      };
     }
 });
 
@@ -156,32 +156,32 @@ exports.MongoDBTypes = AbstractMappedTypes.extend({
  */
 exports.CassandraTypes = AbstractMappedTypes.extend({
 
-    /**
-     * Default constructor.
-     */
-    initialize: function() {
-        // this.types = [ 'UUID', 'TimeUUID', 'String', 'Integer', 'Long', 'BigDecimal', 'Date', 'Boolean' ];
-        this.types = {
-            'UUID': [ 'required' ],
-            'TimeUUID': [ 'required' ],
-            'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-            'Integer': [ 'required', 'min', 'max' ],
-            'Long' : [ 'required', 'min', 'max' ],
-            'BigDecimal' : [ 'required', 'min', 'max' ],
-            'Date' : [],
-            'Boolean' : [],
-        };
+  /**
+   * Default constructor.
+   */
+  initialize: function() {
+      // this.types = [ 'UUID', 'TimeUUID', 'String', 'Integer', 'Long', 'BigDecimal', 'Date', 'Boolean' ];
+      this.types = {
+          'UUID': [ 'required' ],
+          'TimeUUID': [ 'required' ],
+          'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
+          'Integer': [ 'required', 'min', 'max' ],
+          'Long' : [ 'required', 'min', 'max' ],
+          'BigDecimal' : [ 'required', 'min', 'max' ],
+          'Date' : [],
+          'Boolean' : [],
+      };
     }
 });
 
 function NoElementFoundException(message) {
-    this.name = 'NoElementFoundException';
-    this.message = (message || '');
+  this.name = 'NoElementFoundException';
+  this.message = (message || '');
 }
 NoElementFoundException.prototype = new Error();
 
 function UnimplementedOperationException(message) {
-    this.name = 'UnimplementedOperationException';
-    this.message = (message || '');
+  this.name = 'UnimplementedOperationException';
+  this.message = (message || '');
 }
 UnimplementedOperationException.prototype = new Error();
