@@ -14,16 +14,16 @@ describe('XMIParser', function() {
       });
 
       it('initializes each of its attributes', function() {
-        expect(parser.getPrimitiveTypes()).to.deep.equal({});
-        expect(parser.getClasses()).to.deep.equal({});
-        expect(parser.getFields()).to.deep.equal({});
-        expect(parser.getInjectedFields()).to.deep.equal({});
-        expect(parser.getAssociations()).to.deep.equal({});
+        expect(parser.getPrimitiveTypes()).not.to.equal(undefined);
+        expect(parser.getClasses()).not.to.equal(undefined);
+        expect(parser.getFields()).not.to.equal(undefined);
+        expect(parser.getInjectedFields()).not.to.equal(undefined);
+        expect(parser.getAssociations()).not.to.equal(undefined);
 
-        expect(parser.rawPrimitiveTypesIndexes).to.deep.equal([]);
-        expect(parser.rawClassesIndexes).to.deep.equal([]);
-        expect(parser.rawAssociationsIndexes).to.deep.equal([]);
-        expect(parser.rawValidationRulesIndexes).to.deep.equal([]);
+        expect(parser.rawPrimitiveTypesIndexes).not.to.equal(undefined);
+        expect(parser.rawClassesIndexes).not.to.equal(undefined);
+        expect(parser.rawAssociationsIndexes).not.to.equal(undefined);
+        expect(parser.rawValidationRulesIndexes).not.to.equal(undefined);
       });
     });
 
