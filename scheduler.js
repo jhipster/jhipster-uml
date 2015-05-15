@@ -7,7 +7,10 @@ var MANY_TO_ONE = 'many-to-one';
 var MANY_TO_MANY = 'many-to-many';
 
 /**
- * This class sorts the 
+ * This class sorts given classes and injected fields in order to make them
+ * insertable in the given order, by respecting dependencies.
+ * @param classNames {array<string>} class names.
+ * @param injectedFields {hash<Object>} injected fields.
  */
 var ClassScheduler = module.exports = function ClassScheduler(classNames,
     injectedFields) {
@@ -17,12 +20,21 @@ var ClassScheduler = module.exports = function ClassScheduler(classNames,
   this.orderedPool = [];
 };
 
+/**
+ * Gets the ordered pool. Can be null if called before the scheduling task.
+ * @return {array<string>} the ordered pool.
+ */
 ClassScheduler.prototype.getOrderedPool = function() {
-  return this.ordered_pool;
+  return this.orderedPool;
 };
 
+/**
+ * Initializes the pool by creating special object representing vertexes in a
+ * dependency graph.
+ */
 ClassScheduler.prototype.initPool = function() {
   var injectedFieldKeys = Object.keys(this.injectedFields);
+
   for (var i = 0; i < injectedFieldKeys.length; i++) {
     var injectedField = this.injectedFields[injectedFieldKeys[i]];
     var relation = {
@@ -37,11 +49,19 @@ ClassScheduler.prototype.initPool = function() {
   }
 };
 
+/**
+ * This method is the main method of this class: it schedules the given classes
+ * to make them creatable by JHipster in a correct way.
+ * Basically, it goes through every dependency of every class in order to
+ * determine if the class can be safely created before another, and/or after
+ * another.
+ * Please note that the order is not always guaranteed.
+ */
 ClassScheduler.prototype.schedule = function() {
   this.initPool();
   var previousCount = this.pool.length; // used to detect circular dependencies
 
-  while(this.pool.length != 0) {
+  while(this.pool.length != 0 && this.classNames.length != 0) {
     for (var i = 0; i < this.classNames.length; i++) {
       var dependencies = this.getDependencies(this.classNames[i]);
 
@@ -69,6 +89,13 @@ ClassScheduler.prototype.schedule = function() {
   }
 };
 
+/**
+ * This method asserts whether a given class is safe to be removed from the
+ * unsorted pool.
+ * @param className {string} a class name.
+ * @param dependency {Object} a dependency.
+ * @return {boolean} whether it is safe to remove the class.
+ */
 ClassScheduler.prototype.isSafeToRemove = function(className, dependency) {
   switch(dependency.type) { // we don't check for reflexive cases
                             // because they can be removed right away
@@ -82,38 +109,49 @@ ClassScheduler.prototype.isSafeToRemove = function(className, dependency) {
   }
 };
 
+/**
+ * Gets this class' dependencies.
+ * A dependency is a vertex going to OR from this class.
+ * @param className {string} a class name.
+ * @return {array<Object>} the dependencies.
+ */
 ClassScheduler.prototype.getDependencies = function(className) {
-  var dependencies = [];
-  for (var i = 0; i < this.pool.length; i++) {
-    if (this.pool[i].source == className
-        || this.pool[i].destination == className) {
-      dependencies.push(this.pool[i]);
-    }
-  }
-  return dependencies;
+  return this.pool.filter(function(relation) {
+    return relation.source == className || relation.destination == className;
+  });
 };
 
+/**
+ * Removes a class from the unsorted pool, and adds it to the sorted one.
+ * @param className {string} a class name. 
+ */
 ClassScheduler.prototype.remove = function(className) {
   this.addNewElement(className);
   this.removeClassFromPool(className);
 };
 
+/**
+ * Adds the new class to the sorted pool. Doing nothing if the class already
+ * exists.
+ * @param className {string} a class name.
+ */
 ClassScheduler.prototype.addNewElement = function(className) {
   if (this.orderedPool.indexOf(className) == -1) {
     this.orderedPool.push(className);
   }
 };
 
+/**
+ * Removes the passed class from the unsorted pool.
+ * @param className {string} a class name.
+ */
 ClassScheduler.prototype.removeClassFromPool = function (className) {
-  var newPool = [];
-  for (var i = 0; i < this.pool.length; i++) {
-    if (!(this.pool[i].source == className 
-        || this.pool[i].destination == className)) {
-      newPool.push(this.pool[i]);
-    }
-  }
-  this.pool = newPool;
+  this.pool = this.pool.filter(function(relation) {
+    return !(relation.source == className || relation.destination == className);
+  });
 }
+
+// exception definitions
 
 function CircularDependencyException(message) {
   this.name = 'CircularDependencyException';

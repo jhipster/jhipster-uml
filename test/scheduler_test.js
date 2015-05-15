@@ -141,15 +141,50 @@ describe('ClassScheduler', function() {
           destination: '42',
           type: 'reflexive'
         };
+        var length;
 
         before(function() {
           scheduler.addNewElement(fictiveClass);
+          length = scheduler.orderedPool.length;
         })
 
         it('inserts the class key into the ordered pool', function() {
           expect(
             scheduler.orderedPool[scheduler.orderedPool.length - 1]
           ).to.equal(fictiveClass);
+        });
+
+        describe('given an already present class', function() {
+          it('does not add it again', function() {
+            scheduler.addNewElement(fictiveClass);
+            expect(scheduler.orderedPool.length).to.equal(length);
+          });
+        })
+      });
+
+      describe('#isSafeToRemove', function() {
+        describe('given an unremovable class', function() {
+          it('returns false', function() {
+            expect(
+              scheduler.isSafeToRemove('test', {
+                source: 'test',
+                destination: 'test2',
+                type: 'one-to-one'
+              })
+            ).to.equal(false);
+          });
+        });
+
+        describe('given a removable class', function() {
+          it('returns true', function() {
+            expect(
+              scheduler.isSafeToRemove('test', {
+                source: 'test2',
+                destination: 'test',
+                type: 'one-to-one'
+              })
+            ).to.equal(true);
+          });
         });
       });
 
@@ -174,26 +209,40 @@ describe('ClassScheduler', function() {
 
     it('sorts the classes and resolves dependencies', function() {
       scheduler.schedule();
-      expect(scheduler.orderedPool).to.deep.equal(
-        [ '_iW0ZQfJjEeSmmZm37nQR-w',
-          '_iW0ZRPJjEeSmmZm37nQR-w',
-          '_iW0ZSPJjEeSmmZm37nQR-w',
-          '_iW0ZBfJjEeSmmZm37nQR-w',
-          '_iW0ZO_JjEeSmmZm37nQR-w',
-          '_iW0ZMvJjEeSmmZm37nQR-w',
-          '_iW0ZEfJjEeSmmZm37nQR-w',
-          '_iW0ZH_JjEeSmmZm37nQR-w',
-          '_iW0Y-PJjEeSmmZm37nQR-w' ]);
-    });
-
-    it('throws an exception if there is a circular dependency', function() {
-      try {
-        // scheduler.injectedFields['_iW0Y-_JjEeSmmZm37nQR-w'].cardinality = 'many-to-many';
-        scheduler.schedule();
-        fail();
+      try { // two different paths, both valid
+        expect(scheduler.orderedPool).to.deep.equal(
+          [ '_iW0ZQfJjEeSmmZm37nQR-w',
+            '_iW0ZRPJjEeSmmZm37nQR-w',
+            '_iW0ZSPJjEeSmmZm37nQR-w',
+            '_iW0ZBfJjEeSmmZm37nQR-w',
+            '_iW0ZO_JjEeSmmZm37nQR-w',
+            '_iW0ZMvJjEeSmmZm37nQR-w',
+            '_iW0ZEfJjEeSmmZm37nQR-w',
+            '_iW0ZH_JjEeSmmZm37nQR-w',
+            '_iW0Y-PJjEeSmmZm37nQR-w' ]);
       } catch (error) {
-        expect(error.name).to.equal('CircularDependencyException');
+        expect(scheduler.orderedPool).to.deep.equal(
+          [ '_iW0ZQfJjEeSmmZm37nQR-w',
+            '_iW0ZSPJjEeSmmZm37nQR-w',
+            '_iW0ZO_JjEeSmmZm37nQR-w',
+            '_iW0ZMvJjEeSmmZm37nQR-w',
+            '_iW0ZEfJjEeSmmZm37nQR-w',
+            '_iW0ZRPJjEeSmmZm37nQR-w',
+            '_iW0ZBfJjEeSmmZm37nQR-w',
+            '_iW0ZH_JjEeSmmZm37nQR-w',
+            '_iW0Y-PJjEeSmmZm37nQR-w' ]);
       }
     });
+
+    // it('throws an exception if it cannot sort anymore', function() {
+    //   try {
+
+    //     scheduler.schedule();
+    //     fail();
+    //   } catch (error) {
+    //     expect(error.name).to.equal('CircularDependencyException');
+    //   }
+
+    // });
   });
 });
