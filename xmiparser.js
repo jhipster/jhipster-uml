@@ -14,8 +14,8 @@ var MANY_TO_MANY = 'many-to-many';
 
 /**
  * This class parses a XMI document.
- * @param file the input file's name.
- * @databaseTypeName the database type's name.
+ * @param {string} file the input file's name.
+ * @databaseTypeName {string} the database type's name.
  */
 var XMIParser = module.exports = function XMIParser(file, databaseTypeName) {
   this.root = getRootElement(readFileContent(file));
