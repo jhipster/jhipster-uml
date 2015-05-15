@@ -10,7 +10,7 @@ parser.parse();
 var creator = new EntitiesCreator(parser);
 
 /* The variables set to do all the constraints */
-var parserConstrainte = new XMIParser('./test/test_constrainte.xmi', 'sql');
+var parserConstrainte = new XMIParser('./test/test_constraint.xmi', 'sql');
 parserConstrainte.parse();
 var creatorConstrainte = new EntitiesCreator(parserConstrainte);
 
