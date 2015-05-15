@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_ztjzUPfqEeS9zqQRPMzxjw" name="test_contrainte">
+  <eAnnotations xmi:id="_ztjzUffqEeS9zqQRPMzxjw" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_ztjzUvfqEeS9zqQRPMzxjw" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_ztjzU_fqEeS9zqQRPMzxjw" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_ztjzVPfqEeS9zqQRPMzxjw" name="required" constrainedElement="_ztjzXffqEeS9zqQRPMzxjw">
+    <specification xmi:type="uml:LiteralString" xmi:id="_ztjzVffqEeS9zqQRPMzxjw" value=""/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_ztjzVvfqEeS9zqQRPMzxjw" name="minlength" constrainedElement="_ztjzXffqEeS9zqQRPMzxjw">
+    <specification xmi:type="uml:LiteralString" xmi:id="_ztjzV_fqEeS9zqQRPMzxjw" value="4"/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_ztjzWPfqEeS9zqQRPMzxjw" name="maxlength" constrainedElement="_ztjzXvfqEeS9zqQRPMzxjw">
+    <specification xmi:type="uml:LiteralString" xmi:id="_ztjzWffqEeS9zqQRPMzxjw" value="10"/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_ztjzWvfqEeS9zqQRPMzxjw" name="required" constrainedElement="_ztjzX_fqEeS9zqQRPMzxjw">
+    <specification xmi:type="uml:LiteralString" xmi:id="_ztjzW_fqEeS9zqQRPMzxjw" value="&lt;Enter constraint text here&gt;"/>
+  </ownedRule>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ztjzXPfqEeS9zqQRPMzxjw" name="Contrainte">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ztjzXffqEeS9zqQRPMzxjw" name="notTooSmall" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ztjzXvfqEeS9zqQRPMzxjw" name="notTooBig" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ztjzX_fqEeS9zqQRPMzxjw" name="onlyRequired" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ztjzYPfqEeS9zqQRPMzxjw" name="noConstraint" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Model>
