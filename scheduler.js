@@ -35,8 +35,9 @@ ClassScheduler.prototype.getOrderedPool = function() {
 ClassScheduler.prototype.initPool = function() {
   var injectedFieldKeys = Object.keys(this.injectedFields);
 
-  for (var i = 0; i < injectedFieldKeys.length; i++) {
-    var injectedField = this.injectedFields[injectedFieldKeys[i]];
+  this.pool = injectedFieldKeys.map(function(element) {
+
+    var injectedField = this.injectedFields[element];
     var relation = {
       source: injectedField.class,
       destination: injectedField.type,
@@ -45,8 +46,8 @@ ClassScheduler.prototype.initPool = function() {
     if (relation.source == relation.destination) {
       relation.type = 'reflexive'; // special type that isn't checked later
     }
-    this.pool.push(relation);
-  }
+    return relation;
+  }, this);
 };
 
 /**
@@ -56,22 +57,21 @@ ClassScheduler.prototype.initPool = function() {
  * determine if the class can be safely created before another, and/or after
  * another.
  * Please note that the order is not always guaranteed.
+ * Note also that we use the Array#every method in order to exit as soon as
+ * we'd like (every is just a pretty version of a much ugly for loop here).
  */
 ClassScheduler.prototype.schedule = function() {
   this.initPool();
   var previousCount = this.pool.length; // used to detect circular dependencies
 
-  while(this.pool.length != 0 && this.classNames.length != 0) {
+  while(this.pool.length != 0) {
     for (var i = 0; i < this.classNames.length; i++) {
       var dependencies = this.getDependencies(this.classNames[i]);
 
-      var isOkToRemove = true;
-      for (var j = 0; j < dependencies.length; j++) {
-        if (!this.isSafeToRemove(this.classNames[i], dependencies[j])) {
-          isOkToRemove = false;
-          break;
-        }
-      }
+      var className = this.classNames[i];
+      var isOkToRemove = dependencies.every(function(element, index, array) {
+        return this.isSafeToRemove(className, element);
+      }, this);
       if (isOkToRemove) {
         this.remove(this.classNames[i]);
       }
@@ -82,11 +82,13 @@ ClassScheduler.prototype.schedule = function() {
     }
     previousCount = this.pool.length;
   }
-  for (var i = 0; i < this.classNames.length && this.classNames.length != this.orderedPool.length; i++) {
-    if (this.orderedPool.indexOf(this.classNames[i]) == -1) {
-      this.orderedPool.push(this.classNames[i]);
+  this.classNames.every(function(element, index, array) {
+    if (this.orderedPool.indexOf(element) == -1) {
+      this.orderedPool.push(element);
+      return false;
     }
-  }
+    return true;
+  }, this);
 };
 
 /**
@@ -97,15 +99,14 @@ ClassScheduler.prototype.schedule = function() {
  * @return {boolean} whether it is safe to remove the class.
  */
 ClassScheduler.prototype.isSafeToRemove = function(className, dependency) {
-  switch(dependency.type) { // we don't check for reflexive cases
-                            // because they can be removed right away
+  switch(dependency.type) {
     case ONE_TO_ONE:
     case MANY_TO_MANY:
       return dependency.source != className;
     case ONE_TO_MANY:
       return dependency.destination != className;
     default:
-      return true;
+      return true; // for reflexive associations
   }
 };
 
