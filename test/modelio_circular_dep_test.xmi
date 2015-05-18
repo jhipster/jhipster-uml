@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_z6mcQP05EeS0e5TZQR50KQ" name="myjhipsterumltest">
+  <eAnnotations xmi:id="_z6mcQf05EeS0e5TZQR50KQ" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_z6mcQv05EeS0e5TZQR50KQ" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_z6mcQ_05EeS0e5TZQR50KQ" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z6mcRP05EeS0e5TZQR50KQ" name="ClassA">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcRf05EeS0e5TZQR50KQ" name="classC" visibility="private" type="_z6mcUP05EeS0e5TZQR50KQ" aggregation="composite" association="_z6mcSP05EeS0e5TZQR50KQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z6mcRv05EeS0e5TZQR50KQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcR_05EeS0e5TZQR50KQ" name="classAId" visibility="private" type="_z6mcXP05EeS0e5TZQR50KQ" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_z6mcSP05EeS0e5TZQR50KQ" memberEnd="_z6mcRf05EeS0e5TZQR50KQ _z6mcSf05EeS0e5TZQR50KQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_z6mcSf05EeS0e5TZQR50KQ" visibility="private" type="_z6mcRP05EeS0e5TZQR50KQ" association="_z6mcSP05EeS0e5TZQR50KQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z6mcSv05EeS0e5TZQR50KQ" name="ClassB">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcS_05EeS0e5TZQR50KQ" name="classA" visibility="private" type="_z6mcRP05EeS0e5TZQR50KQ" aggregation="composite" association="_z6mcTv05EeS0e5TZQR50KQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z6mcTP05EeS0e5TZQR50KQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcTf05EeS0e5TZQR50KQ" name="classBId" visibility="private" type="_z6mcXP05EeS0e5TZQR50KQ" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_z6mcTv05EeS0e5TZQR50KQ" memberEnd="_z6mcS_05EeS0e5TZQR50KQ _z6mcT_05EeS0e5TZQR50KQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_z6mcT_05EeS0e5TZQR50KQ" visibility="private" type="_z6mcSv05EeS0e5TZQR50KQ" association="_z6mcTv05EeS0e5TZQR50KQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z6mcUP05EeS0e5TZQR50KQ" name="ClassC">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcUf05EeS0e5TZQR50KQ" name="classD" visibility="private" type="_z6mcVv05EeS0e5TZQR50KQ" aggregation="composite" association="_z6mcVP05EeS0e5TZQR50KQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z6mcUv05EeS0e5TZQR50KQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcU_05EeS0e5TZQR50KQ" name="classCId" visibility="private" type="_z6mcXP05EeS0e5TZQR50KQ" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_z6mcVP05EeS0e5TZQR50KQ" memberEnd="_z6mcUf05EeS0e5TZQR50KQ _z6mcVf05EeS0e5TZQR50KQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_z6mcVf05EeS0e5TZQR50KQ" visibility="private" type="_z6mcUP05EeS0e5TZQR50KQ" association="_z6mcVP05EeS0e5TZQR50KQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z6mcVv05EeS0e5TZQR50KQ" name="ClassD">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcV_05EeS0e5TZQR50KQ" name="classB" visibility="private" type="_z6mcSv05EeS0e5TZQR50KQ" aggregation="composite" association="_z6mcWv05EeS0e5TZQR50KQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z6mcWP05EeS0e5TZQR50KQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z6mcWf05EeS0e5TZQR50KQ" name="classDId" visibility="private" type="_z6mcXP05EeS0e5TZQR50KQ" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_z6mcWv05EeS0e5TZQR50KQ" memberEnd="_z6mcV_05EeS0e5TZQR50KQ _z6mcW_05EeS0e5TZQR50KQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_z6mcW_05EeS0e5TZQR50KQ" visibility="private" type="_z6mcVv05EeS0e5TZQR50KQ" association="_z6mcWv05EeS0e5TZQR50KQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_z6mcXP05EeS0e5TZQR50KQ" name="long"/>
+</uml:Model>
