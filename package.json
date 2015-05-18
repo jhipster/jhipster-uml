@@ -1,6 +1,6 @@
 {
   "name": "jhipster-uml",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "UML support for JHipster via XMI files",
   "keywords": [
     "generator-jhipster",
