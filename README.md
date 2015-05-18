@@ -9,3 +9,6 @@ You'll be able to create your entities by supplying a UML file (made with your f
 The currently supported editors are: Modelio (we recommend this one!), UMLDesigner (and Papyrus for Eclipse), GenMyModel, Visual Paradigm and StarUML.
 
 Stay tuned for more news about this project.
+
+
+For more information, visit our Wiki page.
