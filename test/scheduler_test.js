@@ -209,40 +209,53 @@ describe('ClassScheduler', function() {
 
     it('sorts the classes and resolves dependencies', function() {
       scheduler.schedule();
-      try { // two different paths, both valid
-        expect(scheduler.orderedPool).to.deep.equal(
-          [ '_iW0ZQfJjEeSmmZm37nQR-w',
-            '_iW0ZRPJjEeSmmZm37nQR-w',
-            '_iW0ZSPJjEeSmmZm37nQR-w',
-            '_iW0ZBfJjEeSmmZm37nQR-w',
-            '_iW0ZO_JjEeSmmZm37nQR-w',
-            '_iW0ZMvJjEeSmmZm37nQR-w',
-            '_iW0ZEfJjEeSmmZm37nQR-w',
-            '_iW0ZH_JjEeSmmZm37nQR-w',
-            '_iW0Y-PJjEeSmmZm37nQR-w' ]);
-      } catch (error) {
-        expect(scheduler.orderedPool).to.deep.equal(
-          [ '_iW0ZQfJjEeSmmZm37nQR-w',
-            '_iW0ZSPJjEeSmmZm37nQR-w',
-            '_iW0ZO_JjEeSmmZm37nQR-w',
-            '_iW0ZMvJjEeSmmZm37nQR-w',
-            '_iW0ZEfJjEeSmmZm37nQR-w',
-            '_iW0ZRPJjEeSmmZm37nQR-w',
-            '_iW0ZBfJjEeSmmZm37nQR-w',
-            '_iW0ZH_JjEeSmmZm37nQR-w',
-            '_iW0Y-PJjEeSmmZm37nQR-w' ]);
-      }
+      var expectedPathA = [ 
+        '_iW0ZQfJjEeSmmZm37nQR-w',
+        '_iW0ZRPJjEeSmmZm37nQR-w',
+        '_iW0ZSPJjEeSmmZm37nQR-w',
+        '_iW0ZBfJjEeSmmZm37nQR-w',
+        '_iW0ZO_JjEeSmmZm37nQR-w',
+        '_iW0ZMvJjEeSmmZm37nQR-w',
+        '_iW0ZEfJjEeSmmZm37nQR-w',
+        '_iW0ZH_JjEeSmmZm37nQR-w',
+        '_iW0Y-PJjEeSmmZm37nQR-w' ];
+      var expectedPathB = [ 
+        '_iW0ZQfJjEeSmmZm37nQR-w',
+        '_iW0ZSPJjEeSmmZm37nQR-w',
+        '_iW0ZO_JjEeSmmZm37nQR-w',
+        '_iW0ZMvJjEeSmmZm37nQR-w',
+        '_iW0ZEfJjEeSmmZm37nQR-w',
+        '_iW0ZRPJjEeSmmZm37nQR-w',
+        '_iW0ZBfJjEeSmmZm37nQR-w',
+        '_iW0ZH_JjEeSmmZm37nQR-w',
+        '_iW0Y-PJjEeSmmZm37nQR-w' ];
+
+      expect(
+        scheduler.orderedPool.length == expectedPathA.length 
+          && scheduler.orderedPool.length == expectedPathB.length
+      ).to.equal(true);
+
+      scheduler.orderedPool.every(function(element, index, array) {
+        expect(
+          element == expectedPathA[index] || element == expectedPathB[index]
+        ).to.equal(true);
+      });
     });
 
-    // it('throws an exception if it cannot sort anymore', function() {
-    //   try {
+    it('throws an exception if it cannot sort anymore', function() {
+      var otherParser = 
+        new XMIParser('./test/modelio_circular_dep_test.xmi', 'sql');
+      otherParser.parse();
+      var otherScheduler = new ClassScheduler(
+        Object.keys(otherParser.getClasses()),
+        otherParser.getInjectedFields());
+      try {
+        otherScheduler.schedule();
+        fail();
+      } catch (error) {
+        expect(error.name).to.equal('CircularDependencyException');
+      }
 
-    //     scheduler.schedule();
-    //     fail();
-    //   } catch (error) {
-    //     expect(error.name).to.equal('CircularDependencyException');
-    //   }
-
-    // });
+    });
   });
 });
