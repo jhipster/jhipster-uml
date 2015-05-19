@@ -426,6 +426,21 @@ describe('XMIParser', function() {
     describe('#fillValidationRules', function() {
       describe('when adding validations to the fields', function() {
         describe('if there is an invalid validation', function() {
+          describe('because it has a value but no name', function() {
+            it('throws an exception', function() {
+              try {
+                var otherParser = new XMIParser(
+                  './test/NoValidationNameExceptionSample.xmi', 'sql');
+                otherParser.parse();
+                fail();
+              } catch (error) {
+                expect(
+                  error.name
+                ).to.equal('NoValidationNameException');
+              }
+            });
+          });
+
           describe('because it is not supported by the database', function() {
             var previousTypes;
 

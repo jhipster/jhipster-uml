@@ -247,6 +247,10 @@ XMIParser.prototype.addRegularField = function(element, classId) {
  * @param {string} classId the id of the class containing this field.
  */
 XMIParser.prototype.addInjectedField = function(element, classId) {
+  // we exclude reflexivity for now
+  if (element.$['type'] == classId) {
+    return;
+  }
   this.injectedFields[element.$['xmi:id']] = {
     name: element.$['name'],
     type: element.$['type'],
@@ -268,7 +272,7 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
 /**
  * Fills the existing fields with the present validations 
  * (no iteration is performed over the fields).
- * @throws NoValidationNameForValueException if no validation name exists for
+ * @throws NoValidationNameException if no validation name exists for
  *                                           the validation value (1 for no
  *                                           minlength for instance).
  * @throws WrongValidationException if JHipster doesn't support the validation.
@@ -286,11 +290,9 @@ XMIParser.prototype.fillValidationRules = function() {
         this.fields[element.$['constrainedElement']]['validations'];
     }
 
-    if (!name && value) {
-      throw new NoValidationNameForValueException(
-        "The validation value '"
-        + value
-        + "' does not belong to any validation.");
+    if (!name) {
+      throw new NoValidationNameException(
+        "The validation value does not belong to any validation.");
     } else if (!name && !value) {
       continue;
     }
@@ -502,11 +504,11 @@ function NoTypeException(message) {
 }
 NoTypeException.prototype = new Error();
 
-function NoValidationNameForValueException(message) {
-  this.name = 'NoValidationNameForValueException';
+function NoValidationNameException(message) {
+  this.name = 'NoValidationNameException';
   this.message = (message || '');
 }
-NoValidationNameForValueException.prototype = new Error();
+NoValidationNameException.prototype = new Error();
 
 function WrongValidationException(message) {
   this.name = 'WrongValidationException';

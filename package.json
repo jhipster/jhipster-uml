@@ -1,6 +1,6 @@
 {
   "name": "jhipster-uml",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "UML support for JHipster via XMI files",
   "keywords": [
     "generator-jhipster",
@@ -33,15 +33,11 @@
     "jsonfile": "2.0.0",
     "should": "6.0.1"
   },
-
   "devDependencies": {
     "mocha": "2.2.4",
     "jsdoc": "3.3.0"
   },
-
-  "peerDependencies": {
-    
-  },
+  "peerDependencies": {},
   "engines": {
     "node": ">=0.10.25",
     "npm": ">=1.4.21"
