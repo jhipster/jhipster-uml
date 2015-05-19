@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 
 if (process.argv.length < 4) {
