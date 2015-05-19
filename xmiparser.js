@@ -247,6 +247,10 @@ XMIParser.prototype.addRegularField = function(element, classId) {
  * @param {string} classId the id of the class containing this field.
  */
 XMIParser.prototype.addInjectedField = function(element, classId) {
+  // we exclude reflexivity for now
+  if (element.$['type'] == classId) {
+    return;
+  }
   this.injectedFields[element.$['xmi:id']] = {
     name: element.$['name'],
     type: element.$['type'],

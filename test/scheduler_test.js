@@ -61,7 +61,9 @@ describe('ClassScheduler', function() {
       });
 
       it('detects the cardinalities', function() {
-        var expectedReflexiveCount = 1;
+        // we disabled the reflexivity for now
+        // var expectedReflexiveCount = 1;
+        var expectedReflexiveCount = 0;
         var expectedOneToOneCount = 7;
         var expectedOneToManyCount = 1;
         var expectedManyToOneCount = 0;
@@ -114,7 +116,9 @@ describe('ClassScheduler', function() {
         it(
             'returns the dependencies having the class as source or destination',
             function() {
-          expect(dependencies.length).to.equal(4);
+          // we disabled reflexivity for now
+          // expect(dependencies.length).to.equal(4);
+          expect(dependencies.length).to.equal(3);
 
           for (var i = 0; i < dependencies.length; i++) {
             expect(
