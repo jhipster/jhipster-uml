@@ -50,7 +50,7 @@ for (var i =0; i< scheduledClasses.length; i++) {
 function executeEntity(scheduledClasses, classes, index){
    var child;
   console.log(chalk.red("================= "+classes[scheduledClasses[index]].name+ " ================="));
-  child =child_process.exec("yo jhipster:entity "+classes[scheduledClasses[index]].name, function (error, stdout, stderr) {
+  child =child_process.exec("yo jhipster:entity "+classes[scheduledClasses[index]].name + " --force", function (error, stdout, stderr) {
 
     console.log(chalk.green(stdout));
     console.log();
