@@ -74,7 +74,7 @@ EntitiesCreator.prototype.initializeEntities = function() {
 
 /**
  * fill the fields of the current entity
- * praram {String} the id of the current entity
+ * param {String} classId the id of the current entity
  */
 EntitiesCreator.prototype.setFieldsOfEntity = function(classId) {
 
@@ -91,9 +91,38 @@ EntitiesCreator.prototype.setFieldsOfEntity = function(classId) {
       };
 
        field = this.setValidationsOfField(field, fieldId, classId);
+       this.setPropertyOfEntity(field.fieldType, classId);
       this.entities[classId].fields.push(field);
     }
 };
+
+
+/**
+ * Set the entity's properties about the type
+ * like "fieldsContainLocalDate", "fieldsContainBigDecimal", ...
+ * param {String} fieldType  the type of the fields
+ * param {String} classId the id of the current entity
+ */
+EntitiesCreator.prototype.setPropertyOfEntity = function(fieldType, classId) {
+  switch(fieldType){
+    case "DateTime":
+      this.entities[classId].fieldsContainDateTime = true;
+      this.entities[classId].fieldsContainCustomTime = true;
+      break;
+    case "LocalDate":
+    
+      this.entities[classId].fieldsContainLocalDate = true;
+      this.entities[classId].fieldsContainCustomTime = true;
+      break;
+    case "BigDecimal":
+      this.entities[classId].fieldsContainBigDecimal = true;
+      break;
+    case "Date":
+      this.entities[classId].fieldsContainDate = true;
+      this.entities[classId].fieldsContainCustomTime = true;
+      break;
+  }
+}
 
 /**
  * get a field, add the related validations and return it.
