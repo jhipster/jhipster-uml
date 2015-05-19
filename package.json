@@ -2,6 +2,9 @@
   "name": "jhipster-uml",
   "version": "0.5.0",
   "description": "UML support for JHipster via XMI files",
+  "bin": {
+    "jhipster-uml": "./jhipster-uml.js"
+  },
   "keywords": [
     "generator-jhipster",
     "UML",
