@@ -84,9 +84,10 @@ EntitiesCreator.prototype.setFieldsOfEntity = function(classId) {
       var field = {
         "fieldId"     : this.entities[classId].fields.length+1,
         "fieldName"   : this.fields[fieldId].name,
-        "fieldType"   : this.primitiveTypes[this.fields[fieldId].type], //gerer la recuperation dans une classe 
+        "fieldType"   : this.primitiveTypes[this.fields[fieldId].type],
         "fieldNameCapitalized"  : _s.capitalize(this.fields[fieldId].name),
         "fieldNameUnderscored"  : _s.underscored(this.fields[fieldId].name),
+        "fieldInJavaBeanMethod" : _s.capitalize(this.fields[fieldId].name),
         "fieldValidate"   : false 
       };
 
@@ -165,7 +166,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
       /* fill the ownerSide relationship */
       var relationshipOwnerSide = {
         "relationshipId"    : this.entities[classId].relationships.length + 1,
-        "relationshipName"  : this.injectedFields[injectId].name,
+        "relationshipName"  : upperCase(this.injectedFields[injectId].name),
         "relationshipNameCapitalized" : upperCase(this.injectedFields[injectId].name),
         "relationshipFieldName" : this.injectedFields[injectId].name,
         "otherEntityName"   : lowerCase(this.classes[this.injectedFields[injectId].type].name),
@@ -177,7 +178,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
       //TODO GERE LA REFLEXIVIT2
       var relationshipOtherSide = {
           "relationshipId"    : this.entities[this.injectedFields[injectId].type].relationships.length +1,
-          "relationshipName"  : this.getAssociationFieldName(this.injectedFields[injectId].association, lowerCase),
+          "relationshipName"  : this.getAssociationFieldName(this.injectedFields[injectId].association, upperCase),
           "relationshipNameCapitalized" : this.getAssociationFieldName(this.injectedFields[injectId].association, upperCase) ,
           "relationshipFieldName" : this.getAssociationFieldName(this.injectedFields[injectId].association, lowerCase), /*TODO*/  //Le nom du champs est par defaut le nom de l'autre classe en minuscule
           "otherEntityName"   : lowerCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
