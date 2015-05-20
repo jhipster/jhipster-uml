@@ -272,9 +272,9 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
 /**
  * Fills the existing fields with the present validations 
  * (no iteration is performed over the fields).
- * @throws NoValidationNameException if no validation name exists for
- *                                           the validation value (1 for no
- *                                           minlength for instance).
+ * @throws NoValidationNameException if no validation name exists for the 
+ *                                   validation value (1 for no minlength for
+ *                                   instance).
  * @throws WrongValidationException if JHipster doesn't support the validation.
  */
 XMIParser.prototype.fillValidationRules = function() {
@@ -289,7 +289,6 @@ XMIParser.prototype.fillValidationRules = function() {
       previousValidations = 
         this.fields[element.$['constrainedElement']]['validations'];
     }
-
     if (!name) {
       throw new NoValidationNameException(
         "The validation value does not belong to any validation.");
@@ -298,8 +297,8 @@ XMIParser.prototype.fillValidationRules = function() {
     }
 
     if (!this.types.isValidationSupportedForType(
-        this.primitiveTypes[
-          this.fields[element.$['constrainedElement']].type], name)) {
+        this.primitiveTypes[this.fields[element.$['constrainedElement']].type],
+        name)) {
       throw new WrongValidationException(
         "The validation '"
         + name
@@ -405,7 +404,7 @@ XMIParser.prototype.getTypeName = function(uri) {
   return /\W([A-z]*)$/.exec(uri)[1];
 }
 
-// internal functions definitions
+// internal function definitions
 
 /**
  * Reads the passed file's content, and returns it.
