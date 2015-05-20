@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-if (process.argv.length < 4) {
-  throw new NoArgumentSuppliedException(
-    'Wrong argument number specified, an input file and '
+if (process.argv.length < 3) {
+  throw new ArgumentException(
+    'Wrong argument number specified, an input file and (optionally)'
     + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied, "
     + "exiting now.");
 }
@@ -15,9 +15,25 @@ var fs = require('fs'),
 	EntitiesCreator = require('./entitiescreator'),
   ClassScheduler = require('./scheduler');
 
+
+if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
+ throw new ArgumentException(
+    'The database type must either be supplied, or a .yo-rc.json file must'
+    + 'exist in the current directory.');
+}
+
+var type;
+
+if (fs.existsSync('.yo-rc.json') && process.argv.length >= 3) {
+  type = JSON.parse(
+    fs.readFileSync('./.yo-rc.json'))['generator-jhipster']['databaseType'];
+} else if (!fs.existsSync('.yo-rc.json') && process.argv.length >= 4) {
+  type = process.argv[3];
+}
+
 var parser = new XMIParser(
   process.argv[2],
-  process.argv[3]); 
+  type); 
 
 parser.parse();
 
@@ -72,8 +88,8 @@ function executeEntity(scheduledClasses, classes, index){
 }
 
 
-function NoArgumentSuppliedException(message) {
-  this.name = 'NoArgumentSuppliedException';
+function ArgumentException(message) {
+  this.name = 'ArgumentException';
   this.message = (message || '');
 }
-NoArgumentSuppliedException.prototype = new Error();
+ArgumentException.prototype = new Error();
