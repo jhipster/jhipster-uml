@@ -55,11 +55,11 @@ createEntities(scheduledClasses, parser.getClasses());
  */
 function createEntities(scheduledClasses, classes) {
 
-  for (var i =0; i< scheduledClasses.length; i++) {
+  for (var i = 0; i < scheduledClasses.length; i++) {
     console.log(chalk.red(classes[scheduledClasses[i]].name));
   }
 
-  var i= 0;
+  var i = 0;
   executeEntity(scheduledClasses, classes, i);
 }
 
@@ -77,7 +77,7 @@ function executeEntity(scheduledClasses, classes, index) {
       console.log(chalk.green(stdout));
       console.log();
 
-       if (error !== null) {
+      if (error !== null) {
         console.log(chalk.red(error));
       }
 
@@ -85,11 +85,11 @@ function executeEntity(scheduledClasses, classes, index) {
         console.log( stderr);
       }
 
-      //the end condition
-      if(index+1 >= scheduledClasses.length) {
+      // the end condition
+      if(index + 1 >= scheduledClasses.length) {
         return;
       }
-      executeEntity(scheduledClasses, classes, index+1);
+      executeEntity(scheduledClasses, classes, index + 1);
   });
 }
 
