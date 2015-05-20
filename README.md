@@ -11,4 +11,4 @@ The currently supported editors are: Modelio (we recommend this one!), UMLDesign
 Stay tuned for more news about this project.
 
 
-For more information, visit our Wiki page.
+For more information, visit our [Wiki page](https://github.com/jhipster/jhipster-uml/wiki).
