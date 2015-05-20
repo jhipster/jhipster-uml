@@ -35,10 +35,6 @@ var parser = new XMIParser(process.argv[2], type);
 
 parser.parse();
 
-var creator = new EntitiesCreator(parser);
-creator.createEntities();
-creator.writeJSON();
-
 var scheduler = new ClassScheduler(
   Object.keys(parser.getClasses()),
   parser.getInjectedFields()
@@ -47,6 +43,10 @@ var scheduler = new ClassScheduler(
 scheduler.schedule();
 
 var scheduledClasses = scheduler.getOrderedPool();
+
+var creator = new EntitiesCreator(parser);
+creator.createEntities();
+creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
 
