@@ -13,7 +13,8 @@ var fs = require('fs'),
     child_process = require('child_process'),
   	XMIParser = require('./xmiparser'),
   	EntitiesCreator = require('./entitiescreator'),
-    ClassScheduler = require('./scheduler');
+    ClassScheduler = require('./scheduler'),
+    _ = require('underscore.string');
 
 
 if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
@@ -27,7 +28,7 @@ var type;
 if (fs.existsSync('.yo-rc.json') && process.argv.length >= 3) {
   type = JSON.parse(
     fs.readFileSync('./.yo-rc.json'))['generator-jhipster']['databaseType'];
-} else if (!fs.existsSync('.yo-rc.json') && process.argv.length >= 4) {
+} else if (!fs.existsSync('./.yo-rc.json') && process.argv.length >= 4) {
   type = process.argv[3];
 }
 
@@ -49,49 +50,81 @@ creator.createEntities();
 creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
+createReflexives(parser.reflexives);
+
+// generate the reflexive cases
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
  */
 function createEntities(scheduledClasses, classes) {
-
+  console.log(chalk.red('Creating:'));
   for (var i = 0; i < scheduledClasses.length; i++) {
-    console.log(chalk.red(classes[scheduledClasses[i]].name));
+    console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
 
-  var i = 0;
-  executeEntity(scheduledClasses, classes, i);
-}
+  var StringDecoder = require('string_decoder').StringDecoder;
+  var decoder = new StringDecoder('utf8');
 
-function executeEntity(scheduledClasses, classes, index) {
-  var child;
-  console.log(chalk.red(
-      "================= "
-      + classes[scheduledClasses[index]].name
-      + " ================="));
-  child = child_process.exec(
-    "yo jhipster:entity "
-    + classes[scheduledClasses[index]].name 
-    + " --force", function (error, stdout, stderr) {
-
-      console.log(chalk.green(stdout));
-      console.log();
-
-      if (error !== null) {
-        console.log(chalk.red(error));
-      }
-
-      if(stderr == '' || stderr != null) {
-        console.log( stderr);
-      }
-
-      // the end condition
-      if(index + 1 >= scheduledClasses.length) {
-        return;
-      }
-      executeEntity(scheduledClasses, classes, index + 1);
+  scheduledClasses.forEach(function(element, index, array) {
+    var returned = child_process.spawnSync(
+      'yo',
+      ['jhipster:entity', classes[element].name, '--force']);
+    console.log(chalk.green(decoder.write(returned.stdout)));
+    console.log(chalk.red(decoder.write(returned.stderr)));
   });
 }
+
+function createReflexives(reflexives) {
+  reflexives.forEach(function(element, index, array) {
+    var newJson = JSON.parse(
+      fs.readFileSync(
+        '.jhipster/' + _.capitalize(element.className) + '.json'));
+    newJson['relationships'].push({
+      relationshipId: newJson['relationships'].length + 1,
+      relationshipName: element.fieldName,
+      relationshipNameCapitalized: _.capitalize(element.fieldName),
+      relationshipFieldName: element.fieldName,
+      otherEntityName: element.className,
+      relationshipType: 'one-to-one',
+      otherEntityNameCapitalized: _.capitalize(element.className),
+      ownerSide: true
+    });
+    fs.writeFileSync(
+      '.jhipster/' + _.capitalize(element.className) + '.json',
+      JSON.stringify(newJson, null, '  '));
+    child_process.spawnSync(
+      'yo',
+      ['jhipster:entity', element.className, '--force']);
+  });
+}
+
+// function executeEntity(scheduledClasses, classes, index) {
+//   var child;
+//   console.log(chalk.red(
+//       "================= "
+//       + classes[scheduledClasses[index]].name
+//       + " ================="));
+//   child = child_process.exec(
+//     "yo jhipster:entity "
+//     + classes[scheduledClasses[index]].name 
+//     + " --force", function (error, stdout, stderr) {
+
+//       console.log(chalk.green(stdout));
+
+//       if (error) {
+//         console.log(chalk.red(error));
+//       }
+
+//       console.log(stderr);
+
+//       // the end condition
+//       if(index + 1 >= scheduledClasses.length) {
+//         return;
+//       }
+//       executeEntity(scheduledClasses, classes, index + 1);
+//   });
+// }
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';

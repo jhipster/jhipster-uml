@@ -33,6 +33,11 @@ var XMIParser = module.exports = function XMIParser(file, databaseTypeName) {
   this.fields = {};
   this.injectedFields = {};
   this.associations = {};
+
+  // for reflexive cases
+  // contains objects like, for instance
+  // { className: 'Employee', fieldName: 'manager' }
+  this.reflexives = [];
 }
 
 /**
@@ -247,10 +252,14 @@ XMIParser.prototype.addRegularField = function(element, classId) {
  * @param {string} classId the id of the class containing this field.
  */
 XMIParser.prototype.addInjectedField = function(element, classId) {
-  // we exclude reflexivity for now
   if (element.$['type'] == classId) {
+    this.reflexives.push({
+      className: this.classes[classId].name,
+      fieldName: element.$['name']
+    });
     return;
   }
+
   this.injectedFields[element.$['xmi:id']] = {
     name: element.$['name'],
     type: element.$['type'],
@@ -267,6 +276,8 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
   this.injectedFields[element.$['xmi:id']]['cardinality'] =
     this.getCardinality(this.injectedFields[element.$['xmi:id']]);
   this.classes[classId].injectedFields.push(element.$['xmi:id']);
+
+
 }
 
 /**
