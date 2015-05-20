@@ -31,9 +31,7 @@ if (fs.existsSync('.yo-rc.json') && process.argv.length >= 3) {
   type = process.argv[3];
 }
 
-var parser = new XMIParser(
-  process.argv[2],
-  type); 
+var parser = new XMIParser(process.argv[2], type); 
 
 parser.parse();
 
@@ -55,7 +53,7 @@ createEntities(scheduledClasses, parser.getClasses());
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
  */
-function createEntities(scheduledClasses, classes){
+function createEntities(scheduledClasses, classes) {
 
   for (var i =0; i< scheduledClasses.length; i++) {
     console.log(chalk.red(classes[scheduledClasses[i]].name));
@@ -65,7 +63,7 @@ function createEntities(scheduledClasses, classes){
   executeEntity(scheduledClasses, classes, i);
 }
 
-function executeEntity(scheduledClasses, classes, index){
+function executeEntity(scheduledClasses, classes, index) {
   var child;
   console.log(chalk.red(
       "================= "
@@ -83,12 +81,12 @@ function executeEntity(scheduledClasses, classes, index){
         console.log(chalk.red(error));
       }
 
-      if(stderr == '' || stderr != null){
+      if(stderr == '' || stderr != null) {
         console.log( stderr);
       }
 
       //the end condition
-      if(index+1 >= scheduledClasses.length){
+      if(index+1 >= scheduledClasses.length) {
         return;
       }
       executeEntity(scheduledClasses, classes, index+1);
