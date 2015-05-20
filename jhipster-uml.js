@@ -10,7 +10,8 @@ if (process.argv.length < 3) {
 
 var fs = require('fs'),
   	chalk = require('chalk'),
-    child_process = require('child_process'),
+    shelljs = require('shelljs'),
+    // child_process = require('child_process'),
   	XMIParser = require('./xmiparser'),
   	EntitiesCreator = require('./entitiescreator'),
     ClassScheduler = require('./scheduler'),
@@ -52,8 +53,6 @@ creator.writeJSON();
 createEntities(scheduledClasses, parser.getClasses());
 createReflexives(parser.reflexives);
 
-// generate the reflexive cases
-
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
  */
@@ -67,15 +66,14 @@ function createEntities(scheduledClasses, classes) {
   var decoder = new StringDecoder('utf8');
 
   scheduledClasses.forEach(function(element, index, array) {
-    var returned = child_process.spawnSync(
-      'yo',
-      ['jhipster:entity', classes[element].name, '--force']);
-    console.log(chalk.green(decoder.write(returned.stdout)));
-    console.log(chalk.red(decoder.write(returned.stderr)));
+    var returned = 
+      shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
   });
 }
 
 function createReflexives(reflexives) {
+  console.log(chalk.green('Generating reflexive associations'));
+
   reflexives.forEach(function(element, index, array) {
     var newJson = JSON.parse(
       fs.readFileSync(
@@ -93,9 +91,8 @@ function createReflexives(reflexives) {
     fs.writeFileSync(
       '.jhipster/' + _.capitalize(element.className) + '.json',
       JSON.stringify(newJson, null, '  '));
-    child_process.spawnSync(
-      'yo',
-      ['jhipster:entity', element.className, '--force']);
+    var returned = 
+      shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
 
