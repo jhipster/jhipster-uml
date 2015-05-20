@@ -9,11 +9,11 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-	chalk = require('chalk'),
-  child_process = require('child_process'),
-	XMIParser = require('./xmiparser'),
-	EntitiesCreator = require('./entitiescreator'),
-  ClassScheduler = require('./scheduler');
+  	chalk = require('chalk'),
+    child_process = require('child_process'),
+  	XMIParser = require('./xmiparser'),
+  	EntitiesCreator = require('./entitiescreator'),
+    ClassScheduler = require('./scheduler');
 
 
 if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
@@ -51,42 +51,49 @@ scheduler.schedule();
 var scheduledClasses = scheduler.getOrderedPool();
 
 createEntities(scheduledClasses, parser.getClasses());
+
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
  */
 function createEntities(scheduledClasses, classes){
 
-for (var i =0; i< scheduledClasses.length; i++) {
-  console.log(chalk.red(classes[scheduledClasses[i]].name));
-};
+  for (var i =0; i< scheduledClasses.length; i++) {
+    console.log(chalk.red(classes[scheduledClasses[i]].name));
+  }
 
- var i= 0;
- executeEntity(scheduledClasses, classes, i);
-
+  var i= 0;
+  executeEntity(scheduledClasses, classes, i);
 }
+
 function executeEntity(scheduledClasses, classes, index){
-   var child;
-  console.log(chalk.red("================= "+classes[scheduledClasses[index]].name+ " ================="));
-  child =child_process.exec("yo jhipster:entity "+classes[scheduledClasses[index]].name + " --force", function (error, stdout, stderr) {
+  var child;
+  console.log(chalk.red(
+      "================= "
+      + classes[scheduledClasses[index]].name
+      + " ================="));
+  child = child_process.exec(
+    "yo jhipster:entity "
+    + classes[scheduledClasses[index]].name 
+    + " --force", function (error, stdout, stderr) {
 
-    console.log(chalk.green(stdout));
-    console.log();
-     if (error !== null) {
-      console.log(chalk.red(error));
-    }
+      console.log(chalk.green(stdout));
+      console.log();
 
-    if(stderr == '' || stderr != null){
-      console.log( stderr);
-    }
+       if (error !== null) {
+        console.log(chalk.red(error));
+      }
 
-    //the end condition
-    if(index+1 >= scheduledClasses.length){
-      return;
-    }
-    executeEntity(scheduledClasses, classes, index+1);
+      if(stderr == '' || stderr != null){
+        console.log( stderr);
+      }
+
+      //the end condition
+      if(index+1 >= scheduledClasses.length){
+        return;
+      }
+      executeEntity(scheduledClasses, classes, index+1);
   });
 }
-
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
