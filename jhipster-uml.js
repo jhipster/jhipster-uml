@@ -11,7 +11,6 @@ if (process.argv.length < 3) {
 var fs = require('fs'),
   	chalk = require('chalk'),
     shelljs = require('shelljs'),
-    // child_process = require('child_process'),
   	XMIParser = require('./xmiparser'),
   	EntitiesCreator = require('./entitiescreator'),
     ClassScheduler = require('./scheduler'),
@@ -71,6 +70,9 @@ function createEntities(scheduledClasses, classes) {
   });
 }
 
+/**
+ * Creates the reflexive associations.
+ */
 function createReflexives(reflexives) {
   console.log(chalk.green('Generating reflexive associations'));
 
@@ -95,33 +97,6 @@ function createReflexives(reflexives) {
       shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
-
-// function executeEntity(scheduledClasses, classes, index) {
-//   var child;
-//   console.log(chalk.red(
-//       "================= "
-//       + classes[scheduledClasses[index]].name
-//       + " ================="));
-//   child = child_process.exec(
-//     "yo jhipster:entity "
-//     + classes[scheduledClasses[index]].name 
-//     + " --force", function (error, stdout, stderr) {
-
-//       console.log(chalk.green(stdout));
-
-//       if (error) {
-//         console.log(chalk.red(error));
-//       }
-
-//       console.log(stderr);
-
-//       // the end condition
-//       if(index + 1 >= scheduledClasses.length) {
-//         return;
-//       }
-//       executeEntity(scheduledClasses, classes, index + 1);
-//   });
-// }
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
