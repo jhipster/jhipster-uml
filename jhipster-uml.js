@@ -67,6 +67,7 @@ function createEntities(scheduledClasses, classes) {
   scheduledClasses.forEach(function(element, index, array) {
     var returned = 
       shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
+    console.log('\n');
   });
 }
 
