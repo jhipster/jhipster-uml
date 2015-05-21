@@ -57,6 +57,7 @@ EntitiesCreator.prototype.initializeEntities = function() {
     this.entities[classId]={
       "relationships" : [],
       "fields" : [],
+      "fieldsContainOwnerOneToOne": false,
       "fieldsContainOwnerManyToMany": false,
       "fieldsContainOneToMany" : false,
       "fieldsContainLocalDate": false,
@@ -190,6 +191,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           relationshipOwnerSide.ownerSide = true;
           relationshipOtherSide["relationshipType"] = ONE_TO_ONE;
           relationshipOtherSide["ownerSide"] = false;
+          this.entities[classId].fieldsContainOwnerOneToOne = true;
           break;
         case ONE_TO_MANY:
           this.entities[classId].fieldsContainOneToMany = true;
@@ -202,7 +204,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           this.entities[classId].fieldsContainOwnerManyToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
-          this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
+          // this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
           break;
       }
   
