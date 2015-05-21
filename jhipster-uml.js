@@ -75,6 +75,9 @@ function createEntities(scheduledClasses, classes) {
  * Creates the reflexive associations.
  */
 function createReflexives(reflexives) {
+  if (reflexives.length == 0) {
+    return;
+  }
   console.log(chalk.green('Generating reflexive associations'));
 
   reflexives.forEach(function(element, index, array) {
