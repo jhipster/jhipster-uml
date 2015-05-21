@@ -46,6 +46,7 @@
     "node": ">=0.10.25",
     "npm": ">=1.4.21"
   },
+  "license": "Apache-2.0",
   "licenses": [
     {
       "type": "Apache 2.0"
