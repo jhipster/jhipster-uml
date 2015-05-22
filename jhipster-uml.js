@@ -51,7 +51,7 @@ creator.createEntities();
 creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
-createReflexives(parser.reflexives);
+//createReflexives(parser.reflexives);
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
@@ -70,7 +70,7 @@ function createEntities(scheduledClasses, classes) {
       shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
   });
 }
-
+/*
 function createReflexives(reflexives) {
   console.log(chalk.green('Generating reflexive associations'));
 
@@ -95,7 +95,7 @@ function createReflexives(reflexives) {
       shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
-
+*/
 // function executeEntity(scheduledClasses, classes, index) {
 //   var child;
 //   console.log(chalk.red(
