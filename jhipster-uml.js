@@ -65,8 +65,7 @@ function createEntities(scheduledClasses, classes) {
   var decoder = new StringDecoder('utf8');
 
   scheduledClasses.forEach(function(element, index, array) {
-    var returned = 
-      shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
+    shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
     console.log('\n');
   });
 }
@@ -97,8 +96,7 @@ function createReflexives(reflexives) {
     fs.writeFileSync(
       '.jhipster/' + _.capitalize(element.className) + '.json',
       JSON.stringify(newJson, null, '  '));
-    var returned = 
-      shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
+    shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
 
