@@ -69,14 +69,7 @@ function createEntities(scheduledClasses, classes) {
     console.log('\n');
   });
 }
-<<<<<<< HEAD
-/*
-=======
 
-/**
- * Creates the reflexive associations.
- */
->>>>>>> 7a1ab26429bfd9cefbb504bc938efbfa84b08c54
 function createReflexives(reflexives) {
   if (reflexives.length == 0) {
     return;
@@ -103,36 +96,7 @@ function createReflexives(reflexives) {
     shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
-<<<<<<< HEAD
-*/
-// function executeEntity(scheduledClasses, classes, index) {
-//   var child;
-//   console.log(chalk.red(
-//       "================= "
-//       + classes[scheduledClasses[index]].name
-//       + " ================="));
-//   child = child_process.exec(
-//     "yo jhipster:entity "
-//     + classes[scheduledClasses[index]].name 
-//     + " --force", function (error, stdout, stderr) {
 
-//       console.log(chalk.green(stdout));
-
-//       if (error) {
-//         console.log(chalk.red(error));
-//       }
-
-//       console.log(stderr);
-
-//       // the end condition
-//       if(index + 1 >= scheduledClasses.length) {
-//         return;
-//       }
-//       executeEntity(scheduledClasses, classes, index + 1);
-//   });
-// }
-=======
->>>>>>> 7a1ab26429bfd9cefbb504bc938efbfa84b08c54
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
