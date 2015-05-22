@@ -82,12 +82,11 @@ ClassScheduler.prototype.schedule = function() {
     }
     previousCount = this.pool.length;
   }
-  this.classNames.every(function(element, index, array) {
+
+  this.classNames.forEach(function(element, index, array) {
     if (this.orderedPool.indexOf(element) == -1) {
       this.orderedPool.push(element);
-      return false;
     }
-    return true;
   }, this);
 };
 
