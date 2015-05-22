@@ -184,7 +184,11 @@ XMIParser.prototype.fillAssociations = function() {
 XMIParser.prototype.fillClassesAndFields = function() {
   for (var i = 0; i < this.rawClassesIndexes.length; i++) {
     var element = this.root.packagedElement[this.rawClassesIndexes[i]];
-    this.addClass(element);   
+    this.addClass(element);
+
+    if (element.ownedAttribute == undefined) {
+      continue;
+    }
 
     for (var j = 0; j < element.ownedAttribute.length; j++) {
       if (!this.isAnId(
