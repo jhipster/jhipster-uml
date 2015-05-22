@@ -25,7 +25,7 @@ if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
 
 var type;
 
-if (fs.existsSync('.yo-rc.json') && process.argv.length >= 3) {
+if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(
     fs.readFileSync('./.yo-rc.json'))['generator-jhipster']['databaseType'];
 } else if (!fs.existsSync('./.yo-rc.json') && process.argv.length >= 4) {
