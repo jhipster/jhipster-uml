@@ -237,6 +237,20 @@ describe('XMIParser', function() {
           it('has injected fields', function() {
             expect(firstElementKeys).to.include('injectedFields');
           });
+
+          it('should not throw any error if there is no attribute', function() {
+            var noError = true;
+            try {
+              var anotherParser = 
+                new XMIParser('./test/modelio_no_attribute_test.xmi', 'sql');
+              anotherParser.parse();
+              parser.fillClassesAndFields();
+            } catch (error) {
+              console.log('>>>>>>>>>>>>>>>>>>>>>> error');
+              noError = false;
+            }
+            expect(noError).to.equal(true);
+          });
         });
       });
 

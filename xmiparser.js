@@ -190,6 +190,10 @@ XMIParser.prototype.fillClassesAndFields = function() {
       continue;
     }
 
+    if (element.ownedAttribute == undefined) {
+      continue;
+    }
+
     for (var j = 0; j < element.ownedAttribute.length; j++) {
       if (!this.isAnId(
           element.ownedAttribute[j].$['name'],

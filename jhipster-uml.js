@@ -11,7 +11,6 @@ if (process.argv.length < 3) {
 var fs = require('fs'),
   	chalk = require('chalk'),
     shelljs = require('shelljs'),
-    // child_process = require('child_process'),
   	XMIParser = require('./xmiparser'),
   	EntitiesCreator = require('./entitiescreator'),
     ClassScheduler = require('./scheduler'),
@@ -26,7 +25,7 @@ if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
 
 var type;
 
-if (fs.existsSync('.yo-rc.json') && process.argv.length >= 3) {
+if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(
     fs.readFileSync('./.yo-rc.json'))['generator-jhipster']['databaseType'];
 } else if (!fs.existsSync('./.yo-rc.json') && process.argv.length >= 4) {
@@ -66,12 +65,22 @@ function createEntities(scheduledClasses, classes) {
   var decoder = new StringDecoder('utf8');
 
   scheduledClasses.forEach(function(element, index, array) {
-    var returned = 
-      shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
+    shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
+    console.log('\n');
   });
 }
+<<<<<<< HEAD
 /*
+=======
+
+/**
+ * Creates the reflexive associations.
+ */
+>>>>>>> 7a1ab26429bfd9cefbb504bc938efbfa84b08c54
 function createReflexives(reflexives) {
+  if (reflexives.length == 0) {
+    return;
+  }
   console.log(chalk.green('Generating reflexive associations'));
 
   reflexives.forEach(function(element, index, array) {
@@ -91,10 +100,10 @@ function createReflexives(reflexives) {
     fs.writeFileSync(
       '.jhipster/' + _.capitalize(element.className) + '.json',
       JSON.stringify(newJson, null, '  '));
-    var returned = 
-      shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
+    shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
+<<<<<<< HEAD
 */
 // function executeEntity(scheduledClasses, classes, index) {
 //   var child;
@@ -122,6 +131,8 @@ function createReflexives(reflexives) {
 //       executeEntity(scheduledClasses, classes, index + 1);
 //   });
 // }
+=======
+>>>>>>> 7a1ab26429bfd9cefbb504bc938efbfa84b08c54
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';

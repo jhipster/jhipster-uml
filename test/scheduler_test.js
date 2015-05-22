@@ -40,6 +40,22 @@ describe('ClassScheduler', function() {
   });
 
   describe('#schedule', function() {
+    // this case checks whether classes are 'forgotten' by the scheduling
+    describe(
+        'when scheduling classes sorted so as to blend sorted and unsorted classes', 
+        function() {
+      var otherParser =
+        new XMIParser('./test/mappedby_test.xmi', 'sql');
+      otherParser.parse();
+      var otherScheduler = new ClassScheduler(
+        Object.keys(otherParser.getClasses()),
+        otherParser.getInjectedFields());
+      otherScheduler.schedule();
+      expect(
+        otherScheduler.getOrderedPool().length
+      ).to.equal(Object.keys(otherParser.getClasses()).length);
+    });
+
     describe('#initPool', function() {
       before(function() {
         scheduler.initPool();
@@ -61,15 +77,11 @@ describe('ClassScheduler', function() {
       });
 
       it('detects the cardinalities', function() {
-        // we disabled the reflexivity for now
-        // var expectedReflexiveCount = 1;
-        var expectedReflexiveCount = 0;
         var expectedOneToOneCount = 7;
         var expectedOneToManyCount = 1;
         var expectedManyToOneCount = 0;
         var expectedManyToManyCount = 1;
 
-        var reflexiveCount = 0;
         var oneToOneCount = 0;
         var oneToManyCount = 0;
         var manyToOneCount = 0;
@@ -91,13 +103,9 @@ describe('ClassScheduler', function() {
             case 'many-to-many':
               manyToManyCount++;
               break;
-            case 'reflexive':
-              reflexiveCount++;
-              break;
           }
         }
 
-        expect(reflexiveCount).to.equal(expectedReflexiveCount);
         expect(oneToOneCount).to.equal(expectedOneToOneCount);
         expect(oneToManyCount).to.equal(expectedOneToManyCount);
         expect(manyToOneCount).to.equal(expectedManyToOneCount);
@@ -116,8 +124,6 @@ describe('ClassScheduler', function() {
         it(
             'returns the dependencies having the class as source or destination',
             function() {
-          // we disabled reflexivity for now
-          // expect(dependencies.length).to.equal(4);
           expect(dependencies.length).to.equal(3);
 
           for (var i = 0; i < dependencies.length; i++) {
