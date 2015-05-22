@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_s8L6kABYEeWGWPf_MMgWkA" name="mappedby_test">
+  <eAnnotations xmi:id="_s8L6kQBYEeWGWPf_MMgWkA" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_s8L6kgBYEeWGWPf_MMgWkA" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_s8L6kwBYEeWGWPf_MMgWkA" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6lABYEeWGWPf_MMgWkA" name="Employee">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6lQBYEeWGWPf_MMgWkA" name="jobAssigne" visibility="public" type="_s8L6owBYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6nQBYEeWGWPf_MMgWkA">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_s8L6lgBYEeWGWPf_MMgWkA">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6lwBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6mABYEeWGWPf_MMgWkA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6mQBYEeWGWPf_MMgWkA" name="jobAFaire" visibility="public" type="_s8L6owBYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6oABYEeWGWPf_MMgWkA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6mgBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6mwBYEeWGWPf_MMgWkA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6nABYEeWGWPf_MMgWkA" name="Attribute" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6nQBYEeWGWPf_MMgWkA" memberEnd="_s8L6lQBYEeWGWPf_MMgWkA _s8L6ngBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6ngBYEeWGWPf_MMgWkA" name="assignant" visibility="public" type="_s8L6lABYEeWGWPf_MMgWkA" association="_s8L6nQBYEeWGWPf_MMgWkA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6nwBYEeWGWPf_MMgWkA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6oABYEeWGWPf_MMgWkA" memberEnd="_s8L6mQBYEeWGWPf_MMgWkA _s8L6oQBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6oQBYEeWGWPf_MMgWkA" name="assigne" visibility="public" type="_s8L6lABYEeWGWPf_MMgWkA" association="_s8L6oABYEeWGWPf_MMgWkA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6ogBYEeWGWPf_MMgWkA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6owBYEeWGWPf_MMgWkA" name="Job">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6pABYEeWGWPf_MMgWkA" name="Attribute" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6pQBYEeWGWPf_MMgWkA" name="ManyFoo">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6pgBYEeWGWPf_MMgWkA" name="faaOne" visibility="public" type="_s8L6tABYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6rABYEeWGWPf_MMgWkA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6pwBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6qABYEeWGWPf_MMgWkA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6qQBYEeWGWPf_MMgWkA" name="faaTwo" visibility="public" type="_s8L6tABYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6sABYEeWGWPf_MMgWkA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6qgBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6qwBYEeWGWPf_MMgWkA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6rABYEeWGWPf_MMgWkA" memberEnd="_s8L6pgBYEeWGWPf_MMgWkA _s8L6rQBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6rQBYEeWGWPf_MMgWkA" name="fooOne" visibility="public" type="_s8L6pQBYEeWGWPf_MMgWkA" association="_s8L6rABYEeWGWPf_MMgWkA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6rgBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6rwBYEeWGWPf_MMgWkA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6sABYEeWGWPf_MMgWkA" memberEnd="_s8L6qQBYEeWGWPf_MMgWkA _s8L6sQBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6sQBYEeWGWPf_MMgWkA" name="fooTwo" visibility="public" type="_s8L6pQBYEeWGWPf_MMgWkA" association="_s8L6sABYEeWGWPf_MMgWkA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s8L6sgBYEeWGWPf_MMgWkA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s8L6swBYEeWGWPf_MMgWkA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6tABYEeWGWPf_MMgWkA" name="ManyFaa"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6tQBYEeWGWPf_MMgWkA" name="OneFoo">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6tgBYEeWGWPf_MMgWkA" name="firstFaa" visibility="public" type="_s8L6vQBYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6uABYEeWGWPf_MMgWkA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s8L6twBYEeWGWPf_MMgWkA" name="faaSecond" visibility="public" type="_s8L6vQBYEeWGWPf_MMgWkA" aggregation="shared" association="_s8L6ugBYEeWGWPf_MMgWkA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6uABYEeWGWPf_MMgWkA" memberEnd="_s8L6tgBYEeWGWPf_MMgWkA _s8L6uQBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6uQBYEeWGWPf_MMgWkA" name="firstFoo" visibility="public" type="_s8L6tQBYEeWGWPf_MMgWkA" association="_s8L6uABYEeWGWPf_MMgWkA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s8L6ugBYEeWGWPf_MMgWkA" memberEnd="_s8L6twBYEeWGWPf_MMgWkA _s8L6uwBYEeWGWPf_MMgWkA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_s8L6uwBYEeWGWPf_MMgWkA" name="fooSecond" visibility="public" type="_s8L6tQBYEeWGWPf_MMgWkA" association="_s8L6ugBYEeWGWPf_MMgWkA">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_s8L6vABYEeWGWPf_MMgWkA">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s8L6vQBYEeWGWPf_MMgWkA" name="OneFaa"/>
+</uml:Model>
