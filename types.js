@@ -42,9 +42,10 @@ var Types = base.extend({
     toValueNameObjectArray: function() {
       var array = [];
       for (var key in this.getTypes()) {
-        var object = {};
-        object['value'] = this.getTypes()[key];
-        object['name'] = this.getTypes()[key];            
+        var object = {
+          value: this.getTypes()[key],
+          name: this.getTypes()[key]
+        };
         array.push(object);
       }
       return array;
@@ -106,13 +107,13 @@ exports.SQLTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
     this.types = {
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long': [ 'required', 'min', 'max' ],
-      'BigDecimal': [ 'required', 'min', 'max' ],
-      'LocalDate' : [ 'required' ],
-      'DateTime' : [ 'required' ],
-      'Boolean' : []
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long: [ 'required', 'min', 'max' ],
+      BigDecimal: [ 'required', 'min', 'max' ],
+      LocalDate : [ 'required' ],
+      DateTime : [ 'required' ],
+      Boolean : []
     };
   }
 });
@@ -130,13 +131,13 @@ exports.MongoDBTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
     this.types = {
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long': [ 'required', 'min', 'max' ],
-      'BigDecimal': [ 'required', 'min', 'max' ],
-      'LocalDate' : [ 'required' ],
-      'DateTime' : [ 'required' ],
-      'Boolean' : []
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long: [ 'required', 'min', 'max' ],
+      BigDecimal: [ 'required', 'min', 'max' ],
+      LocalDate : [ 'required' ],
+      DateTime : [ 'required' ],
+      Boolean : []
     };
   }
 });
@@ -153,14 +154,14 @@ exports.CassandraTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'UUID', 'TimeUUID', 'String', 'Integer', 'Long', 'BigDecimal', 'Date', 'Boolean' ];
     this.types = {
-      'UUID': [ 'required' ],
-      'TimeUUID': [ 'required' ],
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long' : [ 'required', 'min', 'max' ],
-      'BigDecimal' : [ 'required', 'min', 'max' ],
-      'Date' : [],
-      'Boolean' : [],
+      UUID: [ 'required' ],
+      TimeUUID: [ 'required' ],
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long : [ 'required', 'min', 'max' ],
+      BigDecimal : [ 'required', 'min', 'max' ],
+      Date : [],
+      Boolean : [],
     };
   }
 });

@@ -27,7 +27,7 @@ var type;
 
 if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(
-    fs.readFileSync('./.yo-rc.json'))['generator-jhipster']['databaseType'];
+    fs.readFileSync('./.yo-rc.json'))['generator-jhipster'].databaseType;
 } else if (!fs.existsSync('./.yo-rc.json') && process.argv.length >= 4) {
   type = process.argv[3];
 }
@@ -81,7 +81,7 @@ function createReflexives(reflexives) {
       fs.readFileSync(
         '.jhipster/' + _.capitalize(element.className) + '.json'));
     newJson['relationships'].push({
-      relationshipId: newJson['relationships'].length + 1,
+      relationshipId: newJson.relationships.length + 1,
       relationshipName: element.fieldName,
       relationshipNameCapitalized: _.capitalize(element.fieldName),
       relationshipFieldName: element.fieldName,
