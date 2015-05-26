@@ -1,7 +1,6 @@
 'use strict';
 
-var chalk = require('chalk'),
-    base = require('selfish').Base; // for inheritance
+var base = require('selfish').Base; // for inheritance
 
 /**
  * This interface provides base methods for handling the types.
@@ -16,8 +15,6 @@ var Types = base.extend({
      *                                         implemented by the subclass.
      */
     getTypes: function() {
-      console.log(chalk.red(
-          'This method must be implemented by a subclass to be called.'));
       throw new UnimplementedOperationException(
         'This method must be implemented by a subclass to be called.');
     },
@@ -31,8 +28,6 @@ var Types = base.extend({
      * @throws NoElementFoundException if no type exists for the passed type. 
      */
     getValidationsForType: function(type) {
-      console.log(chalk.red(
-          'This method must be implemented by a subclass to be called.'));
       throw new UnimplementedOperationException(
         'This method must be implemented by a subclass to be called.');
     },
@@ -90,14 +85,10 @@ var AbstractMappedTypes = Types.extend({
      */
     getValidationsForType: function(type) {
       if (!this.contains(type)) {
-        console.log(chalk.red(
-            "The passed type: '" 
-            + type 
-            + "' is not contained in the supported types."));
         throw new NoElementFoundException(
           "The passed type: '" 
           + type 
-          + "' is not contained in the supported types.");
+          + "' is not a supported supported types.");
       }
       return this.types[type];
     }
