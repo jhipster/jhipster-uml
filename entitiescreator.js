@@ -43,7 +43,6 @@ EntitiesCreator.prototype.createEntities = function() {
     
     this.setFieldsOfEntity(classId);
     this.setRelationshipOfEntity(classId);
-
   }
 };
 
