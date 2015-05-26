@@ -246,7 +246,6 @@ describe('XMIParser', function() {
               anotherParser.parse();
               parser.fillClassesAndFields();
             } catch (error) {
-              console.log('>>>>>>>>>>>>>>>>>>>>>> error');
               noError = false;
             }
             expect(noError).to.equal(true);
