@@ -175,6 +175,7 @@ XMIParser.prototype.fillAssociations = function() {
 
 /**
  * Fills the classes and the fields that compose them.
+ * @throws NullPointerException if a class' name, or an attribute, is nil.
  */
 XMIParser.prototype.fillClassesAndFields = function() {
   for (var i = 0; i < this.rawClassesIndexes.length; i++) {
