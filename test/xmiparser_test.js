@@ -213,10 +213,23 @@ describe('XMIParser', function() {
         parser.fillClassesAndFields();
       });
 
+      describe('when a class has no name', function() {
+        it('throws an exception', function() {
+          var otherParser =
+            new XMIParser('./test/xmi/modelio_no_class_name_test.xmi','sql');
+          try {
+            otherParser.parse();
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
+        });
+      });
+
       describe('when an attribute has no name', function() {
         it('throws an exception', function() {
-          var otherParser = new XMIParser(
-            './test/xmi/modelio_no_attribute_name_test.xmi', 'sql');
+          var otherParser = 
+          new XMIParser('./test/xmi/modelio_no_attribute_name_test.xmi', 'sql');
           try {
             otherParser.parse();
             fail();
