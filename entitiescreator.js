@@ -205,7 +205,6 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           this.entities[classId].fieldsContainOwnerManyToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
-          this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
           relationshipOtherSide["mappedBy"] = relationshipOwnerSide.relationshipFieldName;
           break;
       }
