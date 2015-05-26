@@ -83,7 +83,7 @@ EntitiesCreator.prototype.setFieldsOfEntity = function(classId) {
 
       var field = {
         "fieldId"     : this.entities[classId].fields.length+1,
-        "fieldName"   : this.fields[fieldId].name,
+        "fieldName"   : lowerCase(this.fields[fieldId].name),
         "fieldType"   : this.primitiveTypes[this.fields[fieldId].type],
         "fieldNameCapitalized"  : _s.capitalize(this.fields[fieldId].name),
         "fieldNameUnderscored"  : _s.underscored(this.fields[fieldId].name),
@@ -191,13 +191,13 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           relationshipOtherSide["relationshipType"] = ONE_TO_ONE;
           relationshipOtherSide["ownerSide"] = false;
           this.entities[classId].fieldsContainOwnerOneToOne = true;          
-          relationshipOtherSide["mappedBy"] = relationshipOwnerSide.relationshipFieldName;
+          relationshipOtherSide["otherEntityRelationshipName"] = relationshipOwnerSide.relationshipFieldName;
           break;
         case ONE_TO_MANY:
           this.entities[classId].fieldsContainOneToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_ONE;
           relationshipOtherSide["otherEntityField"] = 'id'; //By default set at 'id'
-          relationshipOwnerSide["mappedBy"] = relationshipOtherSide.relationshipFieldName;
+          relationshipOwnerSide["otherEntityRelationshipName"] = relationshipOtherSide.relationshipFieldName;
           break;
         case MANY_TO_MANY:
           relationshipOwnerSide.ownerSide = true;
@@ -205,7 +205,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           this.entities[classId].fieldsContainOwnerManyToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
-          relationshipOtherSide["mappedBy"] = relationshipOwnerSide.relationshipFieldName;
+          relationshipOtherSide["otherEntityRelationshipName"] = relationshipOwnerSide.relationshipFieldName;
           break;
       }
   

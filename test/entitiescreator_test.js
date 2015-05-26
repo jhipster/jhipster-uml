@@ -205,6 +205,8 @@ describe('EntitiesCreator ', function(){
       var jobToEmployee; // relation one to one not owner
       var taskToJob; // relation many to many not owner
       var employeeToDepartment; // relation many to one
+      var jobToTaskFieldName; // the Job to Task relationship field name
+      var taskToJobFieldName; // the Task to Job relationship field name
       var entities;
 
       before(function(){
@@ -256,6 +258,9 @@ describe('EntitiesCreator ', function(){
           it("has a one-to-one relationships type",function(){
             expect(employeeToJob.relationshipType).to.be.equal("one-to-one");
           });
+          it("has a relationshipFieldName set at 'job' ",function(){
+            expect(employeeToJob.relationshipFieldName).to.be.equal("job");
+          });
         });
 
         describe('Job to Employee: One-to-One not owner side', function(){
@@ -265,6 +270,12 @@ describe('EntitiesCreator ', function(){
           it("has a one-to-one relationships type",function(){
             expect(jobToEmployee.relationshipType).to.be.equal("one-to-one");
           });
+          it("has otherEntityRelationshipName set to job", function(){
+            expect(jobToEmployee.otherEntityRelationshipName).to.be.equal("job");
+          });
+          it("has a relationshipFieldName set at 'employee' ",function(){
+            expect(jobToEmployee.relationshipFieldName).to.be.equal("employee");
+          });
         });
 
         describe('Department to Employee : One to Many', function(){
@@ -273,6 +284,9 @@ describe('EntitiesCreator ', function(){
           });
           it("has no ownerSide property",function(){
             expect(departmentToEmployee.ownerSide).to.be.undefined;
+          });
+          it("has otherEntityRelationshipName set to department", function(){
+            expect(departmentToEmployee.otherEntityRelationshipName).to.be.equal("department");
           });
         });
 
@@ -292,6 +306,9 @@ describe('EntitiesCreator ', function(){
           it("has a many-to-many relationships type",function(){
             expect(jobToTask.relationshipType).to.be.equal("many-to-many");
           });
+          it("has a relationshipFieldName set at 'tasks' ",function(){
+            expect(jobToTask.relationshipFieldName).to.be.equal("tasks");
+          });
         });
 
         describe('Task to Job: Many to Many not owner side', function(){
@@ -300,6 +317,13 @@ describe('EntitiesCreator ', function(){
           });
           it("has a many-to-many relationships type",function(){
             expect(taskToJob.relationshipType).to.be.equal("many-to-many");
+          });
+
+          it("has relationshipFieldName set at 'jobs' ",function(){
+            expect(taskToJob.relationshipFieldName).to.be.equal("jobs");
+          });
+          it("has otherEntityRelationshipName set at 'task'", function(){
+            expect( taskToJob.otherEntityRelationshipName).to.be.equal("tasks");
           });
         });
       });
