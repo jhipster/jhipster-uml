@@ -206,39 +206,39 @@ describe('EntitiesCreator ', function(){
       var taskToJob; // relation many to many not owner
       var employeeToDepartment; // relation many to one
       var entities;
+
       before(function(){
           creator.createEntities();
-
           entities = creator.getEntities();
-          
-          //for ( var i=0; i<entities.length; i++){
-          for(var i in Object.keys(entities) ){
+
+          for (var i=0; i<Object.keys(entities).length; i++){
             var classId = Object.keys(entities)[i];
             var relationships = entities[classId].relationships;
-            if( creator.getClasses()[classId].name == "Employee"){
-              for(var j=0; j<relationships.length; j++ ){
+
+            if(creator.getClasses()[classId].name == "Employee"){
+              for(var j=0; j<relationships.length; j++){
                 if(relationships[j].otherEntityNameCapitalized == "Job"){
                   employeeToJob = relationships[j];
                 }else if(relationships[j].otherEntityNameCapitalized == "Department"){
                   employeeToDepartment = relationships[j];
                 }
               }
-            }else if(creator.getClasses()[classId].name == "Department"){
-              for(var j=0; j<relationships.length; j++ ){
+            } else if(creator.getClasses()[classId].name == "Department"){
+              for(var j=0; j<relationships.length; j++){
                 if(relationships[j].otherEntityNameCapitalized == "Employee"){
                   departmentToEmployee = relationships[j];
                 }
               }
-            }else if(creator.getClasses()[classId].name == "Job"){
-              for(var j=0; j<relationships.length; j++ ){
+            } else if(creator.getClasses()[classId].name == "Job"){
+              for(var j=0; j<relationships.length; j++){
                 if(relationships[j].otherEntityNameCapitalized == "Employee"){
                   jobToEmployee = relationships[j];
                 }else if(relationships[j].otherEntityNameCapitalized == "Task"){
                   jobToTask = relationships[j];
                 }
               }
-            }else if(creator.getClasses()[classId].name == "Task"){
-              for(var j=0; j<relationships.length; j++ ){
+            } else if(creator.getClasses()[classId].name == "Task"){
+              for(var j=0; j<relationships.length; j++){
                 if(relationships[j].otherEntityNameCapitalized == "Job"){
                   taskToJob = relationships[j];
                 }
@@ -302,9 +302,20 @@ describe('EntitiesCreator ', function(){
             expect(taskToJob.relationshipType).to.be.equal("many-to-many");
           });
         });
-
       });
 
+      describe("when accessing the entities", function() {
+        it("mentions if the class contains a one-to-one relationship", function() {
+          Object.keys(creator.getEntities()).forEach(function(entity, entityIndex, entities) {
+
+            creator.getEntities()[entity].relationships.forEach(function(relationship, relationshipIndex, relationships) {
+              if (relationship.relationshipType == 'one-to-one' && relationship.ownerSide == true) {
+                expect(creator.getEntities()[entity].fieldsContainOwnerOneToOne).to.equal(true);
+              }
+            });
+          });
+        });
+      });
     });
 
     });
