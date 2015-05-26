@@ -6,7 +6,7 @@ var chai = require('chai'),
   	XMIParser = require('../xmiparser'),
     cardinalities = require('../cardinalities');
 
-var parser = new XMIParser('./test/modelio.xmi', 'sql');
+var parser = new XMIParser('./test/xmi/modelio.xmi', 'sql');
 
 parser.parse();
 
@@ -46,7 +46,7 @@ describe('ClassScheduler', function() {
         'when scheduling classes sorted so as to blend sorted and unsorted classes', 
         function() {
       var otherParser =
-        new XMIParser('./test/mappedby_test.xmi', 'sql');
+        new XMIParser('./test/xmi/mappedby_test.xmi', 'sql');
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),
@@ -255,7 +255,7 @@ describe('ClassScheduler', function() {
 
     it('throws an exception if it cannot sort anymore', function() {
       var otherParser = 
-        new XMIParser('./test/modelio_circular_dep_test.xmi', 'sql');
+        new XMIParser('./test/xmi/modelio_circular_dep_test.xmi', 'sql');
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),

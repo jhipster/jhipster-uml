@@ -5,12 +5,12 @@ var chai = require('chai'),
     EntitiesCreator = require('../entitiescreator'),
     XMIParser = require('../xmiparser');
 
-var parser = new XMIParser('./test/modelio.xmi', 'sql');
+var parser = new XMIParser('./test/xmi/modelio.xmi', 'sql');
 parser.parse();
 var creator = new EntitiesCreator(parser);
 
 /* The variables set to do all the constraints */
-var parserConstrainte = new XMIParser('./test/test_constraint.xmi', 'sql');
+var parserConstrainte = new XMIParser('./test/xmi/test_constraint.xmi', 'sql');
 parserConstrainte.parse();
 var creatorConstrainte = new EntitiesCreator(parserConstrainte);
 

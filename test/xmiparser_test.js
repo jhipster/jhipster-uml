@@ -4,13 +4,13 @@ var chai = require('chai'),
     expect = chai.expect,
     XMIParser = require('../xmiparser');
 
-var parser = new XMIParser('./test/modelio.xmi', 'sql');
+var parser = new XMIParser('./test/xmi/modelio.xmi', 'sql');
 
 describe('XMIParser', function() {
   describe('#initialize', function() {
     describe('when passing valid arguuments', function() {
       it('successfully creates a parser', function() {
-        new XMIParser('./test/modelio.xmi', 'sql');
+        new XMIParser('./test/xmi/modelio.xmi', 'sql');
       });
 
       it('initializes each of its attributes', function() {
@@ -78,7 +78,7 @@ describe('XMIParser', function() {
         describe('because it is null', function() {
           it('throws an exception', function() {
             try {
-              new XMIParser('./test/modelio.xmi', null);
+              new XMIParser('./test/xmi/modelio.xmi', null);
               fail();
             } catch (error) {
               expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -89,7 +89,7 @@ describe('XMIParser', function() {
         describe('because it is blank', function() {
           it('throws an exception', function() {
             try {
-              new XMIParser('./test/modelio.xmi', '');
+              new XMIParser('./test/xmi/modelio.xmi', '');
               fail();
             } catch (error) {
               expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -100,7 +100,7 @@ describe('XMIParser', function() {
         describe('because it is not supported', function() {
           it('throws an exception', function() {
             try {
-              new XMIParser('./test/modelio.xmi', 'isnotsupported');
+              new XMIParser('./test/xmi/modelio.xmi', 'isnotsupported');
               fail();
             } catch (error) {
               expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -242,7 +242,7 @@ describe('XMIParser', function() {
             var noError = true;
             try {
               var anotherParser = 
-                new XMIParser('./test/modelio_no_attribute_test.xmi', 'sql');
+                new XMIParser('./test/xmi/modelio_no_attribute_test.xmi', 'sql');
               anotherParser.parse();
               parser.fillClassesAndFields();
             } catch (error) {
@@ -443,7 +443,7 @@ describe('XMIParser', function() {
             it('throws an exception', function() {
               try {
                 var otherParser = new XMIParser(
-                  './test/NoValidationNameExceptionSample.xmi', 'sql');
+                  './test/xmi/NoValidationNameExceptionSample.xmi', 'sql');
                 otherParser.parse();
                 fail();
               } catch (error) {
