@@ -190,7 +190,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           relationshipOwnerSide.ownerSide = true;
           relationshipOtherSide["relationshipType"] = ONE_TO_ONE;
           relationshipOtherSide["ownerSide"] = false;
-          this.entities[classId].fieldsContainOwnerOneToOne = true;
+          this.entities[classId].fieldsContainOwnerOneToOne = true;          
           relationshipOtherSide["mappedBy"] = relationshipOwnerSide.relationshipFieldName;
           break;
         case ONE_TO_MANY:
@@ -205,6 +205,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           this.entities[classId].fieldsContainOwnerManyToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
+          this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
           relationshipOtherSide["mappedBy"] = relationshipOwnerSide.relationshipFieldName;
           break;
       }

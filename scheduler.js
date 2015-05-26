@@ -82,6 +82,7 @@ ClassScheduler.prototype.schedule = function() {
     }
     previousCount = this.pool.length;
   }
+  
   this.classNames.forEach(function(element, index, array) {
     if (this.orderedPool.indexOf(element) == -1) {
       this.orderedPool.push(element);

@@ -50,7 +50,7 @@ creator.createEntities();
 creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
-createReflexives(parser.reflexives);
+//createReflexives(parser.reflexives);
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
@@ -70,9 +70,6 @@ function createEntities(scheduledClasses, classes) {
   });
 }
 
-/**
- * Creates the reflexive associations.
- */
 function createReflexives(reflexives) {
   if (reflexives.length == 0) {
     return;
@@ -99,6 +96,7 @@ function createReflexives(reflexives) {
     shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
   });
 }
+
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
