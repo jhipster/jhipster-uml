@@ -186,6 +186,12 @@ XMIParser.prototype.fillClassesAndFields = function() {
     }
 
     for (var j = 0; j < element.ownedAttribute.length; j++) {
+      if (!element.ownedAttribute[j].$['name']) {
+        throw new NullPointerException(
+          "No name is defined for the passed attribute, for class'"
+          + element.$['name']
+          + "'.");
+      }
       if (!this.isAnId(
           element.ownedAttribute[j].$['name'],
           element.$['name'])) {
@@ -301,7 +307,7 @@ XMIParser.prototype.fillValidationRules = function() {
     }
     if (!name) {
       throw new NoValidationNameException(
-        "The validation value does not belong to any validation.");
+        'The validation value does not belong to any validation.');
     } else if (!name && !value) {
       continue;
     }
@@ -536,3 +542,9 @@ function NoCardinalityException(message) {
   this.message = (message || '');
 }
 NoCardinalityException.prototype = new Error();
+
+function NullPointerException(message) {
+  this.name = 'NullPointerException';
+  this.message = (message || '');
+}
+NullPointerException.prototype = new Error();
