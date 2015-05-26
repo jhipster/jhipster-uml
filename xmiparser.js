@@ -162,16 +162,16 @@ XMIParser.prototype.fillPrimitiveTypes = function() {
 XMIParser.prototype.fillAssociations = function() {
   for (var i = 0; i < this.rawAssociationsIndexes.length; i++) {
     var element = this.root.packagedElement[this.rawAssociationsIndexes[i]];
-    var name = (element['ownedEnd'] != null) 
-                 ? element['ownedEnd'][0].$['name'] 
+    var name = (element.ownedEnd != null) 
+                 ? element.ownedEnd[0].$['name'] 
                  : '';
-    var type = (element['ownedEnd'] != null) 
-                 ? element['ownedEnd'][0].$['type'] 
+    var type = (element.ownedEnd != null) 
+                 ? element.ownedEnd[0].$['type'] 
                  : '';
 
     this.associations[element.$['xmi:id']] = {
-      isUpperValuePresent: element['ownedEnd'] != null 
-                            && element['ownedEnd'][0]['upperValue'] != null,
+      isUpperValuePresent: element.ownedEnd != null 
+                            && element.ownedEnd[0].upperValue != null,
       name: name,
       type: type
     }
@@ -237,14 +237,14 @@ XMIParser.prototype.addRegularField = function(element, classId) {
   if (element.$['type'] != null) {
     this.fields[element.$['xmi:id']]['type'] = element.$['type'];
   } else {
-    if (!element['type']) { // this field doesn't possess any type at all
+    if (!element.type) { // this field doesn't possess any type at all
       throw new NoTypeException(
         "The field '" 
         + element.$['name'] 
         + "' does not possess any type, exiting now.");
     }
-    var typeName = this.getTypeName(element['type'][0].$['href']);
-    this.fields[element.$['xmi:id']]['type'] = typeName;
+    var typeName = this.getTypeName(element.type[0].$['href']);
+    this.fields[element.$['xmi:id']].type = typeName;
     this.primitiveTypes[typeName] = typeName;
   }
   this.classes[classId].fields.push(element.$['xmi:id']);
@@ -271,13 +271,13 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
     'class': classId,
     isUpperValuePresent: false
   }
-  if (element['upperValue'] != null 
-      && element['upperValue'][0].$['value'] != null) {
-    this.injectedFields[element.$['xmi:id']]['isUpperValuePresent'] =
-      element['upperValue'][0].$['value'] == '*';
+  if (element.upperValue != null 
+      && element.upperValue[0].$['value'] != null) {
+    this.injectedFields[element.$['xmi:id']].isUpperValuePresent =
+      element.upperValue[0].$['value'] == '*';
   }
 
-  this.injectedFields[element.$['xmi:id']]['cardinality'] =
+  this.injectedFields[element.$['xmi:id']].cardinality =
     this.getCardinality(this.injectedFields[element.$['xmi:id']]);
   this.classes[classId].injectedFields.push(element.$['xmi:id']);
 
@@ -297,12 +297,12 @@ XMIParser.prototype.fillValidationRules = function() {
     var element = this.root.ownedRule[this.rawValidationRulesIndexes[i]];
 
     var name = element.$['name'];
-    var value = element['specification'][0].$['value']; // not nil, but ''
+    var value = element.specification[0].$['value']; // not nil, but ''
 
     var previousValidations = {};
     if (this.fields[element.$['constrainedElement']] != null) {
       previousValidations = 
-        this.fields[element.$['constrainedElement']]['validations'];
+        this.fields[element.$['constrainedElement']].validations;
     }
     if (!name) {
       throw new NoValidationNameException(
@@ -322,7 +322,7 @@ XMIParser.prototype.fillValidationRules = function() {
         + "', exiting now.");
     }
     previousValidations[name] = value;
-    this.fields[element.$['constrainedElement']]['validations'] = 
+    this.fields[element.$['constrainedElement']].validations = 
       previousValidations;
   }
 }

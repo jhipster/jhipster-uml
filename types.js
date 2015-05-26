@@ -1,7 +1,6 @@
 'use strict';
 
-var chalk = require('chalk'),
-    base = require('selfish').Base; // for inheritance
+var base = require('selfish').Base; // for inheritance
 
 /**
  * This interface provides base methods for handling the types.
@@ -16,8 +15,6 @@ var Types = base.extend({
      *                                         implemented by the subclass.
      */
     getTypes: function() {
-      console.log(chalk.red(
-          'This method must be implemented by a subclass to be called.'));
       throw new UnimplementedOperationException(
         'This method must be implemented by a subclass to be called.');
     },
@@ -31,8 +28,6 @@ var Types = base.extend({
      * @throws NoElementFoundException if no type exists for the passed type. 
      */
     getValidationsForType: function(type) {
-      console.log(chalk.red(
-          'This method must be implemented by a subclass to be called.'));
       throw new UnimplementedOperationException(
         'This method must be implemented by a subclass to be called.');
     },
@@ -47,9 +42,10 @@ var Types = base.extend({
     toValueNameObjectArray: function() {
       var array = [];
       for (var key in this.getTypes()) {
-        var object = {};
-        object['value'] = this.getTypes()[key];
-        object['name'] = this.getTypes()[key];            
+        var object = {
+          value: this.getTypes()[key],
+          name: this.getTypes()[key]
+        };
         array.push(object);
       }
       return array;
@@ -90,14 +86,10 @@ var AbstractMappedTypes = Types.extend({
      */
     getValidationsForType: function(type) {
       if (!this.contains(type)) {
-        console.log(chalk.red(
-            "The passed type: '" 
-            + type 
-            + "' is not contained in the supported types."));
         throw new NoElementFoundException(
           "The passed type: '" 
           + type 
-          + "' is not contained in the supported types.");
+          + "' is not a supported supported types.");
       }
       return this.types[type];
     }
@@ -115,13 +107,13 @@ exports.SQLTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
     this.types = {
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long': [ 'required', 'min', 'max' ],
-      'BigDecimal': [ 'required', 'min', 'max' ],
-      'LocalDate' : [ 'required' ],
-      'DateTime' : [ 'required' ],
-      'Boolean' : []
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long: [ 'required', 'min', 'max' ],
+      BigDecimal: [ 'required', 'min', 'max' ],
+      LocalDate : [ 'required' ],
+      DateTime : [ 'required' ],
+      Boolean : []
     };
   }
 });
@@ -139,13 +131,13 @@ exports.MongoDBTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'String', 'Integer', 'Long', 'BigDecimal', 'LocalDate', 'DateTime', 'Boolean' ];
     this.types = {
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long': [ 'required', 'min', 'max' ],
-      'BigDecimal': [ 'required', 'min', 'max' ],
-      'LocalDate' : [ 'required' ],
-      'DateTime' : [ 'required' ],
-      'Boolean' : []
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long: [ 'required', 'min', 'max' ],
+      BigDecimal: [ 'required', 'min', 'max' ],
+      LocalDate : [ 'required' ],
+      DateTime : [ 'required' ],
+      Boolean : []
     };
   }
 });
@@ -162,14 +154,14 @@ exports.CassandraTypes = AbstractMappedTypes.extend({
   initialize: function() {
     // this.types = [ 'UUID', 'TimeUUID', 'String', 'Integer', 'Long', 'BigDecimal', 'Date', 'Boolean' ];
     this.types = {
-      'UUID': [ 'required' ],
-      'TimeUUID': [ 'required' ],
-      'String': [ 'required', 'minlength', 'maxlength', 'pattern' ],
-      'Integer': [ 'required', 'min', 'max' ],
-      'Long' : [ 'required', 'min', 'max' ],
-      'BigDecimal' : [ 'required', 'min', 'max' ],
-      'Date' : [],
-      'Boolean' : [],
+      UUID: [ 'required' ],
+      TimeUUID: [ 'required' ],
+      String: [ 'required', 'minlength', 'maxlength', 'pattern' ],
+      Integer: [ 'required', 'min', 'max' ],
+      Long : [ 'required', 'min', 'max' ],
+      BigDecimal : [ 'required', 'min', 'max' ],
+      Date : [],
+      Boolean : [],
     };
   }
 });
