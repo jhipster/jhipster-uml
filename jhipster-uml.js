@@ -50,7 +50,7 @@ creator.createEntities();
 creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
-//createReflexives(parser.reflexives);
+createReflexives(parser.reflexives);
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
