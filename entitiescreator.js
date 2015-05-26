@@ -31,7 +31,7 @@ var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
   this.entities = {};
 }
 	
-EntitiesCreator.prototype.getEntites = function() {
+EntitiesCreator.prototype.getEntities = function() {
 	return this.entities;
 };
 
@@ -57,6 +57,7 @@ EntitiesCreator.prototype.initializeEntities = function() {
     this.entities[classId]={
       "relationships" : [],
       "fields" : [],
+      "fieldsContainOwnerOneToOne": false,
       "fieldsContainOwnerManyToMany": false,
       "fieldsContainOneToMany" : false,
       "fieldsContainLocalDate": false,
@@ -177,12 +178,12 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
       /*fill the relationship on the other side of the association acording to the relationType*/
       //TODO make the reflexive associations work
       var relationshipOtherSide = {
-          "relationshipId"    : this.entities[this.injectedFields[injectId].type].relationships.length + 1,
-          "relationshipName" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
-          "relationshipNameCapitalized" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
-          "relationshipFieldName" : lowerCase(this.classes[this.injectedFields[injectId].class].name), //this.getAssociationFieldName(this.injectedFields[injectId].association, lowerCase),
-          "otherEntityName"   : lowerCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
-          "otherEntityNameCapitalized" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name)
+        "relationshipId"    : this.entities[this.injectedFields[injectId].type].relationships.length + 1,
+        "relationshipName" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
+        "relationshipNameCapitalized" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
+        "relationshipFieldName" : lowerCase(this.classes[this.injectedFields[injectId].class].name), //this.getAssociationFieldName(this.injectedFields[injectId].association, lowerCase),
+        "otherEntityName"   : lowerCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name),
+        "otherEntityNameCapitalized" : upperCase(this.classes[this.associations[this.injectedFields[injectId].association].type].name)
       };
 
       switch(relationshipOwnerSide.relationshipType) {
@@ -190,6 +191,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           relationshipOwnerSide.ownerSide = true;
           relationshipOtherSide["relationshipType"] = ONE_TO_ONE;
           relationshipOtherSide["ownerSide"] = false;
+          this.entities[classId].fieldsContainOwnerOneToOne = true;
           break;
         case ONE_TO_MANY:
           this.entities[classId].fieldsContainOneToMany = true;
@@ -202,7 +204,7 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
           this.entities[classId].fieldsContainOwnerManyToMany = true;
           relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
-          this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
+          // this.entities[classId]["fieldsContainOwnerManyToMany"] = true;
           break;
       }
   
