@@ -90,6 +90,7 @@ function createReflexives(reflexives) {
       otherEntityNameCapitalized: _.capitalize(element.className),
       ownerSide: true
     });
+    newJson.fieldsContainOwnerOneToOne = true;
     fs.writeFileSync(
       '.jhipster/' + _.capitalize(element.className) + '.json',
       JSON.stringify(newJson, null, '  '));
