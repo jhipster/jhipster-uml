@@ -5,13 +5,8 @@ var xml2js = require('xml2js'), // for reading and parsing the XMI
     fs = require('fs'),
     _s = require('underscore.string'),
 	  jf = require('jsonfile'),
-    types = require('./types');
-	
-	// constants used throughout the script
-var ONE_TO_ONE = 'one-to-one';
-var ONE_TO_MANY = 'one-to-many';
-var MANY_TO_ONE = 'many-to-one';
-var MANY_TO_MANY = 'many-to-many';
+    types = require('./types'),
+    cardinalities = require('./cardinalities');
 
 	
 var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
@@ -186,24 +181,24 @@ EntitiesCreator.prototype.setRelationshipOfEntity = function(classId) {
       };
 
       switch(relationshipOwnerSide.relationshipType) {
-        case ONE_TO_ONE:
+        case cardinalities.ONE_TO_ONE:
           relationshipOwnerSide.ownerSide = true;
-          relationshipOtherSide["relationshipType"] = ONE_TO_ONE;
+          relationshipOtherSide["relationshipType"] = cardinalities.ONE_TO_ONE;
           relationshipOtherSide["ownerSide"] = false;
           this.entities[classId].fieldsContainOwnerOneToOne = true;          
           relationshipOtherSide["otherEntityRelationshipName"] = relationshipOwnerSide.relationshipFieldName;
           break;
-        case ONE_TO_MANY:
+        case cardinalities.ONE_TO_MANY:
           this.entities[classId].fieldsContainOneToMany = true;
-          relationshipOtherSide["relationshipType"] = MANY_TO_ONE;
+          relationshipOtherSide["relationshipType"] = cardinalities.MANY_TO_ONE;
           relationshipOtherSide["otherEntityField"] = 'id'; //By default set at 'id'
           relationshipOwnerSide["otherEntityRelationshipName"] = relationshipOtherSide.relationshipFieldName;
           break;
-        case MANY_TO_MANY:
+        case cardinalities.MANY_TO_MANY:
           relationshipOwnerSide.ownerSide = true;
           relationshipOwnerSide['otherEntityField'] = 'id';
           this.entities[classId].fieldsContainOwnerManyToMany = true;
-          relationshipOtherSide["relationshipType"] = MANY_TO_MANY;
+          relationshipOtherSide["relationshipType"] = cardinalities.MANY_TO_MANY;
           relationshipOtherSide["ownerSide"] = false;
           relationshipOtherSide["otherEntityRelationshipName"] = relationshipOwnerSide.relationshipFieldName;
           break;
