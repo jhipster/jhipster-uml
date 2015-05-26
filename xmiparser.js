@@ -4,13 +4,8 @@ var xml2js = require('xml2js'), // for reading and parsing the XMI
     chalk = require('chalk'),
     fs = require('fs'),
     _s = require('underscore.string'),
-    types = require('./types');
-
-// constants used throughout the script
-var ONE_TO_ONE = 'one-to-one';
-var ONE_TO_MANY = 'one-to-many';
-var MANY_TO_ONE = 'many-to-one';
-var MANY_TO_MANY = 'many-to-many';
+    types = require('./types'),
+    cardinalities = require('./cardinalities');
 
 /**
  * This class parses a XMI document.
@@ -352,15 +347,15 @@ XMIParser.prototype.getCardinality = function(injectedField) {
   if (this.isOneToOne( 
       injectedField.isUpperValuePresent, 
       this.associations[injectedField.association].isUpperValuePresent)) {
-    return ONE_TO_ONE;
+    return cardinalities.ONE_TO_ONE;
   } else if (this.isOneToMany(
       injectedField.isUpperValuePresent,
       this.associations[injectedField.association].isUpperValuePresent)) {
-    return ONE_TO_MANY;
+    return cardinalities.ONE_TO_MANY;
   } else if (this.isManyToMany(
       injectedField.isUpperValuePresent,
       this.associations[injectedField.association].isUpperValuePresent)) {
-    return MANY_TO_MANY;
+    return cardinalities.MANY_TO_MANY;
   }
   throw new NoCardinalityException(
     "The injected field '" 

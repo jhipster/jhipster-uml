@@ -1,10 +1,6 @@
 'use strict';
 
-// constants used throughout the script
-var ONE_TO_ONE = 'one-to-one';
-var ONE_TO_MANY = 'one-to-many';
-var MANY_TO_ONE = 'many-to-one';
-var MANY_TO_MANY = 'many-to-many';
+var cardinalities = require('./cardinalities');
 
 /**
  * This class sorts given classes and injected fields in order to make them
@@ -99,10 +95,10 @@ ClassScheduler.prototype.schedule = function() {
  */
 ClassScheduler.prototype.isSafeToRemove = function(className, dependency) {
   switch(dependency.type) {
-    case ONE_TO_ONE:
-    case MANY_TO_MANY:
+    case cardinalities.ONE_TO_ONE:
+    case cardinalities.MANY_TO_MANY:
       return dependency.source != className;
-    case ONE_TO_MANY:
+    case cardinalities.ONE_TO_MANY:
       return dependency.destination != className;
     default:
       return true; // for reflexive associations

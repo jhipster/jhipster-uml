@@ -3,7 +3,8 @@
 var chai = require('chai'),
     expect = chai.expect, 
     ClassScheduler = require('../scheduler'),
-  	XMIParser = require('../xmiparser');
+  	XMIParser = require('../xmiparser'),
+    cardinalities = require('../cardinalities');
 
 var parser = new XMIParser('./test/modelio.xmi', 'sql');
 
@@ -91,16 +92,16 @@ describe('ClassScheduler', function() {
           var relation = scheduler.pool[i];
 
           switch(relation.type) {
-            case 'one-to-one':
+            case cardinalities.ONE_TO_ONE:
               oneToOneCount++;
               break;
-            case 'one-to-many':
+            case cardinalities.ONE_TO_MANY:
               oneToManyCount++;
               break;
-            case 'many-to-one':
+            case cardinalities.MANY_TO_ONE:
               manyToOneCount++;
               break;
-            case 'many-to-many':
+            case cardinalities.MANY_TO_MANY:
               manyToManyCount++;
               break;
           }
