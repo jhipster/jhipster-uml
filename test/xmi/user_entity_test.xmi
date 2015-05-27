@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_mcSBkAO-EeWnSdHFv0G_6g" name="case_user_entity">
+  <eAnnotations xmi:id="_mcSBkQO-EeWnSdHFv0G_6g" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_mcSBkgO-EeWnSdHFv0G_6g" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_mcSBkwO-EeWnSdHFv0G_6g" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mcSBlAO-EeWnSdHFv0G_6g" name="User">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mcSBlQO-EeWnSdHFv0G_6g" name="account" visibility="public" type="_mcSBmwO-EeWnSdHFv0G_6g" association="_mcSBmAO-EeWnSdHFv0G_6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mcSBlgO-EeWnSdHFv0G_6g"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mcSBlwO-EeWnSdHFv0G_6g" name="name" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mcSBmAO-EeWnSdHFv0G_6g" memberEnd="_mcSBlQO-EeWnSdHFv0G_6g _mcSBmQO-EeWnSdHFv0G_6g">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mcSBmQO-EeWnSdHFv0G_6g" name="user" visibility="public" type="_mcSBlAO-EeWnSdHFv0G_6g" association="_mcSBmAO-EeWnSdHFv0G_6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mcSBmgO-EeWnSdHFv0G_6g"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mcSBmwO-EeWnSdHFv0G_6g" name="Account">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mcSBnAO-EeWnSdHFv0G_6g" name="argent" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mcSBnQO-EeWnSdHFv0G_6g" name="Bank">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mcSBngO-EeWnSdHFv0G_6g" name="user" visibility="public" type="_mcSBlAO-EeWnSdHFv0G_6g" aggregation="shared" association="_mcSBogO-EeWnSdHFv0G_6g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mcSBnwO-EeWnSdHFv0G_6g" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mcSBoAO-EeWnSdHFv0G_6g"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mcSBoQO-EeWnSdHFv0G_6g" name="name" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mcSBogO-EeWnSdHFv0G_6g" memberEnd="_mcSBngO-EeWnSdHFv0G_6g _mcSBowO-EeWnSdHFv0G_6g">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mcSBowO-EeWnSdHFv0G_6g" name="bank" visibility="public" type="_mcSBnQO-EeWnSdHFv0G_6g" association="_mcSBogO-EeWnSdHFv0G_6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mcSBpAO-EeWnSdHFv0G_6g"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
