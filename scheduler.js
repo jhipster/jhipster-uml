@@ -9,7 +9,9 @@ var cardinalities = require('./cardinalities');
  * @param injectedFields {hash<Object>} injected fields.
  */
 var ClassScheduler = module.exports = function ClassScheduler(classNames,
-    injectedFields) {
+    injectedFields,
+    classes) {
+  this.classes = classes;
   this.classNames = classNames;
   this.injectedFields = injectedFields;
   this.pool = [];
@@ -21,6 +23,7 @@ var ClassScheduler = module.exports = function ClassScheduler(classNames,
  * @return {array<string>} the ordered pool.
  */
 ClassScheduler.prototype.getOrderedPool = function() {
+
   return this.orderedPool;
 };
 
@@ -84,6 +87,13 @@ ClassScheduler.prototype.schedule = function() {
       this.orderedPool.push(element);
     }
   }, this);
+
+  console.log(this.classes);
+  this.orderedPool = this.orderedPool.filter(function(element){// We filter out all classes that name of JHipster entity User
+    console.log("****** " + element);
+    return this.classes[element].name.toLowerCase() != 'User'.toLowerCase();
+  }, this);
+
 };
 
 /**

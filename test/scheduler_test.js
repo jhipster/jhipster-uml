@@ -14,14 +14,17 @@ var employeeId = '_iW0ZH_JjEeSmmZm37nQR-w';
 
 var scheduler = new ClassScheduler(
   Object.keys(parser.getClasses()),
-  parser.getInjectedFields());
+  parser.getInjectedFields(),
+  parser.getClasses()
+  );
 
 describe('ClassScheduler', function() {
   describe('#initialize', function() {
     it ('successfully creates a scheduler', function() {
       new ClassScheduler(
         Object.keys(parser.getClasses()),
-        parser.getInjectedFields());
+        parser.getInjectedFields(),
+        parser.getClasses());
     });
 
     it('initializes each of its attributes', function() {
@@ -50,7 +53,8 @@ describe('ClassScheduler', function() {
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),
-        otherParser.getInjectedFields());
+        otherParser.getInjectedFields(),
+        otherParser.getClasses());
       otherScheduler.schedule();
       expect(
         otherScheduler.getOrderedPool().length
@@ -259,7 +263,8 @@ describe('ClassScheduler', function() {
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),
-        otherParser.getInjectedFields());
+        otherParser.getInjectedFields(),
+        parser.getClasses());
       try {
         otherScheduler.schedule();
         fail();

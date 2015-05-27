@@ -16,6 +16,9 @@ var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
       "the xmi parser is null"
     );
   }
+
+  //
+  this.USER = 'User';
   //
   this.primitiveTypes = xmiParser.getPrimitiveTypes();
   this.classes = xmiParser.getClasses();
@@ -23,6 +26,7 @@ var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
   this.injectedFields = xmiParser.getInjectedFields();
   this.associations = xmiParser.getAssociations();
   
+
   this.entities = {};
 }
 	
@@ -32,13 +36,26 @@ EntitiesCreator.prototype.getEntities = function() {
 
 EntitiesCreator.prototype.createEntities = function() {
 	this.initializeEntities();
-  
+  var entityToSuppress;
 	for (var i in Object.keys(this.classes)){
     var classId= Object.keys(this.classes)[i];
     
+  /**
+   * If the user add a 'User' entity we consider it as the already created JHipster User entity
+   *  thus none of his fields and ownerside relationships will be considerate
+   */
+    if(this.classes[classId].name.toLowerCase() == this.USER.toLowerCase()){
+      console.log(chalk.yellow("Warning:  An Entity called \'User\' was defined: \'User\' is an entity created by default by JHipster. All relationships toward it will be kept but all attributs and relationships from it will be disregard."));
+      entityToSuppress = classId;
+      continue;
+    }
+
     this.setFieldsOfEntity(classId);
     this.setRelationshipOfEntity(classId);
   }
+
+   delete this.entities[entityToSuppress];
+
 };
 
 
