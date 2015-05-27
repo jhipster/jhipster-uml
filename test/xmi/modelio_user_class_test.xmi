@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_66WysABlEeW5RsvjsYghDw" name="noattrib">
+  <eAnnotations xmi:id="_66WysQBlEeW5RsvjsYghDw" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_66WysgBlEeW5RsvjsYghDw" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_66WyswBlEeW5RsvjsYghDw" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_66WytRBlEeW5RsvjsYghDw" name="User"/>
+</uml:Model>

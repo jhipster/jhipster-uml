@@ -117,6 +117,15 @@ describe('XMIParser', function() {
         parser.findElements();
       });
 
+      describe('when checking if a class named User is present', function() {
+        it('finds it during parsing time, and save its id', function() {
+          var otherParser =
+            new XMIParser('./test/xmi/modelio_user_class_test.xmi', 'sql');
+          otherParser.parse();
+          expect(otherParser.getUserClassId()).not.to.equal(null);
+        });
+      });
+
       describe('#findRawPackagedElements', function() {
         it('correctly fills the index arrays', function() {
           expect(parser.rawPrimitiveTypesIndexes).to.deep.equal([ 19, 20, 21] );
