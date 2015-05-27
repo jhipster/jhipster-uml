@@ -14,6 +14,11 @@ var parserConstrainte = new XMIParser('./test/xmi/test_constraint.xmi', 'sql');
 parserConstrainte.parse();
 var creatorConstrainte = new EntitiesCreator(parserConstrainte);
 
+/* the entity creator set to do the User Entity tests */
+var parserUser = new XMIParser('./test/xmi/user_entity_test.xmi', 'sql');
+parserUser.parse();
+var creatorUser = new EntitiesCreator(parserUser);
+
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
     describe('when passing valid argument ', function(){
@@ -48,11 +53,15 @@ describe('EntitiesCreator ', function(){
     describe('#initializeEntities', function(){
       before(function(){
           creator.initializeEntities();
+          creatorUser.initializeEntities();
       });
       describe('when we intialize Entities', function(){
         it('there are as many Entities as Classes',function(){
           expect(creator.getEntities.length).equal(creator.getClasses.length);
         });
+   /*     it('there are less Entities as Classes when there is a Class called \'User\'', function(){
+          expect(creatorUser.getEntities.length).equal(creatorUser.getClasses.length-1);
+        });*/
       });
     });
 

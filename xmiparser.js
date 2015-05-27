@@ -33,7 +33,18 @@ var XMIParser = module.exports = function XMIParser(file, databaseTypeName) {
   // contains objects like, for instance
   // { className: 'Employee', fieldName: 'manager' }
   this.reflexives = [];
+
+  // the use class's id holder
+  this.userClassId = null;
 }
+
+/**
+ * Gets the user class' id.
+ * @return {Object} the id.
+ */
+XMIParser.prototype.getUserClassId = function() {
+  return this.userClassId;
+};
 
 /**
  * Gets the primitive types.
@@ -182,6 +193,9 @@ XMIParser.prototype.fillClassesAndFields = function() {
     var element = this.root.packagedElement[this.rawClassesIndexes[i]];
     if (!element.$['name']) {
       throw new NullPointerException('Classes must have a name.');
+    }
+    if (!this.userClassId && element.$['name'].toLowerCase() == 'user') {
+      this.userClassId = element.$['xmi:id'];
     }
     this.addClass(element);
 

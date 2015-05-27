@@ -10,12 +10,13 @@ var cardinalities = require('./cardinalities');
  * @throws NullPointerException if the passed class names or injected fields
  *                              are nil.
  */
-var ClassScheduler = module.exports = function ClassScheduler(classNames,
-    injectedFields) {
+var ClassScheduler = module.exports = function ClassScheduler(
+    classNames, injectedFields) {
   if (!classNames || !injectedFields) {
     throw new NullPointerException(
       'The class names and the injected fields must not be nil.');
   }
+
   this.classNames = classNames;
   this.injectedFields = injectedFields;
   this.pool = [];
@@ -27,6 +28,7 @@ var ClassScheduler = module.exports = function ClassScheduler(classNames,
  * @return {array<string>} the ordered pool.
  */
 ClassScheduler.prototype.getOrderedPool = function() {
+
   return this.orderedPool;
 };
 
