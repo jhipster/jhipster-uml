@@ -45,6 +45,9 @@ var scheduler = new ClassScheduler(
 scheduler.schedule();
 
 var scheduledClasses = scheduler.getOrderedPool();
+if (parser.getUserClassId()) {
+  scheduledClasses = filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
+}
 
 var creator = new EntitiesCreator(parser);
 creator.createEntities();
@@ -52,6 +55,16 @@ creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
 createReflexives(parser.reflexives);
+
+
+/**
+ * Removes every class responding to the class to filter out.
+ */
+function filterScheduledClasses(classToFilter, scheduledClasses) {
+  return scheduledClasses.filter(function(element) {
+    return element != classToFilter;
+  });
+}
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order

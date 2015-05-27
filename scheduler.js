@@ -10,10 +10,13 @@ var cardinalities = require('./cardinalities');
  * @throws NullPointerException if the passed class names or injected fields
  *                              are nil.
  */
-var ClassScheduler = module.exports = function ClassScheduler(classNames,
-    injectedFields,
-    classes) {
-  this.classes = classes;
+var ClassScheduler = module.exports = function ClassScheduler(
+    classNames, injectedFields) {
+  if (!classNames || !injectedFields) {
+    throw new NullPointerException(
+      'The class names and the injected fields must not be nil.');
+  }
+
   this.classNames = classNames;
   this.injectedFields = injectedFields;
   this.pool = [];
@@ -89,12 +92,6 @@ ClassScheduler.prototype.schedule = function() {
       this.orderedPool.push(element);
     }
   }, this);
-
-  console.log(this.classes);
-  this.orderedPool = this.orderedPool.filter(function(element){// We filter out all classes that name of JHipster entity User
-    return this.classes[element].name.toLowerCase() != 'User'.toLowerCase();
-  }, this);
-
 };
 
 /**

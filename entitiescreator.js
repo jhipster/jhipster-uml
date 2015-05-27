@@ -45,7 +45,7 @@ EntitiesCreator.prototype.createEntities = function() {
    *  thus none of his fields and ownerside relationships will be considerate
    */
     if(this.classes[classId].name.toLowerCase() == this.USER.toLowerCase()){
-      console.log(chalk.yellow("Warning:  An Entity called \'User\' was defined: \'User\' is an entity created by default by JHipster. All relationships toward it will be kept but all attributs and relationships from it will be disregard."));
+      console.log(chalk.yellow("Warning:  An Entity called \'User\' was defined: \'User\' is an entity created by default by JHipster. All relationships toward it will be kept but all attributes and relationships from it will be disregarded."));
       entityToSuppress = classId;
       continue;
     }
