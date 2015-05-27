@@ -7,11 +7,21 @@ var cardinalities = require('./cardinalities');
  * insertable in the given order, by respecting dependencies.
  * @param classNames {array<string>} class names.
  * @param injectedFields {hash<Object>} injected fields.
+ * @throws NullPointerException if the passed class names or injected fields
+ *                              are nil.
  */
 var ClassScheduler = module.exports = function ClassScheduler(classNames,
+<<<<<<< HEAD
     injectedFields,
     classes) {
   this.classes = classes;
+=======
+    injectedFields) {
+  if (!classNames || !injectedFields) {
+    throw new NullPointerException(
+      'The class names and the injected fields must not be nil.');
+  }
+>>>>>>> 3caa721219e155ad631535780f52725a239c3734
   this.classNames = classNames;
   this.injectedFields = injectedFields;
   this.pool = [];
@@ -102,8 +112,13 @@ ClassScheduler.prototype.schedule = function() {
  * @param className {string} a class name.
  * @param dependency {Object} a dependency.
  * @return {boolean} whether it is safe to remove the class.
+ * @throws NullPointerException if the passed className is nil.
  */
 ClassScheduler.prototype.isSafeToRemove = function(className, dependency) {
+  if (!className) {
+    throw new NullPointerException(
+      'The class name can not be nil.');
+  }
   switch(dependency.type) {
     case cardinalities.ONE_TO_ONE:
     case cardinalities.MANY_TO_MANY:
@@ -130,8 +145,13 @@ ClassScheduler.prototype.getDependencies = function(className) {
 /**
  * Removes a class from the unsorted pool, and adds it to the sorted one.
  * @param className {string} a class name. 
+ * @throws NullPointerException if the passed className is nil.
  */
 ClassScheduler.prototype.remove = function(className) {
+  if (!className) {
+    throw new NullPointerException(
+      'The class name can not be nil.');
+  }
   this.addNewElement(className);
   this.removeClassFromPool(className);
 };
@@ -142,7 +162,7 @@ ClassScheduler.prototype.remove = function(className) {
  * @param className {string} a class name.
  */
 ClassScheduler.prototype.addNewElement = function(className) {
-  if (this.orderedPool.indexOf(className) == -1) {
+  if (className && this.orderedPool.indexOf(className) == -1) {
     this.orderedPool.push(className);
   }
 };
@@ -158,6 +178,11 @@ ClassScheduler.prototype.removeClassFromPool = function (className) {
 }
 
 // exception definitions
+function NullPointerException(message) {
+  this.name = 'NullPointerException';
+  this.message = (message || '');
+}
+NullPointerException.prototype = new Error();
 
 function CircularDependencyException(message) {
   this.name = 'CircularDependencyException';

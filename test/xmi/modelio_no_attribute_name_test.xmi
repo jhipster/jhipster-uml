@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_66WysABlEeW5RsvjsYghDw" name="noattrib">
+  <eAnnotations xmi:id="_66WysQBlEeW5RsvjsYghDw" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_66WysgBlEeW5RsvjsYghDw" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_66WyswBlEeW5RsvjsYghDw" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_66WytRBlEeW5RsvjsYghDw" name="Class2"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_66WytABlEeW5RsvjsYghDw" name="Class">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_66WytQBlEeW5RsvjsYghDw" name="Attribute" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_66WytgBlEeW5RsvjsYghDw" name="Class1">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_66WytwBlEeW5RsvjsYghDw" visibility="public" type="_66WytABlEeW5RsvjsYghDw" aggregation="composite" association="_66WyuQBlEeW5RsvjsYghDw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_66WyuABlEeW5RsvjsYghDw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_66WyuQBlEeW5RsvjsYghDw" memberEnd="_66WytwBlEeW5RsvjsYghDw _66WyugBlEeW5RsvjsYghDw">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_66WyugBlEeW5RsvjsYghDw" visibility="public" type="_66WytgBlEeW5RsvjsYghDw" association="_66WyuQBlEeW5RsvjsYghDw"/>
+  </packagedElement>
+</uml:Model>

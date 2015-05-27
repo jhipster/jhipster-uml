@@ -20,6 +20,44 @@ var scheduler = new ClassScheduler(
 
 describe('ClassScheduler', function() {
   describe('#initialize', function() {
+    describe('when passing nil arguments', function() {
+      describe('for the class names', function() {
+        it('throws an exception', function() {
+          try {
+            new ClassScheduler(
+              null,
+              parser.getInjectedFields());
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
+        });
+      });
+
+      describe('for the injected fields', function() {
+        it('throws an exception', function() {
+          try {
+            new ClassScheduler(
+              Object.keys(parser.getClasses()),
+              null);
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
+        });
+      });
+
+      describe('for both', function() {
+        it('throws an exception', function() {
+          try {
+            new ClassScheduler(
+              null,
+              null);
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
+        });
+      });
+    });
+
     it ('successfully creates a scheduler', function() {
       new ClassScheduler(
         Object.keys(parser.getClasses()),
@@ -145,11 +183,24 @@ describe('ClassScheduler', function() {
           expect(
             scheduler.getDependencies('NoClass')
           ).to.deep.equal([]);
+          expect(
+            scheduler.getDependencies(null)
+          ).to.deep.equal([]);
         });
       });
     });
 
     describe('#remove', function() {
+      describe('when passing a null class name', function() {
+        it('throws an exception', function() {
+           try {
+            scheduler.remove(null);
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
+        });
+      });
+
       describe('#addNewElement', function() {
         var fictiveClass = {
           source: '42',
@@ -174,10 +225,32 @@ describe('ClassScheduler', function() {
             scheduler.addNewElement(fictiveClass);
             expect(scheduler.orderedPool.length).to.equal(length);
           });
-        })
+        });
+
+        describe('given a nil class name',function() {
+          it('does not add it', function() {
+            var previousSize = scheduler.getOrderedPool().length;
+            scheduler.addNewElement(null);
+            expect(scheduler.getOrderedPool().length).to.equal(previousSize);
+          });
+        });
       });
 
       describe('#isSafeToRemove', function() {
+        describe('when passing an invalid class name', function() {
+          it('throws an exception', function() {
+            try {
+              scheduler.isSafeToRemove(null, {
+                source: 'test',
+                destination: 'test2',
+                type: 'one-to-one'
+              });
+            } catch (error) {
+              expect(error.name).to.equal('NullPointerException');
+            }
+          });
+        });
+
         describe('given an unremovable class', function() {
           it('returns false', function() {
             expect(
