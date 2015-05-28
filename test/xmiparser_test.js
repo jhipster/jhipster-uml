@@ -128,7 +128,7 @@ describe('XMIParser', function() {
 
       describe('#findRawPackagedElements', function() {
         it('correctly fills the index arrays', function() {
-          expect(parser.rawPrimitiveTypesIndexes).to.deep.equal([ 19, 20, 21] );
+          expect(parser.rawPrimitiveTypesIndexes).to.deep.equal([ 19, 20, 21]);
           expect(
             parser.rawClassesIndexes
           ).to.deep.equal([ 0, 4, 6, 9, 12, 14, 16, 17, 18 ]);
@@ -136,11 +136,50 @@ describe('XMIParser', function() {
             parser.rawAssociationsIndexes
           ).to.deep.equal([ 1, 2, 3, 5, 7, 8, 10, 11, 13, 15 ]);
         });
+
+        describe('when the XMI file uses xsi:type instead of xmi:type', function() {
+          it('still works', function() {
+            var otherParser = 
+              new XMIParser('./test/xmi/genmymodel_test.xml', 'sql');
+            otherParser.findElements();
+            expect(
+              otherParser.rawPrimitiveTypesIndexes
+            ).to.deep.equal([]);
+            expect(
+              otherParser.rawClassesIndexes
+            ).to.deep.equal([ 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 14, 15 ]);
+            expect(
+              otherParser.rawAssociationsIndexes
+            ).to.deep.equal([ 11, 12, 13 ]);
+          });
+        });
+
+        describe('when the XMI file uses another namespace', function() {
+          it('throws an exception', function() {
+            var otherParser =
+              new XMIParser('./test/xmi/genmymodel_wrong_namespace.xml', 'sql');
+            try {
+              otherParser.findElements();
+              fail();
+            } catch (error) {
+              expect(error.name).to.equal('UnsupportedNamespaceException');
+            }
+          });
+        });
       });
 
       describe('#findRawOwnedRules', function() {
         it('correctly fills the validation index array', function() {
           expect(parser.rawValidationRulesIndexes).to.deep.equal([ 0 ]);
+        });
+
+        describe('when the XMI file uses xsi:type instead of xmi:type', function() {
+          it('still works', function() {
+            var otherParser = 
+              new XMIParser('./test/xmi/genmymodel_test.xml', 'sql');
+            otherParser.findElements();
+            expect(otherParser.rawValidationRulesIndexes).to.deep.equal([]);
+          });
         });
       });
     });

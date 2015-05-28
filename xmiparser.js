@@ -111,8 +111,19 @@ XMIParser.prototype.findElements = function() {
  * classes, types and associations.
  */
 XMIParser.prototype.findRawPackagedElements = function() {
+  var prefix;
+
+  if (this.root.packagedElement[0].$['xmi:type']) {
+    prefix = 'xmi:type';
+  } else if(this.root.packagedElement[0].$['xsi:type']) {
+    prefix = 'xsi:type';
+  } else {
+    throw new UnsupportedNamespaceException(
+      'Your editor uses an unsupported namespace for types, exiting now.');
+  }
+
   for (var i = 0, n = this.root.packagedElement.length; i < n; i++) {
-    switch (this.root.packagedElement[i].$['xmi:type']) {
+    switch (this.root.packagedElement[i].$[prefix]) {
       case 'uml:PrimitiveType':
         this.rawPrimitiveTypesIndexes.push(i);
         break;
@@ -134,8 +145,20 @@ XMIParser.prototype.findRawOwnedRules = function() {
   if (!this.root.ownedRule) {
     return;
   }
+
+  var prefix;
+
+  if (this.root.ownedRule[0].$['xmi:type']) {
+    prefix = 'xmi:type';
+  } else if(this.root.ownedRule[0].$['xsi:type']) {
+    prefix = 'xsi:type';
+  } else {
+    throw new UnsupportedNamespaceException(
+      'Your editor uses an unsupported namespace for types, exiting now.');
+  }
+
   for (var i = 0, n = this.root.ownedRule.length; i < n; i++) {
-    switch (this.root.ownedRule[i].$['xmi:type']) {
+    switch (this.root.ownedRule[i].$[prefix]) {
       case 'uml:Constraint':
         this.rawValidationRulesIndexes.push(i);
         break;
@@ -566,3 +589,8 @@ function NullPointerException(message) {
   this.message = (message || '');
 }
 NullPointerException.prototype = new Error();
+
+function UnsupportedNamespaceException(message) {
+  this.name = 'UnsupportedNamespaceException';
+  this.message = (message || '');
+}
