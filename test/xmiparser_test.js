@@ -137,6 +137,17 @@ describe('XMIParser', function() {
           ).to.deep.equal([ 1, 2, 3, 5, 7, 8, 10, 11, 13, 15 ]);
         });
 
+        describe('when the XMI file uses the uml:DataType for custom types', function() {
+          it('still works', function() {
+            var otherParser = 
+              new XMIParser('./test/xmi/genmymodel_datatype.xmi', 'sql');
+            otherParser.findElements();
+            expect(
+              otherParser.rawPrimitiveTypesIndexes
+            ).to.deep.equal([ 1, 2 ]);
+          });
+        });
+
         describe('when the XMI file uses xsi:type instead of xmi:type', function() {
           it('still works', function() {
             var otherParser = 
@@ -144,7 +155,7 @@ describe('XMIParser', function() {
             otherParser.findElements();
             expect(
               otherParser.rawPrimitiveTypesIndexes
-            ).to.deep.equal([]);
+            ).to.deep.equal([  ]);
             expect(
               otherParser.rawClassesIndexes
             ).to.deep.equal([ 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 14, 15 ]);

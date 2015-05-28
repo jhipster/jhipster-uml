@@ -125,6 +125,7 @@ XMIParser.prototype.findRawPackagedElements = function() {
   for (var i = 0, n = this.root.packagedElement.length; i < n; i++) {
     switch (this.root.packagedElement[i].$[prefix]) {
       case 'uml:PrimitiveType':
+      case 'uml:DataType':
         this.rawPrimitiveTypesIndexes.push(i);
         break;
       case 'uml:Class':
