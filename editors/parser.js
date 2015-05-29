@@ -166,7 +166,7 @@ exports.AbstractParser = Parser.extend({
     this.databaseTypes = databaseTypes;
 
     // arrays used for the XML parsing
-    this.rawPrimitiveTypesIndexes = [];
+    this.rawTypesIndexes = [];
     this.rawClassesIndexes = [];
     this.rawAssociationsIndexes = [];
     this.rawValidationRulesIndexes = [];
