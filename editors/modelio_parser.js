@@ -5,6 +5,9 @@ var base = require('selfish').Base, // for inheritance
     parser = require('./parser'),
     cardinalities = require('../cardinalities');
 
+/**
+ * The parser for the XMI files exported by Modelio.
+ */
 exports.ModelioParser = parser.AbstractParser.extend({
 
   findElements: function() {
