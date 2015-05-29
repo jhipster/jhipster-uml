@@ -215,22 +215,21 @@ exports.ModelioParser = parser.AbstractParser.extend({
         throw new NoValidationNameException(
           'The validation value does not belong to any validation.');
       } else if (!name && !value) {
-        // do nothing
-      } else {
-        if (!this.databaseTypes.isValidationSupportedForType(
-            this.types[this.fields[constraint.$['constrainedElement']].type],
-            name)) {
-          throw new WrongValidationException(
-            "The validation '"
-            + name
-            + "' isn't supported for the type '"
-            + this.types[this.fields[constraint.$['constrainedElement']].type]
-            + "', exiting now.");
-        }
-        previousValidations[name] = value;
-        this.fields[constraint.$['constrainedElement']].validations = 
-          previousValidations;
+        return;
       }
+      if (!this.databaseTypes.isValidationSupportedForType(
+          this.types[this.fields[constraint.$['constrainedElement']].type],
+          name)) {
+        throw new WrongValidationException(
+          "The validation '"
+          + name
+          + "' isn't supported for the type '"
+          + this.types[this.fields[constraint.$['constrainedElement']].type]
+          + "', exiting now.");
+      }
+      previousValidations[name] = value;
+      this.fields[constraint.$['constrainedElement']].validations = 
+        previousValidations;
     }, this);
   },
 
@@ -352,9 +351,3 @@ function NoCardinalityException(message) {
   this.message = (message || '');
 }
 NoCardinalityException.prototype = new Error();
-
-function NoValidationNameException(message) {
-  this.name = 'NoValidationNameException';
-  this.message = (message || '');
-}
-NoValidationNameException.prototype = new Error();
