@@ -218,28 +218,3 @@ function UnimplementedOperationException(message) {
   this.message = (message || '');
 }
 UnimplementedOperationException.prototype = new Error();
-
-function InvalidTypeException(message) {
-  this.name = 'InvalidTypeException';
-  this.message = (message || '');
-}
-InvalidTypeException.prototype = new Error();
-
-function NullPointerException(message) {
-  this.name = 'NullPointerException';
-  this.message = (message || '');
-}
-NullPointerException.prototype = new Error();
-
-function NoValidationNameException(message) {
-  this.name = 'NoValidationNameException';
-  this.message = (message || '');
-}
-NoValidationNameException.prototype = new Error();
-
-function WrongValidationException(message) {
-  this.name = 'WrongValidationException';
-  this.message = (message || '');
-}
-WrongValidationException.prototype = new Error();
-
