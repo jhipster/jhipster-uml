@@ -73,7 +73,7 @@ describe('ModelioParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          fail();
+          throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -143,7 +143,7 @@ describe('ModelioParser', function() {
             initDatabaseTypeHolder('sql'));
         try {
           otherParser.parse();
-          fail();
+          throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -158,7 +158,7 @@ describe('ModelioParser', function() {
             initDatabaseTypeHolder('sql'));
         try {
           otherParser.parse();
-          fail();
+          throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -191,7 +191,6 @@ describe('ModelioParser', function() {
         });
 
         it('should not throw any error if there is no attribute', function() {
-          var noError = true;
           try {
             var anotherParser = new mp.ModelioParser(
               getRootElement(
@@ -200,9 +199,8 @@ describe('ModelioParser', function() {
             anotherParser.parse();
             parser.fillClassesAndFields();
           } catch (error) {
-            noError = false;
+            throw new ExpectationError();
           }
-          expect(noError).to.equal(true);
         });
       });
     });
@@ -267,76 +265,54 @@ describe('ModelioParser', function() {
         });
 
         describe('#getCardinality', function() {
-          describe('when passing an invalid injected field', function() {
-            var falseInjectedField;
-
-            before(function() {
-              for (var element in parser.getInjectedFields()) {
-                if (parser.getInjectedFields()[element].cardinality == 'many-to-many') {
-                  falseInjectedField = parser.getInjectedFields()[element];
-                }
-              }
-              falseInjectedField.aggregation = 'composition';
+          describe('#isOneToOne', function() {
+            describe('when passing valid parameters', function() {
+              it('returns true', function() {
+                expect(parser.isOneToOne(false, false)).to.equal(true);
+              });
             });
-            it('throws an exception', function() {
-              try {
-                parser.getCardinality(falseInjectedField);
-              } catch (error) {
-                expect(error.name).to.equal('NoCardinalityException');
-              }
-            })
+
+            describe('when passing invalid parameters', function() {
+              it('returns false', function() {
+                expect(parser.isOneToOne(true, true)).to.equal(false);
+                expect(parser.isOneToOne(true, false)).to.equal(false);
+                expect(parser.isOneToOne(false, true)).to.equal(false);
+              });
+            });
           });
 
-          describe('when passing a valid injected field', function() {
-            describe('#isOneToOne', function() {
-              describe('when passing valid parameters', function() {
-                it('returns true', function() {
-                  expect(parser.isOneToOne(false, false)).to.equal(true);
-                });
-              });
+          describe('#isOneToMany', function() {
+            describe('when passing valid parameters', function() {
+              it('returns true', function() {
+                expect(parser.isOneToMany(true, false)).to.equal(true);
 
-              describe('when passing invalid parameters', function() {
-                it('returns false', function() {
-                  expect(parser.isOneToOne(true, true)).to.equal(false);
-                  expect(parser.isOneToOne(true, false)).to.equal(false);
-                  expect(parser.isOneToOne(false, true)).to.equal(false);
-                });
+                expect(parser.isOneToMany(false, true)).to.equal(true);
               });
             });
 
-            describe('#isOneToMany', function() {
-              describe('when passing valid parameters', function() {
-                it('returns true', function() {
-                  expect(parser.isOneToMany(true, false)).to.equal(true);
+            describe('when passing invalid parameters', function() {
+              it('returns false', function() {
+                expect(parser.isOneToMany(true, true)).to.equal(false);
 
-                  expect(parser.isOneToMany(false, true)).to.equal(true);
-                });
+                expect(parser.isOneToMany(false, false)).to.equal(false);
               });
+            });
+          });
 
-              describe('when passing invalid parameters', function() {
-                it('returns false', function() {
-                  expect(parser.isOneToMany(true, true)).to.equal(false);
-
-                  expect(parser.isOneToMany(false, false)).to.equal(false);
-                });
+          describe('#isManyToMany', function() {
+            describe('when passing valid parameters', function() {
+              it('returns true', function() {
+                expect(parser.isManyToMany(true, true)).to.equal(true);
               });
             });
 
-            describe('#isManyToMany', function() {
-              describe('when passing valid parameters', function() {
-                it('returns true', function() {
-                  expect(parser.isManyToMany(true, true)).to.equal(true);
-                });
-              });
+            describe('when passing invalid parameters', function() {
+              it('returns false', function() {
+                expect(parser.isManyToMany(false, false)).to.equal(false);
 
-              describe('when passing invalid parameters', function() {
-                it('returns false', function() {
-                  expect(parser.isManyToMany(false, false)).to.equal(false);
+                expect(parser.isManyToMany(false, true)).to.equal(false);
 
-                  expect(parser.isManyToMany(false, true)).to.equal(false);
-
-                  expect(parser.isManyToMany(true, false)).to.equal(false);
-                });
+                expect(parser.isManyToMany(true, false)).to.equal(false);
               });
             });
           });
@@ -392,16 +368,18 @@ describe('ModelioParser', function() {
     describe('#fillConstraints', function() {
       describe('when adding validations to the fields', function() {
         describe('if there is an invalid validation', function() {
+
           describe('because it has a value but no name', function() {
             it('throws an exception', function() {
+              var otherParser = new mp.ModelioParser(
+                getRootElement(
+                  readFileContent(
+                    './test/xmi/modelio_no_validation_name_test.xmi')),
+                initDatabaseTypeHolder('sql'));
+              otherParser.findConstraints();
               try {
-                var otherParser = new mp.ModelioParser(
-                  getRootElement(
-                    readFileContent(
-                      './test/xmi/NoValidationNameExceptionSample.xmi')),
-                  initDatabaseTypeHolder('sql'));
                 otherParser.fillConstraints();
-                fail();
+                throw new ExpectationError();
               } catch (error) {
                 expect(
                   error.name
@@ -429,7 +407,7 @@ describe('ModelioParser', function() {
             it('throws an exception', function() {
               try {
                 parser.fillConstraints();
-                fail();
+                throw new ExpectationError();
               } catch (error) {
                 expect(error.name).to.equal('WrongValidationException');
               }
@@ -500,3 +478,9 @@ function initDatabaseTypeHolder(databaseTypeName) {
         + "', exiting now.");
   }
 }
+
+function ExpectationError(message) {
+  this.name = 'ExpectationError';
+  this.message = (message || '');
+}
+ExpectationError.prototype = new Error();

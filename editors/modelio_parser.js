@@ -11,7 +11,7 @@ var base = require('selfish').Base, // for inheritance
 exports.ModelioParser = parser.AbstractParser.extend({
 
   findElements: function() {
-    this.root.packagedElement.forEach(function(element, index, array) {
+    this.root.packagedElement.forEach(function(element, index) {
       switch (element.$['xmi:type']) {
         case 'uml:PrimitiveType':
           this.rawTypesIndexes.push(index);
@@ -32,7 +32,7 @@ exports.ModelioParser = parser.AbstractParser.extend({
       return;
     }
 
-    this.root.ownedRule.forEach(function(element, index, array) {
+    this.root.ownedRule.forEach(function(element, index) {
       switch (element.$['xmi:type']) {
         case 'uml:Constraint':
           this.rawValidationRulesIndexes.push(index);
@@ -43,7 +43,7 @@ exports.ModelioParser = parser.AbstractParser.extend({
   },
 
   fillTypes: function() {
-    this.rawTypesIndexes.forEach(function(element, index, array) {
+    this.rawTypesIndexes.forEach(function(element) {
       var type = this.root.packagedElement[element];
       var typeName = _s.capitalize(type.$['name']);
 
@@ -58,7 +58,7 @@ exports.ModelioParser = parser.AbstractParser.extend({
   },
 
   fillAssociations: function() {
-    this.rawAssociationsIndexes.forEach(function(element, index, array) {
+    this.rawAssociationsIndexes.forEach(function(element) {
       var association = this.root.packagedElement[element];
 
       var name = (association.ownedEnd != null) 
@@ -200,10 +200,19 @@ exports.ModelioParser = parser.AbstractParser.extend({
    *                                  validation.
    */
   fillConstraints: function() {
-    this.rawValidationRulesIndexes.forEach(function(element, index, array) {
-      var constraint = this.root.ownedRule[element];
+    this.rawValidationRulesIndexes.forEach(function(index) {
+      var constraint = this.root.ownedRule[index];
       var name = constraint.$['name'];
+
+      if (!name) {
+        throw new NoValidationNameException('The validation has no name.');
+      }
+
       var value = constraint.specification[0].$['value']; // not nil, but ''
+
+      if (!name && !value) {
+        return;
+      }
 
       var previousValidations = {};
 
@@ -211,12 +220,7 @@ exports.ModelioParser = parser.AbstractParser.extend({
         previousValidations = 
           this.fields[constraint.$['constrainedElement']].validations;
       }
-      if (!name) {
-        throw new NoValidationNameException(
-          'The validation value does not belong to any validation.');
-      } else if (!name && !value) {
-        return;
-      }
+
       if (!this.databaseTypes.isValidationSupportedForType(
           this.types[this.fields[constraint.$['constrainedElement']].type],
           name)) {
@@ -251,8 +255,6 @@ exports.ModelioParser = parser.AbstractParser.extend({
    * @param {Object} the field.
    * @return {string} the cardinality (one of ONE_TO_ONE, ONE_TO_MANY or
    *                  MANY_TO_MANY).
-   * @throws NoCardinalityException if the relationship doesn't have any
-   *                                cardinality (it shouldn't happen).
    */
   getCardinality: function(injectedField) {
     if (this.isOneToOne( 
@@ -345,9 +347,3 @@ function WrongValidationException(message) {
   this.message = (message || '');
 }
 WrongValidationException.prototype = new Error();
-
-function NoCardinalityException(message) {
-  this.name = 'NoCardinalityException';
-  this.message = (message || '');
-}
-NoCardinalityException.prototype = new Error();
