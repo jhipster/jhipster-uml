@@ -2,6 +2,11 @@
 
 var modelio = require('./editors').MODELIO;
 
+/**
+ * Detects the editor that made the document represented by its passed root.
+ * @param root {Object} the document's root.
+ * @return {string} the editor's name.
+ */
 exports.detect = function detect(root) {
   if (!root) {
     throw new NullPointerException('The root element can not be null.');
@@ -9,9 +14,15 @@ exports.detect = function detect(root) {
   if (root.eAnnotations && root.eAnnotations[0].$['source'] == 'Objing') {
     return modelio;
   } else {
-    console.log('Your editor is unknown');
+    throw new UnknownEditorException('Your editor is unknown');
   }
 };
+
+function UnknownEditorException(message) {
+  this.name = 'UnknownEditorException';
+  this.message = (message || '');
+}
+UnknownEditorException.prototype = new Error();
 
 function NullPointerException(message) {
   this.name = 'NullPointerException';

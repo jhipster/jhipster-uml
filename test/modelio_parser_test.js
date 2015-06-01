@@ -1,3 +1,5 @@
+'use strict';
+
 var chai = require('chai'),
     expect = chai.expect,
     mp = require('../editors/modelio_parser'),
