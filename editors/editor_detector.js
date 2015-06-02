@@ -1,6 +1,7 @@
 'use strict';
 
-var modelio = require('./editors').MODELIO;
+var modelio = require('./editors').MODELIO,
+    umldesigner = require('./editors').UMLDESIGNER;
 
 /**
  * Detects the editor that made the document represented by its passed root.
@@ -13,7 +14,7 @@ exports.detect = function detect(root) {
   }
   if (root.eAnnotations && root.eAnnotations[0].$['source'] == 'Objing') {
     return modelio;
-  } else {
+  } else { // TODO choose UML Designer
     throw new UnknownEditorException('Your editor is unknown');
   }
 };
