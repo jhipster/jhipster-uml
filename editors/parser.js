@@ -161,7 +161,7 @@ exports.AbstractParser = Parser.extend({
   /**
    * Super constructor.
    */
-  initialize: function(root, databaseTypes) {
+  initialize: function(root, databaseTypes) { 
     this.root = root;
     this.databaseTypes = databaseTypes;
 

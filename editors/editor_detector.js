@@ -1,6 +1,8 @@
 'use strict';
 
+
 var modelio = require('./editors').MODELIO,
+    genmymodel = require('./editors').GENMYMODEL,
     umldesigner = require('./editors').UMLDESIGNER;
 
 /**
@@ -13,8 +15,12 @@ exports.detect = function detect(root) {
     throw new NullPointerException('The root element can not be null.');
   }
   if (root.eAnnotations && root.eAnnotations[0].$['source'] == 'Objing') {
+    console.log('Parser detected: MODELIO'+'\n');
     return modelio;
-  } else { // TODO choose UML Designer
+  } else if(root.eAnnotations && root.eAnnotations[0].$['source'] == 'genmymodel'){
+    console.log('Parser detected: GENMYMODEL'+'\n');
+    return genmymodel;
+  } else{ // TODO choose UML Designer
     throw new UnknownEditorException('Your editor is unknown');
   }
 };

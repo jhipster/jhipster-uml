@@ -361,7 +361,6 @@ describe('ModelioParser', function() {
             function() {
           it('is deduced from the field element, and added', function() {
             expect(parser.getTypes()['String']).to.equal('String');
-            expect(parser.getTypes()['Integer']).to.equal('Integer');
           });
         });
       });

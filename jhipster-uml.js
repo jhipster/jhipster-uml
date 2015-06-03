@@ -14,6 +14,7 @@ var fs = require('fs'),
   	XMIParser = require('./xmiparser'),
   	EntitiesCreator = require('./entitiescreator'),
     ClassScheduler = require('./scheduler'),
+    ParserFactory = require('./editors/parser_factory'),
     _ = require('underscore.string');
 
 
@@ -32,7 +33,7 @@ if (fs.existsSync('.yo-rc.json')) {
   type = process.argv[3];
 }
 
-var parser = new XMIParser(process.argv[2], type); 
+var parser = ParserFactory.createParser(process.argv[2], type); 
 
 parser.parse();
 

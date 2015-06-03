@@ -20,7 +20,7 @@ var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
   //
   this.USER = 'User';
   //
-  this.primitiveTypes = xmiParser.getPrimitiveTypes();
+  this.primitiveTypes = xmiParser.getTypes();
   this.classes = xmiParser.getClasses();
   this.fields = xmiParser.getFields();
   this.injectedFields = xmiParser.getInjectedFields();
