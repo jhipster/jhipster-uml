@@ -1,7 +1,7 @@
 'use strict';
 
 var modelio_parser = require('./modelio_parser'),
-	umldesigner_parser = require('./umldesigner_parser');
+	  umldesigner_parser = require('./umldesigner_parser');
 
 exports.MODELIO = 'modelio';
 exports.UMLDESIGNER = 'umldesigner';
