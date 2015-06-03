@@ -1,12 +1,14 @@
 'use strict';
 
-var modelio_parser = require('./modelio_parser');
-var genmymodel_parser = require('./genmymodel_parser');
+var modelio_parser = require('./modelio_parser'),
+	genmymodel_parser = require('./genmymodel_parser'),
+    umldesigner_parser = require('./umldesigner_parser');
 
 exports.MODELIO = 'modelio';
-exports.GENMYMODEL = 'genmymodel';
+exports.UMLDESIGNER = 'umldesigner';
 
 exports.Parsers = {
   modelio: modelio_parser.ModelioParser,
-  genmymodel: genmymodel_parser.GenMyModelParser
+  umldesigner: umldesigner_parser.UMLDesigner,
+  genmymodel:genmymodel_parser.GenMyModelParser
 };

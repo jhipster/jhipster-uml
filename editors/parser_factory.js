@@ -30,7 +30,7 @@ function getRootElement(content) {
     if (result.hasOwnProperty('uml:Model')) {
       root = result['uml:Model'];
     } else if (result.hasOwnProperty('xmi:XMI')) {
-      root = result['xmi:XMI']['uml:Model'][0];
+      root = result['xmi:XMI'];
     } else { // TODO: find the root, if there is one at all.
       throw new NoRootElementException(
         'The passed document has no immediate root element,'
@@ -56,3 +56,21 @@ function initDatabaseTypeHolder(databaseTypeName) {
         + "', exiting now.");
   }
 }
+
+function WrongDatabaseTypeException(message) {
+  this.name = 'WrongDatabaseTypeException';
+  this.message = (message || '');
+}
+WrongDatabaseTypeException.prototype = new Error();
+
+function WrongPassedArgumentException(message) {
+  this.name = 'WrongPassedArgumentException';
+  this.message = (message || '');
+}
+WrongPassedArgumentException.prototype = new Error();
+
+function NoRootElementException(message) {
+  this.name = 'NoRootElementException';
+  this.message = (message || '');
+}
+NoRootElementException.prototype = new Error();

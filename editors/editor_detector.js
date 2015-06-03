@@ -1,7 +1,9 @@
 'use strict';
 
-var modelio = require('./editors').MODELIO;
-var genmymodel = require('./editors').GENMYMODEL;
+
+var modelio = require('./editors').MODELIO,
+    genmymodel = require('./editors').GENMYMODEL,
+    umldesigner = require('./editors').UMLDESIGNER;
 
 /**
  * Detects the editor that made the document represented by its passed root.
@@ -18,7 +20,7 @@ exports.detect = function detect(root) {
   } else if(root.eAnnotations && root.eAnnotations[0].$['source'] == 'genmymodel'){
     console.log('Parser detected: GENMYMODEL'+'\n');
     return genmymodel;
-  } else{
+  } else{ // TODO choose UML Designer
     throw new UnknownEditorException('Your editor is unknown');
   }
 };
