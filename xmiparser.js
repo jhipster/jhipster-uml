@@ -55,6 +55,15 @@ XMIParser.prototype.getPrimitiveTypes = function() {
 };
 
 /**
+ * Gets the primitive types.
+ * @return {Object} the primitive types.
+ */
+XMIParser.prototype.getTypes = function() {
+  return this.primitiveTypes;
+};
+
+
+/**
  * Gets the classes.
  * @return {Object} the classes.
  */
@@ -323,7 +332,6 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
   this.injectedFields[element.$['xmi:id']].cardinality =
     this.getCardinality(this.injectedFields[element.$['xmi:id']]);
   this.classes[classId].injectedFields.push(element.$['xmi:id']);
-
 
 }
 
