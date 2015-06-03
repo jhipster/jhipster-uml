@@ -323,7 +323,7 @@ describe('ModelioParser', function() {
 
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.getFields()).length).to.equal(2);
+          expect(Object.keys(parser.getFields()).length).to.equal(22);
         });
 
         it('adds the fields to the classes', function() {

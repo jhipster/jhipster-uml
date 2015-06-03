@@ -55,6 +55,15 @@ XMIParser.prototype.getPrimitiveTypes = function() {
 };
 
 /**
+ * Gets the primitive types.
+ * @return {Object} the primitive types.
+ */
+XMIParser.prototype.getTypes = function() {
+  return this.primitiveTypes;
+};
+
+
+/**
  * Gets the classes.
  * @return {Object} the classes.
  */
