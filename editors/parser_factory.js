@@ -13,7 +13,6 @@ exports.createParser = function createParser(file, databaseTypeName) {
   return new editors.Parsers[detectedEditor](root, types);
 };
 
-
 function readFileContent(file) {
   if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
     throw new WrongPassedArgumentException(

@@ -324,7 +324,6 @@ XMIParser.prototype.addInjectedField = function(element, classId) {
     this.getCardinality(this.injectedFields[element.$['xmi:id']]);
   this.classes[classId].injectedFields.push(element.$['xmi:id']);
 
-
 }
 
 /**

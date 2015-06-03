@@ -1,6 +1,7 @@
 'use strict';
 
 var modelio = require('./editors').MODELIO;
+var genmymodel = require('./editors').GENMYMODEL;
 
 /**
  * Detects the editor that made the document represented by its passed root.
@@ -12,8 +13,12 @@ exports.detect = function detect(root) {
     throw new NullPointerException('The root element can not be null.');
   }
   if (root.eAnnotations && root.eAnnotations[0].$['source'] == 'Objing') {
+    console.log('Parser detected: MODELIO'+'\n');
     return modelio;
-  } else {
+  } else if(root.eAnnotations && root.eAnnotations[0].$['source'] == 'genmymodel'){
+    console.log('Parser detected: GENMYMODEL'+'\n');
+    return genmymodel;
+  } else{
     throw new UnknownEditorException('Your editor is unknown');
   }
 };
