@@ -6,6 +6,16 @@ var fs = require('fs'),
     editors = require('./editors'),
     types = require('../types');
 
+/**
+ * Creates a parser.
+ * @param file {string} the XMI file's name.
+ * @param databaseTypeName {string} the database type's name (sql, mongoDB, etc.).
+ * @return {Parser} the created parser.
+ * @throws WrongPassedArgumentException if the input file doesn't exist, or is
+ *                                      a folder.
+ * @throws NoRootElementException if the passed file doesn't have a root element.
+ * @throws WrongDatabaseTypeException if the passed type isn't supported.
+ */
 exports.createParser = function createParser(file, databaseTypeName) {
   var root = getRootElement(readFileContent(file));
   var detectedEditor = EditorDetector.detect(root);
