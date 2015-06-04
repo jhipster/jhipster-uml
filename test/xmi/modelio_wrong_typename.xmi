@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_iW0Y8PJjEeSmmZm37nQR-w" name="myjhipsterumltest">
+  <eAnnotations xmi:id="_iW0Y8fJjEeSmmZm37nQR-w" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_iW0Y8vJjEeSmmZm37nQR-w" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_iW0Y8_JjEeSmmZm37nQR-w" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_iW0Y9PJjEeSmmZm37nQR-w" name="required" constrainedElement="_iW0Y_fJjEeSmmZm37nQR-w">
+    <specification xmi:type="uml:LiteralString" xmi:id="_iW0Y9fJjEeSmmZm37nQR-w" value=""/>
+  </ownedRule>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0Y-PJjEeSmmZm37nQR-w" name="JobHistory">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0Y-fJjEeSmmZm37nQR-w" name="job" visibility="private" type="_iW0ZBfJjEeSmmZm37nQR-w" aggregation="composite" association="_iW0Y__JjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0Y-vJjEeSmmZm37nQR-w" name="department" visibility="private" type="_iW0ZEfJjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZAfJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0Y-_JjEeSmmZm37nQR-w" name="employee" visibility="private" type="_iW0ZH_JjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZA_JjEeSmmZm37nQR-w">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_iW0Y_PJjEeSmmZm37nQR-w">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0Y_fJjEeSmmZm37nQR-w" name="startDate" visibility="private" type="_iW0ZS_JjEeSmmZm37nQR-w" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0Y_vJjEeSmmZm37nQR-w" name="endDate" visibility="private" type="_iW0ZS_JjEeSmmZm37nQR-w" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0Y__JjEeSmmZm37nQR-w" memberEnd="_iW0Y-fJjEeSmmZm37nQR-w _iW0ZAPJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZAPJjEeSmmZm37nQR-w" visibility="private" type="_iW0Y-PJjEeSmmZm37nQR-w" association="_iW0Y__JjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZAfJjEeSmmZm37nQR-w" memberEnd="_iW0Y-vJjEeSmmZm37nQR-w _iW0ZAvJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZAvJjEeSmmZm37nQR-w" visibility="private" type="_iW0Y-PJjEeSmmZm37nQR-w" association="_iW0ZAfJjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZA_JjEeSmmZm37nQR-w" memberEnd="_iW0Y-_JjEeSmmZm37nQR-w _iW0ZBPJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZBPJjEeSmmZm37nQR-w" visibility="private" type="_iW0Y-PJjEeSmmZm37nQR-w" association="_iW0ZA_JjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZBfJjEeSmmZm37nQR-w" name="Job">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZBvJjEeSmmZm37nQR-w" name="tasks" visibility="private" type="_iW0ZRPJjEeSmmZm37nQR-w" aggregation="shared" association="_iW0ZDfJjEeSmmZm37nQR-w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iW0ZB_JjEeSmmZm37nQR-w" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZCPJjEeSmmZm37nQR-w"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZCfJjEeSmmZm37nQR-w" name="jobId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZCvJjEeSmmZm37nQR-w" name="jobTitle" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZC_JjEeSmmZm37nQR-w" name="minSalary" visibility="private" type="_iW0ZTfJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZDPJjEeSmmZm37nQR-w" name="maxSalary" visibility="private" type="_iW0ZTfJjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZDfJjEeSmmZm37nQR-w" memberEnd="_iW0ZBvJjEeSmmZm37nQR-w _iW0ZDvJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZDvJjEeSmmZm37nQR-w" name="jobs" visibility="private" type="_iW0ZBfJjEeSmmZm37nQR-w" association="_iW0ZDfJjEeSmmZm37nQR-w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iW0ZD_JjEeSmmZm37nQR-w" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZEPJjEeSmmZm37nQR-w"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZEfJjEeSmmZm37nQR-w" name="Department">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZEvJjEeSmmZm37nQR-w" name="location" visibility="private" type="_iW0ZMvJjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZGvJjEeSmmZm37nQR-w">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZE_JjEeSmmZm37nQR-w"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZFPJjEeSmmZm37nQR-w" name="employees" visibility="private" type="_iW0ZH_JjEeSmmZm37nQR-w" aggregation="shared" association="_iW0ZHPJjEeSmmZm37nQR-w">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_iW0ZFfJjEeSmmZm37nQR-w">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iW0ZFvJjEeSmmZm37nQR-w" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZF_JjEeSmmZm37nQR-w"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZGPJjEeSmmZm37nQR-w" name="departmentId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZGfJjEeSmmZm37nQR-w" name="departmentName" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZGvJjEeSmmZm37nQR-w" memberEnd="_iW0ZEvJjEeSmmZm37nQR-w _iW0ZG_JjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZG_JjEeSmmZm37nQR-w" visibility="private" type="_iW0ZEfJjEeSmmZm37nQR-w" association="_iW0ZGvJjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZHPJjEeSmmZm37nQR-w" memberEnd="_iW0ZFPJjEeSmmZm37nQR-w _iW0ZHfJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZHfJjEeSmmZm37nQR-w" visibility="private" type="_iW0ZEfJjEeSmmZm37nQR-w" association="_iW0ZHPJjEeSmmZm37nQR-w">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZHvJjEeSmmZm37nQR-w"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZH_JjEeSmmZm37nQR-w" name="Employee">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZIPJjEeSmmZm37nQR-w" name="manager" visibility="private" type="_iW0ZH_JjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZLfJjEeSmmZm37nQR-w">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_iW0ZIfJjEeSmmZm37nQR-w">
+        <body>&lt;Enter note text here&gt;</body>
+      </ownedComment>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZIvJjEeSmmZm37nQR-w"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZI_JjEeSmmZm37nQR-w" name="job" visibility="private" type="_iW0ZBfJjEeSmmZm37nQR-w" aggregation="shared" association="_iW0ZL_JjEeSmmZm37nQR-w">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZJPJjEeSmmZm37nQR-w"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZJfJjEeSmmZm37nQR-w" name="employeeId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZJvJjEeSmmZm37nQR-w" name="firstName" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZJ_JjEeSmmZm37nQR-w" name="lastName" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZKPJjEeSmmZm37nQR-w" name="email" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZKfJjEeSmmZm37nQR-w" name="phoneNumber" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZKvJjEeSmmZm37nQR-w" name="hireDate" visibility="private" type="_iW0ZS_JjEeSmmZm37nQR-w" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZK_JjEeSmmZm37nQR-w" name="salary" visibility="private" type="_iW0ZTfJjEeSmmZm37nQR-w" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZLPJjEeSmmZm37nQR-w" name="comissionPct" visibility="private" type="_iW0ZTfJjEeSmmZm37nQR-w" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZLfJjEeSmmZm37nQR-w" memberEnd="_iW0ZIPJjEeSmmZm37nQR-w _iW0ZLvJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZLvJjEeSmmZm37nQR-w" visibility="private" type="_iW0ZH_JjEeSmmZm37nQR-w" association="_iW0ZLfJjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZL_JjEeSmmZm37nQR-w" memberEnd="_iW0ZI_JjEeSmmZm37nQR-w _iW0ZMPJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZMPJjEeSmmZm37nQR-w" visibility="private" type="_iW0ZH_JjEeSmmZm37nQR-w" association="_iW0ZL_JjEeSmmZm37nQR-w">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iW0ZMfJjEeSmmZm37nQR-w"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZMvJjEeSmmZm37nQR-w" name="Location">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZM_JjEeSmmZm37nQR-w" name="country" visibility="private" type="_iW0ZO_JjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZOfJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZNPJjEeSmmZm37nQR-w" name="locationId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZNfJjEeSmmZm37nQR-w" name="streetAddress" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZNvJjEeSmmZm37nQR-w" name="postalCode" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZN_JjEeSmmZm37nQR-w" name="city" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZOPJjEeSmmZm37nQR-w" name="stateProvince" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZOfJjEeSmmZm37nQR-w" memberEnd="_iW0ZM_JjEeSmmZm37nQR-w _iW0ZOvJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZOvJjEeSmmZm37nQR-w" visibility="private" type="_iW0ZMvJjEeSmmZm37nQR-w" association="_iW0ZOfJjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZO_JjEeSmmZm37nQR-w" name="Country">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZPPJjEeSmmZm37nQR-w" name="region" visibility="private" type="_iW0ZQfJjEeSmmZm37nQR-w" aggregation="composite" association="_iW0ZP_JjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZPfJjEeSmmZm37nQR-w" name="countryId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZPvJjEeSmmZm37nQR-w" name="countryName" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iW0ZP_JjEeSmmZm37nQR-w" memberEnd="_iW0ZPPJjEeSmmZm37nQR-w _iW0ZQPJjEeSmmZm37nQR-w">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iW0ZQPJjEeSmmZm37nQR-w" visibility="private" type="_iW0ZO_JjEeSmmZm37nQR-w" association="_iW0ZP_JjEeSmmZm37nQR-w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZQfJjEeSmmZm37nQR-w" name="Region">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZQvJjEeSmmZm37nQR-w" name="regionId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZQ_JjEeSmmZm37nQR-w" name="regionName" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZRPJjEeSmmZm37nQR-w" name="Task" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZRfJjEeSmmZm37nQR-w" name="taskId" visibility="private" type="_iW0ZTPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZRvJjEeSmmZm37nQR-w" name="title" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZR_JjEeSmmZm37nQR-w" name="description" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#WRONGString"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iW0ZSPJjEeSmmZm37nQR-w" name="BugFixing">
+    <generalization xmi:type="uml:Generalization" xmi:id="_iW0ZSfJjEeSmmZm37nQR-w" general="_iW0ZRPJjEeSmmZm37nQR-w"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iW0ZSvJjEeSmmZm37nQR-w" name="numberOfBugs" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZS_JjEeSmmZm37nQR-w" name="dateTime"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZTPJjEeSmmZm37nQR-w" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZTfJjEeSmmZm37nQR-w" name="long"/>
+</uml:Model>

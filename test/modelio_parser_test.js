@@ -356,6 +356,21 @@ describe('ModelioParser', function() {
           });
         });
 
+        describe('when having an invalid type in the XMI', function() {
+          it('throws an exception', function() {
+            try {
+              var otherParser = new mp.ModelioParser(
+                getRootElement(
+                  readFileContent('./test/xmi/modelio_wrong_typename.xmi')),
+                initDatabaseTypeHolder('sql'));
+              otherParser.parse();
+              throw new ExpectationError();
+            } catch (error) {
+              expect(error.name).to.equal('InvalidTypeException');
+            }
+          });
+        });
+
         describe(
             'when a type was not defined in a primitiveType tag',
             function() {

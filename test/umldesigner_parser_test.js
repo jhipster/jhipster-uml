@@ -212,6 +212,21 @@ describe('UMLDesignerParser', function() {
           });
         });
 
+        describe('when having an invalid type in the XMI', function() {
+          it('throws an exception', function() {
+            try {
+              var otherParser = new mp.UMLDesignerParser(
+                getRootElement(
+                  readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
+                initDatabaseTypeHolder('sql'));
+              otherParser.parse();
+              throw new ExpectationError();
+            } catch (error) {
+              expect(error.name).to.equal('InvalidTypeException');
+            }
+          });
+        });
+
         describe(
             'when a type was not defined in a primitiveType tag',
             function() {
