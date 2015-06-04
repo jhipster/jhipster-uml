@@ -21,7 +21,7 @@ var fs = require('fs'),
 if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
  throw new ArgumentException(
     'The database type must either be supplied, or a .yo-rc.json file must'
-    + 'exist in the current directory.');
+    + ' exist in the current directory.');
 }
 
 var type;
