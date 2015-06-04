@@ -10,6 +10,15 @@ var base = require('selfish').Base, // for inheritance
  */
 exports.ModelioParser = parser.AbstractParser.extend({
 
+  parse: function() {
+    this.findElements();
+    this.findConstraints();
+    this.fillTypes();
+    this.fillAssociations();
+    this.fillClassesAndFields();
+    this.fillConstraints();
+  },
+
   findElements: function() {
     this.root.packagedElement.forEach(function(element, index) {
       switch (element.$['xmi:type']) {

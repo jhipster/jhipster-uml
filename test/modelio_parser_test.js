@@ -41,7 +41,7 @@ describe('ModelioParser', function() {
       parser.findConstraints();
     });
 
-    describe('when having a document with a validatin', function() {
+    describe('when having a document with a validation', function() {
       it('finds the constraints in the document', function() {
         expect(parser.rawValidationRulesIndexes).to.deep.equal([ 0 ]);
       });

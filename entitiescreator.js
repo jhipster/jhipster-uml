@@ -26,7 +26,6 @@ var EntitiesCreator = module.exports = function EntitiesCreator(xmiParser) {
   this.injectedFields = xmiParser.getInjectedFields();
   this.associations = xmiParser.getAssociations();
   
-
   this.entities = {};
 }
 	

@@ -3,10 +3,15 @@
 var chai = require('chai'),
     expect = chai.expect, 
     ClassScheduler = require('../scheduler'),
-  	XMIParser = require('../xmiparser'),
+  	mp = require('../editors/modelio_parser'),
+    xml2js = require('xml2js'),
+    fs = require('fs'),
+    types = require('../types'),
     cardinalities = require('../cardinalities');
 
-var parser = new XMIParser('./test/xmi/modelio.xmi', 'sql');
+var parser = new mp.ModelioParser(
+  getRootElement(readFileContent('./test/xmi/modelio.xmi')),
+  initDatabaseTypeHolder('sql'));
 
 parser.parse();
 
@@ -86,8 +91,10 @@ describe('ClassScheduler', function() {
     describe(
         'when scheduling classes sorted so as to blend sorted and unsorted classes', 
         function() {
-      var otherParser =
-        new XMIParser('./test/xmi/mappedby_test.xmi', 'sql');
+
+      var otherParser = new mp.ModelioParser(
+        getRootElement(readFileContent('./test/xmi/mappedby_test.xmi')),
+        initDatabaseTypeHolder('sql'));
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),
@@ -331,8 +338,10 @@ describe('ClassScheduler', function() {
     });
 
     it('throws an exception if it cannot sort anymore', function() {
-      var otherParser = 
-        new XMIParser('./test/xmi/modelio_circular_dep_test.xmi', 'sql');
+
+      var otherParser = new mp.ModelioParser(
+        getRootElement(readFileContent('./test/xmi/modelio_circular_dep_test.xmi')),
+        initDatabaseTypeHolder('sql'));
       otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(otherParser.getClasses()),
@@ -344,7 +353,50 @@ describe('ClassScheduler', function() {
       } catch (error) {
         expect(error.name).to.equal('CircularDependencyException');
       }
-
     });
   });
 });
+
+function getRootElement(content) {
+  var root;
+  var parser = new xml2js.Parser(); // as an option: {explicitArray : false}
+  var result = parser.parseString(content, function (err, result) {
+    if (result.hasOwnProperty('uml:Model')) {
+      root = result['uml:Model'];
+    } else if (result.hasOwnProperty('xmi:XMI')) {
+      root = result['xmi:XMI']['uml:Model'][0];
+    } else {
+      throw new NoRootElementException(
+        'The passed document has no immediate root element,'
+        + ' exiting now.');
+    }
+  });
+  return root;
+}
+
+function readFileContent(file) {
+  if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+    throw new WrongPassedArgumentException(
+      "The passed file '"
+      + file
+      + "' must exist and must not be a directory, exiting now.'");
+  }
+  return fs.readFileSync(file, 'utf-8');
+}
+
+function initDatabaseTypeHolder(databaseTypeName) {
+  switch (databaseTypeName) {
+    case 'sql':
+      return new types.SQLTypes();
+    case 'mongodb':
+      return new types.MongoDBTypes();
+    case 'cassandra':
+      return new types.CassandraTypes();
+    default:
+      throw new WrongDatabaseTypeException(
+        'The passed database type is incorrect. '
+        + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
+        + databaseTypeName
+        + "', exiting now.");
+  }
+}

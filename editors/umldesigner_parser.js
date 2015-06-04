@@ -34,6 +34,7 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
         default:
       }
     }, this);
+    this.findConstraints();
   },
 
   findConstraints: function() {

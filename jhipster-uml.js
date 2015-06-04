@@ -11,7 +11,7 @@ if (process.argv.length < 3) {
 var fs = require('fs'),
   	chalk = require('chalk'),
     shelljs = require('shelljs'),
-  	XMIParser = require('./xmiparser'),
+  	ParserFactory = require('./editors/parser_factory'),
   	EntitiesCreator = require('./entitiescreator'),
     ClassScheduler = require('./scheduler'),
     ParserFactory = require('./editors/parser_factory'),
