@@ -10,5 +10,5 @@ exports.UMLDESIGNER = 'umldesigner';
 exports.Parsers = {
   modelio: modelio_parser.ModelioParser,
   umldesigner: umldesigner_parser.UMLDesigner,
-  genmymodel:genmymodel_parser.GenMyModelParser
+  genmymodel : genmymodel_parser.GenMyModelParser
 };
