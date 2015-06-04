@@ -34,7 +34,7 @@ function askForEditor() {
     {
       type: 'list',
       name: 'answer',
-      message: 'Please choose between the available editors;',
+      message: 'Please choose between the available editors:',
       choices: ['Modelio', 'UMLDesigner', 'GenMyModel'],
       filter: function(val) { return val.toLowerCase(); }
     }
