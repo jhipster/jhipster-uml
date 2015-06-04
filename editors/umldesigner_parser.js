@@ -136,7 +136,8 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
   fillAssociations: function() {
     this.rawAssociationsIndexes.forEach(function(element) {
       var association = this.root.packagedElement[element];
-      if (association.ownedEnd[0].$['xmi:id'] == association.$['navigableOwnedEnd']) {
+      if (association.ownedEnd[0].upperValue[0].$['value'] == '*' 
+          && association.ownedEnd[1].upperValue[0].$['value'] == '*') {
         this.associations[association.$['xmi:id']] = {
           isUpperValuePresent: association.ownedEnd[1].upperValue[0].$['value'] == '*',
           name: association.ownedEnd[1].$['name'],
@@ -150,12 +151,6 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
         this.classes[
           association.ownedEnd[1].$['type']
         ].injectedFields.push(association.$['xmi:id']);
-      } else {
-        this.associations[association.$['xmi:id']] = {
-          isUpperValuePresent: association.ownedEnd[0].upperValue[0].$['value'] == '*',
-          name: association.ownedEnd[0].$['name'],
-          type: association.ownedEnd[0].$['type']
-        };
 
         this.addInjectedField(
           association.ownedEnd[1],
@@ -164,6 +159,36 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
         this.classes[
           association.ownedEnd[0].$['type']
         ].injectedFields.push(association.$['xmi:id']);
+      } else {
+        if (association.ownedEnd[0].$['xmi:id'] == association.$['navigableOwnedEnd']) {
+          this.associations[association.$['xmi:id']] = {
+            isUpperValuePresent: association.ownedEnd[1].upperValue[0].$['value'] == '*',
+            name: association.ownedEnd[1].$['name'],
+            type: association.ownedEnd[1].$['type']
+          };
+
+          this.addInjectedField(
+            association.ownedEnd[0],
+            association.ownedEnd[1].$['type']);
+
+          this.classes[
+            association.ownedEnd[1].$['type']
+          ].injectedFields.push(association.$['xmi:id']);
+        } else {
+          this.associations[association.$['xmi:id']] = {
+            isUpperValuePresent: association.ownedEnd[0].upperValue[0].$['value'] == '*',
+            name: association.ownedEnd[0].$['name'],
+            type: association.ownedEnd[0].$['type']
+          };
+
+          this.addInjectedField(
+            association.ownedEnd[1],
+            association.ownedEnd[0].$['type']);
+
+          this.classes[
+            association.ownedEnd[0].$['type']
+          ].injectedFields.push(association.$['xmi:id']);
+        }
       }
     }, this);
   },
