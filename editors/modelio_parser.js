@@ -153,6 +153,12 @@ exports.ModelioParser = parser.AbstractParser.extend({
           + "' does not possess any type, exiting now.");
       }
       var typeName = this.getTypeName(element.type[0].$['href']);
+      if (!this.databaseTypes.contains(typeName)) {
+        throw new InvalidTypeException(
+          "The type '"
+          + typeName
+          + "' isn't supported by JHipster, exiting now.");
+      }
       this.fields[element.$['xmi:id']].type = typeName;
       this.types[typeName] = typeName;
     }

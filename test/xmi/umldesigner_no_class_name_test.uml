@@ -57,16 +57,16 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_mpCCgAkAEeWqoJCeJxiByQ" name="Employee">
     <ownedAttribute xmi:id="_oKvF0AkAEeWqoJCeJxiByQ" name="firstName">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EString"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_qQ5hEAkAEeWqoJCeJxiByQ" name="lastName">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EString"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_sLgMkAkAEeWqoJCeJxiByQ" name="email">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EString"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_t5XckAkAEeWqoJCeJxiByQ" name="phoneNumber">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EString"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_wAUiAAkAEeWqoJCeJxiByQ" name="hireDate" type="_iBC7QAhyEeWi0sc6-CVAgg"/>
     <ownedAttribute xmi:id="_x9FJoAkAEeWqoJCeJxiByQ" name="salary">
