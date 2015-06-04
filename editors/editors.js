@@ -10,6 +10,6 @@ exports.GENMYMODEL = 'genmymodel';
 
 exports.Parsers = {
   modelio: modelio_parser.ModelioParser,
-  umldesigner: umldesigner_parser.UMLDesigner,
+  umldesigner: umldesigner_parser.UMLDesignerParser,
   genmymodel: genmymodel_parser.GenMyModelParser
 };
