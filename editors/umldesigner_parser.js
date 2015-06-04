@@ -147,10 +147,6 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
         this.addInjectedField(
           association.ownedEnd[0],
           association.ownedEnd[1].$['type']);
-
-        this.classes[
-          association.ownedEnd[1].$['type']
-        ].injectedFields.push(association.ownedEnd[0].$['xmi:id']);
       } else {
         this.associations[association.$['xmi:id']] = {
           isUpperValuePresent: association.ownedEnd[0].upperValue[0].$['value'] == '*',
@@ -161,10 +157,6 @@ exports.UMLDesignerParser = parser.AbstractParser.extend({
         this.addInjectedField(
           association.ownedEnd[1],
           association.ownedEnd[0].$['type']);
-
-        this.classes[
-          association.ownedEnd[0].$['type']
-        ].injectedFields.push(association.ownedEnd[1].$['xmi:id']);
       }
     }, this);
   },
