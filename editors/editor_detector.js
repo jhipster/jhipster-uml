@@ -9,7 +9,6 @@ var util = require('util'),
  * Detects the editor that made the document represented by its passed root.
  * @param root {Object} the document's root.
  * @return {string} the editor's name.
- * @throws UnknownEditorException if no editor has been recognized.
  */
 exports.detect = function detect(root) {
   if (!root) {
@@ -49,12 +48,6 @@ function askForEditor() {
 
   return choice;
 }
-
-function UnknownEditorException(message) {
-  this.name = 'UnknownEditorException';
-  this.message = (message || '');
-}
-UnknownEditorException.prototype = new Error();
 
 function NullPointerException(message) {
   this.name = 'NullPointerException';

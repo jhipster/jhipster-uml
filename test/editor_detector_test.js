@@ -33,26 +33,6 @@ describe('EditorDetector#detect', function() {
         expect(detected).to.equal('modelio');
       });
     });
-
-    describe('when passing a root from an unrecognized editor', function() {
-      it('throws an exception', function() {
-        try {
-          EditorDetector.detect({
-          eAnnotations: [
-            {
-              $: {
-                source: 'UnknownEditor'
-              }
-            }
-          ]
-        });
-          throw new ExpectationError();
-        } catch (error) {
-          expect(error.name).to.equal('UnknownEditorException');
-        }
-      });
-    });
-
   });
 });
 
