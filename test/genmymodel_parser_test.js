@@ -272,9 +272,13 @@ describe('GenMyModelParser', function() {
         });
 
         describe("when trying to add an injectedFields with an invalid type", function(){
+          before(function() {
+            parserWrongType.findElements();
+            parserWrongType.fillTypes();
+          });
           it('thows an exception',  function() {
             try {
-              parserWrongType.parse();
+              parserWrongType.fillClassesAndFields();
               throw new ExpectationError();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
