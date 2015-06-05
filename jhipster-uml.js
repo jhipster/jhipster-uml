@@ -9,10 +9,10 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-  	chalk = require('chalk'),
+    chalk = require('chalk'),
     shelljs = require('shelljs'),
-  	ParserFactory = require('./lib/editors/parser_factory'),
-  	EntitiesCreator = require('./lib/entitiescreator'),
+    ParserFactory = require('./lib/editors/parser_factory'),
+    EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory'),
     _ = require('underscore.string');
