@@ -40,7 +40,7 @@ parser.parse();
 var scheduler = new ClassScheduler(
   Object.keys(parser.getClasses()),
   parser.getInjectedFields(),
-   parser.getClasses()
+  parser.getClasses()
 );
 
 scheduler.schedule();
