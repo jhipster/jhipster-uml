@@ -108,8 +108,9 @@ describe('UMLDesignerParser', function() {
             getRootElement(
               readFileContent('./test/xmi/umldesigner_no_class_name_test.uml')),
             initDatabaseTypeHolder('sql'));
+        otherParser.findElements();
         try {
-          otherParser.parse();
+          otherParser.fillClassesAndFields();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -123,8 +124,9 @@ describe('UMLDesignerParser', function() {
             getRootElement(
               readFileContent('./test/xmi/umldesigner_no_attribute_name_test.uml')),
             initDatabaseTypeHolder('sql'));
+        otherParser.findElements();
         try {
-          otherParser.parse();
+          otherParser.fillClassesAndFields();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -158,13 +160,12 @@ describe('UMLDesignerParser', function() {
         });
 
         it('should not throw any error if there is no attribute', function() {
+          var anotherParser = new mp.UMLDesignerParser(
+            getRootElement(
+              readFileContent('./test/xmi/umldesigner_no_attribute_test.uml')),
+            initDatabaseTypeHolder('sql'));
           try {
-            var anotherParser = new mp.UMLDesignerParser(
-              getRootElement(
-                readFileContent('./test/xmi/umldesigner_no_attribute_test.uml')),
-              initDatabaseTypeHolder('sql'));
             anotherParser.parse();
-            parser.fillClassesAndFields();
           } catch (error) {
             throw new ExpectationError();
           }
@@ -229,11 +230,11 @@ describe('UMLDesignerParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
+            var otherParser = new mp.UMLDesignerParser(
+              getRootElement(
+                readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
+              initDatabaseTypeHolder('sql'));
             try {
-              var otherParser = new mp.UMLDesignerParser(
-                getRootElement(
-                  readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
-                initDatabaseTypeHolder('sql'));
               otherParser.parse();
               throw new ExpectationError();
             } catch (error) {

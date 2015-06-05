@@ -159,8 +159,9 @@ describe('ModelioParser', function() {
             getRootElement(
               readFileContent('./test/xmi/modelio_no_class_name_test.xmi')),
             initDatabaseTypeHolder('sql'));
+        otherParser.findElements();
         try {
-          otherParser.parse();
+          otherParser.fillClassesAndFields();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -174,8 +175,9 @@ describe('ModelioParser', function() {
             getRootElement(
               readFileContent('./test/xmi/modelio_no_attribute_name_test.xmi')),
             initDatabaseTypeHolder('sql'));
+        otherParser.findElements();
         try {
-          otherParser.parse();
+          otherParser.fillClassesAndFields();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -209,13 +211,13 @@ describe('ModelioParser', function() {
         });
 
         it('should not throw any error if there is no attribute', function() {
+          var anotherParser = new mp.ModelioParser(
+            getRootElement(
+              readFileContent('./test/xmi/modelio_no_attribute_test.xmi')),
+            initDatabaseTypeHolder('sql'));
+          anotherParser.findElements();
           try {
-            var anotherParser = new mp.ModelioParser(
-              getRootElement(
-                readFileContent('./test/xmi/modelio_no_attribute_test.xmi')),
-              initDatabaseTypeHolder('sql'));
             anotherParser.parse();
-            parser.fillClassesAndFields();
           } catch (error) {
             throw new ExpectationError();
           }
@@ -374,11 +376,11 @@ describe('ModelioParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
+            var otherParser = new mp.ModelioParser(
+              getRootElement(
+                readFileContent('./test/xmi/modelio_wrong_typename.xmi')),
+              initDatabaseTypeHolder('sql'));
             try {
-              var otherParser = new mp.ModelioParser(
-                getRootElement(
-                  readFileContent('./test/xmi/modelio_wrong_typename.xmi')),
-                initDatabaseTypeHolder('sql'));
               otherParser.parse();
               throw new ExpectationError();
             } catch (error) {
