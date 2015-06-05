@@ -2,7 +2,7 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    EditorDetector = require('../editors/editor_detector');
+    EditorDetector = require('../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', function() {
   describe('when passing an invalid root', function() {

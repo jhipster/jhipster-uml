@@ -2,12 +2,12 @@
 
 var chai = require('chai'),
     expect = chai.expect, 
-    ClassScheduler = require('../scheduler'),
-  	mp = require('../editors/modelio_parser'),
+    ClassScheduler = require('../lib/scheduler'),
+  	mp = require('../lib/editors/modelio_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types'),
-    cardinalities = require('../cardinalities');
+    types = require('../lib/types'),
+    cardinalities = require('../lib/cardinalities');
 
 var parser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/modelio.xmi')),

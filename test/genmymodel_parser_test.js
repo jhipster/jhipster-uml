@@ -2,10 +2,10 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    gmp = require('../editors/genmymodel_parser'),
+    gmp = require('../lib/editors/genmymodel_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types');
+    types = require('../lib/types');
 
 var parser = new gmp.GenMyModelParser(
   getRootElement(readFileContent('./test/xmi/genmymodel_evolve.xmi')),

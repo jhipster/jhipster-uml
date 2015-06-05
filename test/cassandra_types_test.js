@@ -2,7 +2,7 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    types = require('../types');
+    types = require('../lib/types');
 
 var cassandraTypes;
 

@@ -2,10 +2,10 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    mp = require('../editors/umldesigner_parser'),
+    mp = require('../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types');
+    types = require('../lib/types');
 
 var parser = new mp.UMLDesignerParser(
   getRootElement(readFileContent('./test/xmi/umldesigner.uml')),

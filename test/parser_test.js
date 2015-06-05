@@ -1,6 +1,6 @@
 var chai = require('chai'),
     expect = chai.expect,
-    parser = require('../editors/parser');
+    parser = require('../lib/editors/parser');
 
 describe('Parser', function() {
   it('is not accessible outside the file', function() {

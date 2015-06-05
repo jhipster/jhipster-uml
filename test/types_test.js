@@ -1,6 +1,6 @@
 var chai = require('chai'),
     expect = chai.expect,
-    types = require('../types');
+    types = require('../lib/types');
 
 describe('Types', function() {
   it('is not accessible outside the file', function() {

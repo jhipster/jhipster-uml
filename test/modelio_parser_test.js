@@ -2,10 +2,10 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    mp = require('../editors/modelio_parser'),
+    mp = require('../lib/editors/modelio_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types'),
+    types = require('../lib/types'),
     _ = require('underscore.string');
 
 var parser = new mp.ModelioParser(

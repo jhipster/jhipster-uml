@@ -2,11 +2,11 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    EntitiesCreator = require('../entitiescreator'),
-    mp = require('../editors/modelio_parser'),
+    EntitiesCreator = require('../lib/entitiescreator'),
+    mp = require('../lib/editors/modelio_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types');
+    types = require('../lib/types');
 
 var parser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/modelio.xmi')),
