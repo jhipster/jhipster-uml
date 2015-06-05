@@ -80,6 +80,21 @@ describe('GenMyModelParser', function() {
         expect(expectedTypes.length).to.equal(0);
       });
     });
+
+    describe('if the types are not capitalized', function() {
+      it('capitalizes and adds them', function() {
+        var otherParser =  new gmp.GenMyModelParser(
+          getRootElement(
+            readFileContent('./test/xmi/genmymodel_lowercased_string_type.xml')),
+          initDatabaseTypeHolder('sql'));
+        otherParser.fillTypes();
+        Object.keys(otherParser.getTypes()).forEach(function(type) {
+          expect(
+            otherParser.getTypes()[type].name
+          ).to.equal(_.capitalize(otherParser.getTypes()[type].name));
+        });
+      });
+    });
   });
 
   describe('#fillAssociations', function() {

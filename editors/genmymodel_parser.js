@@ -54,18 +54,20 @@ exports.GenMyModelParser = parser.AbstractParser.extend({
   },
 
   fillTypes: function() {
-    this.rawTypesIndexes.forEach(function(element, index, array) {
+    this.rawTypesIndexes.forEach(function(element) {
       var type = this.root.packagedElement[element];
-      var typeName = _s.capitalize(type.$['name']);
-
-      if (!this.databaseTypes.contains(typeName)) {
-        throw new InvalidTypeException(
-          "The type '"
-          + typeName
-          + "' isn't supported by JHipster, exiting now.");
-      }
-      this.types[type.$['xmi:id']] = typeName;
+      this.addType(_s.capitalize(type.$['name']), type.$['xmi:id']);
     }, this);
+  },
+
+  addType: function(typeName, typeId) {
+    if (!this.databaseTypes.contains(typeName)) {
+      throw new InvalidTypeException(
+        "The type '"
+        + typeName
+        + "' isn't supported by JHipster, exiting now.");
+    }
+    this.types[typeId] = typeName;
   },
 
   fillAssociations: function() {
@@ -139,7 +141,6 @@ exports.GenMyModelParser = parser.AbstractParser.extend({
     }
   },
 
-
   /**
    * Adds a new field to the field map.
    * @param {Object} element the field to add.
@@ -148,7 +149,6 @@ exports.GenMyModelParser = parser.AbstractParser.extend({
   addField: function(element, classId) {
     this.addRegularField(element, classId);
   },
-
 
   /**
    * Adds a (regular, not injected) field to the field map.
@@ -170,15 +170,9 @@ exports.GenMyModelParser = parser.AbstractParser.extend({
       }
       var typeName = _s.capitalize(this.getTypeName(element.type[0].$['href']));
 
-      if (!this.databaseTypes.contains(typeName)) {
-        throw new InvalidTypeException(
-          "The type '"
-          + typeName
-          + "' isn't supported by JHipster, exiting now.");
-      }
+      this.addType(typeName, typeName); // id = name
 
       this.fields[element.$['xmi:id']].type = typeName;
-      this.types[typeName] = typeName;
     }
     this.classes[classId].fields.push(element.$['xmi:id']);
   },

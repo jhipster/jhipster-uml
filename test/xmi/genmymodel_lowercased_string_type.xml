@@ -54,7 +54,7 @@
         <details xmi:id="_YzOggORNEeSNGZq_xSbn1w" key="uuid" value="_uxBeUDxdEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOggeRNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_YzOgguRNEeSNGZq_xSbn1w" name="points">
       <eAnnotations xmi:id="_YzOgg-RNEeSNGZq_xSbn1w" source="genmymodel">
@@ -74,7 +74,7 @@
       <eAnnotations xmi:id="_YzOgi-RNEeSNGZq_xSbn1w" source="genmymodel">
         <details xmi:id="_YzOgjORNEeSNGZq_xSbn1w" key="uuid" value="_bbm8sUDaEDKRNLPebofYGQ"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="_YzOgjeRNEeSNGZq_xSbn1w" name="Question">
@@ -91,14 +91,14 @@
         <details xmi:id="_YzOgleRNEeSNGZq_xSbn1w" key="uuid" value="_39VVgDxgEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOgluRNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_YzOgl-RNEeSNGZq_xSbn1w" name="Reponse">
       <eAnnotations xmi:id="_YzOgmORNEeSNGZq_xSbn1w" source="genmymodel">
         <details xmi:id="_YzOgmeRNEeSNGZq_xSbn1w" key="uuid" value="_6XYWEDxgEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOgmuRNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
     <ownedOperation xmi:id="_YzOgm-RNEeSNGZq_xSbn1w" name="isGoodResponse">
       <eAnnotations xmi:id="_YzOgnORNEeSNGZq_xSbn1w" source="genmymodel">
@@ -174,7 +174,7 @@
         <details xmi:id="_YzOgx-RNEeSNGZq_xSbn1w" key="uuid" value="_FWhkMDxhEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOgyORNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:InstanceSpecification" xmi:id="_YzOgyeRNEeSNGZq_xSbn1w" name="myInstance">
@@ -217,14 +217,14 @@
         <details xmi:id="_YzOg4ORNEeSNGZq_xSbn1w" key="uuid" value="_4hyQ8DxhEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOg4eRNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_YzOg4uRNEeSNGZq_xSbn1w" name="reponse">
       <eAnnotations xmi:id="_YzOg4-RNEeSNGZq_xSbn1w" source="genmymodel">
         <details xmi:id="_YzOg5ORNEeSNGZq_xSbn1w" key="uuid" value="_8AwSMDxhEDK9a-JcxxhvuA"/>
         <details xmi:id="_YzOg5eRNEeSNGZq_xSbn1w" key="gmm-documentation" value="&lt;br>"/>
       </eAnnotations>
-      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//string"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="_YzOg5uRNEeSNGZq_xSbn1w" name="Position_Quete" memberEnd="_YzOg6eRNEeSNGZq_xSbn1w _YzOg7uRNEeSNGZq_xSbn1w" navigableOwnedEnd="_YzOg6eRNEeSNGZq_xSbn1w _YzOg7uRNEeSNGZq_xSbn1w">
