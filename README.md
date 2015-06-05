@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml)
+[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Coverage Status](https://coveralls.io/repos/jhipster/jhipster-uml/badge.svg)](https://coveralls.io/r/jhipster/jhipster-uml)
 
 Welcome to JHipster-UML!
 
