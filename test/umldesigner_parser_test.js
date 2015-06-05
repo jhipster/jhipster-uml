@@ -80,6 +80,21 @@ describe('UMLDesignerParser', function() {
         expect(expectedTypes.length).to.equal(0);
       });
     });
+
+    describe('if the types are not capitalized', function() {
+      it('capitalizes and adds them', function() {
+        var otherParser =  new mp.UMLDesignerParser(
+          getRootElement(
+            readFileContent('./test/xmi/umldesigner_lowercased_string_type.xmi')),
+          initDatabaseTypeHolder('sql'));
+        otherParser.fillTypes();
+        Object.keys(otherParser.getTypes()).forEach(function(type) {
+          expect(
+            otherParser.getTypes()[type].name
+          ).to.equal(_.capitalize(otherParser.getTypes()[type].name));
+        });
+      });
+    });
   });
 
   describe('#fillClassesAndFields', function() {

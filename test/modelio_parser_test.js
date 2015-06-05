@@ -5,7 +5,8 @@ var chai = require('chai'),
     mp = require('../editors/modelio_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../types');
+    types = require('../types'),
+    _ = require('underscore.string');
 
 var parser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/modelio.xmi')),
@@ -97,6 +98,21 @@ describe('ModelioParser', function() {
             expectedTypes.indexOf(parser.getTypes()[element]), 1);
         }
         expect(expectedTypes.length).to.equal(0);
+      });
+
+      describe('if the types are not capitalized', function() {
+        it('capitalizes and adds them', function() {
+          var otherParser =  new mp.ModelioParser(
+            getRootElement(
+              readFileContent('./test/xmi/modelio_lowercased_string_type.xmi')),
+            initDatabaseTypeHolder('sql'));
+          otherParser.fillTypes();
+          Object.keys(otherParser.getTypes()).forEach(function(type) {
+            expect(
+              otherParser.getTypes()[type].name
+            ).to.equal(_.capitalize(otherParser.getTypes()[type].name));
+          });
+        });
       });
     });
   });
