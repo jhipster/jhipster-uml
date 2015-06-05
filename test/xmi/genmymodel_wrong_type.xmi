@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_rOgeAAtfEeWATac42w0kFQ" name="model">
+  <eAnnotations xmi:id="_rOgeAQtfEeWATac42w0kFQ" source="genmymodel">
+    <details xmi:id="_rOgeAgtfEeWATac42w0kFQ" key="uuid" value="_hUw9UAqREeWNVPA9hBwttA"/>
+  </eAnnotations>
+  <packageImport xmi:id="_rOgeAwtfEeWATac42w0kFQ">
+    <eAnnotations xmi:id="_rOgeBAtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeBQtfEeWATac42w0kFQ" key="uuid" value="_hUyygAqREeWNVPA9hBwttA"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_rOgeBgtfEeWATac42w0kFQ">
+    <eAnnotations xmi:id="_rOgeBwtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeCAtfEeWATac42w0kFQ" key="uuid" value="_hUyygQqREeWNVPA9hBwttA"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Class" xmi:id="_rOgeCQtfEeWATac42w0kFQ" name="Book">
+    <eAnnotations xmi:id="_rOgeCgtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeCwtfEeWATac42w0kFQ" key="uuid" value="_tL9aMOzDEDKuLtgRSQRoTA"/>
+    </eAnnotations>
+    <ownedAttribute xmi:id="_rOgeDAtfEeWATac42w0kFQ" name="title">
+      <eAnnotations xmi:id="_rOgeDQtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeDgtfEeWATac42w0kFQ" key="uuid" value="_PbB2IOzFEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rOgeDwtfEeWATac42w0kFQ" name="description">
+      <eAnnotations xmi:id="_rOgeEAtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeEQtfEeWATac42w0kFQ" key="uuid" value="_R02NMOzFEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rOgeEgtfEeWATac42w0kFQ" name="publicationDate" type="_rOgeLwtfEeWATac42w0kFQ">
+      <eAnnotations xmi:id="_rOgeEwtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeFAtfEeWATac42w0kFQ" key="uuid" value="_U5N9IOzFEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rOgeFQtfEeWATac42w0kFQ" name="price" type="_rOgeMgtfEeWATac42w0kFQ">
+      <eAnnotations xmi:id="_rOgeFgtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeFwtfEeWATac42w0kFQ" key="uuid" value="_YZXqIOzFEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Class" xmi:id="_rOgeGAtfEeWATac42w0kFQ" name="Author">
+    <eAnnotations xmi:id="_rOgeGQtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeGgtfEeWATac42w0kFQ" key="uuid" value="_uRk-cOzDEDKuLtgRSQRoTA"/>
+    </eAnnotations>
+    <ownedAttribute xmi:id="_rOgeGwtfEeWATac42w0kFQ" name="name">
+      <eAnnotations xmi:id="_rOgeHAtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeHQtfEeWATac42w0kFQ" key="uuid" value="_Hyk3AOzFEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#//Real"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rOgeHgtfEeWATac42w0kFQ" name="birthDate" type="_rOgeLwtfEeWATac42w0kFQ">
+      <eAnnotations xmi:id="_rOgeHwtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeIAtfEeWATac42w0kFQ" key="uuid" value="_KnHbMOzFEDKuLtgRSQRoTA"/>
+        <details xmi:id="_rOgeIQtfEeWATac42w0kFQ" key="gmm-documentation" value="&lt;br>"/>
+      </eAnnotations>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association" xmi:id="_rOgeIgtfEeWATac42w0kFQ" name="Author_Book" memberEnd="_rOgeJQtfEeWATac42w0kFQ _rOgeKgtfEeWATac42w0kFQ" navigableOwnedEnd="_rOgeJQtfEeWATac42w0kFQ _rOgeKgtfEeWATac42w0kFQ">
+    <eAnnotations xmi:id="_rOgeIwtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeJAtfEeWATac42w0kFQ" key="uuid" value="_cKr1EOzEEDKuLtgRSQRoTA"/>
+    </eAnnotations>
+    <ownedEnd xmi:id="_rOgeJQtfEeWATac42w0kFQ" name="book" type="_rOgeCQtfEeWATac42w0kFQ" aggregation="shared" association="_rOgeIgtfEeWATac42w0kFQ">
+      <eAnnotations xmi:id="_rOgeJgtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeJwtfEeWATac42w0kFQ" key="uuid" value="_cKmVgOzEEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_rOgeKAtfEeWATac42w0kFQ"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_rOgeKQtfEeWATac42w0kFQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_rOgeKgtfEeWATac42w0kFQ" name="author" type="_rOgeGAtfEeWATac42w0kFQ" association="_rOgeIgtfEeWATac42w0kFQ">
+      <eAnnotations xmi:id="_rOgeKwtfEeWATac42w0kFQ" source="genmymodel">
+        <details xmi:id="_rOgeLAtfEeWATac42w0kFQ" key="uuid" value="_cKp_4OzEEDKuLtgRSQRoTA"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_rOgeLQtfEeWATac42w0kFQ" value="1"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_rOgeLgtfEeWATac42w0kFQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xsi:type="uml:DataType" xmi:id="_rOgeLwtfEeWATac42w0kFQ" name="LocalDate">
+    <eAnnotations xmi:id="_rOgeMAtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeMQtfEeWATac42w0kFQ" key="uuid" value="_BAuvwOzFEDKuLtgRSQRoTA"/>
+    </eAnnotations>
+  </packagedElement>
+  <packagedElement xsi:type="uml:DataType" xmi:id="_rOgeMgtfEeWATac42w0kFQ" name="BigDecimal">
+    <eAnnotations xmi:id="_rOgeMwtfEeWATac42w0kFQ" source="genmymodel">
+      <details xmi:id="_rOgeNAtfEeWATac42w0kFQ" key="uuid" value="_D83wwOzFEDKuLtgRSQRoTA"/>
+    </eAnnotations>
+  </packagedElement>
+</uml:Model>
