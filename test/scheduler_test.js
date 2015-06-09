@@ -174,7 +174,7 @@ describe('ClassScheduler', function() {
         it(
             'returns the dependencies having the class as source or destination',
             function() {
-          expect(dependencies.length).to.equal(3);
+          expect(dependencies.length).to.equal(4);
 
           for (var i = 0; i < dependencies.length; i++) {
             expect(

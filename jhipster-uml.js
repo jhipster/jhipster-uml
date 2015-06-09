@@ -55,8 +55,6 @@ creator.createEntities();
 creator.writeJSON();
 
 createEntities(scheduledClasses, parser.getClasses());
-createReflexives(parser.reflexives);
-
 
 /**
  * Removes every class responding to the class to filter out.
@@ -84,35 +82,6 @@ function createEntities(scheduledClasses, classes) {
     console.log('\n');
   });
 }
-
-function createReflexives(reflexives) {
-  if (reflexives.length == 0) {
-    return;
-  }
-  console.log(chalk.green('Generating reflexive associations'));
-
-  reflexives.forEach(function(element, index, array) {
-    var newJson = JSON.parse(
-      fs.readFileSync(
-        '.jhipster/' + _.capitalize(element.className) + '.json'));
-    newJson['relationships'].push({
-      relationshipId: newJson.relationships.length + 1,
-      relationshipName: element.fieldName,
-      relationshipNameCapitalized: _.capitalize(element.fieldName),
-      relationshipFieldName: element.fieldName,
-      otherEntityName: element.className,
-      relationshipType: 'one-to-one',
-      otherEntityNameCapitalized: _.capitalize(element.className),
-      ownerSide: true
-    });
-    newJson.fieldsContainOwnerOneToOne = true;
-    fs.writeFileSync(
-      '.jhipster/' + _.capitalize(element.className) + '.json',
-      JSON.stringify(newJson, null, '  '));
-    shelljs.exec('yo jhipster:entity ' + element.className + ' --force');
-  });
-}
-
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
