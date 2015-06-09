@@ -11,4 +11,4 @@ We support: Modelio, UMLDesigner and GenMyModel.
 Stay tuned for more news about this project.
 
 
-For more information, visit our [Wiki page](https://github.com/jhipster/jhipster-uml/wiki).
+For more information, visit our [Wiki page](http://jhipster.github.io/jhipster_uml.html) in JHipster's wiki.
