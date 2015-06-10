@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml)
+[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml) [![Code Climate](https://codeclimate.com/github/jhipster/jhipster-uml/badges/gpa.svg)](https://codeclimate.com/github/jhipster/jhipster-uml)
 
 Welcome to JHipster-UML!
 
@@ -11,4 +11,4 @@ We support: Modelio, UMLDesigner and GenMyModel.
 Stay tuned for more news about this project.
 
 
-For more information, visit our [Wiki page](https://github.com/jhipster/jhipster-uml/wiki).
+For more information, visit our [Wiki page](http://jhipster.github.io/jhipster_uml.html) in JHipster's wiki.
