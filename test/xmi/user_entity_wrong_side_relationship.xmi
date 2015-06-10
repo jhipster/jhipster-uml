@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_uy4W0A9IEeWa5JwclR5VRw" name="model">
+  <eAnnotations xmi:id="_uy4W0Q9IEeWa5JwclR5VRw" source="genmymodel">
+    <details xmi:id="_uy4W0g9IEeWa5JwclR5VRw" key="uuid" value="_hUw9UAqREeWNVPA9hBwttA"/>
+  </eAnnotations>
+  <packageImport xmi:id="_uy4W0w9IEeWa5JwclR5VRw">
+    <eAnnotations xmi:id="_uy4W1A9IEeWa5JwclR5VRw" source="genmymodel">
+      <details xmi:id="_uy4W1Q9IEeWa5JwclR5VRw" key="uuid" value="_hUyygAqREeWNVPA9hBwttA"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_uy4W1g9IEeWa5JwclR5VRw">
+    <eAnnotations xmi:id="_uy4W1w9IEeWa5JwclR5VRw" source="genmymodel">
+      <details xmi:id="_uy4W2A9IEeWa5JwclR5VRw" key="uuid" value="_hUyygQqREeWNVPA9hBwttA"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Class" xmi:id="_uy4W2Q9IEeWa5JwclR5VRw" name="User">
+    <eAnnotations xmi:id="_uy4W2g9IEeWa5JwclR5VRw" source="genmymodel">
+      <details xmi:id="_uy4W2w9IEeWa5JwclR5VRw" key="uuid" value="_IrTmAfALEDKISoOIwu7fVA"/>
+    </eAnnotations>
+    <ownedAttribute xmi:id="_uy4W3A9IEeWa5JwclR5VRw" name="name">
+      <eAnnotations xmi:id="_uy4W3Q9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W3g9IEeWa5JwclR5VRw" key="uuid" value="_iNK2sPALEDKISoOIwu7fVA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_uy4W3w9IEeWa5JwclR5VRw" name="birthday">
+      <eAnnotations xmi:id="_uy4W4A9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W4Q9IEeWa5JwclR5VRw" key="uuid" value="_kgxRAPALEDKISoOIwu7fVA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Class" xmi:id="_uy4W4g9IEeWa5JwclR5VRw" name="BankAccount">
+    <eAnnotations xmi:id="_uy4W4w9IEeWa5JwclR5VRw" source="genmymodel">
+      <details xmi:id="_uy4W5A9IEeWa5JwclR5VRw" key="uuid" value="_KfMlgPALEDKISoOIwu7fVA"/>
+    </eAnnotations>
+    <ownedAttribute xmi:id="_uy4W5Q9IEeWa5JwclR5VRw" name="name">
+      <eAnnotations xmi:id="_uy4W5g9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W5w9IEeWa5JwclR5VRw" key="uuid" value="_oYtL4PALEDKISoOIwu7fVA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_uy4W6A9IEeWa5JwclR5VRw" name="balance">
+      <eAnnotations xmi:id="_uy4W6Q9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W6g9IEeWa5JwclR5VRw" key="uuid" value="_qGNPgPALEDKISoOIwu7fVA"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association" xmi:id="_uy4W6w9IEeWa5JwclR5VRw" name="BankAccount_User" memberEnd="_uy4W7g9IEeWa5JwclR5VRw _uy4W8w9IEeWa5JwclR5VRw" navigableOwnedEnd="_uy4W7g9IEeWa5JwclR5VRw _uy4W8w9IEeWa5JwclR5VRw">
+    <eAnnotations xmi:id="_uy4W7A9IEeWa5JwclR5VRw" source="genmymodel">
+      <details xmi:id="_uy4W7Q9IEeWa5JwclR5VRw" key="uuid" value="_Uw1koPDgEDK547EKNHzFFQ"/>
+    </eAnnotations>
+    <ownedEnd xmi:id="_uy4W7g9IEeWa5JwclR5VRw" name="user" type="_uy4W2Q9IEeWa5JwclR5VRw" aggregation="shared" association="_uy4W6w9IEeWa5JwclR5VRw">
+      <eAnnotations xmi:id="_uy4W7w9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W8A9IEeWa5JwclR5VRw" key="uuid" value="_UwzIYPDgEDK547EKNHzFFQ"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_uy4W8Q9IEeWa5JwclR5VRw"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_uy4W8g9IEeWa5JwclR5VRw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_uy4W8w9IEeWa5JwclR5VRw" name="bankAccount" type="_uy4W4g9IEeWa5JwclR5VRw" association="_uy4W6w9IEeWa5JwclR5VRw">
+      <eAnnotations xmi:id="_uy4W9A9IEeWa5JwclR5VRw" source="genmymodel">
+        <details xmi:id="_uy4W9Q9IEeWa5JwclR5VRw" key="uuid" value="_Uw09kPDgEDK547EKNHzFFQ"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_uy4W9g9IEeWa5JwclR5VRw"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_uy4W9w9IEeWa5JwclR5VRw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
