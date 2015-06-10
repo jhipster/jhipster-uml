@@ -14,11 +14,10 @@ var fs = require('fs'),
     ParserFactory = require('./lib/editors/parser_factory'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
-    ParserFactory = require('./lib/editors/parser_factory'),
-    _ = require('underscore.string');
+    ParserFactory = require('./lib/editors/parser_factory');
 
 
-if (!fs.existsSync('.yo-rc.json') && process.argv.length == 3) {
+if (!fs.existsSync('.yo-rc.json') && process.argv.length === 3) {
  throw new ArgumentException(
     'The database type must either be supplied, or a .yo-rc.json file must'
     + ' exist in the current directory.');
@@ -61,7 +60,7 @@ createEntities(scheduledClasses, parser.getClasses());
  */
 function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
-    return element != classToFilter;
+    return element !== classToFilter;
   });
 }
 
@@ -74,10 +73,7 @@ function createEntities(scheduledClasses, classes) {
     console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
 
-  var StringDecoder = require('string_decoder').StringDecoder;
-  var decoder = new StringDecoder('utf8');
-
-  scheduledClasses.forEach(function(element, index, array) {
+  scheduledClasses.forEach(function(element) {
     shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
     console.log('\n');
   });
