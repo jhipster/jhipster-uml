@@ -9,8 +9,7 @@
     "generator-jhipster",
     "UML",
     "XMI",
-    "JSON",
-    "Mocha"
+    "JSON"
   ],
   "homepage": "https://github.com/jhipster/jhipster-uml",
   "bugs": "https://github.com/jhipster/jhipster-uml/issues",
