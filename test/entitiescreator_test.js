@@ -4,6 +4,7 @@ var chai = require('chai'),
     expect = chai.expect,
     EntitiesCreator = require('../lib/entitiescreator'),
     mp = require('../lib/editors/modelio_parser'),
+    gp = require('../lib/editors/genmymodel_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
     types = require('../lib/types');
@@ -27,6 +28,13 @@ var parserUser = new mp.ModelioParser(
   initDatabaseTypeHolder('sql'));
 parserUser.parse();
 var creatorUser = new EntitiesCreator(parserUser);
+
+/* the entity creator set to do the User Entity tests */
+var parserUserWrong = new gp.GenMyModelParser(
+  getRootElement(readFileContent('./test/xmi/user_entity_wrong_side_relationship.xmi')),
+  initDatabaseTypeHolder('sql'));
+parserUserWrong.parse();
+var creatorUserWrong = new EntitiesCreator(parserUserWrong);
 
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
@@ -57,7 +65,7 @@ describe('EntitiesCreator ', function(){
       });
     });
   });
-  describe( '#creatEntities', function(){
+  describe( '#createEntities', function(){
     
     describe('#initializeEntities', function(){
       before(function(){
@@ -68,9 +76,7 @@ describe('EntitiesCreator ', function(){
         it('there are as many Entities as Classes',function(){
           expect(creator.getEntities.length).equal(creator.getClasses.length);
         });
-   /*     it('there are less Entities as Classes when there is a Class called \'User\'', function(){
-          expect(creatorUser.getEntities.length).equal(creatorUser.getClasses.length-1);
-        });*/
+
       });
     });
 
@@ -360,6 +366,23 @@ describe('EntitiesCreator ', function(){
       });
     });
 
+    });
+  });
+  describe('#createEntities with an entity called USER ', function(){
+    before(function(){
+      creatorUser.createEntities();
+    });
+    it('there are less Entities as Classes when there is a Class called \'User\'', function(){
+      expect(Object.keys(creatorUser.entities).length).to.equal(Object.keys(creatorUser.classes).length-1);
+    });
+
+    describe( 'When an association goes to a USER class ' , function(){
+      before(function(){
+        creatorUserWrong.createEntities();
+      });
+      it('there is no relationships to USER entity after creating entities', function(){
+        expect(Object.keys(creatorUserWrong.entities['_uy4W4g9IEeWa5JwclR5VRw'].relationships).length).to.equal(0);
+      });
     });
   });
 });
