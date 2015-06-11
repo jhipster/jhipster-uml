@@ -153,6 +153,7 @@ describe('ClassScheduler', function() {
             case cardinalities.MANY_TO_MANY:
               manyToManyCount++;
               break;
+            default:
           }
         }
 
@@ -178,8 +179,8 @@ describe('ClassScheduler', function() {
 
           for (var i = 0; i < dependencies.length; i++) {
             expect(
-              dependencies[i].source == employeeId 
-                || dependencies[i].destination == employeeId
+              dependencies[i].source === employeeId 
+                || dependencies[i].destination === employeeId
             ).to.equal(true);
           }
         });
@@ -326,13 +327,13 @@ describe('ClassScheduler', function() {
         '_iW0Y-PJjEeSmmZm37nQR-w' ];
 
       expect(
-        scheduler.orderedPool.length == expectedPathA.length 
-          && scheduler.orderedPool.length == expectedPathB.length
+        scheduler.orderedPool.length === expectedPathA.length 
+          && scheduler.orderedPool.length === expectedPathB.length
       ).to.equal(true);
 
-      scheduler.orderedPool.every(function(element, index, array) {
+      scheduler.orderedPool.every(function(element, index) {
         expect(
-          element == expectedPathA[index] || element == expectedPathB[index]
+          element === expectedPathA[index] || element === expectedPathB[index]
         ).to.equal(true);
       });
     });
@@ -359,8 +360,8 @@ describe('ClassScheduler', function() {
 
 function getRootElement(content) {
   var root;
-  var parser = new xml2js.Parser(); // as an option: {explicitArray : false}
-  var result = parser.parseString(content, function (err, result) {
+  var parser = new xml2js.Parser();
+  parser.parseString(content, function (err, result) {
     if (result.hasOwnProperty('uml:Model')) {
       root = result['uml:Model'];
     } else if (result.hasOwnProperty('xmi:XMI')) {

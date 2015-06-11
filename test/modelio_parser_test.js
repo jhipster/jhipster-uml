@@ -91,11 +91,13 @@ describe('ModelioParser', function() {
       it('assigns their id with their capitalized name', function() {
         var expectedTypes = [ 'DateTime', 'Long', 'Long' ];
         for(var element in parser.getTypes()) {
-          expect(
-            expectedTypes
-          ).to.include(parser.getTypes()[element]);
-          expectedTypes.splice(
-            expectedTypes.indexOf(parser.getTypes()[element]), 1);
+          if (parser.getTypes().hasOwnProperty(element)) {
+            expect(
+              expectedTypes
+            ).to.include(parser.getTypes()[element]);
+            expectedTypes.splice(
+              expectedTypes.indexOf(parser.getTypes()[element]), 1);            
+          }
         }
         expect(expectedTypes.length).to.equal(0);
       });
@@ -347,7 +349,9 @@ describe('ModelioParser', function() {
         it('adds the fields to the classes', function() {
           var count = 0;
           for(var element in parser.getClasses()) {
-            count += parser.getClasses()[element]['fields'].length;
+            if (parser.getClasses().hasOwnProperty(element)) {
+              count += parser.getClasses()[element]['fields'].length;
+            }
           }
           expect(count).to.equal(Object.keys(parser.getFields()).length);
         });
@@ -456,8 +460,10 @@ describe('ModelioParser', function() {
         it('adds the validations to the fields', function() {
           var count = 0;
           for (var element in parser.getFields()) {
-            count += 
-              Object.keys(parser.getFields()[element]['validations']).length;
+            if (parser.getFields().hasOwnProperty(element)) {
+              count += 
+                Object.keys(parser.getFields()[element]['validations']).length;
+            }
           }
           expect(count).to.equal(1);
         });
@@ -471,8 +477,8 @@ describe('ModelioParser', function() {
 
 function getRootElement(content) {
   var root;
-  var parser = new xml2js.Parser(); // as an option: {explicitArray : false}
-  var result = parser.parseString(content, function (err, result) {
+  var parser = new xml2js.Parser();
+  parser.parseString(content, function (err, result) {
     if (result.hasOwnProperty('uml:Model')) {
       root = result['uml:Model'];
     } else if (result.hasOwnProperty('xmi:XMI')) {
