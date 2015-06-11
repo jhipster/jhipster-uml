@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml) [![Code Climate](https://codeclimate.com/github/jhipster/jhipster-uml/badges/gpa.svg)](https://codeclimate.com/github/jhipster/jhipster-uml)
+[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml)
 
 Welcome to JHipster-UML!
 
