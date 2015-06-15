@@ -2,16 +2,12 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    mp = require('../lib/editors/umldesigner_parser'),
-    xml2js = require('xml2js'),
-    fs = require('fs'),
-    types = require('../lib/types');
+    mp = require('../lib/editors/visualparadigm_parser'),
+    ParserFactory = require('../lib/editors/parser_factory');
 
-var parser = new mp.UMLDesignerParser(
-  getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
-  initDatabaseTypeHolder('sql'));
+var parser = ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
 
-describe('UMLDesignerParser', function() {
+describe('VisualParadigmParser', function() {
   describe('#findElements',function() {
     before(function() {
       parser.findElements();
@@ -20,24 +16,42 @@ describe('UMLDesignerParser', function() {
     it('finds the classes in the document', function() {
       expect(
         parser.rawClassesIndexes
-      ).to.deep.equal([ 0, 3, 5, 7, 12, 14, 15, 17, 19 ]);
+      ).to.deep.equal([ 0, 1, 2, 5, 6, 7, 8, 9, 10 ]);
     });
 
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 1, 2 ]);
+      ).to.deep.equal([ 3, 4, 21 ]);
     });
 
     it('finds the associations in the document', function() {
       expect(
         parser.rawAssociationsIndexes
-      ).to.deep.equal([ 4, 6, 8, 9, 10, 11, 13, 16, 18, 20 ]);
+      ).to.deep.equal([ 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]);
     });
   });
 
   describe('#findConstraints', function() {
-    // not supported by the editor yet
+    before(function() {
+      parser.findConstraints();
+    });
+
+    describe('when having a document with a validation', function() {
+      it('finds the constraints in the document', function() {
+        expect(parser.rawValidationRulesIndexes).to.deep.equal([ 0, 1 ]);
+      });
+    });
+
+    describe('when having a document with no validation', function() {
+      it('does not do anything', function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/visualparadigm_user_class_test.uml',
+          'sql');
+        otherParser.findConstraints();
+        expect(otherParser.rawValidationRulesIndexes).to.deep.equal([]);
+      });
+    });
   });
 
   describe('#fillTypes', function() {
@@ -69,7 +83,7 @@ describe('UMLDesignerParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'DateTime', 'BigDecimal' ];
+        var expectedTypes = [ 'BigDecimal', 'DateTime', 'Long' ];
         for(var element in parser.getTypes()) {
           if(parser.getTypes().hasOwnProperty(element)) {
             expect(
@@ -85,10 +99,8 @@ describe('UMLDesignerParser', function() {
 
     describe('if the types are not capitalized', function() {
       it('capitalizes and adds them', function() {
-        var otherParser =  new mp.UMLDesignerParser(
-          getRootElement(
-            readFileContent('./test/xmi/umldesigner_lowercased_string_type.xmi')),
-          initDatabaseTypeHolder('sql'));
+        var otherParser =
+          ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
         otherParser.fillTypes();
         Object.keys(otherParser.getTypes()).forEach(function(type) {
           expect(
@@ -101,18 +113,17 @@ describe('UMLDesignerParser', function() {
 
   describe('#fillClassesAndFields', function() {
     before(function() {
-      parser.fillClassesAndFields();
+      parser.parse();
     });
 
     describe('when a class has no name', function() {
       it('throws an exception', function() {
-        var otherParser = new mp.UMLDesignerParser(
-            getRootElement(
-              readFileContent('./test/xmi/umldesigner_no_class_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/visualparadigm_no_class_name_test.uml',
+          'sql'
+        );
         try {
-          otherParser.fillClassesAndFields();
+          otherParser.parse();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -122,13 +133,11 @@ describe('UMLDesignerParser', function() {
 
     describe('when an attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser =  new mp.UMLDesignerParser(
-            getRootElement(
-              readFileContent('./test/xmi/umldesigner_no_attribute_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/visualparadigm_no_attribute_name_test.uml',
+          'sql');
         try {
-          otherParser.fillClassesAndFields();
+          otherParser.parse();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -162,10 +171,9 @@ describe('UMLDesignerParser', function() {
         });
 
         it('should not throw any error if there is no attribute', function() {
-          var anotherParser = new mp.UMLDesignerParser(
-            getRootElement(
-              readFileContent('./test/xmi/umldesigner_no_attribute_test.uml')),
-            initDatabaseTypeHolder('sql'));
+          var anotherParser = ParserFactory.createParser(
+            './test/xmi/visualparadigm_no_attribute_test.uml',
+            'sql');
           try {
             anotherParser.parse();
           } catch (error) {
@@ -197,7 +205,7 @@ describe('UMLDesignerParser', function() {
     describe('#addField', function() {
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.getFields()).length).to.equal(22);
+          expect(Object.keys(parser.getFields()).length).to.equal(21);
         });
 
         it('adds the fields to the classes', function() {
@@ -234,10 +242,9 @@ describe('UMLDesignerParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
-            var otherParser = new mp.UMLDesignerParser(
-              getRootElement(
-                readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
-              initDatabaseTypeHolder('sql'));
+            var otherParser = ParserFactory.createParser(
+              './test/xmi/visualparadigm_wrong_typename.uml',
+              'sql');
             try {
               otherParser.parse();
               throw new ExpectationError();
@@ -252,7 +259,6 @@ describe('UMLDesignerParser', function() {
             function() {
           it('is deduced from the field element, and added', function() {
             expect(parser.getTypes()['String']).to.equal('String');
-            expect(parser.getTypes()['Integer']).to.equal('Integer');
           });
         });
       });
@@ -260,10 +266,6 @@ describe('UMLDesignerParser', function() {
   });
 
   describe('#fillAssociations', function() {
-    before(function() {
-      parser.fillAssociations();
-    });
-
     it('inserts the found associations', function() {
       expect(Object.keys(parser.getAssociations()).length).to.equal(10);
     });
@@ -387,50 +389,6 @@ describe('UMLDesignerParser', function() {
 
 
 // external functions
-
-function getRootElement(content) {
-  var root;
-  var parser = new xml2js.Parser();
-  parser.parseString(content, function (err, result) {
-    if (result.hasOwnProperty('uml:Model')) {
-      root = result['uml:Model'];
-    } else if (result.hasOwnProperty('xmi:XMI')) {
-      root = result['xmi:XMI']['uml:Model'][0];
-    } else {
-      throw new NoRootElementException(
-        'The passed document has no immediate root element,'
-        + ' exiting now.');
-    }
-  });
-  return root;
-}
-
-function readFileContent(file) {
-  if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-    throw new WrongPassedArgumentException(
-      "The passed file '"
-      + file
-      + "' must exist and must not be a directory, exiting now.'");
-  }
-  return fs.readFileSync(file, 'utf-8');
-}
-
-function initDatabaseTypeHolder(databaseTypeName) {
-  switch (databaseTypeName) {
-    case 'sql':
-      return new types.SQLTypes();
-    case 'mongodb':
-      return new types.MongoDBTypes();
-    case 'cassandra':
-      return new types.CassandraTypes();
-    default:
-      throw new WrongDatabaseTypeException(
-        'The passed database type is incorrect. '
-        + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
-        + databaseTypeName
-        + "', exiting now.");
-  }
-}
 
 function ExpectationError(message) {
   this.name = 'ExpectationError';
