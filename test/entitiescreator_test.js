@@ -13,28 +13,28 @@ var parser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/modelio.xmi')),
   initDatabaseTypeHolder('sql'));
 parser.parse();
-var creator = new EntitiesCreator(parser);
+var creator = new EntitiesCreator(parser,false);
 
 /* The variables set to do all the constraints */
 var parserConstrainte = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/test_constraint.xmi')),
   initDatabaseTypeHolder('sql'));
 parserConstrainte.parse();
-var creatorConstrainte = new EntitiesCreator(parserConstrainte);
+var creatorConstrainte = new EntitiesCreator(parserConstrainte,false);
 
 /* the entity creator set to do the User Entity tests */
 var parserUser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/user_entity_test.xmi')),
   initDatabaseTypeHolder('sql'));
 parserUser.parse();
-var creatorUser = new EntitiesCreator(parserUser);
+var creatorUser = new EntitiesCreator(parserUser,false);
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong = new gp.GenMyModelParser(
   getRootElement(readFileContent('./test/xmi/user_entity_wrong_side_relationship.xmi')),
   initDatabaseTypeHolder('sql'));
 parserUserWrong.parse();
-var creatorUserWrong = new EntitiesCreator(parserUserWrong);
+var creatorUserWrong = new EntitiesCreator(parserUserWrong,false);
 
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
@@ -43,7 +43,7 @@ describe('EntitiesCreator ', function(){
 
       it('Successfully initialize Entities Parser', function(){
         try {
-          creator = new EntitiesCreator(parser);
+          creator = new EntitiesCreator(parser,false);
         } catch (error) {
           throw new ExpectationError();
         }
