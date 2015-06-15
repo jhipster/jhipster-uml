@@ -4,8 +4,9 @@
 if (process.argv.length < 3) {
   throw new ArgumentException(
     'Wrong argument number specified, an input file and (optionally)'
-    + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied, "
-    + "exiting now.");
+    + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied. \n"
+    + "Use the command \'jhipster-uml -help\' to know more, \n"
+    + "Exiting now.");
 }
 
 var fs = require('fs'),
@@ -17,19 +18,42 @@ var fs = require('fs'),
     ParserFactory = require('./lib/editors/parser_factory');
 
 
-if (!fs.existsSync('.yo-rc.json') && process.argv.length === 3) {
- throw new ArgumentException(
-    'The database type must either be supplied, or a .yo-rc.json file must'
-    + ' exist in the current directory.');
-}
+
 
 var type;
+var dto=false;
+
+ 
+
+process.argv.forEach(function (val, index, array) {
+  switch(val) {
+    case '-db':
+      if(!fs.existsSync('./.yo-rc.json') ){
+        type = process.argv[index+1];
+      }
+    break;
+    case '-dto':
+      dto=true;  
+    break;
+    case '-help':
+        dislayHelp();
+        process.exit(0);
+    break;
+    default:
+  }
+});
+
 
 if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(
     fs.readFileSync('./.yo-rc.json'))['generator-jhipster'].databaseType;
-} else if (!fs.existsSync('./.yo-rc.json') && process.argv.length >= 4) {
-  type = process.argv[3];
+}
+if (!fs.existsSync('.yo-rc.json') && type === undefined) {
+ throw new ArgumentException(
+    'The database type must either be supplied with the -db option, or a .yo-rc.json file must'
+    + ' exist in the current directory. \n'
+    + "Use the command \'jhipster-uml -help\' to know more."
+  );
 }
 
 var parser = ParserFactory.createParser(process.argv[2], type);
@@ -49,7 +73,7 @@ if (parser.getUserClassId()) {
     filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
 }
 
-var creator = new EntitiesCreator(parser);
+var creator = new EntitiesCreator(parser, dto);
 creator.createEntities();
 creator.writeJSON();
 
@@ -84,3 +108,10 @@ function ArgumentException(message) {
   this.message = (message || '');
 }
 ArgumentException.prototype = new Error();
+
+function dislayHelp(){
+  console.log("Syntaxe : jhipster-uml <xmi file> [-options] ");
+  console.log("the options are :");
+  console.log('\t'+"-db <the database name>"+'\t'+"define which database to use");
+  console.log('\t'+"-dto"+'\t'+"Generate DTO with MapStruct for all your entites ");
+}
