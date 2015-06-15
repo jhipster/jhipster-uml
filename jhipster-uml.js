@@ -18,12 +18,8 @@ var fs = require('fs'),
     ParserFactory = require('./lib/editors/parser_factory');
 
 
-
-
 var type;
-var dto=false;
-
- 
+var dto =false;
 
 process.argv.forEach(function (val, index, array) {
   switch(val) {
@@ -33,16 +29,15 @@ process.argv.forEach(function (val, index, array) {
       }
     break;
     case '-dto':
-      dto=true;  
+      dto = true;
     break;
     case '-help':
-        dislayHelp();
-        process.exit(0);
+      dislayHelp();
+      process.exit(0);
     break;
     default:
   }
 });
-
 
 if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(
@@ -99,7 +94,7 @@ function createEntities(scheduledClasses, classes) {
 
   scheduledClasses.forEach(function(element) {
     shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
-    console.log('\n');
+    console.info('\n');
   });
 }
 
@@ -109,9 +104,11 @@ function ArgumentException(message) {
 }
 ArgumentException.prototype = new Error();
 
-function dislayHelp(){
-  console.log("Syntaxe : jhipster-uml <xmi file> [-options] ");
-  console.log("the options are :");
-  console.log('\t'+"-db <the database name>"+'\t'+"define which database to use");
-  console.log('\t'+"-dto"+'\t'+"Generate DTO with MapStruct for all your entites ");
+function dislayHelp() {
+  console.info(
+    'Syntax: jhipster-uml <xmi file> [-options]\n'
+    + 'The options are:\n'
+    + '\t-db <the database name>\tDefines which database type your app uses;\n'
+    + '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
+  );
 }
