@@ -32,21 +32,21 @@ if (fs.existsSync('.yo-rc.json')) {
   type = process.argv[3];
 }
 
-var parser = ParserFactory.createParser(process.argv[2], type); 
+var parser = ParserFactory.createParser(process.argv[2], type);
 
 parser.parse();
 
 var scheduler = new ClassScheduler(
   Object.keys(parser.getClasses()),
-  parser.getInjectedFields(),
-  parser.getClasses()
+  parser.getInjectedFields()
 );
 
 scheduler.schedule();
 
 var scheduledClasses = scheduler.getOrderedPool();
 if (parser.getUserClassId()) {
-  scheduledClasses = filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
+  scheduledClasses =
+    filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
 }
 
 var creator = new EntitiesCreator(parser);
@@ -56,7 +56,7 @@ creator.writeJSON();
 createEntities(scheduledClasses, parser.getClasses());
 
 /**
- * Removes every class responding to the class to filter out.
+ * Removes every class corresponding to the class to filter out.
  */
 function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
