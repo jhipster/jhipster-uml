@@ -39,8 +39,6 @@ var creatorUserWrong = new EntitiesCreator(parserUserWrong,false);
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
     describe('when passing valid argument ', function(){
-      var creator;
-
       it('Successfully initialize Entities Parser', function(){
         try {
           creator = new EntitiesCreator(parser,false);
@@ -55,6 +53,9 @@ describe('EntitiesCreator ', function(){
         expect(creator.getInjectedFields()).to.deep.equal(parser.getInjectedFields());
         expect(creator.getAssociations()).to.deep.equal(parser.getAssociations());
 
+        expect(creator.getEntities()).to.deep.equal({});
+      });
+      it('initializes each of its attributes', function() {
         expect(creator.getEntities()).to.deep.equal({});
       });
     });
@@ -82,7 +83,20 @@ describe('EntitiesCreator ', function(){
         it('there are as many Entities as Classes',function(){
           expect(creator.getEntities.length).equal(creator.getClasses.length);
         });
-
+        it("all entities attributs are set",function(){
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerOneToOne).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerManyToMany).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOneToMany).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainLocalDate).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainCustomTime).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBigDecimal).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDateTime).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDate).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].changelogDate).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].dto).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].pagination).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].validation).to.be.defined;
+        });
       });
     });
 
@@ -387,9 +401,9 @@ describe('EntitiesCreator ', function(){
         });
       });
     });
-
-    });
   });
+  });
+//
   describe('#createEntities with an entity called USER ', function(){
     before(function(){
       creatorUser.createEntities();
