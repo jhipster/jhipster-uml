@@ -58,7 +58,7 @@ describe('EntitiesCreator ', function(){
         expect(creator.getEntities()).to.deep.equal({});
       });
     });
-    describe('when passing invalid argument', function(){  
+    describe('when passing invalid argument', function(){
       describe('when passing a null argument',function(){
         it('throws an exception',function(){
           try{
@@ -72,7 +72,7 @@ describe('EntitiesCreator ', function(){
     });
   });
   describe( '#createEntities', function(){
-    
+
     describe('#initializeEntities', function(){
       before(function(){
           creator.initializeEntities();
@@ -123,7 +123,7 @@ describe('EntitiesCreator ', function(){
 
       /**
        * Here we check the validation gestion, for that purpose we created
-       *   a xmi of a class Contrainte with 4 attributs, each with differente 
+       *   a xmi of a class Contrainte with 4 attributs, each with differente
        *   constraints:
        *   - notTooSmall [ required , minlength : 4 ]
        *   - notTooBig [maxlength : 10]
@@ -177,7 +177,7 @@ describe('EntitiesCreator ', function(){
             }
           });
         });
-      
+
 
       describe('when field has a maxlength validation', function(){
           it('fieldValidate is true',function(){
@@ -205,7 +205,7 @@ describe('EntitiesCreator ', function(){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
                 if(field.fieldName === "notTooBig" ){
-                  expect(field.fieldValidateRulesMax === "10").to.equal(true);
+                  expect(field.fieldValidateRulesMaxlength === "10").to.equal(true);
                 }
               }
             }
@@ -238,14 +238,14 @@ describe('EntitiesCreator ', function(){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
                 if(field.fieldName === "notTooSmall" ){
-                  expect(field.fieldValidateRulesMin === "4").to.equal(true);
+                  expect(field.fieldValidateRulesMinlength === "4").to.equal(true);
                 }
               }
             }
           });
         });
       });
-    
+
     describe('#setRelationshipOfEntity',function(){
       var employeeToJob; // relation one to one owner
       var departmentToEmployee; // relation one to many
@@ -296,7 +296,7 @@ describe('EntitiesCreator ', function(){
       });
 
       describe("when trying to access a relationships", function(){
-        
+
         describe('Employee to Job: One to one owner side', function(){
           it("has a ownerSide property at true ",function(){
             expect(employeeToJob.ownerSide).to.equal(true);
