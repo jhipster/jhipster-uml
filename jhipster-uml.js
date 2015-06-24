@@ -52,6 +52,7 @@ if (!fs.existsSync('.yo-rc.json') && type === undefined) {
 }
 
 try {
+
   var parser = ParserFactory.createParser(process.argv[2], type);
 
   parser.parse();

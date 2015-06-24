@@ -1,0 +1,86 @@
+{
+  function concat(aray1, aray2){
+    Array.prototype.push.apply(aray1, aray2);
+    return aray1;
+  }
+
+  function makeString(o) {
+    return o.join("");
+  }
+
+
+}
+
+start
+  = le:listEntity space* lr:listRelationship                                           {return {"entities" : le, "relationships" : lr};}
+                                                                     
+
+listEntity 
+  = space* ed:entityDecl space* le:listEntity                                          {return concat([ed],le);}
+  /                                                                                    {[]}
+
+entityDecl
+  = "entity" space e:ENTITYNAME space* eb:entityBody                                   {return {"name" : e, "body":eb};}          
+ 
+entityBody
+  = "{" space* fdl:fieldDeclList space* "}"                                            {return fdl;}
+  /                                                                                    {return {};}
+
+fieldDeclList
+  = f:FIELDNAME space t:type space* vl:validationList space* "," space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl}], fdl );}
+  / f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl}];}
+  /                                                                                    {return [];}                                                
+
+validationList
+  = v:validation space* vl:validationList                                              {return concat([v], vl);}                                    
+  /                                                                                    {return [];}
+
+
+listRelationship
+  = space* rd:relationDecl space* l:listRelationship                                   {return concat([rd] , l );}
+  /                                                                                    {return [];} 
+
+relationDecl
+  = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cadinality = rt; return rb;}  
+
+relationshipBody
+  = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
+
+relationshipSide          
+  = e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
+  / e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i};}
+
+
+
+relationshipType = "OneToOne" {return "one-to-one"} / "OneToMany" {return "one-to-many"} / "ManyToOne" {return "many-to-one"} / "ManyToMany" {return "many-to-many"}
+
+type "a type" = "String" {return "String"} / "BigDecimal" {return "BigDecimal"} / "Long" {return "Long"} / "Boolean" {return "Boolean"} / "DateTime" {return "DateTime"} / "Date" {return "Date"} / "Integer"{return "Integer"}
+
+validation 
+  = "required"                                                                         {return {key:'required', value:''};}
+  / "minlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'minlength', value:int};}
+  / "maxlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'maxlength', value:int};}
+  / "pattern" space* "("  apostrophe regexp:REGEXP  apostrophe space* ")"              {return {key:'pattern' , value:regexp};}
+
+
+
+apostrophe "apostrophe"
+  = a:["|']                    
+
+REGEXP "a regular expression" 
+  = word:[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/? ]*                               {return makeString(word);}
+
+INTEGER "integer"
+  = int:[0-9]+                                                                         {return parseInt(int.join(""), 10);} 
+
+INJECTEDFIELDNAME "an injected field"
+  = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}
+
+ENTITYNAME "an entity name"  
+  = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
+
+FIELDNAME "a field name"
+  = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}               
+
+space "a space"
+  = space:['\n'|'\t'|' ']+           
