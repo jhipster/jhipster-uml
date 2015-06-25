@@ -1,17 +1,15 @@
 entity Booo{
   id Long,
   firstName String,
-  lastName String required minlength(12) maxlength(15),
-  email String,
-  phoneNumber String,
-  address String,
-  postalCode String,salary BigDecimal,pct BigDecimal 
+  lastName String,
+  salary BigDecimal,
+  pct BigDecimal 
 }
+
 
 entity Joby {
   id Long,
-  title String required,
-  minSalary BigDecimal,
+  title String,
   maxSalary BigDecimal
 }
 
