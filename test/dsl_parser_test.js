@@ -9,15 +9,15 @@ var parser_DSL = require("../lib/dsl/dsl_parser"),
     types = require('../lib/types');
 
     var fileName = "test/jh/oracle.jh";
-    var parser = new parser_DSL.DSL(fileName, 
+    var parser = new parser_DSL.DSL(fileName,
       initDatabaseTypeHolder('sql'));
 
     /* The parser with an undeclared entity in a relationship */
-    var parserUndeclaredEntity = new parser_DSL.DSL("test/jh/UndeclaredEntity.jh", 
+    var parserUndeclaredEntity = new parser_DSL.DSL("test/jh/UndeclaredEntity.jh",
       initDatabaseTypeHolder('sql'));
 
     /* The parser with a wrong type */
-    var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh", 
+    var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh",
       initDatabaseTypeHolder('sql'));
 
 
@@ -41,10 +41,10 @@ describe("DSL Parser", function(){
        parser.result = pegParser.parse(jh);
        parser.fillClassesAndFields();
       });
-    
+
       it("there is the expected number of classes",function(){
         expect(Object.keys(parser.classes).length).to.be.equal(7);
-      });  
+      });
       it("there is the expected number of field",function(){
         expect(Object.keys(parser.fields).length).to.be.equal(20);
       });
@@ -72,7 +72,7 @@ describe("DSL Parser", function(){
         }catch(error){
           expect(true).to.be.equal(true);
         }
-      });  
+      });
     });
 
   });
@@ -111,14 +111,14 @@ describe("DSL Parser", function(){
         parserUndeclaredEntity.result = pegParser.parse(jh);
         parserUndeclaredEntity.fillClassesAndFields();
       });
-    
+
       it("thows an UndeclaredEntityExecption",function(){
         try{
           parserUndeclaredEntity.fillAssociations();
         }catch(error){
           expect(error.name).to.be.equal("UndeclaredEntityExecption");
         }
-      });  
+      });
     });
   });
 

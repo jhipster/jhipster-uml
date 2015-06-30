@@ -94,11 +94,11 @@ describe('EntitiesCreator ', function(){
         firstClassId = Object.keys(creatorConstrainte.getClasses())[0];
         creatorConstrainte.initializeEntities();
         creatorConstrainte.setFieldsOfEntity(firstClassId);
-        fields = creatorConstrainte.getEntities()[firstClassId].fields
+        fields = creatorConstrainte.getEntities()[firstClassId].fields;
       });
 
       describe("when fields trying to access an entity field ",function(){
-        var field
+        var field;
         before(function(){
           field = fields[0];
         });

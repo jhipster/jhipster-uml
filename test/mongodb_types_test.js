@@ -20,7 +20,7 @@ describe('MongoDBTypes', function() {
           'Integer',
           'Long',
           'BigDecimal',
-          'LocalDate', 
+          'LocalDate',
           'DateTime',
           'Boolean'
         ]
@@ -75,7 +75,7 @@ describe('MongoDBTypes', function() {
             expect(error.name).to.equal('NoElementFoundException');
           }
         });
-      });      
+      });
     });
   });
 

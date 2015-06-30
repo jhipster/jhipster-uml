@@ -20,7 +20,7 @@ describe('SQLTypes', function() {
           'Integer',
           'Long',
           'BigDecimal',
-          'LocalDate', 
+          'LocalDate',
           'DateTime',
           'Boolean'
         ]
@@ -75,7 +75,7 @@ describe('SQLTypes', function() {
             expect(error.name).to.equal('NoElementFoundException');
           }
         });
-      });      
+      });
     });
   });
 
