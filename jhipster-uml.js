@@ -56,19 +56,6 @@ try {
   var parser = ParserFactory.createParser(process.argv[2], type);
   parser.parse();
 
-/***************************/
-  console.log("**** THE F-ING PARSER ******");
-  var file = 'DEBUGSHIT.txt';
-  fs.writeFileSync(file, JSON.stringify(parser.getClasses(), null, '  '));
-  console.log("** associations **");
-  console.log(parser.getAssociations());
-  console.log("** getInjectedFields **");
-  console.log(parser.getInjectedFields());
-  console.log();
-  console.log("** getFields **");
-    console.log(parser.getFields());    
-/**************************/
-
   var scheduler = new ClassScheduler(
     Object.keys(parser.getClasses()),
     parser.getInjectedFields()

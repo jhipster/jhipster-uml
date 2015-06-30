@@ -1,3 +1,10 @@
+/*
+ *
+ * This the grammar we used to generate the parser jhGrammar.js
+ *   We use the online tool http://pegjs.org/online to generate the  parser
+ *
+ */
+
 {
   function concat(aray1, aray2){
     Array.prototype.push.apply(aray1, aray2);
@@ -7,20 +14,18 @@
   function makeString(o) {
     return o.join("");
   }
-
-
 }
 
 start
-  = le:listEntity space* lr:listRelationship                                           {return {"entities" : le, "relationships" : lr};}
-                                                                     
-
-listEntity 
-  = space* ed:entityDecl space* le:listEntity                                          {return concat([ed],le);}
-  /                                                                                    {[]}
+  = p:prog                                                                             {return p;}
+  
+prog
+  = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships};}
+  / space* rd:relationDecl space* p:prog                                               {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships)};}
+  /                                                                                    {return {"entities" : [],"relationships": []};}                                                                 
 
 entityDecl
-  = "entity" space e:ENTITYNAME space* eb:entityBody                                   {return {"name" : e, "body":eb};}          
+  = "entity" space* e:ENTITYNAME space* eb:entityBody                                   {return {"name" : e, "body":eb};}          
  
 entityBody
   = "{" space* fdl:fieldDeclList space* "}"                                            {return fdl;}
@@ -35,11 +40,6 @@ validationList
   = v:validation space* vl:validationList                                              {return concat([v], vl);}                                    
   /                                                                                    {return [];}
 
-
-listRelationship
-  = space* rd:relationDecl space* l:listRelationship                                   {return concat([rd] , l );}
-  /                                                                                    {return [];} 
-
 relationDecl
   = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cadinality = rt; return rb;}  
 
@@ -47,8 +47,8 @@ relationshipBody
   = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
 
 relationshipSide          
-  = e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
-  / e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i};}
+  = e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i};}
+  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
 
 
 
@@ -60,6 +60,8 @@ validation
   = "required"                                                                         {return {key:'required', value:''};}
   / "minlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'minlength', value:int};}
   / "maxlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'maxlength', value:int};}
+  / "max" space* "(" space* int:INTEGER space* ")"                                     {return {key:'max', value:int};}
+  / "min" space* "(" space* int:INTEGER space* ")"                                     {return {key:'min', value:int};}
   / "pattern" space* "("  apostrophe regexp:REGEXP  apostrophe space* ")"              {return {key:'pattern' , value:regexp};}
 
 
@@ -84,3 +86,4 @@ FIELDNAME "a field name"
 
 space "a space"
   = space:['\n'|'\t'|' ']+           
+
