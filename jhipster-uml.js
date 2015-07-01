@@ -11,7 +11,8 @@ if (process.argv.length < 3) {
 
 var fs = require('fs'),
 	chalk = require('chalk'),
-	shelljs = require('shelljs'),
+	// shelljs = require('shelljs'),
+  child_process = require('child_process'),
 	ParserFactory = require('./lib/editors/parser_factory'),
 	EntitiesCreator = require('./lib/entitiescreator'),
 	ClassScheduler = require('./lib/scheduler'),
@@ -45,9 +46,9 @@ if (fs.existsSync('.yo-rc.json')) {
 }
 if (!fs.existsSync('.yo-rc.json') && type === undefined) {
  throw new ArgumentException(
-	'The database type must either be supplied with the -db option, or a .yo-rc.json file must'
-	+ ' exist in the current directory. \n'
-	+ "Use the command \'jhipster-uml -help\' to know more."
+  	'The database type must either be supplied with the -db option, '
+    + 'or a .yo-rc.json file must exist in the current directory. \n'
+  	+ "Use the command \'jhipster-uml -help\' to know more."
   );
 }
 
@@ -66,7 +67,7 @@ try {
   var scheduledClasses = scheduler.getOrderedPool();
   if (parser.getUserClassId()) {
     scheduledClasses =
-    filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
+      filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
   }
 
   var creator = new EntitiesCreator(parser, dto);
@@ -85,7 +86,7 @@ try {
  */
 function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
-	return element !== classToFilter;
+    return element !== classToFilter;
   });
 }
 
@@ -95,13 +96,19 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
   for (var i = 0; i < scheduledClasses.length; i++) {
-	console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
+ 	  console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
 
   scheduledClasses.forEach(function(element) {
-	shelljs.exec('yo jhipster:entity ' +  classes[element].name + ' --force');
-	console.info('\n');
+
+    var childProcess = child_process.spawnSync(
+      'yo',
+      ['jhipster:entity', classes[element].name],
+      { stdio: [process.stdin, process.stdout, process.stderr] }
+    );
+    console.info('\n');
   });
+
 }
 
 function ArgumentException(message) {
@@ -112,9 +119,9 @@ ArgumentException.prototype = new Error();
 
 function dislayHelp() {
   console.info(
-	'Syntax: jhipster-uml <xmi file> [-options]\n'
-	+ 'The options are:\n'
-	+ '\t-db <the database name>\tDefines which database type your app uses;\n'
-	+ '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
+  	'Syntax: jhipster-uml <xmi file> [-options]\n'
+  	+ 'The options are:\n'
+  	+ '\t-db <the database name>\tDefines which database type your app uses;\n'
+  	+ '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
   );
 }
