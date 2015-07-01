@@ -210,7 +210,7 @@ describe('GenMyModelParser', function() {
           it('has a class', function() {
             expect(firstElementKeys).to.include('class');
           });
-          
+
           it('has a flag if the upper value is present', function() {
             expect(firstElementKeys).to.include('isUpperValuePresent');
           });

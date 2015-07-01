@@ -76,7 +76,7 @@ describe('CassandraTypes', function() {
             expect(error.name).to.equal('NoElementFoundException');
           }
         });
-      });      
+      });
     });
   });
 

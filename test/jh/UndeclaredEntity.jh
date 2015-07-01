@@ -1,0 +1,17 @@
+entity Departement{
+	departementName String
+}
+
+entity Employee{
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	hireDAte DateTime,
+	salary Long,
+	comissionPct Long
+}
+
+relationship OneToMany{
+	WrongEntity{employee} to Employee{departement}
+}

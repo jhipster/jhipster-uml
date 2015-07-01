@@ -134,7 +134,7 @@ describe('ModelioParser', function() {
       before(function() {
         firstElementKeys = Object.keys(
           parser.getAssociations()[Object.keys(parser.getAssociations())[0]]);
-      })
+      });
 
       it('has a name', function() {
         expect(firstElementKeys).to.include('name');
@@ -434,7 +434,7 @@ describe('ModelioParser', function() {
               parser.databaseTypes.types = {};
               var keys = Object.keys(previousTypes);
               for(var i = 0; i < keys.length; i++) {
-                parser.databaseTypes.types[keys[i]] = ['Nothing']
+                parser.databaseTypes.types[keys[i]] = ['Nothing'];
               }
             });
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var chai = require('chai'),
-    expect = chai.expect, 
+    expect = chai.expect,
     ClassScheduler = require('../lib/scheduler'),
   	mp = require('../lib/editors/modelio_parser'),
     xml2js = require('xml2js'),
@@ -89,7 +89,7 @@ describe('ClassScheduler', function() {
   describe('#schedule', function() {
     // this case checks whether classes are 'forgotten' by the scheduling
     describe(
-        'when scheduling classes sorted so as to blend sorted and unsorted classes', 
+        'when scheduling classes sorted so as to blend sorted and unsorted classes',
         function() {
 
       var otherParser = new mp.ModelioParser(
@@ -179,7 +179,7 @@ describe('ClassScheduler', function() {
 
           for (var i = 0; i < dependencies.length; i++) {
             expect(
-              dependencies[i].source === employeeId 
+              dependencies[i].source === employeeId
                 || dependencies[i].destination === employeeId
             ).to.equal(true);
           }
@@ -305,7 +305,7 @@ describe('ClassScheduler', function() {
 
     it('sorts the classes and resolves dependencies', function() {
       scheduler.schedule();
-      var expectedPathA = [ 
+      var expectedPathA = [
         '_iW0ZQfJjEeSmmZm37nQR-w',
         '_iW0ZRPJjEeSmmZm37nQR-w',
         '_iW0ZSPJjEeSmmZm37nQR-w',
@@ -315,7 +315,7 @@ describe('ClassScheduler', function() {
         '_iW0ZEfJjEeSmmZm37nQR-w',
         '_iW0ZH_JjEeSmmZm37nQR-w',
         '_iW0Y-PJjEeSmmZm37nQR-w' ];
-      var expectedPathB = [ 
+      var expectedPathB = [
         '_iW0ZQfJjEeSmmZm37nQR-w',
         '_iW0ZSPJjEeSmmZm37nQR-w',
         '_iW0ZO_JjEeSmmZm37nQR-w',
@@ -327,7 +327,7 @@ describe('ClassScheduler', function() {
         '_iW0Y-PJjEeSmmZm37nQR-w' ];
 
       expect(
-        scheduler.orderedPool.length === expectedPathA.length 
+        scheduler.orderedPool.length === expectedPathA.length
           && scheduler.orderedPool.length === expectedPathB.length
       ).to.equal(true);
 

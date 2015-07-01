@@ -1,0 +1,70 @@
+entity Departement{
+	departementName String
+}
+
+entity JobHistory{
+	startDate DateTime,
+	endDate DateTime
+}
+
+entity Job {
+	jobTitle String,
+	minSalary Long,
+	maxSalary Long,
+}
+
+
+entity Employee{
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	hireDAte DateTime,
+	salary Long,
+	comissionPct Long
+}
+
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String,
+	stateProvince String
+}
+
+entity Task{
+	title String,
+	description String
+}
+
+entity Country{
+	countryName String
+}
+
+
+relationship OneToMany{
+	Departement{employee} to Employee{departement}
+}
+
+relationship OneToMany{
+	Location{country} to Country{location}
+}
+
+relationship OneToOne{
+	JobHistory{departement} to Departement{jobHistory}
+}
+
+relationship OneToOne{
+	Employee{manager} to Employee{employee}
+}
+
+relationship OneToOne{
+	Employee{job} to Job{Employee}
+}
+
+relationship ManyToMany{
+	Job{tasks} to Task{jobs} 
+}
+
+relationship OneToOne{
+	Departement{location} to Location{department}
+}
