@@ -3,20 +3,19 @@
 
 if (process.argv.length < 3) {
   throw new ArgumentException(
-  	'Wrong argument number specified, an input file and (optionally) '
-  	+ "the database type ('sql', 'mongodb' or 'cassandra') must be supplied. \n"
-  	+ "Use the command 'jhipster-uml -help' to see the available commands. \n"
-  	+ "Exiting now.");
+   'Wrong argument number specified, an input file and (optionally) '
+   + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied. \n"
+   + "Use the command 'jhipster-uml -help' to see the available commands. \n"
+   + "Exiting now.");
 }
 
 var fs = require('fs'),
-	chalk = require('chalk'),
-	// shelljs = require('shelljs'),
-  child_process = require('child_process'),
-	ParserFactory = require('./lib/editors/parser_factory'),
-	EntitiesCreator = require('./lib/entitiescreator'),
-	ClassScheduler = require('./lib/scheduler'),
-	ParserFactory = require('./lib/editors/parser_factory');
+    chalk = require('chalk'),
+    child_process = require('child_process'),
+    ParserFactory = require('./lib/editors/parser_factory'),
+    EntitiesCreator = require('./lib/entitiescreator'),
+    ClassScheduler = require('./lib/scheduler'),
+    ParserFactory = require('./lib/editors/parser_factory');
 
 
 var type;
@@ -24,36 +23,34 @@ var dto = false;
 
 process.argv.forEach(function(val, index) {
   switch(val) {
-	case '-db':
-	  if(!fs.existsSync('./.yo-rc.json') ){
-		  type = process.argv[index+1];
-	  }
-	break;
-	case '-dto':
-	  dto = true;
-	break;
-	case '-help':
-	  dislayHelp();
-	  process.exit(0);
-	break;
-	default:
+    case '-db':
+      if(!fs.existsSync('./.yo-rc.json') ){
+        type = process.argv[index+1];
+      }
+      break;
+    case '-dto':
+      dto = true;
+      break;
+    case '-help':
+      dislayHelp();
+      process.exit(0);
+      break;
+    default:
   }
 });
 
 if (fs.existsSync('.yo-rc.json')) {
-  type = JSON.parse(
-	fs.readFileSync('./.yo-rc.json'))['generator-jhipster'].databaseType;
+  type = JSON.parse(fs.readFileSync('./.yo-rc.json'))['generator-jhipster'].databaseType;
 }
 if (!fs.existsSync('.yo-rc.json') && type === undefined) {
  throw new ArgumentException(
-  	'The database type must either be supplied with the -db option, '
+    'The database type must either be supplied with the -db option, '
     + 'or a .yo-rc.json file must exist in the current directory. \n'
-  	+ "Use the command \'jhipster-uml -help\' to know more."
+    + "Use the command \'jhipster-uml -help\' to know more."
   );
 }
 
 try {
-
   var parser = ParserFactory.createParser(process.argv[2], type);
   parser.parse();
 
@@ -96,7 +93,7 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
   for (var i = 0; i < scheduledClasses.length; i++) {
- 	  console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
+    console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
 
   scheduledClasses.forEach(function(element) {
@@ -119,9 +116,9 @@ ArgumentException.prototype = new Error();
 
 function dislayHelp() {
   console.info(
-  	'Syntax: jhipster-uml <xmi file> [-options]\n'
-  	+ 'The options are:\n'
-  	+ '\t-db <the database name>\tDefines which database type your app uses;\n'
-  	+ '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
+   'Syntax: jhipster-uml <xmi file> [-options]\n'
+   + 'The options are:\n'
+   + '\t-db <the database name>\tDefines which database type your app uses;\n'
+   + '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
   );
 }
