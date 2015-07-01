@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml=" 
+http://www.omg.org/spec/UML/20110701" xmlns:xmi=" 
+http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" 
+xmi:id="_0EfOwBnaEeWw3ro4S7dYeg" name="poc"> <eAnnotations 
+xmi:id="_0EfOwRnaEeWw3ro4S7dYeg" source="Objing"> <contents 
+xmi:type="uml:Property" xmi:id="_0EfOwhnaEeWw3ro4S7dYeg" 
+name="exporterVersion"> <defaultValue xmi:type="uml:LiteralString" 
+xmi:id="_0EfOwxnaEeWw3ro4S7dYeg" value="3.0.0"/> </contents> 
+</eAnnotations> <packagedElement xmi:type="uml:Class" 
+xmi:id="_0EfOxBnaEeWw3ro4S7dYeg" name="Author"> <ownedAttribute 
+xmi:type="uml:Property" xmi:id="_0EfOxRnaEeWw3ro4S7dYeg" name="books" 
+visibility="public" type="_0EfOzBnaEeWw3ro4S7dYeg" aggregation="shared" 
+association="_0EfOyxnaEeWw3ro4S7dYeg"> <upperValue 
+xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0EfOxhnaEeWw3ro4S7dYeg" 
+value="*"/> <lowerValue xmi:type="uml:LiteralInteger" 
+xmi:id="_0EfOxxnaEeWw3ro4S7dYeg"/> </ownedAttribute> <ownedAttribute 
+xmi:type="uml:Property" xmi:id="_0EfOyBnaEeWw3ro4S7dYeg" name="id" 
+visibility="private" type="_0EfO1RnaEeWw3ro4S7dYeg" isUnique="false"/> 
+<ownedAttribute xmi:type="uml:Property" xmi:id="_0EfOyRnaEeWw3ro4S7dYeg" 
+name="name" visibility="private" isUnique="false"> <type 
+xmi:type="uml:PrimitiveType" href=" 
+http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/> 
+</ownedAttribute> <ownedAttribute xmi:type="uml:Property" 
+xmi:id="_0EfOyhnaEeWw3ro4S7dYeg" name="birthDate" visibility="private" 
+type="_0EfO0xnaEeWw3ro4S7dYeg" isUnique="false"/> </packagedElement> 
+<packagedElement xmi:type="uml:Association" 
+xmi:id="_0EfOyxnaEeWw3ro4S7dYeg" memberEnd="_0EfOxRnaEeWw3ro4S7dYeg 
+_0EfOzRnaEeWw3ro4S7dYeg"/> <packagedElement xmi:type="uml:Class" 
+xmi:id="_0EfOzBnaEeWw3ro4S7dYeg" name="Book"> <ownedAttribute 
+xmi:type="uml:Property" xmi:id="_0EfOzRnaEeWw3ro4S7dYeg" name="author" 
+visibility="public" type="_0EfOxBnaEeWw3ro4S7dYeg" 
+association="_0EfOyxnaEeWw3ro4S7dYeg"/> <ownedAttribute 
+xmi:type="uml:Property" xmi:id="_0EfOzhnaEeWw3ro4S7dYeg" name="id" 
+visibility="private" type="_0EfO1RnaEeWw3ro4S7dYeg" isUnique="false"/> 
+<ownedAttribute xmi:type="uml:Property" xmi:id="_0EfOzxnaEeWw3ro4S7dYeg" 
+name="title" visibility="private" isUnique="false"> <type 
+xmi:type="uml:PrimitiveType" href=" 
+http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/> 
+</ownedAttribute> <ownedAttribute xmi:type="uml:Property" 
+xmi:id="_0EfO0BnaEeWw3ro4S7dYeg" name="description" visibility="private" 
+isUnique="false"> <type xmi:type="uml:PrimitiveType" href=" 
+http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/> 
+</ownedAttribute> <ownedAttribute xmi:type="uml:Property" 
+xmi:id="_0EfO0RnaEeWw3ro4S7dYeg" name="publicationDate" 
+visibility="private" type="_0EfO0xnaEeWw3ro4S7dYeg" isUnique="false"/> 
+<ownedAttribute xmi:type="uml:Property" xmi:id="_0EfO0hnaEeWw3ro4S7dYeg" 
+name="price" visibility="private" type="_0EfO1BnaEeWw3ro4S7dYeg" 
+isUnique="false"/> </packagedElement> <packagedElement 
+xmi:type="uml:PrimitiveType" xmi:id="_0EfO0xnaEeWw3ro4S7dYeg" 
+name="LocalDate"/> <packagedElement xmi:type="uml:PrimitiveType" 
+xmi:id="_0EfO1BnaEeWw3ro4S7dYeg" name="BigDecimal"/> <packagedElement 
+xmi:type="uml:PrimitiveType" xmi:id="_0EfO1RnaEeWw3ro4S7dYeg" 
+name="long"/> </uml:Model>

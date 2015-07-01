@@ -400,6 +400,23 @@ describe('EntitiesCreator ', function(){
           });
         });
       });
+
+      describe('when the model has a bidirectional relationship', function() {
+        it('throw an exception', function() {
+          var otherParser = new mp.ModelioParser(
+            getRootElement(readFileContent('./test/xmi/modelio_bidirectional.xmi')),
+            initDatabaseTypeHolder('sql'));
+          otherParser.parse();
+          var otherCreator = new EntitiesCreator(otherParser, false);
+          try {
+            otherCreator.createEntities();
+            throw new ExpectationError();
+          } catch (error) {
+            expect(error.name).to.equal('BidirectionalAssociationUseException');
+          }
+          
+        });
+      });
     });
   });
   });
