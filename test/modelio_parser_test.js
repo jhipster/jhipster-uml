@@ -96,7 +96,7 @@ describe('ModelioParser', function() {
               expectedTypes
             ).to.include(parser.getTypes()[element]);
             expectedTypes.splice(
-              expectedTypes.indexOf(parser.getTypes()[element]), 1);            
+              expectedTypes.indexOf(parser.getTypes()[element]), 1);
           }
         }
         expect(expectedTypes.length).to.equal(0);
@@ -134,7 +134,7 @@ describe('ModelioParser', function() {
       before(function() {
         firstElementKeys = Object.keys(
           parser.getAssociations()[Object.keys(parser.getAssociations())[0]]);
-      })
+      });
 
       it('has a name', function() {
         expect(firstElementKeys).to.include('name');
@@ -249,7 +249,7 @@ describe('ModelioParser', function() {
     describe('#addField', function() {
       describe('#addInjectedField', function() {
         it('adds the injected fields', function() {
-          expect(Object.keys(parser.getClasses()).length).to.equal(9);
+          expect(Object.keys(parser.getInjectedFields()).length).to.equal(10);
         });
 
         describe("when trying to access an element's attributes", function() {
@@ -276,7 +276,7 @@ describe('ModelioParser', function() {
           it('has a class', function() {
             expect(firstElementKeys).to.include('class');
           });
-          
+
           it('has a flag if the upper value is present', function() {
             expect(firstElementKeys).to.include('isUpperValuePresent');
           });
@@ -434,7 +434,7 @@ describe('ModelioParser', function() {
               parser.databaseTypes.types = {};
               var keys = Object.keys(previousTypes);
               for(var i = 0; i < keys.length; i++) {
-                parser.databaseTypes.types[keys[i]] = ['Nothing']
+                parser.databaseTypes.types[keys[i]] = ['Nothing'];
               }
             });
 
@@ -461,7 +461,7 @@ describe('ModelioParser', function() {
           var count = 0;
           for (var element in parser.getFields()) {
             if (parser.getFields().hasOwnProperty(element)) {
-              count += 
+              count +=
                 Object.keys(parser.getFields()[element]['validations']).length;
             }
           }

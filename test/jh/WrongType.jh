@@ -1,0 +1,12 @@
+entity Departement{
+	departementName String
+}
+
+entity Employee{
+	firstName String,
+	lastName WrongType
+}
+
+relationship OneToMany{
+	Departement{employee} to Employee{departement}
+}

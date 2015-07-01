@@ -1,0 +1,7 @@
+entity TestStuff {
+	firstName String required,
+	lastName String minlength(1) maxlength(20),
+	number Integer required min(2) max(15),
+	salary Long,
+	comissionPct Long
+}

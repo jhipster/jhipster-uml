@@ -1,6 +1,6 @@
 {
   "name": "jhipster-uml",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UML support for JHipster via XMI files",
   "bin": {
     "jhipster-uml": "./jhipster-uml.js"
@@ -33,12 +33,13 @@
     "selfish": "1.0.2",
     "shelljs": "0.5.1",
     "underscore.string": "3.1.1",
-    "xml2js": "0.4.9"
+    "xml2js": "0.4.9",
+    "pegjs": "0.8.0"
   },
   "devDependencies": {
     "mocha": "2.2.5",
     "chai": "3.0.0",
-    "jsdoc": "3.3.1"
+    "jsdoc": "3.3.2"
   },
   "peerDependencies": {},
   "engines": {

@@ -6,7 +6,7 @@ This project's main goal is to bring support of UML (more precisely, XMI) files 
 
 You'll be able to create your entities by supplying a UML file (made with your favorite editor, if it supports XMI) to JHipster, and we'll take care of creating your entities for you!
 
-We support: Modelio, UMLDesigner and GenMyModel.
+We support: Modelio, UML Designer, GenMyModel and Visual Paradigm.
 
 Stay tuned for more news about this project.
 
