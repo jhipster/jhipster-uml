@@ -13,35 +13,35 @@ var parser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/modelio.xmi')),
   initDatabaseTypeHolder('sql'));
 parser.parse();
-var creator = new EntitiesCreator(parser,false);
+var creator = new EntitiesCreator(parser,[]);
 
 /* The variables set to do all the constraints */
 var parserConstrainte = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/test_constraint.xmi')),
   initDatabaseTypeHolder('sql'));
 parserConstrainte.parse();
-var creatorConstrainte = new EntitiesCreator(parserConstrainte,false);
+var creatorConstrainte = new EntitiesCreator(parserConstrainte,[]);
 
 /* the entity creator set to do the User Entity tests */
 var parserUser = new mp.ModelioParser(
   getRootElement(readFileContent('./test/xmi/user_entity_test.xmi')),
   initDatabaseTypeHolder('sql'));
 parserUser.parse();
-var creatorUser = new EntitiesCreator(parserUser,false);
+var creatorUser = new EntitiesCreator(parserUser,[]);
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong = new gp.GenMyModelParser(
   getRootElement(readFileContent('./test/xmi/user_entity_wrong_side_relationship.xmi')),
   initDatabaseTypeHolder('sql'));
 parserUserWrong.parse();
-var creatorUserWrong = new EntitiesCreator(parserUserWrong,false);
+var creatorUserWrong = new EntitiesCreator(parserUserWrong,[]);
 
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
     describe('when passing valid argument ', function(){
       it('Successfully initialize Entities Parser', function(){
         try {
-          creator = new EntitiesCreator(parser,false);
+          creator = new EntitiesCreator(parser,[]);
         } catch (error) {
           throw new ExpectationError();
         }
@@ -407,7 +407,7 @@ describe('EntitiesCreator ', function(){
             getRootElement(readFileContent('./test/xmi/modelio_bidirectional.xmi')),
             initDatabaseTypeHolder('sql'));
           otherParser.parse();
-          var otherCreator = new EntitiesCreator(otherParser, false);
+          var otherCreator = new EntitiesCreator(otherParser, []);
           try {
             otherCreator.createEntities();
             throw new ExpectationError();
