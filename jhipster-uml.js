@@ -19,7 +19,10 @@ var fs = require('fs'),
 
 
 var type;
+
+//option DTO
 var dto = false;
+var listDTO = [];
 
 process.argv.forEach(function(val, index) {
   switch(val) {
@@ -67,7 +70,11 @@ try {
       filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
   }
 
-  var creator = new EntitiesCreator(parser, dto);
+  if(dto){
+   listDTO = askForDTO(parser.classes);
+  }
+
+  var creator = new EntitiesCreator(parser, listDTO);
   creator.createEntities();
   creator.writeJSON();
 
@@ -121,4 +128,48 @@ function dislayHelp() {
     + '\t-db <the database name>\tDefines which database type your app uses;\n'
     + '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
   );
+}
+
+
+
+function askForDTO(classes) {
+  var inquirer = require('inquirer');
+  var choice = null;
+  var allEntityMessage = '*** All Entities ***';
+  var choicesList = [allEntityMessage];
+
+  Array.prototype.push.apply( 
+    choicesList, 
+    Object.keys(classes)
+              .map(function(e){
+                return classes[e].name;
+              })
+    );                        
+
+
+  inquirer.prompt([
+    {
+      type: 'checkbox',
+      name: 'answer',
+      message: 'Please choose the entities you want to generate DTO:',
+      choices: choicesList,
+      filter: function(val) {
+        return val;
+      }
+    }
+  ], function(answers) {
+
+      //if '*** All Entities ***' is selected return all Entities
+      if(answers.answer.indexOf(allEntityMessage) !== -1) {
+        choice = choicesList; 
+      }else{
+        choice = answers.answer;
+      }
+    }
+  );
+  while(!choice) {
+    require('deasync').sleep(100);
+  }
+
+  return choice;
 }
