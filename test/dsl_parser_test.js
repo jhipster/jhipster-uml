@@ -1,6 +1,5 @@
 "use strict"
 
-
 var parser_DSL = require("../lib/dsl/dsl_parser"),
     chai = require('chai'),
     fs = require('fs'),
@@ -8,17 +7,18 @@ var parser_DSL = require("../lib/dsl/dsl_parser"),
     expect = chai.expect,
     types = require('../lib/types');
 
-    var fileName = "test/jh/oracle.jh";
-    var parser = new parser_DSL.DSL(fileName,
-      initDatabaseTypeHolder('sql'));
 
-    /* The parser with an undeclared entity in a relationship */
-    var parserUndeclaredEntity = new parser_DSL.DSL("test/jh/UndeclaredEntity.jh",
-      initDatabaseTypeHolder('sql'));
+  var fileName = "test/jh/oracle.jh";
+  var parser = new parser_DSL.DSL(fileName,
+    initDatabaseTypeHolder('sql'));
 
-    /* The parser with a wrong type */
-    var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh",
-      initDatabaseTypeHolder('sql'));
+  /* The parser with an undeclared entity in a relationship */
+  var parserUndeclaredEntity = new parser_DSL.DSL("test/jh/UndeclaredEntity.jh",
+    initDatabaseTypeHolder('sql'));
+
+  /* The parser with a wrong type */
+  var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh",
+    initDatabaseTypeHolder('sql'));
 
 
 describe("DSL Parser", function(){

@@ -3,17 +3,15 @@
 var chai = require('chai'),
     expect = chai.expect,
     gmp = require('../lib/editors/genmymodel_parser'),
-    xml2js = require('xml2js'),
-    fs = require('fs'),
-    types = require('../lib/types');
+    ParserFactory = require('../lib/editors/parser_factory');
 
-var parser = new gmp.GenMyModelParser(
-  getRootElement(readFileContent('./test/xmi/genmymodel_evolve.xmi')),
-  initDatabaseTypeHolder('sql'));
+var parser = ParserFactory.createParser(
+  './test/xmi/genmymodel_evolve.xmi',
+  'sql');
 
-var parserWrongType = new gmp.GenMyModelParser(
-  getRootElement(readFileContent('./test/xmi/genmymodel_wrong_type.xmi')),
-  initDatabaseTypeHolder('sql'));
+var parserWrongType = ParserFactory.createParser(
+  './test/xmi/genmymodel_wrong_type.xmi',
+  'sql');
 
 describe('GenMyModelParser', function() {
   describe('#findElements',function() {
@@ -85,10 +83,9 @@ describe('GenMyModelParser', function() {
 
     describe('if the types are not capitalized', function() {
       it('capitalizes and adds them', function() {
-        var otherParser =  new gmp.GenMyModelParser(
-          getRootElement(
-            readFileContent('./test/xmi/genmymodel_lowercased_string_type.xml')),
-          initDatabaseTypeHolder('sql'));
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/genmymodel_lowercased_string_type.xml',
+          'sql');
         otherParser.fillTypes();
         Object.keys(otherParser.getTypes()).forEach(function(type) {
           expect(
@@ -339,52 +336,6 @@ describe('GenMyModelParser', function() {
   });
 });
 
-
-// external functions
-
-function getRootElement(content) {
-  var root;
-  var parser = new xml2js.Parser();
-  parser.parseString(content, function (err, result) {
-    if (result.hasOwnProperty('uml:Model')) {
-      root = result['uml:Model'];
-    } else if (result.hasOwnProperty('xmi:XMI')) {
-      root = result['xmi:XMI']['uml:Model'][0];
-    } else {
-      throw new NoRootElementException(
-        'The passed document has no immediate root element,'
-        + ' exiting now.');
-    }
-  });
-  return root;
-}
-
-function readFileContent(file) {
-  if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-    throw new WrongPassedArgumentException(
-      "The passed file '"
-      + file
-      + "' must exist and must not be a directory, exiting now.'");
-  }
-  return fs.readFileSync(file, 'utf-8');
-}
-
-function initDatabaseTypeHolder(databaseTypeName) {
-  switch (databaseTypeName) {
-    case 'sql':
-      return new types.SQLTypes();
-    case 'mongodb':
-      return new types.MongoDBTypes();
-    case 'cassandra':
-      return new types.CassandraTypes();
-    default:
-      throw new WrongDatabaseTypeException(
-        'The passed database type is incorrect. '
-        + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
-        + databaseTypeName
-        + "', exiting now.");
-  }
-}
 
 function ExpectationError(message) {
   this.name = 'ExpectationError';
