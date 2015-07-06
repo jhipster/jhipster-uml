@@ -126,7 +126,7 @@ function dislayHelp() {
     'Syntax: jhipster-uml <xmi file> [-options]\n'
     + 'The options are:\n'
     + '\t-db <the database name>\tDefines which database type your app uses;\n'
-    + '\t-dto\t[BETA] Generates DTO with MapStruct for all your entites.'
+    + '\t-dto\t[BETA] Generates DTO with MapStruct the selected entities.'
   );
 }
 

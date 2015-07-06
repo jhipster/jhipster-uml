@@ -36,6 +36,8 @@ var parserUserWrong = new gp.GenMyModelParser(
 parserUserWrong.parse();
 var creatorUserWrong = new EntitiesCreator(parserUserWrong,[]);
 
+
+
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
     describe('when passing valid argument ', function(){
@@ -417,10 +419,24 @@ describe('EntitiesCreator ', function(){
           
         });
       });
+      describe('when the model has relationships and the app has a NoSQL database', function() {
+        it('throw an exception', function() {
+          try {
+            var parserNoSQL_with_relationship = new mp.ModelioParser(
+              getRootElement(readFileContent('./test/xmi/modelio.xmi')),
+              initDatabaseTypeHolder('mongodb'));
+            parserNoSQL_with_relationship.parse();
+            var creatorNoSQL_with_relationship = new EntitiesCreator(parserNoSQL_with_relationship,[]);
+            throw new ExpectationError();
+          } catch (error) {
+            expect(error.name).to.equal('NoSQLModellingException');
+          }
+          
+        });
+      });
     });
   });
   });
-//
   describe('#createEntities with an entity called USER ', function(){
     before(function(){
       creatorUser.createEntities();
