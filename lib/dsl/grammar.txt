@@ -2,7 +2,7 @@
  *
  * This the grammar we used to generate the parser jhGrammar.js
  *   We use the online tool http://pegjs.org/online to generate the  parser
- *
+ *   Modifying this file wont affect the program, this just to have a more readable grammar. 
  */
 
 {
@@ -41,7 +41,7 @@ validationList
   /                                                                                    {return [];}
 
 relationDecl
-  = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cadinality = rt; return rb;}  
+  = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cardinality = rt; return rb;}  
 
 relationshipBody
   = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
@@ -52,9 +52,18 @@ relationshipSide
 
 
 
-relationshipType = "OneToOne" {return "one-to-one"} / "OneToMany" {return "one-to-many"} / "ManyToOne" {return "many-to-one"} / "ManyToMany" {return "many-to-many"}
+relationshipType = "OneToOne" {return "one-to-one";} / "OneToMany" {return "one-to-many";} / "ManyToOne" {return "many-to-one";} / "ManyToMany" {return "many-to-many";}
 
-type "a type" = "String" {return "String"} / "BigDecimal" {return "BigDecimal"} / "Long" {return "Long"} / "Boolean" {return "Boolean"} / "DateTime" {return "DateTime"} / "Date" {return "Date"} / "Integer"{return "Integer"}
+type "a type" = "String" {return "String";} 
+               / "BigDecimal" {return "BigDecimal";} 
+               / "Long" {return "Long";} 
+               / "Boolean" {return "Boolean";} 
+               / "DateTime" {return "DateTime";} 
+               / "Date" {return "Date";} 
+               / "Integer"{return "Integer";} 
+               / "LocalDate" {return "LocalDate";} 
+               / "TimeUUID" {return "TimeUUID";} 
+               / "UUID" {return "UUID";}
 
 validation 
   = "required"                                                                         {return {key:'required', value:''};}
