@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Z4QUUCGOEeW-sfm-95cxKg" name="NewModel">
+  <packageImport xmi:id="_qfS_ECGOEeW-sfm-95cxKg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_rJ2X8CGOEeW-sfm-95cxKg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hMvOkCGOEeW-sfm-95cxKg" name="MyClass">
+    <ownedAttribute xmi:id="_oIWV0CGOEeW-sfm-95cxKg" name="myAttribute">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oIXj8CGOEeW-sfm-95cxKg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oIYyECGOEeW-sfm-95cxKg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_28T5YCGOEeW-sfm-95cxKg" name="myAttribute2" type="_iYeo8CGOEeW-sfm-95cxKg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_28T5YSGOEeW-sfm-95cxKg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_28T5YiGOEeW-sfm-95cxKg" value="1"/>
+      <qualifier xmi:id="_3EBD4CGOEeW-sfm-95cxKg" name="myAttribute">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3EBD4SGOEeW-sfm-95cxKg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3EBD4iGOEeW-sfm-95cxKg" value="1"/>
+      </qualifier>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_3NLm8CGOEeW-sfm-95cxKg" name="myAttribute3" type="_jzWEcCGOEeW-sfm-95cxKg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3NLm8SGOEeW-sfm-95cxKg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3NLm8iGOEeW-sfm-95cxKg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_742r4CGOEeW-sfm-95cxKg" name="myAttribute4" type="_iYeo8CGOEeW-sfm-95cxKg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_742r4SGOEeW-sfm-95cxKg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_742r4iGOEeW-sfm-95cxKg" value="1"/>
+      <qualifier xmi:id="_742r4yGOEeW-sfm-95cxKg" name="myAttribute">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_742r5CGOEeW-sfm-95cxKg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_742r5SGOEeW-sfm-95cxKg" value="1"/>
+      </qualifier>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_iYeo8CGOEeW-sfm-95cxKg" name="MyEnumeration">
+    <ownedLiteral xmi:id="_l2tqYCGOEeW-sfm-95cxKg" name="">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_l2-wICGOEeW-sfm-95cxKg"/>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="_mzBhoCGOEeW-sfm-95cxKg" name="VALUE_B">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_mzBhoSGOEeW-sfm-95cxKg"/>
+    </ownedLiteral>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_jzWEcCGOEeW-sfm-95cxKg" name="MyEnumeration2">
+    <ownedLiteral xmi:id="_nXKwgCGOEeW-sfm-95cxKg" name="VALUE_A">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_nXKwgSGOEeW-sfm-95cxKg"/>
+    </ownedLiteral>
+  </packagedElement>
+</uml:Model>

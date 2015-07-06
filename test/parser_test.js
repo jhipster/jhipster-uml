@@ -119,6 +119,23 @@ describe('AbstractParser', function() {
       });
     });
 
+    describe('#fillEnums', function() {
+      it('is accessible', function() {
+        expect(
+          new parser.AbstractParser(null, null).fillEnums
+        ).not.to.be.undefined;
+      });
+
+      it('is not defined yet', function() {
+        try {
+          new parser.AbstractParser(null, null).fillEnums();
+          fail();
+        } catch (error) {
+          expect(error.name).to.equal('UnimplementedOperationException');
+        }
+      });
+    });
+
     describe('#fillAssociations', function() {
       it('is accessible', function() {
         expect(

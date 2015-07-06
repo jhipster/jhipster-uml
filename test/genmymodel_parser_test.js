@@ -31,6 +31,13 @@ describe('GenMyModelParser', function() {
       ).to.deep.equal([ 1,2]);
     });
 
+    it('find the enumerations in the document', function() {
+      var otherParser =
+        ParserFactory.createParser('./test/xmi/genmymodel_enum_test.xml', 'sql');
+      otherParser.findElements();
+      expect(otherParser.rawEnumsIndexes).to.deep.equal([ 1, 2 ]);
+    });
+
     it('finds the associations in the document', function() {
        expect(
         parser.rawAssociationsIndexes
@@ -92,6 +99,57 @@ describe('GenMyModelParser', function() {
             otherParser.getTypes()[type].name
           ).to.equal(_.capitalize(otherParser.getTypes()[type].name));
         });
+      });
+    });
+  });
+
+  describe('#fillConstraints', function() {
+    describe('when an enum has no name', function() {
+      it('throws an exception', function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/genmymodel_enum_no_name_test.xml',
+          'sql');
+        try {
+          otherParser.parse();
+          throw new ExpectationError();
+        } catch (error) {
+          expect(error.name).to.equal('NullPointerException');
+        }
+      });
+    });
+
+    describe('when an enum attribute has no name', function() {
+      it('throws an exception', function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/genmymodel_enum_no_attribute_name_test.xml',
+          'sql');
+        try {
+          otherParser.parse();
+          throw new ExpectationError();
+        } catch (error) {
+          expect(error.name).to.equal('NullPointerException');
+        }
+      });
+    });
+
+    describe('when an enum is well formed', function() {
+      it('is parsed', function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/genmymodel_enum_test.xml',
+          'sql');
+        otherParser.parse();
+        var expectedNames = ['MyEnumeration', 'MyEnumeration2'];
+        var expectedNValues = ['LITERAL1', 'LITERAL2', 'LITERAL'];
+        var names = [];
+        var values = [];
+        Object.keys(otherParser.getEnums()).forEach(function(element) {
+          names.push(otherParser.getEnums()[element].name);
+          otherParser.getEnums()[element].values.forEach(function(value) {
+            values.push(value);
+          });
+        });
+        expect(names).to.deep.equal(expectedNames);
+        expect(values).to.deep.equal(expectedNValues);
       });
     });
   });
