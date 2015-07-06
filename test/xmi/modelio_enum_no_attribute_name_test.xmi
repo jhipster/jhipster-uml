@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_LwhPUCFnEeWP5-PV_D3nAw" name="enumproject">
+  <eAnnotations xmi:id="_LwhPUSFnEeWP5-PV_D3nAw" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_LwhPUiFnEeWP5-PV_D3nAw" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_LwhPUyFnEeWP5-PV_D3nAw" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LwhPVCFnEeWP5-PV_D3nAw" name="MyClass">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LwhPVSFnEeWP5-PV_D3nAw" name="myAttribute" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LwhPViFnEeWP5-PV_D3nAw" name="mySecondAttribute" visibility="public" type="_LwhPWSFnEeWP5-PV_D3nAw" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LwhPVyFnEeWP5-PV_D3nAw" name="myThirdAttribute" visibility="public" type="_LwhPXCFnEeWP5-PV_D3nAw" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_LwhPWCFnEeWP5-PV_D3nAw" name="myFourthAttribute" visibility="public" type="_LwhPWSFnEeWP5-PV_D3nAw" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_LwhPWSFnEeWP5-PV_D3nAw" name="MyEnumeration">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_LwhPWiFnEeWP5-PV_D3nAw" name=""/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_LwhPWyFnEeWP5-PV_D3nAw" name="VALUE_B"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_LwhPXCFnEeWP5-PV_D3nAw" name="MySecondEnumeration">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_LwhPXSFnEeWP5-PV_D3nAw" name="VALUE_A"/>
+  </packagedElement>
+</uml:Model>

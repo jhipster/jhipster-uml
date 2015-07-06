@@ -7,6 +7,7 @@ var chai = require('chai'),
     gp = require('../lib/editors/genmymodel_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
+    ParserFactory = require('../lib/editors/parser_factory'),
     types = require('../lib/types');
 
 var parser = new mp.ModelioParser(
@@ -104,6 +105,7 @@ describe('EntitiesCreator ', function(){
     describe('#setFieldsOfEntity',function(){
       var firstClassId;
       var fields;
+
       before(function(){
         firstClassId = Object.keys(creatorConstrainte.getClasses())[0];
         creatorConstrainte.initializeEntities();
@@ -111,7 +113,47 @@ describe('EntitiesCreator ', function(){
         fields = creatorConstrainte.getEntities()[firstClassId].fields;
       });
 
-      describe("when fields trying to access an entity field ",function(){
+      describe('when creating enums', function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/modelio_enum_test.xmi',
+          'sql');
+        otherParser.parse();
+        var otherCreator = new EntitiesCreator(otherParser,[]);
+        otherCreator.createEntities();
+
+        var enumFields;
+
+        Object.keys(otherCreator.entities).forEach(function(element) {
+          enumFields = otherCreator.entities[element].fields;
+        });
+
+        it('adds the values of the enum', function() {
+          enumFields.forEach(function(field) {
+            if (!field.fieldIsEnum) {
+              expect(field.fieldValues).to.equal(undefined);
+            } else {
+              switch (field.id) {
+                case 2:
+                case 4:
+                  expect(field.fieldValues).to.deep.equal(['VALUE_A,VALUE_B']);
+                  break;
+                case 3:
+                  expect(field.fieldValues).to.deep.equal(['VALUE_A']);
+                  break;
+              }
+            }
+          });
+        });
+        it('creates them by true-ing the enum flag', function() {
+          enumFields.forEach(function(field) {
+            if (field.fieldValues) {
+              expect(field.fieldIsEnum).to.equal(true);
+            }
+          });
+        });
+      });
+
+      describe("when fields trying to access an entity field ", function(){
         var field;
         before(function(){
           field = fields[0];
@@ -414,7 +456,7 @@ describe('EntitiesCreator ', function(){
           } catch (error) {
             expect(error.name).to.equal('BidirectionalAssociationUseException');
           }
-          
+
         });
       });
     });
