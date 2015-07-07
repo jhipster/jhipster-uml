@@ -22,7 +22,8 @@ describe('MongoDBTypes', function() {
           'BigDecimal',
           'LocalDate',
           'DateTime',
-          'Boolean'
+          'Boolean',
+          'Enum'
         ]
       );
     });
@@ -112,6 +113,10 @@ describe('MongoDBTypes', function() {
             {
               value: 'Boolean',
               name: 'Boolean'
+            },
+            {
+              value: 'Enum',
+              name: 'Enum'
             }
           ]
         );

@@ -22,7 +22,8 @@ describe('SQLTypes', function() {
           'BigDecimal',
           'LocalDate',
           'DateTime',
-          'Boolean'
+          'Boolean',
+          'Enum'
         ]
       );
     });
@@ -112,6 +113,10 @@ describe('SQLTypes', function() {
             {
               value: 'Boolean',
               name: 'Boolean'
+            },
+            {
+              value: 'Enum',
+              name: 'Enum'
             }
           ]
         );

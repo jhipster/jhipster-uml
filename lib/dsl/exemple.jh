@@ -1,4 +1,4 @@
-entity Departement{
+sentity Departement{
 	departementName String
 }
 

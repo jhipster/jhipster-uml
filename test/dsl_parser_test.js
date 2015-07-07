@@ -20,6 +20,10 @@ var parser_DSL = require("../lib/dsl/dsl_parser"),
   var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh",
     initDatabaseTypeHolder('sql'));
 
+  /* The parser with an enum */
+  var parserEnum = new parser_DSL.DSL("test/jh/enum.jh",
+    initDatabaseTypeHolder('sql'));
+
 
 describe("DSL Parser", function(){
   describe("initialized",function(){
@@ -39,7 +43,8 @@ describe("DSL Parser", function(){
       before(function(){
        var jh = fs.readFileSync(parser.file).toString();
        parser.result = pegParser.parse(jh);
-       parser.fillClassesAndFields();
+       parser.fillEnums();
+       parser.fillClassesAndFields()
       });
 
       it("there is the expected number of classes",function(){
@@ -56,7 +61,7 @@ describe("DSL Parser", function(){
         expect(classObj.injectedFields.length).to.be.equals(0);
       });
       it("the field Object is well formed",function(){
-        var firstnameFields = parser.fields["firstName"];
+        var firstnameFields = parser.fields["Employee_firstName"];
         expect(firstnameFields.name).to.be.equals("firstName");
         expect(firstnameFields.type).to.be.equals("String");
         expect(firstnameFields.validations).to.deep.equal([]);
@@ -68,11 +73,34 @@ describe("DSL Parser", function(){
         try{
           var jh = fs.readFileSync(parserWrongType.file).toString();
           parserWrongType.result = pegParser.parse(jh);
-          parserUndeclaredEntity.fillClassesAndFields();
+          parserWrongType.fillEnums();
+          parserWrongType.fillClassesAndFields();
         }catch(error){
-          expect(true).to.be.equal(true);
+          expect(error.name).to.be.equal("InvalidTypeException");
         }
       });
+    });
+
+    describe("When an enum is declared", function(){
+      it("the enums in result are well formed",function(){
+        var jh = fs.readFileSync(parserEnum.file).toString();
+       parserEnum.result = pegParser.parse(jh);
+       expect(parserEnum.result.enums[0].name).to.be.equal("Language");
+       expect(parserEnum.result.enums[0].values.length).to.be.equal(4);
+      });
+
+      it("the enum Object is well formed",function(){
+       var jh = fs.readFileSync(parserEnum.file).toString();
+       parserEnum.result = pegParser.parse(jh);
+       parserEnum.fillEnums();
+       parserEnum.fillClassesAndFields();
+
+       expect(parserEnum.enums['Language'].name).to.be.equal("Language");
+       expect(parserEnum.enums['Language'].values.length).to.be.equal(4);
+       //expect(parserEnum.fields['language'].type)
+     //  expect(parserEnum.fields['language'].validations)
+      });
+
     });
 
   });
@@ -83,6 +111,7 @@ describe("DSL Parser", function(){
       before(function(){
         var jh = fs.readFileSync(parser.file).toString();
         parser.result = pegParser.parse(jh);
+        parser.fillEnums();
         parser.fillClassesAndFields();
         parser.fillAssociations();
       });

@@ -20,10 +20,13 @@ start
   = p:prog                                                                             {return p;}
   
 prog
-  = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships};}
-  / space* rd:relationDecl space* p:prog                                               {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships)};}
-  /                                                                                    {return {"entities" : [],"relationships": []};}                                                                 
+  = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
+  / space* rd:relationDecl space* p:prog                                               {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums};}
+  / space* end:enumDecl space* p:prog                                                  {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums)};}
+  /                                                                                    {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
 
+
+//Entities
 entityDecl
   = "entity" space* e:ENTITYNAME space* eb:entityBody                                   {return {"name" : e, "body":eb};}          
  
@@ -40,6 +43,7 @@ validationList
   = v:validation space* vl:validationList                                              {return concat([v], vl);}                                    
   /                                                                                    {return [];}
 
+//Relationship
 relationDecl
   = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cardinality = rt; return rb;}  
 
@@ -51,19 +55,19 @@ relationshipSide
   / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
 
 
+//Enum
+enumDecl
+  = 'enum' space e:ENUMNAME space* '{' space* el:enumPropList space* '}'                    {return {"name":e, "values" : el };}
+
+enumPropList
+  = e:ENUMPROP space* ',' space* el:enumPropList                                       {return concat([e],el);}
+  / e:ENUMPROP                                                                         {return [e];} 
+
+
 
 relationshipType = "OneToOne" {return "one-to-one";} / "OneToMany" {return "one-to-many";} / "ManyToOne" {return "many-to-one";} / "ManyToMany" {return "many-to-many";}
 
-type "a type" = "String" {return "String";} 
-               / "BigDecimal" {return "BigDecimal";} 
-               / "Long" {return "Long";} 
-               / "Boolean" {return "Boolean";} 
-               / "DateTime" {return "DateTime";} 
-               / "Date" {return "Date";} 
-               / "Integer"{return "Integer";} 
-               / "LocalDate" {return "LocalDate";} 
-               / "TimeUUID" {return "TimeUUID";} 
-               / "UUID" {return "UUID";}
+type "a type" = head:[A-Z]tail:[a-zA-Z0-9]* {return makeString(concat([head],tail));} //we must check afterward if the type is acceptable.
 
 validation 
   = "required"                                                                         {return {key:'required', value:''};}
@@ -80,6 +84,12 @@ apostrophe "apostrophe"
 
 REGEXP "a regular expression" 
   = word:[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/? ]*                               {return makeString(word);}
+
+ENUMNAME "an enum name"
+  = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
+
+ENUMPROP "an enum property"
+  = word:[A-Z0-9]+                                                                     {return makeString(word);}
 
 INTEGER "integer"
   = int:[0-9]+                                                                         {return parseInt(int.join(""), 10);} 
