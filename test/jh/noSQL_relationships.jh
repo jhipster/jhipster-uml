@@ -1,0 +1,14 @@
+entity Book{
+  title String required,
+  description String required minlength(5) maxlength(50),
+  publicationDate LocalDate,
+  price BigDecimal
+}
+entity Author{
+  name String required,
+  birthDate LocalDate
+}
+
+relationship OneToMany{
+	Book{author} to Author{book}
+}

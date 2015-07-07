@@ -1,0 +1,18 @@
+enum Language {
+JAVA, PHP, GOGO, GROOVY
+}
+
+entity Book{
+name String,
+description String required,
+language Language required
+}
+
+entity Author {
+  name String,
+  date DateTime
+}
+
+relationship OneToMany{
+   Author to Book
+}
