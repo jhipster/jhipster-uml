@@ -24,7 +24,6 @@ describe('CassandraTypes', function() {
           'BigDecimal',
           'Date',
           'Boolean',
-          'Enum'
         ]
       );
     });
@@ -118,10 +117,6 @@ describe('CassandraTypes', function() {
             {
               value: 'Boolean',
               name: 'Boolean'
-            },
-            {
-              value: 'Enum',
-              name: 'Enum'
             }
           ]
         );
