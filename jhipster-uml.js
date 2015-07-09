@@ -23,6 +23,8 @@ var type;
 //option DTO
 var dto = false;
 var listDTO = [];
+//option force
+var force= false;
 
 process.argv.forEach(function(val, index) {
   switch(val) {
@@ -30,6 +32,9 @@ process.argv.forEach(function(val, index) {
       if(!fs.existsSync('./.yo-rc.json') ){
         type = process.argv[index+1];
       }
+      break;
+    case '-f':
+      force = true;
       break;
     case '-dto':
       dto = true;
@@ -69,14 +74,16 @@ try {
     scheduledClasses =
       filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
   }
-
   if(dto){
    listDTO = askForDTO(parser.classes);
   }
-
+  
   var creator = new EntitiesCreator(parser, listDTO);
   creator.createEntities();
-  creator.writeJSON();
+  if(!force){
+    scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
+  } 
+  creator.writeJSON(scheduledClasses);
 
   createEntities(scheduledClasses, parser.getClasses());
 } catch (error) {
@@ -92,7 +99,8 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
     return element !== classToFilter;
   });
-}
+};
+
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
@@ -141,9 +149,9 @@ function askForDTO(classes) {
   Array.prototype.push.apply( 
     choicesList, 
     Object.keys(classes)
-              .map(function(e){
-                return classes[e].name;
-              })
+            .map(function(e){
+              return classes[e].name;
+            })
     );                        
 
 
