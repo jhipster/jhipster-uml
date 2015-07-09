@@ -107,6 +107,11 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
  */
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
+
+  if(scheduledClasses.length == 0){
+    console.log(chalk.red('\t No modification was made to your entities'));
+    return;
+  }
   for (var i = 0; i < scheduledClasses.length; i++) {
     console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
