@@ -12,7 +12,6 @@ if (process.argv.length < 3) {
 var fs = require('fs'),
     chalk = require('chalk'),
     child_process = require('child_process'),
-    ParserFactory = require('./lib/editors/parser_factory'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory');
