@@ -79,11 +79,10 @@ try {
 
   var creator = new EntitiesCreator(parser, listDTO);
   creator.createEntities();
-  if(!force){
+  if(!force) {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);
-
   createEntities(scheduledClasses, parser.getClasses());
 } catch (error) {
   console.error(error.message);
@@ -107,10 +106,7 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
 
-  var cmd,
-      args;
-
-  if(scheduledClasses.length == 0){
+  if(scheduledClasses.length === 0){
     console.log(chalk.red('\t No modification was made to your entities'));
     return;
   }
@@ -119,7 +115,7 @@ function createEntities(scheduledClasses, classes) {
   }
 
   scheduledClasses.forEach(function(element) {
-
+    var cmd, args;
     if (process.platform === 'win32') {
       cmd = process.env.comspec || 'cmd.exe';
       args = ['/s', '/c', 'yo jhipster:entity', classes[element].name];
@@ -135,7 +131,6 @@ function createEntities(scheduledClasses, classes) {
     );
     console.info('\n');
   });
-
 }
 
 function ArgumentException(message) {
@@ -152,8 +147,6 @@ function dislayHelp() {
     + '\t-dto\t[BETA] Generates DTO with MapStruct the selected entities.'
   );
 }
-
-
 
 function askForDTO(classes) {
   var inquirer = require('inquirer');
