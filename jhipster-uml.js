@@ -76,12 +76,12 @@ try {
   if(dto){
    listDTO = askForDTO(parser.classes);
   }
-  
+
   var creator = new EntitiesCreator(parser, listDTO);
   creator.createEntities();
   if(!force){
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
-  } 
+  }
   creator.writeJSON(scheduledClasses);
 
   createEntities(scheduledClasses, parser.getClasses());
@@ -107,6 +107,9 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
 
+  var cmd,
+      args;
+
   if(scheduledClasses.length == 0){
     console.log(chalk.red('\t No modification was made to your entities'));
     return;
@@ -117,9 +120,17 @@ function createEntities(scheduledClasses, classes) {
 
   scheduledClasses.forEach(function(element) {
 
+    if (process.platform === 'win32') {
+      cmd = process.env.comspec || 'cmd.exe';
+      args = ['/s', '/c', 'yo jhipster:entity', classes[element].name];
+    } else {
+      cmd = 'yo';
+      args = ['jhipster:entity', classes[element].name];
+    }
+
     var childProcess = child_process.spawnSync(
-      'yo',
-      ['jhipster:entity', classes[element].name],
+      cmd,
+      args,
       { stdio: [process.stdin, process.stdout, process.stderr] }
     );
     console.info('\n');
@@ -150,13 +161,13 @@ function askForDTO(classes) {
   var allEntityMessage = '*** All Entities ***';
   var choicesList = [allEntityMessage];
 
-  Array.prototype.push.apply( 
-    choicesList, 
+  Array.prototype.push.apply(
+    choicesList,
     Object.keys(classes)
             .map(function(e){
               return classes[e].name;
             })
-    );                        
+    );
 
 
   inquirer.prompt([
@@ -173,7 +184,7 @@ function askForDTO(classes) {
 
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
-        choice = choicesList; 
+        choice = choicesList;
       }else{
         choice = answers.answer;
       }
