@@ -30,7 +30,6 @@
     "chalk": "1.1.0",
     "deasync": "0.1.0",
     "inquirer": "0.8.5",
-    "selfish": "1.1.0",
     "underscore.string": "3.1.1",
     "xml2js": "0.4.9",
     "pegjs": "0.8.0",

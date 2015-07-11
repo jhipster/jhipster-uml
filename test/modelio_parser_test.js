@@ -275,25 +275,6 @@ describe('ModelioParser', function() {
       });
     });
 
-    describe('#isAnId', function() {
-      describe(
-          "when passing fields that match 'id', with non-sensitive case",
-          function() {
-        it('returns true', function() {
-          expect(parser.isAnId('id', 'Class')).to.equal(true);
-          expect(parser.isAnId('Id', 'Class')).to.equal(true);
-          expect(parser.isAnId('iD', 'Class')).to.equal(true);
-          expect(parser.isAnId('ID', 'Class')).to.equal(true);
-        });
-      });
-
-      describe('when passing fields matching: className + Id', function() {
-        it('returns true', function() {
-          expect(parser.isAnId('classId', 'Class')).to.equal(true);
-        });
-      });
-    });
-
     describe('#addField', function() {
       describe('#addInjectedField', function() {
         it('adds the injected fields', function() {
@@ -331,60 +312,6 @@ describe('ModelioParser', function() {
 
           it('has a cardinality', function() {
             expect(firstElementKeys).to.include('cardinality');
-          });
-        });
-
-        describe('#getCardinality', function() {
-          describe('#isOneToOne', function() {
-            describe('when passing valid parameters', function() {
-              it('returns true', function() {
-                expect(parser.isOneToOne(false, false)).to.equal(true);
-              });
-            });
-
-            describe('when passing invalid parameters', function() {
-              it('returns false', function() {
-                expect(parser.isOneToOne(true, true)).to.equal(false);
-                expect(parser.isOneToOne(true, false)).to.equal(false);
-                expect(parser.isOneToOne(false, true)).to.equal(false);
-              });
-            });
-          });
-
-          describe('#isOneToMany', function() {
-            describe('when passing valid parameters', function() {
-              it('returns true', function() {
-                expect(parser.isOneToMany(true, false)).to.equal(true);
-
-                expect(parser.isOneToMany(false, true)).to.equal(true);
-              });
-            });
-
-            describe('when passing invalid parameters', function() {
-              it('returns false', function() {
-                expect(parser.isOneToMany(true, true)).to.equal(false);
-
-                expect(parser.isOneToMany(false, false)).to.equal(false);
-              });
-            });
-          });
-
-          describe('#isManyToMany', function() {
-            describe('when passing valid parameters', function() {
-              it('returns true', function() {
-                expect(parser.isManyToMany(true, true)).to.equal(true);
-              });
-            });
-
-            describe('when passing invalid parameters', function() {
-              it('returns false', function() {
-                expect(parser.isManyToMany(false, false)).to.equal(false);
-
-                expect(parser.isManyToMany(false, true)).to.equal(false);
-
-                expect(parser.isManyToMany(true, false)).to.equal(false);
-              });
-            });
           });
         });
       });

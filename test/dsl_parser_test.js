@@ -1,35 +1,35 @@
 "use strict"
 
-var parser_DSL = require("../lib/dsl/dsl_parser"),
+var DSLParser = require("../lib/dsl/dsl_parser"),
     chai = require('chai'),
     fs = require('fs'),
     pegParser = require('../lib/dsl/jhGrammar'),
     expect = chai.expect,
-    types = require('../lib/types');
+    SQLTypes = require('../lib/types/sql_types'),
+    MongoDBTypes = require('../lib/types/mongodb_types'),
+    CassandraTypes = require('../lib/types/cassandra_types');
 
+var fileName = "test/jh/oracle.jh";
+var parser = new DSLParser(fileName, initDatabaseTypeHolder('sql'));
 
-  var fileName = "test/jh/oracle.jh";
-  var parser = new parser_DSL.DSL(fileName,
-    initDatabaseTypeHolder('sql'));
+/* The parser with an undeclared entity in a relationship */
+var parserUndeclaredEntity = new DSLParser("test/jh/UndeclaredEntity.jh",
+  initDatabaseTypeHolder('sql'));
 
-  /* The parser with an undeclared entity in a relationship */
-  var parserUndeclaredEntity = new parser_DSL.DSL("test/jh/UndeclaredEntity.jh",
-    initDatabaseTypeHolder('sql'));
+/* The parser with a wrong type */
+var parserWrongType = new DSLParser("test/jh/WrongType.jh",
+  initDatabaseTypeHolder('sql'));
 
-  /* The parser with a wrong type */
-  var parserWrongType = new parser_DSL.DSL("test/jh/WrongType.jh",
-    initDatabaseTypeHolder('sql'));
-
-  /* The parser with an enum */
-  var parserEnum = new parser_DSL.DSL("test/jh/enum.jh",
-    initDatabaseTypeHolder('sql'));
+/* The parser with an enum */
+var parserEnum = new DSLParser("test/jh/enum.jh",
+  initDatabaseTypeHolder('sql'));
 
 
 describe("DSL Parser", function(){
   describe("initialized",function(){
     it('All attributs are set', function(){
       expect(parser.file).to.be.equal(fileName);
-      expect(parser.databaseTypes).to.deep.equal(new types.SQLTypes());
+      expect(parser.databaseTypes).to.deep.equal(new SQLTypes());
       expect(parser.classes).to.deep.equal({});
       expect(parser.fields).to.deep.equal({});
       expect(parser.types).to.deep.equal({});
@@ -156,11 +156,11 @@ describe("DSL Parser", function(){
 function initDatabaseTypeHolder(databaseTypeName) {
   switch (databaseTypeName) {
     case 'sql':
-      return new types.SQLTypes();
+      return new SQLTypes();
     case 'mongodb':
-      return new types.MongoDBTypes();
+      return new MongoDBTypes();
     case 'cassandra':
-      return new types.CassandraTypes();
+      return new CassandraTypes();
     default:
       throw new WrongDatabaseTypeException(
         'The passed database type is incorrect. '

@@ -2,13 +2,13 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    types = require('../lib/types');
+    MongoDBTypes = require('../lib/types/mongodb_types');
 
 var mongoDBTypes;
 
 describe('MongoDBTypes', function() {
   before(function() {
-    mongoDBTypes = new types.MongoDBTypes;
+    mongoDBTypes = new MongoDBTypes();
   });
 
   describe('#getTypes', function() {

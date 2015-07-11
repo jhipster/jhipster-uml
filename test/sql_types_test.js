@@ -2,13 +2,13 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    types = require('../lib/types');
+    SQLTypes = require('../lib/types/sql_types');
 
 var sqlTypes;
 
 describe('SQLTypes', function() {
   before(function() {
-    sqlTypes = new types.SQLTypes;
+    sqlTypes = new SQLTypes();
   });
 
   describe('#getTypes', function() {
