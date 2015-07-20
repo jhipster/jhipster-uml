@@ -23,7 +23,9 @@ describe('SQLTypes', function() {
           'LocalDate',
           'DateTime',
           'Boolean',
-          'Enum'
+          'Enum',
+          'AnyBlob',
+          'ImageBlob'
         ]
       );
     });
@@ -117,6 +119,14 @@ describe('SQLTypes', function() {
             {
               value: 'Enum',
               name: 'Enum'
+            },
+            {
+              value: 'AnyBlob',
+              name: 'AnyBlob'
+            },
+            {
+              value: 'ImageBlob',
+              name: 'ImageBlob'
             }
           ]
         );
