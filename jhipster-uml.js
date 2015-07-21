@@ -15,7 +15,8 @@ var fs = require('fs'),
     ParserFactory = require('./lib/editors/parser_factory'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
-    ParserFactory = require('./lib/editors/parser_factory');
+    ParserFactory = require('./lib/editors/parser_factory'),
+    inquirer = require('inquirer');
 
 
 var type;
@@ -25,6 +26,9 @@ var dto = false;
 var listDTO = [];
 //option force
 var force= false;
+//option pagination
+var paginate = false;
+var listPagination = {};
 
 process.argv.forEach(function(val, index) {
   switch(val) {
@@ -38,6 +42,9 @@ process.argv.forEach(function(val, index) {
       break;
     case '-dto':
       dto = true;
+      break;
+    case '-paginate':
+      paginate = true;
       break;
     case '-help':
       dislayHelp();
@@ -74,11 +81,16 @@ try {
     scheduledClasses =
       filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
   }
+
+  if(paginate){
+    listPagination = askForPagination(parser.classes);
+  }
+
   if(dto){
-   listDTO = askForDTO(parser.classes);
+    listDTO = askForDTO(parser.classes);
   }
   
-  var creator = new EntitiesCreator(parser, listDTO);
+  var creator = new EntitiesCreator(parser, listDTO, listPagination);
   creator.createEntities();
   if(!force){
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
@@ -126,7 +138,7 @@ function createEntities(scheduledClasses, classes) {
     console.info('\n');
   });
 
-}
+};
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
@@ -140,11 +152,122 @@ function dislayHelp() {
     + 'The options are:\n'
     + '\t-db <the database name>\tDefines which database type your app uses;\n'
     + '\t-dto\t[BETA] Generates DTO with MapStruct the selected entities.'
+    + '\t-paginate \tChoose your entities\' pagination '
   );
-}
+};
 
 
+/*
+ * @param{Map} All the entities we want to choose from
+ * Display in prompt the list of the entities you want to choose pagination for
+ */
+function askForPagination(classes) {
+  var _continue = true;
 
+  while(_continue){
+    var done = null;
+
+    var ctp = askForClassesToPaginate(classes);
+    var style = askForStylePagination();
+    ctp.forEach(function(element){
+      listPagination[element] = style;
+    });
+    inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'addPagination',
+        message: 'Do you want to add an other pagination style?',
+        default: true
+      }
+      ], function(answer){
+        _continue = answer.addPagination;
+        done = true;
+      }
+    );
+    while(!done) {
+      require('deasync').sleep(100);
+    }
+  }
+    return listPagination;
+};
+
+function askForClassesToPaginate(classes){
+ 
+  var choice = null;
+  var allEntityMessage = '*** All Entities ***';
+  var choicesList = [allEntityMessage];
+
+  Array.prototype.push.apply( 
+    choicesList, 
+    Object.keys(classes)
+            .map(function(e){
+              return classes[e].name;
+            })
+    );                        
+
+
+  inquirer.prompt([
+    {
+      type: 'checkbox',
+      name: 'answer',
+      message: 'Please choose the entities you want to paginate:',
+      choices: choicesList,
+      filter: function(val) {
+        return val;
+      }
+    }
+  ], function(answers) {
+
+      //if '*** All Entities ***' is selected return all Entities
+      if(answers.answer.indexOf(allEntityMessage) !== -1) {
+        choice = choicesList; 
+      }else{
+        choice = answers.answer;
+      }
+    }
+  );
+  while(!choice) {
+    require('deasync').sleep(100);
+  }
+  return choice;
+};
+
+function askForStylePagination(){
+  var inquirer = require('inquirer');
+  var choice = null;
+  var choicesList = [
+    {name : "Pagination links", value : "pagination"},
+    {name : "Simple pager", value : "pager"},
+    {name : "Infinit Scroll", value : "infinite-scroll"}
+  ];
+
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'answer',
+      message: 'Please choose the pagination style:',
+      choices: choicesList,
+      filter: function(val) {
+        return val;
+      }
+    }
+    ], 
+    function(answers){
+      choice = answers.answer;
+    }
+  );
+
+  while(!choice) {
+    require('deasync').sleep(100);
+  }
+  return choice;
+};
+
+
+/*
+ * @param{Map} All the entities we want to choose from
+ * Display in prompt the list of the entities you want to add DTO for
+ */
 function askForDTO(classes) {
   var inquirer = require('inquirer');
   var choice = null;
@@ -185,4 +308,4 @@ function askForDTO(classes) {
   }
 
   return choice;
-}
+};
