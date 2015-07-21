@@ -2,12 +2,14 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    mp = require('../lib/editors/umldesigner_parser'),
+    UMLDesignerParser = require('../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    types = require('../lib/types');
+    SQLTypes = require('../lib/types/sql_types'),
+    MongoDBTypes = require('../lib/types/mongodb_types'),
+    CassandraTypes = require('../lib/types/cassandra_types');
 
-var parser = new mp.UMLDesignerParser(
+var parser = new UMLDesignerParser(
   getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
   initDatabaseTypeHolder('sql'));
 
@@ -30,7 +32,7 @@ describe('UMLDesignerParser', function() {
     });
 
     it('find the enumerations in the document', function() {
-      var otherParser = new mp.UMLDesignerParser(
+      var otherParser = new UMLDesignerParser(
         getRootElement(readFileContent('./test/xmi/umldesigner_enum_test.uml')),
         initDatabaseTypeHolder('sql'));
       otherParser.findElements();
@@ -93,7 +95,7 @@ describe('UMLDesignerParser', function() {
 
     describe('if the types are not capitalized', function() {
       it('capitalizes and adds them', function() {
-        var otherParser =  new mp.UMLDesignerParser(
+        var otherParser =  new UMLDesignerParser(
           getRootElement(
             readFileContent('./test/xmi/umldesigner_lowercased_string_type.xmi')),
           initDatabaseTypeHolder('sql'));
@@ -110,7 +112,7 @@ describe('UMLDesignerParser', function() {
   describe('#fillEnums', function() {
     describe('when an enum has no name', function() {
       it('throws an exception', function() {
-        var otherParser = new mp.UMLDesignerParser(
+        var otherParser = new UMLDesignerParser(
           getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_name_test.uml')),
           initDatabaseTypeHolder('sql'));
         try {
@@ -124,7 +126,7 @@ describe('UMLDesignerParser', function() {
 
     describe('when an enum attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = new mp.UMLDesignerParser(
+        var otherParser = new UMLDesignerParser(
           getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_attribute_name_test.uml')),
           initDatabaseTypeHolder('sql'));
         try {
@@ -138,7 +140,7 @@ describe('UMLDesignerParser', function() {
 
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
-        var otherParser = new mp.UMLDesignerParser(
+        var otherParser = new UMLDesignerParser(
           getRootElement(readFileContent('./test/xmi/umldesigner_enum_test.uml')),
           initDatabaseTypeHolder('sql'));
         otherParser.parse();
@@ -165,7 +167,7 @@ describe('UMLDesignerParser', function() {
 
     describe('when a class has no name', function() {
       it('throws an exception', function() {
-        var otherParser = new mp.UMLDesignerParser(
+        var otherParser = new UMLDesignerParser(
             getRootElement(
               readFileContent('./test/xmi/umldesigner_no_class_name_test.uml')),
             initDatabaseTypeHolder('sql'));
@@ -181,7 +183,7 @@ describe('UMLDesignerParser', function() {
 
     describe('when an attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser =  new mp.UMLDesignerParser(
+        var otherParser =  new UMLDesignerParser(
             getRootElement(
               readFileContent('./test/xmi/umldesigner_no_attribute_name_test.uml')),
             initDatabaseTypeHolder('sql'));
@@ -221,7 +223,7 @@ describe('UMLDesignerParser', function() {
         });
 
         it('should not throw any error if there is no attribute', function() {
-          var anotherParser = new mp.UMLDesignerParser(
+          var anotherParser = new UMLDesignerParser(
             getRootElement(
               readFileContent('./test/xmi/umldesigner_no_attribute_test.uml')),
             initDatabaseTypeHolder('sql'));
@@ -230,25 +232,6 @@ describe('UMLDesignerParser', function() {
           } catch (error) {
             throw new ExpectationError();
           }
-        });
-      });
-    });
-
-    describe('#isAnId', function() {
-      describe(
-          "when passing fields that match 'id', with non-sensitive case",
-          function() {
-        it('returns true', function() {
-          expect(parser.isAnId('id', 'Class')).to.equal(true);
-          expect(parser.isAnId('Id', 'Class')).to.equal(true);
-          expect(parser.isAnId('iD', 'Class')).to.equal(true);
-          expect(parser.isAnId('ID', 'Class')).to.equal(true);
-        });
-      });
-
-      describe('when passing fields matching: className + Id', function() {
-        it('returns true', function() {
-          expect(parser.isAnId('classId', 'Class')).to.equal(true);
         });
       });
     });
@@ -293,7 +276,7 @@ describe('UMLDesignerParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
-            var otherParser = new mp.UMLDesignerParser(
+            var otherParser = new UMLDesignerParser(
               getRootElement(
                 readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
               initDatabaseTypeHolder('sql'));
@@ -386,64 +369,9 @@ describe('UMLDesignerParser', function() {
           expect(firstElementKeys).to.include('cardinality');
         });
       });
-
-      describe('#getCardinality', function() {
-        describe('#isOneToOne', function() {
-          describe('when passing valid parameters', function() {
-            it('returns true', function() {
-              expect(parser.isOneToOne(false, false)).to.equal(true);
-            });
-          });
-
-          describe('when passing invalid parameters', function() {
-            it('returns false', function() {
-              expect(parser.isOneToOne(true, true)).to.equal(false);
-              expect(parser.isOneToOne(true, false)).to.equal(false);
-              expect(parser.isOneToOne(false, true)).to.equal(false);
-            });
-          });
-        });
-
-        describe('#isOneToMany', function() {
-          describe('when passing valid parameters', function() {
-            it('returns true', function() {
-              expect(parser.isOneToMany(true, false)).to.equal(true);
-
-              expect(parser.isOneToMany(false, true)).to.equal(true);
-            });
-          });
-
-          describe('when passing invalid parameters', function() {
-            it('returns false', function() {
-              expect(parser.isOneToMany(true, true)).to.equal(false);
-
-              expect(parser.isOneToMany(false, false)).to.equal(false);
-            });
-          });
-        });
-
-        describe('#isManyToMany', function() {
-          describe('when passing valid parameters', function() {
-            it('returns true', function() {
-              expect(parser.isManyToMany(true, true)).to.equal(true);
-            });
-          });
-
-          describe('when passing invalid parameters', function() {
-            it('returns false', function() {
-              expect(parser.isManyToMany(false, false)).to.equal(false);
-
-              expect(parser.isManyToMany(false, true)).to.equal(false);
-
-              expect(parser.isManyToMany(true, false)).to.equal(false);
-            });
-          });
-        });
-      });
     });
   });
 });
-
 
 // external functions
 
@@ -477,11 +405,11 @@ function readFileContent(file) {
 function initDatabaseTypeHolder(databaseTypeName) {
   switch (databaseTypeName) {
     case 'sql':
-      return new types.SQLTypes();
+      return new SQLTypes();
     case 'mongodb':
-      return new types.MongoDBTypes();
+      return new MongoDBTypes();
     case 'cassandra':
-      return new types.CassandraTypes();
+      return new CassandraTypes();
     default:
       throw new WrongDatabaseTypeException(
         'The passed database type is incorrect. '

@@ -2,13 +2,13 @@
 
 var chai = require('chai'),
     expect = chai.expect,
-    types = require('../lib/types');
+    CassandraTypes = require('../lib/types/cassandra_types');
 
 var cassandraTypes;
 
 describe('CassandraTypes', function() {
   before(function() {
-    cassandraTypes = new types.CassandraTypes;
+    cassandraTypes = new CassandraTypes();
   });
 
   describe('#getTypes', function() {
@@ -23,8 +23,7 @@ describe('CassandraTypes', function() {
           'Long',
           'BigDecimal',
           'Date',
-          'Boolean',
-          'Enum'
+          'Boolean'
         ]
       );
     });
@@ -118,10 +117,6 @@ describe('CassandraTypes', function() {
             {
               value: 'Boolean',
               name: 'Boolean'
-            },
-            {
-              value: 'Enum',
-              name: 'Enum'
             }
           ]
         );

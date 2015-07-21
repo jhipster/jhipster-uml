@@ -12,7 +12,6 @@ if (process.argv.length < 3) {
 var fs = require('fs'),
     chalk = require('chalk'),
     child_process = require('child_process'),
-    ParserFactory = require('./lib/editors/parser_factory'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory'),
@@ -91,12 +90,12 @@ try {
   }
   
   var creator = new EntitiesCreator(parser, listDTO, listPagination);
-  creator.createEntities();
-  if(!force){
-    scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
-  } 
-  creator.writeJSON(scheduledClasses);
 
+  creator.createEntities();
+  if(!force) {
+    scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
+  }
+  creator.writeJSON(scheduledClasses);
   createEntities(scheduledClasses, parser.getClasses());
 } catch (error) {
   console.error(error.message);
@@ -120,7 +119,7 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
 function createEntities(scheduledClasses, classes) {
   console.log(chalk.red('Creating:'));
 
-  if(scheduledClasses.length == 0){
+  if(scheduledClasses.length === 0){
     console.log(chalk.red('\t No modification was made to your entities'));
     return;
   }
@@ -129,16 +128,28 @@ function createEntities(scheduledClasses, classes) {
   }
 
   scheduledClasses.forEach(function(element) {
+    var cmd, args;
+    if (process.platform === 'win32') {
+      cmd = process.env.comspec || 'cmd.exe';
+      args = ['/s', '/c', 'yo jhipster:entity', classes[element].name];
+    } else {
+      cmd = 'yo';
+      args = ['jhipster:entity', classes[element].name];
+    }
 
     var childProcess = child_process.spawnSync(
-      'yo',
-      ['jhipster:entity', classes[element].name],
+      cmd,
+      args,
       { stdio: [process.stdin, process.stdout, process.stderr] }
     );
     console.info('\n');
   });
+<<<<<<< HEAD
 
 };
+=======
+}
+>>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
@@ -218,6 +229,7 @@ function askForClassesToPaginate(classes){
     }
   ], function(answers) {
 
+<<<<<<< HEAD
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
         choice = choicesList; 
@@ -268,19 +280,21 @@ function askForStylePagination(){
  * @param{Map} All the entities we want to choose from
  * Display in prompt the list of the entities you want to add DTO for
  */
+=======
+>>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67
 function askForDTO(classes) {
   var inquirer = require('inquirer');
   var choice = null;
   var allEntityMessage = '*** All Entities ***';
   var choicesList = [allEntityMessage];
 
-  Array.prototype.push.apply( 
-    choicesList, 
+  Array.prototype.push.apply(
+    choicesList,
     Object.keys(classes)
             .map(function(e){
               return classes[e].name;
             })
-    );                        
+    );
 
 
   inquirer.prompt([
@@ -297,7 +311,7 @@ function askForDTO(classes) {
 
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
-        choice = choicesList; 
+        choice = choicesList;
       }else{
         choice = answers.answer;
       }
@@ -308,4 +322,8 @@ function askForDTO(classes) {
   }
 
   return choice;
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67

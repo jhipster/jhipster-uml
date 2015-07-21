@@ -3,37 +3,27 @@
 var chai = require('chai'),
     expect = chai.expect,
     EntitiesCreator = require('../lib/entitiescreator'),
-    mp = require('../lib/editors/modelio_parser'),
-    gp = require('../lib/editors/genmymodel_parser'),
-    xml2js = require('xml2js'),
-    fs = require('fs'),
-    ParserFactory = require('../lib/editors/parser_factory'),
-    types = require('../lib/types');
+    ParserFactory = require('../lib/editors/parser_factory');
 
-var parser = new mp.ModelioParser(
-  getRootElement(readFileContent('./test/xmi/modelio.xmi')),
-  initDatabaseTypeHolder('sql'));
+var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 parser.parse();
 var creator = new EntitiesCreator(parser,[],{});
 
 /* The variables set to do all the constraints */
-var parserConstrainte = new mp.ModelioParser(
-  getRootElement(readFileContent('./test/xmi/test_constraint.xmi')),
-  initDatabaseTypeHolder('sql'));
-parserConstrainte.parse();
-var creatorConstrainte = new EntitiesCreator(parserConstrainte,[],{});
+var parserConstraint =
+  ParserFactory.createParser('./test/xmi/test_constraint.xmi', 'sql');
+parserConstraint.parse();
+var creatorConstraint = new EntitiesCreator(parserConstraint,[],{});
 
 /* the entity creator set to do the User Entity tests */
-var parserUser = new mp.ModelioParser(
-  getRootElement(readFileContent('./test/xmi/user_entity_test.xmi')),
-  initDatabaseTypeHolder('sql'));
+var parserUser =
+  ParserFactory.createParser('./test/xmi/user_entity_test.xmi', 'sql');
 parserUser.parse();
 var creatorUser = new EntitiesCreator(parserUser,[],{});
 
 /* the entity creator set to do the User Entity tests */
-var parserUserWrong = new gp.GenMyModelParser(
-  getRootElement(readFileContent('./test/xmi/user_entity_wrong_side_relationship.xmi')),
-  initDatabaseTypeHolder('sql'));
+var parserUserWrong =
+  ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
 parserUserWrong.parse();
 var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
 
@@ -109,10 +99,10 @@ describe('EntitiesCreator ', function(){
       var fields;
 
       before(function(){
-        firstClassId = Object.keys(creatorConstrainte.getClasses())[0];
-        creatorConstrainte.initializeEntities();
-        creatorConstrainte.setFieldsOfEntity(firstClassId);
-        fields = creatorConstrainte.getEntities()[firstClassId].fields;
+        firstClassId = Object.keys(creatorConstraint.getClasses())[0];
+        creatorConstraint.initializeEntities();
+        creatorConstraint.setFieldsOfEntity(firstClassId);
+        fields = creatorConstraint.getEntities()[firstClassId].fields;
       });
 
       describe('when creating enums', function() {
@@ -447,9 +437,8 @@ describe('EntitiesCreator ', function(){
 
       describe('when the model has a bidirectional relationship', function() {
         it('throw an exception', function() {
-          var otherParser = new mp.ModelioParser(
-            getRootElement(readFileContent('./test/xmi/modelio_bidirectional.xmi')),
-            initDatabaseTypeHolder('sql'));
+          var otherParser =
+            ParserFactory.createParser('./test/xmi/modelio_bidirectional.xmi', 'sql');
           otherParser.parse();
           var otherCreator = new EntitiesCreator(otherParser, [],{});
           try {
@@ -464,9 +453,8 @@ describe('EntitiesCreator ', function(){
       describe('when the model has relationships and the app has a NoSQL database', function() {
         it('throw an exception', function() {
           try {
-            var parserNoSQL_with_relationship = new mp.ModelioParser(
-              getRootElement(readFileContent('./test/xmi/modelio.xmi')),
-              initDatabaseTypeHolder('mongodb'));
+            var parserNoSQL_with_relationship =
+              ParserFactory.createParser('./test/xmi/modelio.xmi', 'mongodb');
             parserNoSQL_with_relationship.parse();
             var creatorNoSQL_with_relationship = new EntitiesCreator(parserNoSQL_with_relationship,[],{});
             throw new ExpectationError();
@@ -497,51 +485,6 @@ describe('EntitiesCreator ', function(){
     });
   });
 });
-
-
-function getRootElement(content) {
-  var root;
-  var parser = new xml2js.Parser();
-  parser.parseString(content, function (err, result) {
-    if (result.hasOwnProperty('uml:Model')) {
-      root = result['uml:Model'];
-    } else if (result.hasOwnProperty('xmi:XMI')) {
-      root = result['xmi:XMI']['uml:Model'][0];
-    } else {
-      throw new NoRootElementException(
-        'The passed document has no immediate root element,'
-        + ' exiting now.');
-    }
-  });
-  return root;
-}
-
-function readFileContent(file) {
-  if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-    throw new WrongPassedArgumentException(
-      "The passed file '"
-      + file
-      + "' must exist and must not be a directory, exiting now.'");
-  }
-  return fs.readFileSync(file, 'utf-8');
-}
-
-function initDatabaseTypeHolder(databaseTypeName) {
-  switch (databaseTypeName) {
-    case 'sql':
-      return new types.SQLTypes();
-    case 'mongodb':
-      return new types.MongoDBTypes();
-    case 'cassandra':
-      return new types.CassandraTypes();
-    default:
-      throw new WrongDatabaseTypeException(
-        'The passed database type is incorrect. '
-        + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
-        + databaseTypeName
-        + "', exiting now.");
-  }
-}
 
 function ExpectationError(message) {
   this.name = 'ExpectationError';
