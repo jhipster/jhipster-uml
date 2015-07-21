@@ -144,12 +144,7 @@ function createEntities(scheduledClasses, classes) {
     );
     console.info('\n');
   });
-<<<<<<< HEAD
-
 };
-=======
-}
->>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67
 
 function ArgumentException(message) {
   this.name = 'ArgumentException';
@@ -228,8 +223,6 @@ function askForClassesToPaginate(classes){
       }
     }
   ], function(answers) {
-
-<<<<<<< HEAD
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
         choice = choicesList; 
@@ -280,8 +273,6 @@ function askForStylePagination(){
  * @param{Map} All the entities we want to choose from
  * Display in prompt the list of the entities you want to add DTO for
  */
-=======
->>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67
 function askForDTO(classes) {
   var inquirer = require('inquirer');
   var choice = null;
@@ -308,7 +299,6 @@ function askForDTO(classes) {
       }
     }
   ], function(answers) {
-
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
         choice = choicesList;
@@ -320,10 +310,5 @@ function askForDTO(classes) {
   while(!choice) {
     require('deasync').sleep(100);
   }
-
   return choice;
-<<<<<<< HEAD
 };
-=======
-}
->>>>>>> 5964669ce9842550dcf66934972ddef170bf6d67
