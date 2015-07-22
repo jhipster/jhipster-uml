@@ -24,6 +24,7 @@ describe('SQLTypes', function() {
           'DateTime',
           'Boolean',
           'Enum',
+          'Blob',
           'AnyBlob',
           'ImageBlob'
         ]
@@ -119,6 +120,10 @@ describe('SQLTypes', function() {
             {
               value: 'Enum',
               name: 'Enum'
+            },
+            {
+              value: 'Blob',
+              name: 'Blob'
             },
             {
               value: 'AnyBlob',
