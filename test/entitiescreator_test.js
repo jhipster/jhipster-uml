@@ -7,25 +7,25 @@ var chai = require('chai'),
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 parser.parse();
-var creator = new EntitiesCreator(parser,[]);
+var creator = new EntitiesCreator(parser,[],{});
 
 /* The variables set to do all the constraints */
 var parserConstraint =
   ParserFactory.createParser('./test/xmi/test_constraint.xmi', 'sql');
 parserConstraint.parse();
-var creatorConstraint = new EntitiesCreator(parserConstraint,[]);
+var creatorConstraint = new EntitiesCreator(parserConstraint,[],{});
 
 /* the entity creator set to do the User Entity tests */
 var parserUser =
   ParserFactory.createParser('./test/xmi/user_entity_test.xmi', 'sql');
 parserUser.parse();
-var creatorUser = new EntitiesCreator(parserUser,[]);
+var creatorUser = new EntitiesCreator(parserUser,[],{});
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong =
   ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
 parserUserWrong.parse();
-var creatorUserWrong = new EntitiesCreator(parserUserWrong,[]);
+var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
 
 
 
@@ -34,7 +34,7 @@ describe('EntitiesCreator ', function(){
     describe('when passing valid argument ', function(){
       it('Successfully initialize Entities Parser', function(){
         try {
-          creator = new EntitiesCreator(parser,[]);
+          creator = new EntitiesCreator(parser,[],{});
         } catch (error) {
           throw new ExpectationError();
         }
@@ -110,7 +110,7 @@ describe('EntitiesCreator ', function(){
           './test/xmi/modelio_enum_test.xmi',
           'sql');
         otherParser.parse();
-        var otherCreator = new EntitiesCreator(otherParser,[]);
+        var otherCreator = new EntitiesCreator(otherParser,[],{});
         otherCreator.createEntities();
 
         var enumFields;
@@ -440,7 +440,7 @@ describe('EntitiesCreator ', function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/modelio_bidirectional.xmi', 'sql');
           otherParser.parse();
-          var otherCreator = new EntitiesCreator(otherParser, []);
+          var otherCreator = new EntitiesCreator(otherParser, [],{});
           try {
             otherCreator.createEntities();
             throw new ExpectationError();
@@ -456,7 +456,7 @@ describe('EntitiesCreator ', function(){
             var parserNoSQL_with_relationship =
               ParserFactory.createParser('./test/xmi/modelio.xmi', 'mongodb');
             parserNoSQL_with_relationship.parse();
-            new EntitiesCreator(parserNoSQL_with_relationship,[]);
+            var creatorNoSQL_with_relationship = new EntitiesCreator(parserNoSQL_with_relationship,[],{});
             throw new ExpectationError();
           } catch (error) {
             expect(error.name).to.equal('NoSQLModellingException');
