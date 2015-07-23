@@ -95,7 +95,7 @@ INTEGER "integer"
   = int:[0-9]+                                                                         {return parseInt(int.join(""), 10);} 
 
 INJECTEDFIELDNAME "an injected field"
-  = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}
+  = head:[a-zA-Z]tail:[a-zA-Z0-9()]*                                                     {return makeString(concat([head],tail));}
 
 ENTITYNAME "an entity name"  
   = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
