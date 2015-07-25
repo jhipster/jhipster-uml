@@ -27,6 +27,12 @@ var parserUserWrong =
 parserUserWrong.parse();
 var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
 
+/* the entity creator set to do the otherEntityField tests for Many to Many relationships */
+var parserUserWrong =
+  ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
+parserUserWrong.parse();
+var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
+
 
 
 describe('EntitiesCreator ', function(){
@@ -459,6 +465,61 @@ describe('EntitiesCreator ', function(){
               }
             });
           });
+        });
+      });
+
+      describe("when the model as the otherEntityField declared in a Many-to-Many relationship", function(){
+        var relationship;
+        before(function(){
+          var otherParser =
+            ParserFactory.createParser('./test/xmi/otherEntityFieldMM.xmi', 'sql');
+          otherParser.parse();
+          var otherCreator = new EntitiesCreator(otherParser, [],{});
+          otherCreator.createEntities();
+          var entities = otherCreator.getEntities();
+
+          for(var i=0; i<Object.keys(entities).length; i++){
+            var classId = Object.keys(entities)[i];
+            var relationships = entities[classId].relationships;
+            for(var j=0; j<relationships.length; j++) {
+              switch(otherCreator.getClasses()[classId].name) {
+                case 'Owner':
+                    relationship = relationships[0];
+                break; 
+              }
+            }
+          }
+        });
+        it("has the property otherEntityField ", function(){
+          expect(relationship.otherEntityField).to.be.equal("otherOwner");
+        });
+      });
+
+
+      describe("when the model as the otherEntityField declared in a One-to-Many relationship", function(){
+        var relationship;
+        before(function(){
+          var otherParser =
+            ParserFactory.createParser('./test/xmi/otherEntityFieldOM.xmi', 'sql');
+          otherParser.parse();
+          var otherCreator = new EntitiesCreator(otherParser, [],{});
+          otherCreator.createEntities();
+          var entities = otherCreator.getEntities();
+
+          for(var i=0; i<Object.keys(entities).length; i++){
+            var classId = Object.keys(entities)[i];
+            var relationships = entities[classId].relationships;
+            for(var j=0; j<relationships.length; j++) {
+              switch(otherCreator.getClasses()[classId].name) {
+                case 'Many':
+                    relationship = relationships[0];
+                break; 
+              }
+            }
+          }
+        });
+        it("has the property otherEntityField ", function(){
+          expect(relationship.otherEntityField).to.be.equal("otherOne");
         });
       });
 
