@@ -137,7 +137,7 @@ function createEntities(scheduledClasses, classes) {
       args = ['jhipster:entity', classes[element].name];
     }
 
-    var childProcess = child_process.spawnSync(
+    child_process.spawnSync(
       cmd,
       args,
       { stdio: [process.stdin, process.stdout, process.stderr] }
