@@ -104,5 +104,5 @@ FIELDNAME "a field name"
   = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}               
 
 space "a space"
-  = space:['\n'|'\t'|' ']+           
+  = space:['\n'|'\t'|'\r'|' ']+           
 
