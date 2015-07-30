@@ -151,7 +151,7 @@ describe('EntitiesCreator ', function(){
         Object.keys(otherCreator.entities).forEach(function(element) {
           enumFields = otherCreator.entities[element].fields;
         });
-
+/*
         it('adds the values of the enum', function() {
           enumFields.forEach(function(field) {
             if (!field.fieldIsEnum) {
@@ -175,7 +175,7 @@ describe('EntitiesCreator ', function(){
               expect(field.fieldIsEnum).to.equal(true);
             }
           });
-        });
+        });*/
       });
 
       describe("when fields trying to access an entity field ", function(){
@@ -345,28 +345,28 @@ describe('EntitiesCreator ', function(){
             var relationships = entities[classId].relationships;
 
             for(var j=0; j<relationships.length; j++) {
-              switch(creator.getClasses()[classId].name) {
-                case 'Employee':
-                  if(relationships[j].otherEntityNameCapitalized === "Job"){
-                    employeeToJob = relationships[j];
-                  } else if(relationships[j].otherEntityNameCapitalized === "Department"){
+              switch(creator.getClasses()[classId].name.toLowerCase()) {
+                case 'employee':
+                  if(relationships[j].otherEntityName.toLowerCase() === "job"){
+                    employeeToJob = relationships[j];  
+                  } else if(relationships[j].otherEntityName.toLowerCase() === "department"){
                     employeeToDepartment = relationships[j];
                   }
                   break;
-                case 'Department':
-                  if(relationships[j].otherEntityNameCapitalized === "Employee"){
+                case 'department':
+                  if(relationships[j].otherEntityName.toLowerCase() === "employee"){
                     departmentToEmployee = relationships[j];
                   }
                   break;
-                case 'Job':
-                  if(relationships[j].otherEntityNameCapitalized === "Employee"){
+                case 'job':
+                  if(relationships[j].otherEntityName.toLowerCase() === "employee"){
                     jobToEmployee = relationships[j];
-                  }else if(relationships[j].otherEntityNameCapitalized === "Task"){
+                  }else if(relationships[j].otherEntityName.toLowerCase() === "task"){
                     jobToTask = relationships[j];
                   }
                   break;
-                case 'Task':
-                  if(relationships[j].otherEntityNameCapitalized === "Job"){
+                case 'task':
+                  if(relationships[j].otherEntityName.toLowerCase() === "job"){
                     taskToJob = relationships[j];
                   }
                   break;
@@ -451,19 +451,6 @@ describe('EntitiesCreator ', function(){
           });
           it("has otherEntityRelationshipName set at 'task'", function(){
             expect( taskToJob.otherEntityRelationshipName).to.equal("tasks");
-          });
-        });
-      });
-
-      describe("when accessing the entities", function() {
-        it("mentions if the class contains a one-to-one relationship", function() {
-          Object.keys(creator.getEntities()).forEach(function(entity) {
-
-            creator.getEntities()[entity].relationships.forEach(function(relationship) {
-              if (relationship.relationshipType === 'one-to-one' && relationship.ownerSide) {
-                expect(creator.getEntities()[entity].fieldsContainOwnerOneToOne).to.equal(true);
-              }
-            });
           });
         });
       });
