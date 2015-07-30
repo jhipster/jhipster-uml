@@ -23,7 +23,10 @@ describe('MongoDBTypes', function() {
           'LocalDate',
           'DateTime',
           'Boolean',
-          'Enum'
+          'Enum',
+          'Blob',
+          'AnyBlob',
+          'ImageBlob'
         ]
       );
     });
@@ -117,6 +120,18 @@ describe('MongoDBTypes', function() {
             {
               value: 'Enum',
               name: 'Enum'
+            },
+            {
+              value: 'Blob',
+              name: 'Blob'
+            },
+            {
+              value: 'AnyBlob',
+              name: 'AnyBlob'
+            },
+            {
+              value: 'ImageBlob',
+              name: 'ImageBlob'
             }
           ]
         );

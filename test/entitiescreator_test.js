@@ -78,11 +78,11 @@ describe('EntitiesCreator ', function(){
           creator.initializeEntities();
           creatorUser.initializeEntities();
       });
-      describe('when we intialize Entities', function(){
+      describe('when we initialize Entities', function(){
         it('there are as many Entities as Classes',function(){
           expect(creator.getEntities.length).equal(creator.getClasses.length);
         });
-        it("all entities attributs are set",function(){
+        it("all entities attributes are set",function(){
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerOneToOne).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerManyToMany).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOneToMany).to.be.defined;
@@ -95,6 +95,7 @@ describe('EntitiesCreator ', function(){
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].dto).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].pagination).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].validation).to.be.defined;
+          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBlob).to.be.defined;
         });
       });
     });
@@ -109,6 +110,32 @@ describe('EntitiesCreator ', function(){
         creatorConstraint.initializeEntities();
         creatorConstraint.setFieldsOfEntity(firstClassId);
         fields = creatorConstraint.getEntities()[firstClassId].fields;
+      });
+
+      describe('when dealing with blobs', function() {
+        var otherParser =
+          ParserFactory.createParser('./test/xmi/modelio_blob.xmi', 'sql');
+        otherParser.parse();
+        var otherCreator = new EntitiesCreator(otherParser,[],{});
+        otherCreator.createEntities();
+
+        it('changes the type of blob fields from Blob to byte[]', function() {
+          Object.keys(otherCreator.getEntities()).forEach(function(element) {
+            otherCreator.getEntities()[element].fields.forEach(function(field) {
+              expect(field.type).not.to.equal('Blob');
+              expect(field.type).not.to.equal('AnyBlob');
+              expect(field.type).not.to.equal('ImageBlob');
+            });
+          });
+        });
+
+        it('fills the blob type attribute', function() {
+          Object.keys(otherCreator.getEntities()).forEach(function(element) {
+            otherCreator.getEntities()[element].fields.forEach(function(field) {
+              expect(field.fieldTypeBlobContent).to.match(/image|any/);
+            });
+          });
+        });
       });
 
       describe('when creating enums', function() {
@@ -517,10 +544,10 @@ describe('EntitiesCreator ', function(){
             var parserNoSQL_with_relationship =
               ParserFactory.createParser('./test/xmi/modelio.xmi', 'mongodb');
             parserNoSQL_with_relationship.parse();
-            var creatorNoSQL_with_relationship = new EntitiesCreator(parserNoSQL_with_relationship,[],{});
+            new EntitiesCreator(parserNoSQL_with_relationship,[],{});
             throw new ExpectationError();
           } catch (error) {
-            expect(error.name).to.equal('NoSQLModellingException');
+            expect(error.name).to.equal('NoSQLModelingException');
           }
           
         });
