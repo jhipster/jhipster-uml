@@ -3,10 +3,10 @@
 
 if (process.argv.length < 3) {
   throw new ArgumentException(
-   'Wrong argument number specified, an input file and (optionally) '
-   + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied. \n"
-   + "Use the command 'jhipster-uml -help' to see the available commands. \n"
-   + "Exiting now.");
+    'Wrong argument number specified, an input file and (optionally) '
+    + "the database type ('sql', 'mongodb' or 'cassandra') must be supplied. \n"
+    + "Use the command 'jhipster-uml -help' to see the available commands. \n"
+    + "Exiting now.");
 }
 
 var fs = require('fs'),
@@ -57,7 +57,7 @@ if (fs.existsSync('.yo-rc.json')) {
   type = JSON.parse(fs.readFileSync('./.yo-rc.json'))['generator-jhipster'].databaseType;
 }
 if (!fs.existsSync('.yo-rc.json') && type === undefined) {
- throw new ArgumentException(
+  throw new ArgumentException(
     'The database type must either be supplied with the -db option, '
     + 'or a .yo-rc.json file must exist in the current directory. \n'
     + "Use the command \'jhipster-uml -help\' to know more."
@@ -88,7 +88,7 @@ try {
   if(dto){
     listDTO = askForDTO(parser.classes);
   }
-  
+
   var creator = new EntitiesCreator(parser, listDTO, listPagination);
 
   creator.createEntities();
@@ -179,12 +179,12 @@ function askForPagination(classes) {
       listPagination[element] = style;
     });
     inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'addPagination',
-        message: 'Do you want to add an other pagination style?',
-        default: true
-      }
+        {
+          type: 'confirm',
+          name: 'addPagination',
+          message: 'Do you want to add an other pagination style?',
+          default: true
+        }
       ], function(answer){
         _continue = answer.addPagination;
         done = true;
@@ -194,38 +194,37 @@ function askForPagination(classes) {
       require('deasync').sleep(100);
     }
   }
-    return listPagination;
+  return listPagination;
 };
 
 function askForClassesToPaginate(classes){
- 
+
   var choice = null;
   var allEntityMessage = '*** All Entities ***';
   var choicesList = [allEntityMessage];
 
-  Array.prototype.push.apply( 
-    choicesList, 
-    Object.keys(classes)
-            .map(function(e){
-              return classes[e].name;
-            })
-    );                        
+  Array.prototype.push.apply(
+    choicesList,
+    Object.keys(classes).map(function(e) {
+      return classes[e].name;
+    })
+  );
 
 
   inquirer.prompt([
-    {
-      type: 'checkbox',
-      name: 'answer',
-      message: 'Please choose the entities you want to paginate:',
-      choices: choicesList,
-      filter: function(val) {
-        return val;
+      {
+        type: 'checkbox',
+        name: 'answer',
+        message: 'Please choose the entities you want to paginate:',
+        choices: choicesList,
+        filter: function(val) {
+          return val;
+        }
       }
-    }
-  ], function(answers) {
+    ], function(answers) {
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
-        choice = choicesList; 
+        choice = choicesList;
       }else{
         choice = answers.answer;
       }
@@ -247,16 +246,16 @@ function askForStylePagination(){
   ];
 
   inquirer.prompt([
-    {
-      type: 'list',
-      name: 'answer',
-      message: 'Please choose the pagination style:',
-      choices: choicesList,
-      filter: function(val) {
-        return val;
+      {
+        type: 'list',
+        name: 'answer',
+        message: 'Please choose the pagination style:',
+        choices: choicesList,
+        filter: function(val) {
+          return val;
+        }
       }
-    }
-    ], 
+    ],
     function(answers){
       choice = answers.answer;
     }
@@ -282,23 +281,23 @@ function askForDTO(classes) {
   Array.prototype.push.apply(
     choicesList,
     Object.keys(classes)
-            .map(function(e){
-              return classes[e].name;
-            })
-    );
+      .map(function(e){
+        return classes[e].name;
+      })
+  );
 
 
   inquirer.prompt([
-    {
-      type: 'checkbox',
-      name: 'answer',
-      message: 'Please choose the entities you want to generate DTO:',
-      choices: choicesList,
-      filter: function(val) {
-        return val;
+      {
+        type: 'checkbox',
+        name: 'answer',
+        message: 'Please choose the entities you want to generate DTO:',
+        choices: choicesList,
+        filter: function(val) {
+          return val;
+        }
       }
-    }
-  ], function(answers) {
+    ], function(answers) {
       //if '*** All Entities ***' is selected return all Entities
       if(answers.answer.indexOf(allEntityMessage) !== -1) {
         choice = choicesList;
