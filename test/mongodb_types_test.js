@@ -26,7 +26,9 @@ describe('MongoDBTypes', function() {
           'Enum',
           'Blob',
           'AnyBlob',
-          'ImageBlob'
+          'ImageBlob',
+          'Float',
+          'Double'
         ]
       );
     });
@@ -132,6 +134,14 @@ describe('MongoDBTypes', function() {
             {
               value: 'ImageBlob',
               name: 'ImageBlob'
+            },
+            {
+              value: 'Float',
+              name: 'Float'
+            },
+            {
+              value: 'Double',
+              name: 'Double'
             }
           ]
         );
