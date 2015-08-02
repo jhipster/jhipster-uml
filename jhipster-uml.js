@@ -110,19 +110,17 @@ function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
     return element !== classToFilter;
   });
-};
-
+}
 
 /**
  * Execute the command yo jhipster:entity for all the classes in the right order
  */
 function createEntities(scheduledClasses, classes) {
-  console.log(chalk.red('Creating:'));
-
   if(scheduledClasses.length === 0){
-    console.log(chalk.red('\t No modification was made to your entities'));
+    console.log(chalk.red('No modification was made to your entities.'));
     return;
   }
+  console.log(chalk.red('Creating:'));
   for (var i = 0; i < scheduledClasses.length; i++) {
     console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
   }
@@ -144,33 +142,26 @@ function createEntities(scheduledClasses, classes) {
     );
     console.info('\n');
   });
-};
-
-function ArgumentException(message) {
-  this.name = 'ArgumentException';
-  this.message = (message || '');
 }
-ArgumentException.prototype = new Error();
 
 function dislayHelp() {
   console.info(
     'Syntax: jhipster-uml <xmi file> [-options]\n'
     + 'The options are:\n'
     + '\t-db <the database name>\tDefines which database type your app uses;\n'
-    + '\t-dto\t[BETA] Generates DTO with MapStruct the selected entities.'
-    + '\t-paginate \tChoose your entities\' pagination '
+    + '\t-dto\t[BETA] Generates DTO with MapStruct for the selected entities;\n'
+    + '\t-paginate \tChoose your entities\' for pagination.'
   );
-};
-
+}
 
 /*
  * @param{Map} All the entities we want to choose from
  * Display in prompt the list of the entities you want to choose pagination for
  */
 function askForPagination(classes) {
-  var _continue = true;
+  var shouldContinueAsking = true;
 
-  while(_continue){
+  while(shouldContinueAsking){
     var done = null;
 
     var ctp = askForClassesToPaginate(classes);
@@ -186,7 +177,7 @@ function askForPagination(classes) {
           default: true
         }
       ], function(answer){
-        _continue = answer.addPagination;
+        shouldContinueAsking = answer.addPagination;
         done = true;
       }
     );
@@ -195,10 +186,9 @@ function askForPagination(classes) {
     }
   }
   return listPagination;
-};
+}
 
 function askForClassesToPaginate(classes){
-
   var choice = null;
   var allEntityMessage = '*** All Entities ***';
   var choicesList = [allEntityMessage];
@@ -209,7 +199,6 @@ function askForClassesToPaginate(classes){
       return classes[e].name;
     })
   );
-
 
   inquirer.prompt([
       {
@@ -234,7 +223,7 @@ function askForClassesToPaginate(classes){
     require('deasync').sleep(100);
   }
   return choice;
-};
+}
 
 function askForStylePagination(){
   var inquirer = require('inquirer');
@@ -265,8 +254,7 @@ function askForStylePagination(){
     require('deasync').sleep(100);
   }
   return choice;
-};
-
+}
 
 /*
  * @param{Map} All the entities we want to choose from
@@ -285,7 +273,6 @@ function askForDTO(classes) {
         return classes[e].name;
       })
   );
-
 
   inquirer.prompt([
       {
@@ -310,4 +297,10 @@ function askForDTO(classes) {
     require('deasync').sleep(100);
   }
   return choice;
-};
+}
+
+function ArgumentException(message) {
+  this.name = 'ArgumentException';
+  this.message = (message || '');
+}
+ArgumentException.prototype = new Error();
