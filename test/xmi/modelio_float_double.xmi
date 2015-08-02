@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_OPATIDlREeW_jrHFCniKwQ" name="floaty">
+  <eAnnotations xmi:id="_OPATITlREeW_jrHFCniKwQ" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_OPATIjlREeW_jrHFCniKwQ" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_OPATIzlREeW_jrHFCniKwQ" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_OPATJDlREeW_jrHFCniKwQ" name="required" constrainedElement="_OPATLjlREeW_jrHFCniKwQ">
+    <specification xmi:type="uml:LiteralString" xmi:id="_OPATJTlREeW_jrHFCniKwQ" value="&lt;Enter constraint text here&gt;"/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_OPATJjlREeW_jrHFCniKwQ" name="min" constrainedElement="_OPATLjlREeW_jrHFCniKwQ">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_OPATJzlREeW_jrHFCniKwQ">
+      <body>&lt;Enter note text here&gt;</body>
+    </ownedComment>
+    <specification xmi:type="uml:LiteralString" xmi:id="_OPATKDlREeW_jrHFCniKwQ" value="42"/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_OPATKTlREeW_jrHFCniKwQ" name="required" constrainedElement="_OPATLzlREeW_jrHFCniKwQ">
+    <specification xmi:type="uml:LiteralString" xmi:id="_OPATKjlREeW_jrHFCniKwQ" value="&lt;Enter constraint text here&gt;"/>
+  </ownedRule>
+  <ownedRule xmi:type="uml:Constraint" xmi:id="_OPATKzlREeW_jrHFCniKwQ" name="max" constrainedElement="_OPATLzlREeW_jrHFCniKwQ">
+    <specification xmi:type="uml:LiteralString" xmi:id="_OPATLDlREeW_jrHFCniKwQ" value="142"/>
+  </ownedRule>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OPATLTlREeW_jrHFCniKwQ" name="MyClass">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_OPATLjlREeW_jrHFCniKwQ" name="attr" visibility="public" type="_OPATMDlREeW_jrHFCniKwQ" isUnique="false"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_OPATLzlREeW_jrHFCniKwQ" name="attr2" visibility="public" type="_OPATMTlREeW_jrHFCniKwQ" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_OPATMDlREeW_jrHFCniKwQ" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_OPATMTlREeW_jrHFCniKwQ" name="double"/>
+</uml:Model>
