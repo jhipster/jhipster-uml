@@ -23,7 +23,9 @@ describe('CassandraTypes', function() {
           'Long',
           'BigDecimal',
           'Date',
-          'Boolean'
+          'Boolean',
+          'Float',
+          'Double'
         ]
       );
     });
@@ -117,6 +119,14 @@ describe('CassandraTypes', function() {
             {
               value: 'Boolean',
               name: 'Boolean'
+            },
+            {
+              value: 'Float',
+              name: 'Float'
+            },
+            {
+              value: 'Double',
+              name: 'Double'
             }
           ]
         );
