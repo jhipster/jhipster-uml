@@ -237,16 +237,6 @@ describe('EntitiesCreator ', function(){
 
         });
         describe('when field has a required validation', function(){
-          it('fieldValidate is true',function(){
-            for(var i in fields){
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if(field.fieldName === "notTooSmall" || field.fieldName === "onlyRequired" ){
-                  expect(field.fieldValidate).to.equal(true);
-                }
-              }
-            }
-          });
           it('has a \'required\' string in fieldValidateRules',function(){
             for(var i in fields){
               if (fields.hasOwnProperty(i)) {
@@ -261,16 +251,6 @@ describe('EntitiesCreator ', function(){
 
 
       describe('when field has a maxlength validation', function(){
-          it('fieldValidate is true',function(){
-            for(var i in fields){
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if(field.fieldName === "notTooBig"){
-                  expect(field.fieldValidate).to.equal(true);
-                }
-              }
-            }
-          });
           it('has a \'maxlength\' string in fieldValidateRules',function(){
             for(var i in fields){
               if (fields.hasOwnProperty(i)) {
@@ -294,16 +274,6 @@ describe('EntitiesCreator ', function(){
         });
 
         describe('when field has a minlength validation', function(){
-          it('fieldValidate is true',function(){
-            for(var i in fields){
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if(field.fieldName === "notTooSmall"){
-                  expect(field.fieldValidate).to.equal(true);
-                }
-              }
-            }
-          });
           it('has a \'minlength\' string in fieldValidateRules',function(){
             for(var i in fields){
               if (fields.hasOwnProperty(i)) {
