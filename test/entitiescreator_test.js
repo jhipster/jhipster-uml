@@ -27,13 +27,6 @@ var parserUserWrong =
 parserUserWrong.parse();
 var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
 
-/* the entity creator set to do the otherEntityField tests for Many to Many relationships */
-var parserUserWrong =
-  ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
-parserUserWrong.parse();
-var creatorUserWrong = new EntitiesCreator(parserUserWrong,[],{});
-
-
 
 describe('EntitiesCreator ', function(){
   describe('#initialize ', function(){
@@ -357,6 +350,12 @@ describe('EntitiesCreator ', function(){
           });
           it("has a relationshipFieldName set at 'job' ",function(){
             expect(employeeToJob.relationshipFieldName).to.equal("job");
+          });
+          it("has a otherEntityRelationshipName set at 'employee' ",function(){
+            expect(employeeToJob.otherEntityRelationshipName).to.equal("employee");
+          });
+          it("has a otherEntityField set at 'id' ",function(){
+            expect(employeeToJob.otherEntityField).to.equal("id");
           });
         });
 
