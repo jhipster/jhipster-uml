@@ -24,7 +24,7 @@ describe('ModelioParser', function() {
       ).to.deep.equal([ 19, 20, 21 ]);
     });
 
-    it('find the enumerations in the document', function() {
+    it('finds the enumerations in the document', function() {
       var otherParser =
         ParserFactory.createParser('./test/xmi/modelio_enum_test.xmi', 'sql');
       otherParser.findElements();
@@ -158,8 +158,8 @@ describe('ModelioParser', function() {
         var names = [];
         var values = [];
         Object.keys(otherParser.parsedData.enums).forEach(function(enumId) {
-          names.push(otherParser.parsedData.enums[enumId].name);
-          otherParser.parsedData.enums[enumId].values.forEach(function(value) {
+          names.push(otherParser.parsedData.getEnum(enumId).name);
+          otherParser.parsedData.getEnum(enumId).values.forEach(function(value) {
             values.push(value);
           });
         });
@@ -176,27 +176,6 @@ describe('ModelioParser', function() {
 
     it('inserts the found associations', function() {
       expect(Object.keys(parser.parsedData.associations).length).to.equal(10);
-    });
-
-    describe("when trying to access an element's attributes", function() {
-      var firstElementKeys;
-
-      before(function() {
-        firstElementKeys = Object.keys(
-          parser.parsedData.associations[Object.keys(parser.parsedData.associations)[0]]);
-      });
-
-      it('has a name', function() {
-        expect(firstElementKeys).to.include('name');
-      });
-
-      it('has a type', function() {
-        expect(firstElementKeys).to.include('type');
-      });
-
-      it('has a flag telling if it has an upper value', function() {
-        expect(firstElementKeys).to.include('isUpperValuePresent');
-      });
     });
   });
 
