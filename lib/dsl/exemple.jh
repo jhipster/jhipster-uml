@@ -1,5 +1,5 @@
-sentity Departement{
-	departementName String
+entity Department{
+	departmentName String
 }
 
 entity JobHistory{
@@ -21,7 +21,7 @@ entity Employee{
 	phoneNumber String,
 	hireDAte DateTime,
 	salary Long,
-	comissionPct Long
+	commissionPct Long
 }
 
 entity Location {
@@ -42,7 +42,7 @@ entity Country{
 
 
 relationship OneToMany{
-	Departement{employee} to Employee{departement}
+	Department{employee} to Employee{departement}
 }
 
 relationship OneToMany{
@@ -66,5 +66,5 @@ relationship ManyToMany{
 }
 
 relationship OneToOne{
-	Departement{location} to Location{department}
+	Department{location} to Location{department}
 }

@@ -1,8 +1,8 @@
 /*
  *
- * This the grammar we used to generate the parser jhGrammar.js
- *   We use the online tool http://pegjs.org/online to generate the  parser
- *   Modifying this file wont affect the program, this just to have a more readable grammar. 
+ * This the grammar we use to generate the parser jhGrammar.js.
+ *   We use the online tool http://pegjs.org/online to generate the parser.
+ *   Modifying this file won't affect the program, this is just to have a more readable grammar. 
  */
 
 {
@@ -89,7 +89,7 @@ ENUMNAME "an enum name"
   = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
 
 ENUMPROP "an enum property"
-  = word:[A-Z0-9]+                                                                     {return makeString(word);}
+  = underscore:[_]*head:[A-Z0-9]tail:[A-Z0-9_]*                                                                    {return makeString(concat(concat(underscore,[head]), tail));}
 
 INTEGER "integer"
   = int:[0-9]+                                                                         {return parseInt(int.join(""), 10);} 
