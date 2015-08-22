@@ -523,8 +523,8 @@ describe('EntitiesCreator ', function(){
       before(function(){
         creatorUserWrong.createEntities();
       });
-      it('there is no relationships to USER entity after creating entities', function(){
-        expect(Object.keys(creatorUserWrong.entities['_uy4W4g9IEeWa5JwclR5VRw'].relationships).length).to.equal(0);
+      it('there is a relationship to USER entity after creating entities', function(){
+        expect(Object.keys(creatorUserWrong.entities['_uy4W4g9IEeWa5JwclR5VRw'].relationships).length).not.to.equal(0);
       });
     });
   });
