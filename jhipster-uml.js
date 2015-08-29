@@ -66,16 +66,14 @@ if (!fs.existsSync('.yo-rc.json') && type === undefined) {
 
 try {
   var parser = ParserFactory.createParser(process.argv[2], type);
-  parser.parse();
+  var parsedData = parser.parse();
 
   var scheduler = new ClassScheduler(
-    Object.keys(parser.getClasses()),
-    parser.getInjectedFields()
+    Object.keys(parsedData.classes),
+    parsedData.injectedFields()
   );
 
-  scheduler.schedule();
-
-  var scheduledClasses = scheduler.getOrderedPool();
+  var scheduledClasses = scheduler.schedule();
   if (parser.getUserClassId()) {
     scheduledClasses =
       filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
@@ -89,7 +87,11 @@ try {
     listDTO = askForDTO(parser.classes);
   }
 
-  var creator = new EntitiesCreator(parser, listDTO, listPagination);
+  var creator = new EntitiesCreator(
+    parsedData,
+    parser.databaseTypes,
+    listDTO,
+    listPagination);
 
   creator.createEntities();
   if(!force) {
