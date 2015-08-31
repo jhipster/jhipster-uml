@@ -70,7 +70,7 @@ try {
 
   var scheduler = new ClassScheduler(
     Object.keys(parsedData.classes),
-    parsedData.injectedFields()
+    parsedData.injectedFields
   );
 
   var scheduledClasses = scheduler.schedule();

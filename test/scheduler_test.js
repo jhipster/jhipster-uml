@@ -8,15 +8,13 @@ var chai = require('chai'),
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 
-parser.parse();
+var parsedData = parser.parse();
 
 var employeeId = '_iW0ZH_JjEeSmmZm37nQR-w';
 
 var scheduler = new ClassScheduler(
-  Object.keys(parser.getClasses()),
-  parser.getInjectedFields(),
-  parser.getClasses()
-  );
+  Object.keys(parsedData.classes),
+  parsedData.injectedFields);
 
 describe('ClassScheduler', function() {
   describe('#initialize', function() {
@@ -26,7 +24,7 @@ describe('ClassScheduler', function() {
           try {
             new ClassScheduler(
               null,
-              parser.getInjectedFields());
+              parsedData.injectedFields);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
           }
@@ -37,7 +35,7 @@ describe('ClassScheduler', function() {
         it('throws an exception', function() {
           try {
             new ClassScheduler(
-              Object.keys(parser.getClasses()),
+              Object.keys(parsedData.classes),
               null);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
@@ -60,9 +58,8 @@ describe('ClassScheduler', function() {
 
     it ('successfully creates a scheduler', function() {
       new ClassScheduler(
-        Object.keys(parser.getClasses()),
-        parser.getInjectedFields(),
-        parser.getClasses());
+        Object.keys(parsedData.classes),
+        parsedData.injectedFields);
     });
 
     it('initializes each of its attributes', function() {
@@ -89,15 +86,13 @@ describe('ClassScheduler', function() {
 
       var otherParser =
         ParserFactory.createParser('./test/xmi/mappedby_test.xmi', 'sql');
-      otherParser.parse();
+      var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(
-        Object.keys(otherParser.getClasses()),
-        otherParser.getInjectedFields(),
-        otherParser.getClasses());
-      otherScheduler.schedule();
+        Object.keys(parsedData.classes),
+        parsedData.injectedFields);
       expect(
-        otherScheduler.getOrderedPool().length
-      ).to.equal(Object.keys(otherParser.getClasses()).length);
+        otherScheduler.schedule().length
+      ).to.equal(Object.keys(parsedData.classes).length);
     });
 
     describe('#initPool', function() {
@@ -108,9 +103,9 @@ describe('ClassScheduler', function() {
       it('fills the pool with correct objects', function() {
         expect(
           scheduler.pool.length
-        ).to.equal(Object.keys(parser.getInjectedFields()).length);
+        ).to.equal(Object.keys(parsedData.injectedFields).length);
 
-        for (var i = 0; i < Object.keys(parser.getInjectedFields()).length; i++) {
+        for (var i = 0; i < Object.keys(parsedData.injectedFields).length; i++) {
           var relation = scheduler.pool[i];
 
           expect(relation).not.to.equal(undefined);
@@ -131,7 +126,7 @@ describe('ClassScheduler', function() {
         var manyToOneCount = 0;
         var manyToManyCount = 0;
 
-        for (var i = 0; i < Object.keys(parser.getInjectedFields()).length; i++) {
+        for (var i = 0; i < Object.keys(parsedData.injectedFields).length; i++) {
           var relation = scheduler.pool[i];
 
           switch(relation.type) {
@@ -214,7 +209,7 @@ describe('ClassScheduler', function() {
         before(function() {
           scheduler.addNewElement(fictiveClass);
           length = scheduler.orderedPool.length;
-        })
+        });
 
         it('inserts the class key into the ordered pool', function() {
           expect(

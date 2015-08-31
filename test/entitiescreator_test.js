@@ -32,7 +32,7 @@ describe('EntitiesCreator ', function(){
     describe('when passing valid argument ', function(){
       it('Successfully initialize Entities Parser', function(){
         try {
-          creator = new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
+          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
         } catch (error) {
           throw new ExpectationError();
         }
