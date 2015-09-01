@@ -437,6 +437,7 @@ describe('EntitiesCreator ', function(){
             for(var j=0; j<relationships.length; j++) {
               switch(otherCreator.getClasses()[classId].name) {
                 case 'Owner':
+                default:
                     relationship = relationships[0];
                 break;
               }
@@ -464,6 +465,7 @@ describe('EntitiesCreator ', function(){
             for(var j=0; j<relationships.length; j++) {
               switch(otherCreator.getClasses()[classId].name) {
                 case 'Many':
+                default:
                     relationship = relationships[0];
                 break;
               }
