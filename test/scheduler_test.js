@@ -65,16 +65,16 @@ describe('ClassScheduler', function() {
     it('initializes each of its attributes', function() {
       expect(
         scheduler.classNames
-      ).not.to.equal(undefined);
+      ).not.to.be.undefined;
       expect(
         scheduler.injectedFields
-      ).not.to.equal(undefined);
+      ).not.to.be.undefined;
       expect(
         scheduler.pool
-      ).not.to.equal(undefined);
+      ).not.to.be.undefined;
       expect(
         scheduler.orderedPool
-      ).not.to.equal(undefined);
+      ).not.to.be.undefined;
     });
   });
 
@@ -83,7 +83,6 @@ describe('ClassScheduler', function() {
     describe(
         'when scheduling classes sorted so as to blend sorted and unsorted classes',
         function() {
-
       var otherParser =
         ParserFactory.createParser('./test/xmi/mappedby_test.xmi', 'sql');
       var parsedData = otherParser.parse();
@@ -108,10 +107,10 @@ describe('ClassScheduler', function() {
         for (var i = 0; i < Object.keys(parsedData.injectedFields).length; i++) {
           var relation = scheduler.pool[i];
 
-          expect(relation).not.to.equal(undefined);
-          expect(relation.source).not.to.equal(undefined);
-          expect(relation.destination).not.to.equal(undefined);
-          expect(relation.type).not.to.equal(undefined);
+          expect(relation).not.to.be.undefined;
+          expect(relation.source).not.to.be.undefined;
+          expect(relation.destination).not.to.be.undefined;
+          expect(relation.type).not.to.be.undefined;
         }
       });
 
@@ -166,12 +165,12 @@ describe('ClassScheduler', function() {
             function() {
           expect(dependencies.length).to.equal(4);
 
-          for (var i = 0; i < dependencies.length; i++) {
+          dependencies.forEach(function(dependency) {
             expect(
-              dependencies[i].source === employeeId
-                || dependencies[i].destination === employeeId
+              dependency.source === employeeId
+                || dependency.destination === employeeId
             ).to.equal(true);
-          }
+          });
         });
       });
 
@@ -331,11 +330,10 @@ describe('ClassScheduler', function() {
 
       var otherParser =
         ParserFactory.createParser('./test/xmi/modelio_circular_dep_test.xmi', 'sql');
-      otherParser.parse();
+      var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(
-        Object.keys(otherParser.getClasses()),
-        otherParser.getInjectedFields(),
-        parser.getClasses());
+        Object.keys(parsedData.classes),
+        parsedData.injectedFields);
       try {
         otherScheduler.schedule();
         fail();
