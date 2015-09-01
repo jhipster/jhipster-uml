@@ -195,7 +195,7 @@ describe('EntitiesCreator ', function(){
 
       /**
        * Here we check the validation gestion, for that purpose we created
-       *   a xmi of a class Contrainte with 4 attributs, each with differente
+       *   a xmi of a class constraint with 4 attributs, each with different
        *   constraints:
        *   - notTooSmall [ required , minlength : 4 ]
        *   - notTooBig [maxlength : 10]
@@ -309,7 +309,7 @@ describe('EntitiesCreator ', function(){
               switch(creator.getClasses()[classId].name.toLowerCase()) {
                 case 'employee':
                   if(relationships[j].otherEntityName.toLowerCase() === "job"){
-                    employeeToJob = relationships[j];  
+                    employeeToJob = relationships[j];
                   } else if(relationships[j].otherEntityName.toLowerCase() === "department"){
                     employeeToDepartment = relationships[j];
                   }
@@ -438,7 +438,7 @@ describe('EntitiesCreator ', function(){
               switch(otherCreator.getClasses()[classId].name) {
                 case 'Owner':
                     relationship = relationships[0];
-                break; 
+                break;
               }
             }
           }
@@ -465,7 +465,7 @@ describe('EntitiesCreator ', function(){
               switch(otherCreator.getClasses()[classId].name) {
                 case 'Many':
                     relationship = relationships[0];
-                break; 
+                break;
               }
             }
           }
@@ -507,7 +507,7 @@ describe('EntitiesCreator ', function(){
           } catch (error) {
             expect(error.name).to.equal('NoSQLModelingException');
           }
-          
+
         });
       });
     });
