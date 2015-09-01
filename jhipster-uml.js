@@ -74,9 +74,9 @@ try {
   );
 
   var scheduledClasses = scheduler.schedule();
-  if (parser.getUserClassId()) {
+  if (parsedData.userClassId) {
     scheduledClasses =
-      filterScheduledClasses(parser.getUserClassId(), scheduledClasses);
+      filterScheduledClasses(parsedData.userClassId, scheduledClasses);
   }
 
   if(paginate){
@@ -98,7 +98,7 @@ try {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);
-  createEntities(scheduledClasses, parser.getClasses());
+  createEntities(scheduledClasses, parsedData.classes);
 } catch (error) {
   console.error(error.message);
   console.error(error.stack);
