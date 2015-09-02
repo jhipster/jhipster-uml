@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_BKvWkFFCEeWwLL0iEbCFOA" name="comments">
+  <eAnnotations xmi:id="_BKvWkVFCEeWwLL0iEbCFOA" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_BKvWklFCEeWwLL0iEbCFOA" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_BKvWk1FCEeWwLL0iEbCFOA" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_BKvWlFFCEeWwLL0iEbCFOA" name="MyClass">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_BKvWlVFCEeWwLL0iEbCFOA">
+      <body>&lt;p&gt;Description for a &lt;strong&gt;class:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+	&lt;li&gt;&lt;strong&gt;one&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;two&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</body>
+    </ownedComment>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BKvWllFCEeWwLL0iEbCFOA" name="myClass2" visibility="public" type="_BKvWnVFCEeWwLL0iEbCFOA" aggregation="composite" association="_BKvWm1FCEeWwLL0iEbCFOA">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_BKvWl1FCEeWwLL0iEbCFOA">
+        <body>&lt;p&gt;Comment for a relationship.&lt;/p&gt;
+</body>
+      </ownedComment>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BKvWmFFCEeWwLL0iEbCFOA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BKvWmVFCEeWwLL0iEbCFOA" name="myAttribute" visibility="public" isUnique="false">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_BKvWmlFCEeWwLL0iEbCFOA">
+        <body>&lt;p&gt;Description for an &lt;strong&gt;attribute&lt;/strong&gt;.&lt;/p&gt;
+</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_BKvWm1FCEeWwLL0iEbCFOA" memberEnd="_BKvWllFCEeWwLL0iEbCFOA _BKvWnFFCEeWwLL0iEbCFOA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_BKvWnFFCEeWwLL0iEbCFOA" visibility="public" type="_BKvWlFFCEeWwLL0iEbCFOA" association="_BKvWm1FCEeWwLL0iEbCFOA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_BKvWnVFCEeWwLL0iEbCFOA" name="MyClass2">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_BKvWlVFCEeWwLL0iEbCFOA">
+      <body>&lt;p&gt;Another description.&lt;/p&gt;</body>
+    </ownedComment>
+  </packagedElement>
+</uml:Model>

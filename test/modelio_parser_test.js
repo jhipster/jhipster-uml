@@ -218,6 +218,15 @@ describe('ModelioParser', function() {
       it('adds the found classes', function() {
         expect(Object.keys(parser.parsedData.classes).length).to.equal(9);
       });
+
+      it("adds the comment if there's any", function(){
+        var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
+        var parsedData = otherParser.parse();
+        Object.keys(parsedData.classes).forEach(function(classData) {
+          expect(parsedData.getClass(classData)).not.to.be.undefined;
+          expect(parsedData.getClass(classData)).not.to.equal('');
+        });
+      });
     });
 
     describe('#addField', function() {
@@ -225,11 +234,29 @@ describe('ModelioParser', function() {
         it('adds the injected fields', function() {
           expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(10);
         });
+
+        it("adds the comment if there's any", function(){
+          var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
+          var parsedData = otherParser.parse();
+          Object.keys(parsedData.fields).forEach(function(fieldData) {
+            expect(parsedData.getField(fieldData)).not.to.be.undefined;
+            expect(parsedData.getField(fieldData)).not.to.equal('');
+          });
+        });
       });
 
       describe('#addRegularField', function() {
         it('adds the fields', function() {
           expect(Object.keys(parser.parsedData.fields).length).to.equal(22);
+        });
+
+        it("adds the comment if there's any", function(){
+          var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
+          var parsedData = otherParser.parse();
+          Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
+            expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
+            expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+          });
         });
 
         it('adds the fields to the classes', function() {
