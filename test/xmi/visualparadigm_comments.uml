@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model name="comments" xmi:id="uVsGcfKD.AACAQZ1" xmi:version="2.1" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="Visual Paradigm" exporterVersion="7.0.2">
+		<xmi:Extension extender="Visual Paradigm">
+			<nickname exportedFromDifferentName="false"/>
+		</xmi:Extension>
+	</xmi:Documentation>
+	<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="MyClass" visibility="public" xmi:id="4I8GcfKD.AACAQiC" xmi:type="uml:Class">
+		<xmi:Extension extender="Visual Paradigm">
+			<isRoot xmi:value="false"/>
+			<modelType value="Class"/>
+			<businessModel xmi:value="false"/>
+			<qualityScore value="-1"/>
+			<comments>
+				<comment author="ippon" date="2 sept. 2015 16:06:28" documentation="This is a class comment." summary="" xmi:id="DuqGcfKD.AACAQil"/>
+			</comments>
+		</xmi:Extension>
+		<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="attribute" type="string_id" visibility="private" xmi:id="d.xGcfKD.AACAQi8" xmi:type="uml:Property">
+			<xmi:Extension extender="Visual Paradigm">
+				<attribute/>
+				<isVisble xmi:value="true"/>
+				<qualityScore value="-1"/>
+				<comments>
+					<comment author="ippon" date="2 sept. 2015 16:07:45" documentation="This is an attribute comment.&#10;&#10;A comment." summary="" xmi:id="P2FGcfKD.AACAQjR"/>
+				</comments>
+			</xmi:Extension>
+		</ownedAttribute>
+	</packagedElement>
+	<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="MyClass2" visibility="public" xmi:id="RBCGcfKD.AACAQiN" xmi:type="uml:Class">
+		<xmi:Extension extender="Visual Paradigm">
+			<isRoot xmi:value="false"/>
+			<modelType value="Class"/>
+			<businessModel xmi:value="false"/>
+			<qualityScore value="-1"/>
+			<comments>
+				<comment author="ippon" date="2 sept. 2015 16:07:07" documentation="Something." summary="" xmi:id="so.GcfKD.AACAQiy"/>
+			</comments>
+		</xmi:Extension>
+	</packagedElement>
+	<packagedElement isAbstract="false" isDerived="false" isLeaf="false" memberEnd="N.vGcfKD.AACAQjd d.vGcfKD.AACAQjg" xmi:id="x.vGcfKD.AACAQjb" xmi:type="uml:Association">
+		<ownedEnd aggregation="none" association="x.vGcfKD.AACAQjb" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" type="4I8GcfKD.AACAQiC" xmi:id="N.vGcfKD.AACAQjd" xmi:type="uml:Property">
+		</ownedEnd>
+		<ownedEnd aggregation="composite" association="x.vGcfKD.AACAQjb" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" type="RBCGcfKD.AACAQiN" xmi:id="d.vGcfKD.AACAQjg" xmi:type="uml:Property">
+		</ownedEnd>
+		<xmi:Extension extender="Visual Paradigm">
+			<qualityScore value="-1"/>
+			<comments>
+				<comment author="ippon" date="2 sept. 2015 16:09:18" documentation="This is a relationship comment." summary="" xmi:id="TPfGcfKD.AACAQjp"/>
+			</comments>
+		</xmi:Extension>
+	</packagedElement>
+	<packagedElement name="string" visibility="public" xmi:id="string_id" xmi:type="uml:DataType"/>
+</uml:Model>
