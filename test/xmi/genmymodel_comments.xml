@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_UlHVsFFwEeW5wfYDi5CV9g" name="model">
+  <eAnnotations xmi:id="_UlHVsVFwEeW5wfYDi5CV9g" source="genmymodel">
+    <details xmi:id="_UlHVslFwEeW5wfYDi5CV9g" key="uuid" value="_P7W3wA9CEeWa5JwclR5VRw"/>
+  </eAnnotations>
+  <packageImport xmi:id="_UlHVs1FwEeW5wfYDi5CV9g">
+    <eAnnotations xmi:id="_UlHVtFFwEeW5wfYDi5CV9g" source="genmymodel">
+      <details xmi:id="_UlHVtVFwEeW5wfYDi5CV9g" key="uuid" value="_P7Z7EA9CEeWa5JwclR5VRw"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_UlHVtlFwEeW5wfYDi5CV9g">
+    <eAnnotations xmi:id="_UlHVt1FwEeW5wfYDi5CV9g" source="genmymodel">
+      <details xmi:id="_UlHVuFFwEeW5wfYDi5CV9g" key="uuid" value="_P7gBsA9CEeWa5JwclR5VRw"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Class" xmi:id="_UlHVuVFwEeW5wfYDi5CV9g" name="MyClass">
+    <eAnnotations xmi:id="_UlHVulFwEeW5wfYDi5CV9g" source="genmymodel">
+      <details xmi:id="_UlHVu1FwEeW5wfYDi5CV9g" key="uuid" value="_GSiU0AO0EDOlePwfIFdifg"/>
+      <details xmi:id="_UlHVvFFwEeW5wfYDi5CV9g" key="gmm-documentation" value="This is a class &lt;b&gt;comment&lt;/b&gt;!&lt;br&gt;"/>
+    </eAnnotations>
+    <ownedAttribute xmi:id="_UlHVvVFwEeW5wfYDi5CV9g" name="attribute">
+      <eAnnotations xmi:id="_UlHVvlFwEeW5wfYDi5CV9g" source="genmymodel">
+        <details xmi:id="_UlHVv1FwEeW5wfYDi5CV9g" key="uuid" value="_TE_ToAO0EDOlePwfIFdifg"/>
+        <details xmi:id="_UlHVwFFwEeW5wfYDi5CV9g" key="gmm-documentation" value="This is an attribute &lt;i&gt;comment&lt;/i&gt;.&lt;br&gt;"/>
+      </eAnnotations>
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Class" xmi:id="_UlHVwVFwEeW5wfYDi5CV9g" name="MyClass2">
+    <eAnnotations xmi:id="_UlHVwlFwEeW5wfYDi5CV9g" source="genmymodel">
+      <details xmi:id="_UlHVw1FwEeW5wfYDi5CV9g" key="uuid" value="_GGuiwDOeEDOr3dN48gSgxQ"/>
+      <details xmi:id="_UlHVxFFwEeW5wfYDi5CV9g" key="gmm-documentation" value="Something."/>
+    </eAnnotations>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association" xmi:id="_UlHVxVFwEeW5wfYDi5CV9g" name="MyClass_MyClass2" memberEnd="_UlHVyFFwEeW5wfYDi5CV9g _UlHVzlFwEeW5wfYDi5CV9g" navigableOwnedEnd="_UlHVyFFwEeW5wfYDi5CV9g _UlHVzlFwEeW5wfYDi5CV9g">
+    <eAnnotations xmi:id="_UlHVxlFwEeW5wfYDi5CV9g" source="genmymodel">
+      <details xmi:id="_UlHVx1FwEeW5wfYDi5CV9g" key="uuid" value="_JC9DUDOeEDOr3dN48gSgxQ"/>
+    </eAnnotations>
+    <ownedEnd xmi:id="_UlHVyFFwEeW5wfYDi5CV9g" name="myClass2" type="_UlHVwVFwEeW5wfYDi5CV9g" aggregation="composite" association="_UlHVxVFwEeW5wfYDi5CV9g">
+      <eAnnotations xmi:id="_UlHVyVFwEeW5wfYDi5CV9g" source="genmymodel">
+        <details xmi:id="_UlHVylFwEeW5wfYDi5CV9g" key="uuid" value="_JC4K0DOeEDOr3dN48gSgxQ"/>
+        <details xmi:id="_UlHVy1FwEeW5wfYDi5CV9g" key="gmm-documentation" value="This is a relationship comment.&lt;br&gt;"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_UlHVzFFwEeW5wfYDi5CV9g"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_UlHVzVFwEeW5wfYDi5CV9g" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_UlHVzlFwEeW5wfYDi5CV9g" name="myClass" type="_UlHVuVFwEeW5wfYDi5CV9g" association="_UlHVxVFwEeW5wfYDi5CV9g">
+      <eAnnotations xmi:id="_UlHVz1FwEeW5wfYDi5CV9g" source="genmymodel">
+        <details xmi:id="_UlHV0FFwEeW5wfYDi5CV9g" key="uuid" value="_JC7OIDOeEDOr3dN48gSgxQ"/>
+        <details xmi:id="_UlHV0VFwEeW5wfYDi5CV9g" key="gmm-documentation" value="This is yet another comment!&lt;br&gt;&lt;br&gt;Weird...&lt;br&gt;"/>
+      </eAnnotations>
+      <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_UlHV0lFwEeW5wfYDi5CV9g"/>
+      <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_UlHV01FwEeW5wfYDi5CV9g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

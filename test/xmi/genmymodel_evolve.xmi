@@ -19,12 +19,12 @@
   <packagedElement xsi:type="uml:Class" xmi:id="_bNF4-gknEeWNVPA9hBwttA" name="Book">
     <eAnnotations xmi:id="_bNF4-wknEeWNVPA9hBwttA" source="genmymodel">
       <details xmi:id="_bNF4_AknEeWNVPA9hBwttA" key="uuid" value="_R4gaUN0QEDKYK6ftuIVH8g"/>
-      <details xmi:id="_bNF4_QknEeWNVPA9hBwttA" key="gmm-documentation" value="&lt;br>"/>
+      <details xmi:id="_bNF4_QknEeWNVPA9hBwttA" key="gmm-documentation"/>
     </eAnnotations>
     <ownedAttribute xmi:id="_bNF4_gknEeWNVPA9hBwttA" name="title">
       <eAnnotations xmi:id="_bNF4_wknEeWNVPA9hBwttA" source="genmymodel">
         <details xmi:id="_bNF5AAknEeWNVPA9hBwttA" key="uuid" value="_1UdnsN0zEDKYK6ftuIVH8g"/>
-        <details xmi:id="_bNF5AQknEeWNVPA9hBwttA" key="gmm-documentation" value="&lt;br>"/>
+        <details xmi:id="_bNF5AQknEeWNVPA9hBwttA" key="gmm-documentation"/>
       </eAnnotations>
       <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
       <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_bNF5AgknEeWNVPA9hBwttA" value="1"/>

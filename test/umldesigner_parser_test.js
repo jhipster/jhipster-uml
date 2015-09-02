@@ -291,9 +291,9 @@ describe('UMLDesignerParser', function() {
               readFileContent('./test/xmi/umldesigner_comments.uml')),
             initDatabaseTypeHolder('sql'));
         var parsedData = otherParser.parse();
-        Object.keys(parsedData.fields).forEach(function(fieldData) {
-          expect(parsedData.getField(fieldData)).not.to.be.undefined;
-          expect(parsedData.getField(fieldData)).not.to.equal('');
+        Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
+          expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
+          expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
         });
       });
     });
