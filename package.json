@@ -1,6 +1,6 @@
 {
   "name": "jhipster-uml",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "UML support for JHipster via XMI files",
   "bin": {
     "jhipster-uml": "./jhipster-uml.js"
