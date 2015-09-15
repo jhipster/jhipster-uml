@@ -133,6 +133,15 @@ describe('ModelioParser', function() {
       });
     });
 
+    describe('when an enum has no value', function() {
+      it("doesn't throw any exception", function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/modelio_enum_no_value_test.xmi',
+          'sql');
+        otherParser.parse();
+      });
+    });
+
     describe('when an enum attribute has no name', function() {
       it('throws an exception', function() {
         var otherParser = ParserFactory.createParser(
