@@ -26,52 +26,40 @@ var parserEnum = new DSLParser("test/jh/enum.jh",
 
 
 describe("DSL Parser", function(){
-  describe("initialized",function(){
-    it('All attributs are set', function(){
-      expect(parser.file).to.be.equal(fileName);
-      expect(parser.databaseTypes).to.deep.equal(new SQLTypes());
-      expect(parser.classes).to.deep.equal({});
-      expect(parser.fields).to.deep.equal({});
-      expect(parser.types).to.deep.equal({});
-      expect(parser.injectedFields).to.deep.equal({});
-      expect(parser.associations).to.deep.equal({});
-    });
-
-  });
   describe("#fillClassesAndFields", function(){
     describe("when the classes and fields are created",function(){
       before(function(){
-       var jh = fs.readFileSync(parser.file).toString();
+       var jh = fs.readFileSync(parser.root).toString();
        parser.result = pegParser.parse(jh);
        parser.fillEnums();
-       parser.fillClassesAndFields()
+       parser.fillClassesAndFields();
       });
 
       it("there is the expected number of classes",function(){
-        expect(Object.keys(parser.classes).length).to.be.equal(7);
+        expect(Object.keys(parser.parsedData.classes).length).to.be.equal(7);
       });
       it("there is the expected number of field",function(){
-        expect(Object.keys(parser.fields).length).to.be.equal(20);
+        expect(Object.keys(parser.parsedData.fields).length).to.be.equal(20);
       });
       it("the classe Object is well formed",function(){
-        var classObj = parser.classes["Employee"];
+        var classObj = parser.parsedData.classes["Employee"];
         expect(classObj.name).to.be.equals('Employee');
         expect(classObj.fields.length).to.be.equals(7);
         //the property injectedFields is not set yet
         expect(classObj.injectedFields.length).to.be.equals(0);
       });
       it("the field Object is well formed",function(){
-        var firstnameFields = parser.fields["Employee_firstName"];
+        var firstnameFields = parser.parsedData.fields["Employee_firstName"];
         expect(firstnameFields.name).to.be.equals("firstName");
         expect(firstnameFields.type).to.be.equals("String");
-        expect(firstnameFields.validations).to.deep.equal([]);
+        expect(firstnameFields.validations).to.deep.equal({});
       });
     });
 
     describe("When a field has type not supported by JHipster",function(){
       it("thows an parsing exception",function(){
         try{
-          var jh = fs.readFileSync(parserWrongType.file).toString();
+          var jh = fs.readFileSync(parserWrongType.root).toString();
           parserWrongType.result = pegParser.parse(jh);
           parserWrongType.fillEnums();
           parserWrongType.fillClassesAndFields();
@@ -83,20 +71,20 @@ describe("DSL Parser", function(){
 
     describe("When an enum is declared", function(){
       it("the enums in result are well formed",function(){
-        var jh = fs.readFileSync(parserEnum.file).toString();
+        var jh = fs.readFileSync(parserEnum.root).toString();
        parserEnum.result = pegParser.parse(jh);
        expect(parserEnum.result.enums[0].name).to.be.equal("Language");
        expect(parserEnum.result.enums[0].values.length).to.be.equal(4);
       });
 
       it("the enum Object is well formed",function(){
-       var jh = fs.readFileSync(parserEnum.file).toString();
+       var jh = fs.readFileSync(parserEnum.root).toString();
        parserEnum.result = pegParser.parse(jh);
        parserEnum.fillEnums();
        parserEnum.fillClassesAndFields();
 
-       expect(parserEnum.enums['Language'].name).to.be.equal("Language");
-       expect(parserEnum.enums['Language'].values.length).to.be.equal(4);
+       expect(parserEnum.parsedData.getEnum('Language').name).to.be.equal("Language");
+       expect(parserEnum.parsedData.getEnum('Language').values.length).to.be.equal(4);
        //expect(parserEnum.fields['language'].type)
      //  expect(parserEnum.fields['language'].validations)
       });
@@ -109,43 +97,43 @@ describe("DSL Parser", function(){
 
     describe("When the relationships are created",function(){
       before(function(){
-        var jh = fs.readFileSync(parser.file).toString();
+        var jh = fs.readFileSync(parser.root).toString();
         parser.result = pegParser.parse(jh);
         parser.fillEnums();
         parser.fillClassesAndFields();
         parser.fillAssociations();
       });
       it("there is the expected number of relationships",function(){
-        expect(Object.keys(parser.associations).length).to.be.equal(7);
+        expect(Object.keys(parser.parsedData.associations).length).to.be.equal(7);
       });
       it("the associations Object is well formed",function(){
-        expect(parser.associations["Departement_to_Employee"].name).to.be.equal("departement");
-        expect(parser.associations["Departement_to_Employee"].type).to.be.equal("Departement");
+        expect(parser.parsedData.getAssociation("Departement_to_Employee").name).to.be.equal("departement");
+        expect(parser.parsedData.getAssociation("Departement_to_Employee").type).to.be.equal("Departement");
       });
       it("the injectedFields Object is well formed",function(){
-        expect(parser.injectedFields["Departement_employee"].name).to.be.equal("employee");
-        expect(parser.injectedFields["Departement_employee"].type).to.be.equal("Employee");
-        expect(parser.injectedFields["Departement_employee"].association).to.be.equal("Departement_to_Employee");
-        expect(parser.injectedFields["Departement_employee"].class).to.be.equal("Departement");
-        expect(parser.injectedFields["Departement_employee"].cardinality).to.be.equal("one-to-many");
+        expect(parser.parsedData.getInjectedField("Departement_employee").name).to.be.equal("employee");
+        expect(parser.parsedData.getInjectedField("Departement_employee").type).to.be.equal("Employee");
+        expect(parser.parsedData.getInjectedField("Departement_employee").association).to.be.equal("Departement_to_Employee");
+        expect(parser.parsedData.getInjectedField("Departement_employee").class).to.be.equal("Departement");
+        expect(parser.parsedData.getInjectedField("Departement_employee").cardinality).to.be.equal("one-to-many");
       });
       it("the injectedField id has been injected in the corresponding class", function(){
-        expect(contains(parser.classes["Departement"].injectedFields,"Departement_employee")).to.be.equal(true);
+        expect(contains(parser.parsedData.getClass("Departement").injectedFields,"Departement_employee")).to.be.equal(true);
       });
     });
 
     describe("When an entity in a relationship is not declared",function(){
       before(function(){
-        var jh = fs.readFileSync(parserUndeclaredEntity.file).toString();
+        var jh = fs.readFileSync(parserUndeclaredEntity.root).toString();
         parserUndeclaredEntity.result = pegParser.parse(jh);
         parserUndeclaredEntity.fillClassesAndFields();
       });
 
-      it("thows an UndeclaredEntityExecption",function(){
+      it("thows an UndeclaredEntityException",function(){
         try{
           parserUndeclaredEntity.fillAssociations();
         }catch(error){
-          expect(error.name).to.be.equal("UndeclaredEntityExecption");
+          expect(error.name).to.be.equal("UndeclaredEntityException");
         }
       });
     });

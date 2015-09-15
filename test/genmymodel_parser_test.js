@@ -133,6 +133,15 @@ describe('GenMyModelParser', function() {
       });
     });
 
+    describe('when an enum has no value', function() {
+      it("doesn't throw any exception", function() {
+        var otherParser = ParserFactory.createParser(
+          './test/xmi/genmymodel_enum_no_value_test.xml',
+          'sql');
+        otherParser.parse();
+      });
+    });
+
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
         var otherParser = ParserFactory.createParser(
