@@ -80,11 +80,11 @@ try {
   }
 
   if(paginate){
-    listPagination = askForPagination(parser.classes);
+    listPagination = askForPagination(parsedData.classes);
   }
 
   if(dto){
-    listDTO = askForDTO(parser.classes);
+    listDTO = askForDTO(parsedData.classes);
   }
 
   var creator = new EntitiesCreator(
@@ -233,7 +233,7 @@ function askForStylePagination(){
   var choicesList = [
     {name : "Pagination links", value : "pagination"},
     {name : "Simple pager", value : "pager"},
-    {name : "Infinit Scroll", value : "infinite-scroll"}
+    {name : "Infinite Scroll", value : "infinite-scroll"}
   ];
 
   inquirer.prompt([
