@@ -6,9 +6,9 @@
  */
 
 {
-  function concat(aray1, aray2){
-    Array.prototype.push.apply(aray1, aray2);
-    return aray1;
+  function concat(array1, array2){
+    Array.prototype.push.apply(array1, array2);
+    return array1;
   }
 
   function makeString(o) {
@@ -16,8 +16,7 @@
   }
 }
 
-start
-  = p:prog                                                                             {return p;}
+start = p:prog { return p; }
   
 prog
   = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
@@ -28,7 +27,7 @@ prog
 
 //Entities
 entityDecl
-  = jd:Comment space "entity" space* e:ENTITYNAME space* eb:entityBody                {return {"name" : e, "body":eb, "javadoc":jd};}
+  = jd:Comment? space* "entity" space* e:ENTITYNAME space* eb:entityBody                {return {"name" : e, "body":eb, "javadoc":jd};}
   / "entity" space* e:ENTITYNAME space* eb:entityBody                                  {return {"name" : e, "body":eb, "javadoc":""};}           
  
 entityBody
@@ -36,8 +35,8 @@ entityBody
   / ""                                                                                 {return {};}
 
 fieldDeclList
-  = f:FIELDNAME space t:type space* vl:validationList space* "," space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl}], fdl );}
-  / f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl}];}
+  = com:Comment? space* f:FIELDNAME space t:type space* vl:validationList? space* ","? space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl, "javadoc": com}], fdl );}
+  / f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
   / ""                                                                                   {return [];}                                                
 
 validationList
@@ -114,5 +113,7 @@ Comment = ComStart nc:Not_Com* ComStop      {return makeString(nc);}
 ComStart = "/**"
 
 ComStop = "*/"
+
+JDLComment = "//"
 
 Not_Com = (!ComStop !ComStart char:.) {return char;}
