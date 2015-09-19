@@ -10,12 +10,11 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-    chalk = require('chalk'),
-    child_process = require('child_process'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory'),
-    inquirer = require('inquirer');
+    inquirer = require('inquirer'),
+    generateEntities = require('./lib/entity_generator');
 
 
 var type;
@@ -98,7 +97,7 @@ try {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);
-  createEntities(scheduledClasses, parsedData.classes);
+  generateEntities(scheduledClasses, parsedData.classes);
 } catch (error) {
   console.error(error.message);
   console.error(error.stack);
@@ -111,38 +110,6 @@ try {
 function filterScheduledClasses(classToFilter, scheduledClasses) {
   return scheduledClasses.filter(function(element) {
     return element !== classToFilter;
-  });
-}
-
-/**
- * Execute the command yo jhipster:entity for all the classes in the right order
- */
-function createEntities(scheduledClasses, classes) {
-  if(scheduledClasses.length === 0){
-    console.log(chalk.red('No modification was made to your entities.'));
-    return;
-  }
-  console.log(chalk.red('Creating:'));
-  for (var i = 0; i < scheduledClasses.length; i++) {
-    console.log(chalk.red('\t' + classes[scheduledClasses[i]].name));
-  }
-
-  scheduledClasses.forEach(function(element) {
-    var cmd, args;
-    if (process.platform === 'win32') {
-      cmd = process.env.comspec || 'cmd.exe';
-      args = ['/s', '/c', 'yo jhipster:entity', classes[element].name];
-    } else {
-      cmd = 'yo';
-      args = ['jhipster:entity', classes[element].name];
-    }
-
-    child_process.spawnSync(
-      cmd,
-      args,
-      { stdio: [process.stdin, process.stdout, process.stderr] }
-    );
-    console.info('\n');
   });
 }
 
