@@ -36,7 +36,7 @@ entityBody
 
 fieldDeclList
   = com:Comment? space* f:FIELDNAME space t:type space* vl:validationList? space* ","? space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl, "javadoc": com}], fdl );}
-  / f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
+  / com:Comment? space* f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
   / ""                                                                                   {return [];}                                                
 
 validationList
@@ -51,8 +51,8 @@ relationshipBody
   = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
 
 relationshipSide          
-  = e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i};}
-  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
+  = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
+  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : "", "javadoc": ''};}
 
 
 //Enum
