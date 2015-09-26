@@ -48,7 +48,14 @@ entity Country{
 
 
 relationship OneToMany{
-  Department{employee} to Employee{departement}
+  /**
+   * A relationship
+   */
+  Department{employee} to
+  /**
+   * Another side of the same relationship
+   */
+  Employee{departement}
 }
 
 relationship OneToMany{
@@ -56,7 +63,7 @@ relationship OneToMany{
 }
 
 relationship OneToOne{
-  JobHistory{departement} to Departement{jobHistory}
+  JobHistory{department} to Department{jobHistory}
 }
 
 relationship OneToOne{

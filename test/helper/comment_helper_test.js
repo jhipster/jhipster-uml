@@ -7,10 +7,12 @@ describe('#formatComment', function() {
   describe('when the comment is in the one-line form', function() {
     var oneLineComment1 = ' comment ';
     var oneLineComment2 = 'comment';
-    var oneLineComment3 = ' multi word\tcomment ';
-    var oneLineComment4 = 'multi word\tcomment';
+    var oneLineComment3 = ' * a one line comment. ';
+    var oneLineComment4 = ' multi word\tcomment ';
+    var oneLineComment5 = 'multi word\tcomment';
     var expectedResult1 = 'comment';
-    var expectedResult2 = 'multi word\tcomment';
+    var expectedResult2 = 'a one line comment.';
+    var expectedResult3 = 'multi word\tcomment';
 
     describe(buildTestTitle(oneLineComment1), function() {
       it('returns ' + buildTestTitle(expectedResult1), function() {
@@ -28,8 +30,13 @@ describe('#formatComment', function() {
       });
     });
     describe(buildTestTitle(oneLineComment4), function() {
-      it('returns ' + buildTestTitle(expectedResult2), function() {
-        expect(formatComment(oneLineComment4)).to.eq(expectedResult2);
+      it('returns ' + buildTestTitle(expectedResult3), function() {
+        expect(formatComment(oneLineComment4)).to.eq(expectedResult3);
+      });
+    });
+    describe(buildTestTitle(oneLineComment5), function() {
+      it('returns ' + buildTestTitle(expectedResult3), function() {
+        expect(formatComment(oneLineComment5)).to.eq(expectedResult3);
       });
     });
   });
