@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     _ = require('underscore.string'),
     UMLDesignerParser = require('../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),

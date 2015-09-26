@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     ParserFactory = require('../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');

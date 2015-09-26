@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     MongoDBTypes = require('../lib/types/mongodb_types');
 
 var mongoDBTypes;
