@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     CassandraTypes = require('../lib/types/cassandra_types');
 
 var cassandraTypes;

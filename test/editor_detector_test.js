@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     EditorDetector = require('../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', function() {

@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     merge = require('../../lib/helper/object_helper').merge;
 
 describe('ObjectHelper', function() {
