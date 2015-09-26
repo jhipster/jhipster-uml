@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect,
+var expect = require('chai').expect,
     generateEntities = require('../lib/entity_generator');
 
 describe('#generateEntities', function() {

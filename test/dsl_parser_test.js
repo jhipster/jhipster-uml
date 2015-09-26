@@ -1,10 +1,9 @@
 "use strict"
 
 var DSLParser = require("../lib/dsl/dsl_parser"),
-    chai = require('chai'),
     fs = require('fs'),
     pegParser = require('../lib/dsl/jhGrammar'),
-    expect = chai.expect,
+    expect = require('chai').expect,
     SQLTypes = require('../lib/types/sql_types'),
     MongoDBTypes = require('../lib/types/mongodb_types'),
     CassandraTypes = require('../lib/types/cassandra_types');
