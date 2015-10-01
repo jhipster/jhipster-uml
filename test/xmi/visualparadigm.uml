@@ -13,168 +13,56 @@
 			<appliedProfile href="visualparadigm_test.profile.uml#p9OYF7KD.AACAQAQ_profile"/>
 		</profileApplication>
 		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="Job" visibility="public" xmi:id="v8ZYF7KD.AACAQOP" xmi:type="uml:Class">
-			<xmi:Extension extender="Visual Paradigm">
-				<isRoot xmi:value="false"/>
-				<modelType value="Class"/>
-				<businessModel xmi:value="false"/>
-				<qualityScore value="-1"/>
-			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="ZxFYF7KD.AACAQOU" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="title" visibility="private" xmi:id="hFlYF7KD.AACAQOX" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="minSalary" type="c0D8F7KD.AACAQRU" visibility="private" xmi:id="W0VYF7KD.AACAQOa" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="maxSalary" type="c0D8F7KD.AACAQRU" visibility="private" xmi:id="3a1YF7KD.AACAQOd" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 			<ownedAttribute aggregation="shared" association="3J0iF7KD.AACAQUo" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="tasks" type="cmfCF7KD.AACAQUJ" xmi:id="3J0iF7KD.AACAQUr" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<associationEnd/>
-					<qualifier name="" xmi:id="3J0iF7KD.AACAQUs" xmi:type="qualifier">
-						<xmi:Extension extender="Visual Paradigm">
-							<qualityScore value="-1"/>
-						</xmi:Extension>
-					</qualifier>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<upperValue value="*" xmi:id="3J0iF7KD.AACAQUr_multiplicity_upperValue" xmi:type="uml:LiteralString"/>
 			</ownedAttribute>
 		</packagedElement>
 		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="Department" visibility="public" xmi:id="FXtYF7KD.AACAQOp" xmi:type="uml:Class">
-			<xmi:Extension extender="Visual Paradigm">
-				<isRoot xmi:value="false"/>
-				<modelType value="Class"/>
-				<businessModel xmi:value="false"/>
-				<qualityScore value="-1"/>
-			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="pV9YF7KD.AACAQOt" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="name" visibility="private" xmi:id="jUDYF7KD.AACAQOw" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="composite" association="GwBiF7KD.AACAQV9" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="location" type="IziiF7KD.AACAQVd" xmi:id="mwBiF7KD.AACAQWA" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<associationEnd/>
-					<qualifier name="" xmi:id="mwBiF7KD.AACAQWB" xmi:type="qualifier">
-						<xmi:Extension extender="Visual Paradigm">
-							<qualityScore value="-1"/>
-						</xmi:Extension>
-					</qualifier>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<lowerValue value="0" xmi:id="mwBiF7KD.AACAQWA_multiplicity_lowerValue" xmi:type="uml:LiteralString"/>
 				<upperValue value="1" xmi:id="mwBiF7KD.AACAQWA_multiplicity_upperValue" xmi:type="uml:LiteralString"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="shared" association="0keEb7KD.AACAQV9" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="employees" type="v7zYF7KD.AACAQPK" xmi:id="0keEb7KD.AACAQWA" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<associationEnd/>
-					<qualifier name="" xmi:id="0keEb7KD.AACAQWB" xmi:type="qualifier">
-						<xmi:Extension extender="Visual Paradigm">
-							<qualityScore value="-1"/>
-						</xmi:Extension>
-					</qualifier>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<upperValue value="*" xmi:id="0keEb7KD.AACAQWA_multiplicity_upperValue" xmi:type="uml:LiteralString"/>
 			</ownedAttribute>
 		</packagedElement>
 		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="Employee" visibility="public" xmi:id="v7zYF7KD.AACAQPK" xmi:type="uml:Class">
-			<xmi:Extension extender="Visual Paradigm">
-				<isRoot xmi:value="false"/>
-				<modelType value="Class"/>
-				<businessModel xmi:value="false"/>
-				<qualityScore value="-1"/>
-			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="JZrYF7KD.AACAQPO" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="firstName" visibility="private" xmi:id="kAbYF7KD.AACAQPR" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="lastName" visibility="private" xmi:id="lpbYF7KD.AACAQPU" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="email" visibility="private" xmi:id="CY7YF7KD.AACAQPX" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="phoneNumber" visibility="private" xmi:id="FoHYF7KD.AACAQPa" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="commissionPct" type="c0D8F7KD.AACAQRU" visibility="private" xmi:id="izHYF7KD.AACAQPd" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="hireDate" type="ekkCF7KD.AACAQR5" visibility="private" xmi:id="XaQ4F7KD.AACAQPt" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="salary" type="c0D8F7KD.AACAQRU" visibility="private" xmi:id="Guw4F7KD.AACAQPw" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="shared" association="bP7CF7KD.AACAQTs" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="job" type="v8ZYF7KD.AACAQOP" xmi:id="bP7CF7KD.AACAQTv" xmi:type="uml:Property">
 				<xmi:Extension extender="Visual Paradigm">
@@ -227,18 +115,10 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="startDate" type="ekkCF7KD.AACAQR5" visibility="private" xmi:id=".b5CF7KD.AACAQSy" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="endDate" type="ekkCF7KD.AACAQR5" visibility="private" xmi:id="cONCF7KD.AACAQS0" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="composite" association="YuLCF7KD.AACAQTS" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="job" type="v8ZYF7KD.AACAQOP" xmi:id="YuLCF7KD.AACAQTV" xmi:type="uml:Property">
 				<xmi:Extension extender="Visual Paradigm">
@@ -288,26 +168,14 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="IDgiF7KD.AACAQUb" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="title" visibility="private" xmi:id="1oIiF7KD.AACAQUf" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="description" visibility="private" xmi:id="zg4iF7KD.AACAQUh" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 		</packagedElement>
@@ -332,42 +200,22 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="nQKiF7KD.AACAQVi" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="streetAddress" visibility="private" xmi:id="hfqiF7KD.AACAQVm" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="postalCode" visibility="private" xmi:id="l2GiF7KD.AACAQVq" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="city" visibility="private" xmi:id="giWiF7KD.AACAQVu" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="stateProvince" visibility="private" xmi:id="FT2iF7KD.AACAQVy" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="composite" association=".e1iF7KD.AACAQWt" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="country" type="gsxiF7KD.AACAQWZ" xmi:id=".e1iF7KD.AACAQWw" xmi:type="uml:Property">
@@ -392,18 +240,10 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="9tZiF7KD.AACAQWe" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="name" visibility="private" xmi:id="7hFiF7KD.AACAQWi" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 			<ownedAttribute aggregation="composite" association="pyniF7KD.AACAQXZ" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" name="region" type="5kTiF7KD.AACAQXF" xmi:id="pyniF7KD.AACAQXc" xmi:type="uml:Property">
@@ -428,18 +268,10 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="id" type="long_id" visibility="private" xmi:id="rwLiF7KD.AACAQXK" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 			</ownedAttribute>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="name" visibility="private" xmi:id="ovriF7KD.AACAQXO" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String" xmi:type="uml:PrimitiveType"/>
 			</ownedAttribute>
 		</packagedElement>
@@ -457,15 +289,7 @@
 		</ownedRule>
 		<packagedElement isAbstract="false" isDerived="false" isLeaf="false" memberEnd="YuLCF7KD.AACAQTT YuLCF7KD.AACAQTV" xmi:id="YuLCF7KD.AACAQTS" xmi:type="uml:Association">
 			<ownedEnd aggregation="none" association="YuLCF7KD.AACAQTS" isDerived="false" isDerivedUnion="false" isLeaf="false" isNavigable="true" isReadOnly="false" isStatic="false" type="10WCF7KD.AACAQSt" xmi:id="YuLCF7KD.AACAQTT" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<associationEnd/>
-					<qualifier name="" xmi:id="YuLCF7KD.AACAQTU" xmi:type="qualifier">
-						<xmi:Extension extender="Visual Paradigm">
-							<qualityScore value="-1"/>
-						</xmi:Extension>
-					</qualifier>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
+
 				<lowerValue value="1" xmi:id="YuLCF7KD.AACAQTT_multiplicity_lowerValue" xmi:type="uml:LiteralString"/>
 				<upperValue value="1" xmi:id="YuLCF7KD.AACAQTT_multiplicity_upperValue" xmi:type="uml:LiteralString"/>
 			</ownedEnd>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0TZOsFFXEeWn8vWfxOEIOg" name="NewModel">
+  <packagedElement xmi:type="uml:Class" xmi:id="_2q878FFXEeWn8vWfxOEIOg" name="Class1">
+    <ownedComment xmi:id="_JYYrcFFYEeWn8vWfxOEIOg" annotatedElement="_2q878FFXEeWn8vWfxOEIOg">
+      <body>This is a class comment.&lt;br/>
+This &lt;b>sucks&lt;/b>.</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_MYveEFFYEeWn8vWfxOEIOg" name="property">
+      <ownedComment xmi:id="_RL-jkFFYEeWn8vWfxOEIOg" annotatedElement="_MYveEFFYEeWn8vWfxOEIOg">
+        <body>This is an attribute comment.&lt;br/>
+&lt;p>This sucks &lt;i>too&lt;/i>&lt;/p></body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MYwFIFFYEeWn8vWfxOEIOg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MYwFIVFYEeWn8vWfxOEIOg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5fY9AFFYEeWn8vWfxOEIOg" name="Class2">
+    <ownedComment xmi:id="_75ZhUFFYEeWn8vWfxOEIOg" annotatedElement="_5fY9AFFYEeWn8vWfxOEIOg">
+      <body>Another&amp;nbsp;comment.</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_9ZgpMFFYEeWn8vWfxOEIOg" memberEnd="_9ZgpMVFYEeWn8vWfxOEIOg _9Zwg0FFYEeWn8vWfxOEIOg" navigableOwnedEnd="_9Zwg0FFYEeWn8vWfxOEIOg">
+    <ownedComment xmi:id="_SVzc8FFZEeWn8vWfxOEIOg" annotatedElement="_9ZgpMFFYEeWn8vWfxOEIOg">
+      <body>Comment on a relationship.</body>
+    </ownedComment>
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_9ZgpMVFYEeWn8vWfxOEIOg" name="class1s" type="_2q878FFXEeWn8vWfxOEIOg" aggregation="composite" association="_9ZgpMFFYEeWn8vWfxOEIOg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9Zv5wFFYEeWn8vWfxOEIOg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9Zv5wVFYEeWn8vWfxOEIOg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_9Zwg0FFYEeWn8vWfxOEIOg" name="class2s" type="_5fY9AFFYEeWn8vWfxOEIOg" association="_9ZgpMFFYEeWn8vWfxOEIOg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9Z_KUFFYEeWn8vWfxOEIOg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9Z_xYFFYEeWn8vWfxOEIOg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

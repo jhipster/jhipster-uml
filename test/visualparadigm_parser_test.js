@@ -156,17 +156,17 @@ describe('VisualParadigmParser', function() {
 
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
-        var otherParser = ParserFactory.createParser(
+        var parsedData = ParserFactory.createParser(
           './test/xmi/visualparadigm_enum_test.uml',
-          'sql');
-        otherParser.parse();
+          'sql'
+        ).parse();
         var expectedNames = ['MyEnumeration2', 'MyEnumeration'];
         var expectedNValues = ['VALUE_A', 'VALUE_A', 'VALUE_B'];
         var names = [];
         var values = [];
-        Object.keys(otherParser.parsedData.enums).forEach(function(enumId) {
-          names.push(otherParser.parsedData.getEnum(enumId).name);
-          otherParser.parsedData.getEnum(enumId).values.forEach(function(value) {
+        Object.keys(parsedData.enums).forEach(function(enumId) {
+          names.push(parsedData.getEnum(enumId).name);
+          parsedData.getEnum(enumId).values.forEach(function(value) {
             values.push(value);
           });
         });
@@ -183,12 +183,11 @@ describe('VisualParadigmParser', function() {
 
     describe('when a class has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
+        try {
+          ParserFactory.createParser(
           './test/xmi/visualparadigm_no_class_name_test.uml',
           'sql'
-        );
-        try {
-          otherParser.parse();
+        ).parse();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -198,11 +197,11 @@ describe('VisualParadigmParser', function() {
 
     describe('when an attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/visualparadigm_no_attribute_name_test.uml',
-          'sql');
         try {
-          otherParser.parse();
+          ParserFactory.createParser(
+            './test/xmi/visualparadigm_no_attribute_name_test.uml',
+            'sql'
+          ).parse();
           throw new ExpectationError();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -214,12 +213,34 @@ describe('VisualParadigmParser', function() {
       it('adds the found classes', function() {
         expect(Object.keys(parser.parsedData.classes).length).to.equal(9);
       });
+
+      it("adds the comment if there's any", function(){
+        var parsedData = ParserFactory.createParser(
+          './test/xmi/visualparadigm_comments.uml',
+          'sql'
+        ).parse();
+        Object.keys(parsedData.classes).forEach(function(classData) {
+          expect(parsedData.getClass(classData)).not.to.be.undefined;
+          expect(parsedData.getClass(classData)).not.to.equal('');
+        });
+      });
     });
 
     describe('#addField', function() {
       describe('#addRegularField', function() {
         it('adds the fields', function() {
           expect(Object.keys(parser.parsedData.fields).length).to.equal(21);
+        });
+
+        it("adds the comment if there's any", function(){
+          var parsedData = ParserFactory.createParser(
+            './test/xmi/visualparadigm_comments.uml',
+            'sql'
+          ).parse();
+          Object.keys(parsedData.fields).forEach(function(fieldData) {
+            expect(parsedData.getField(fieldData)).not.to.be.undefined;
+            expect(parsedData.getField(fieldData)).not.to.equal('');
+          });
         });
 
         it('adds the fields to the classes', function() {
@@ -234,11 +255,11 @@ describe('VisualParadigmParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
-            var otherParser = ParserFactory.createParser(
-              './test/xmi/visualparadigm_wrong_typename.uml',
-              'sql');
             try {
-              otherParser.parse();
+              ParserFactory.createParser(
+                './test/xmi/visualparadigm_wrong_typename.uml',
+                'sql'
+              ).parse();
               throw new ExpectationError();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
@@ -265,6 +286,17 @@ describe('VisualParadigmParser', function() {
     describe('#addInjectedField', function() {
       it('adds the injected fields', function() {
         expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(10);
+      });
+
+      it("adds the comment if there's any", function(){
+        var parsedData = ParserFactory.createParser(
+          './test/xmi/visualparadigm_comments.uml',
+          'sql'
+        ).parse();
+        Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
+          expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
+          expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+        });
       });
     });
   });

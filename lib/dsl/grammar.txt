@@ -6,9 +6,9 @@
  */
 
 {
-  function concat(aray1, aray2){
-    Array.prototype.push.apply(aray1, aray2);
-    return aray1;
+  function concat(array1, array2){
+    Array.prototype.push.apply(array1, array2);
+    return array1;
   }
 
   function makeString(o) {
@@ -16,32 +16,32 @@
   }
 }
 
-start
-  = p:prog                                                                             {return p;}
+start = p:prog { return p; }
   
 prog
   = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
   / space* rd:relationDecl space* p:prog                                               {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums};}
   / space* end:enumDecl space* p:prog                                                  {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums)};}
-  / ''                                                                                   {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
+  / ""                                                                                 {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
 
 
 //Entities
 entityDecl
-  = "entity" space* e:ENTITYNAME space* eb:entityBody                                   {return {"name" : e, "body":eb};}          
+  = jd:Comment? space* "entity" space* e:ENTITYNAME space* eb:entityBody                {return {"name" : e, "body":eb, "javadoc":jd};}
+  / "entity" space* e:ENTITYNAME space* eb:entityBody                                  {return {"name" : e, "body":eb, "javadoc":""};}           
  
 entityBody
   = "{" space* fdl:fieldDeclList space* "}"                                            {return fdl;}
-  / ''                                                                                   {return {};}
+  / ""                                                                                 {return {};}
 
 fieldDeclList
-  = f:FIELDNAME space t:type space* vl:validationList space* "," space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl}], fdl );}
-  / f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl}];}
-  / ''                                                                                   {return [];}                                                
+  = com:Comment? space* f:FIELDNAME space t:type space* vl:validationList? space* ","? space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl, "javadoc": com}], fdl );}
+  / com:Comment? space* f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
+  / ""                                                                                   {return [];}                                                
 
 validationList
   = v:validation space* vl:validationList                                              {return concat([v], vl);}                                    
-  / ''                                                                                   {return [];}
+  / ""                                                                                   {return [];}
 
 //Relationship
 relationDecl
@@ -51,8 +51,8 @@ relationshipBody
   = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
 
 relationshipSide          
-  = e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME? space* "}" space*               {return {"name" :e, "injectedfield" : i};}
-  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : ""};}
+  = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
+  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : "", "javadoc": ''};}
 
 
 //Enum
@@ -104,5 +104,16 @@ FIELDNAME "a field name"
   = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}               
 
 space "a space"
-  = space:['\n'|'\t'|'\r'|' ']+           
+  = space:['\n'|'\t'|'\r'|' '|\u2028|\u2029]+      
 
+
+/******************               COMMENT                 ***********************/
+Comment = ComStart nc:Not_Com* ComStop      {return makeString(nc);}
+
+ComStart = "/**"
+
+ComStop = "*/"
+
+JDLComment = "//"
+
+Not_Com = (!ComStop !ComStart char:.) {return char;}
