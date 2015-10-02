@@ -14,6 +14,8 @@
   function makeString(o) {
     return o.join("");
   }
+  var unidir = "*unidir*";
+  var anonymous = "*anonymous*";
 }
 
 start = p:prog { return p; }
@@ -52,7 +54,8 @@ relationshipBody
 
 relationshipSide          
   = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
-  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : "", "javadoc": ''};}
+  / jd:Comment? space* e:ENTITYNAME space* "{" space* "}" space*                       {return {"name" :e, "injectedfield" : anonymous, "javadoc": jd};}
+  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : unidir, "javadoc": ''};}
 
 
 //Enum
