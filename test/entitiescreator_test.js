@@ -26,10 +26,10 @@ var creatorUserWrong =
   new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes,[],{});
 
 
-describe('EntitiesCreator ', function() {
-  describe('#initialize ', function() {
-    describe('when passing valid argument ', function() {
-      it('Successfully initialize Entities Parser', function() {
+describe('EntitiesCreator ', function(){
+  describe('#initialize ', function(){
+    describe('when passing valid argument ', function(){
+      it('Successfully initialize Entities Parser', function(){
         try {
           new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
         } catch (error) {
@@ -49,31 +49,31 @@ describe('EntitiesCreator ', function() {
         expect(creator.getEntities()).to.deep.equal({});
       });
     });
-    describe('when passing invalid argument', function() {
-      describe('when passing a null argument',function() {
-        it('throws an exception',function() {
+    describe('when passing invalid argument', function(){
+      describe('when passing a null argument',function(){
+        it('throws an exception',function(){
           try{
             new EntitiesCreator(null);
             fail();
-          }catch(error) {
+          }catch(error){
             expect(error.name).to.equal('NullArgumentException');
           }
         });
       });
     });
   });
-  describe( '#createEntities', function() {
+  describe( '#createEntities', function(){
 
-    describe('#initializeEntities', function() {
-      before(function() {
+    describe('#initializeEntities', function(){
+      before(function(){
           creator.initializeEntities();
           creatorUser.initializeEntities();
       });
-      describe('when we initialize Entities', function() {
-        it('there are as many Entities as Classes',function() {
+      describe('when we initialize Entities', function(){
+        it('there are as many Entities as Classes',function(){
           expect(creator.getEntities().length).equal(creator.getClasses().length);
         });
-        it('all entities attributes are set',function() {
+        it('all entities attributes are set',function(){
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerOneToOne).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerManyToMany).to.be.defined;
           expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOneToMany).to.be.defined;
@@ -91,11 +91,12 @@ describe('EntitiesCreator ', function() {
       });
     });
 
-    describe('#setFieldsOfEntity',function() {
+
+    describe('#setFieldsOfEntity',function(){
       var firstClassId;
       var fields;
 
-      before(function() {
+      before(function(){
         firstClassId = Object.keys(creatorConstraint.getClasses())[0];
         creatorConstraint.initializeEntities();
         creatorConstraint.setFieldsOfEntity(firstClassId);
@@ -167,25 +168,25 @@ describe('EntitiesCreator ', function() {
         });*/
       });
 
-      describe('when fields trying to access an entity field ', function() {
+      describe('when fields trying to access an entity field ', function(){
         var field;
-        before(function() {
+        before(function(){
           field = fields[0];
         });
 
-        it('has fieldId property',function() {
+        it('has fieldId property',function(){
           expect(field.fieldId).to.be.defined;
         });
 
-        it('has fieldName property',function() {
+        it('has fieldName property',function(){
           expect(field.fieldName).to.be.defined;
         });
 
-        it('has fieldType property',function() {
+        it('has fieldType property',function(){
           expect(field.fieldType).to.be.defined;
         });
 
-        it('has fieldValidate property',function() {
+        it('has fieldValidate property',function(){
           expect(field.fieldValidate).to.be.defined;
         });
 
@@ -200,24 +201,24 @@ describe('EntitiesCreator ', function() {
        *   - onlyRequired [ required ]
        *   - noConstraint []
        */
-      describe('#setValidationsOfField: ',function() {
-        describe('when field has no validation', function() {
-          it('fieldValidate is false',function() {
-            for(var i in fields) {
+      describe('#setValidationsOfField: ',function(){
+        describe('when field has no validation', function(){
+          it('fieldValidate is false',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'noContraint') {
+                if(field.fieldName === 'noContraint'){
                   expect(field.fieldValidate).to.equal(false);
                 }
               }
             }
           });
 
-          it('fieldValidateRules is undefined',function() {
-            for(var i in fields) {
+          it('fieldValidateRules is undefined',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'noContraint') {
+                if(field.fieldName === 'noContraint'){
                   expect(field.fieldValidateRules).to.be.undefined;
                 }
               }
@@ -225,9 +226,9 @@ describe('EntitiesCreator ', function() {
           });
 
         });
-        describe('when field has a required validation', function() {
-          it('has a \'required\' string in fieldValidateRules',function() {
-            for(var i in fields) {
+        describe('when field has a required validation', function(){
+          it('has a \'required\' string in fieldValidateRules',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
                 if(field.fieldName === 'notTooSmall' || field.fieldName === 'onlyRequired' ) {
@@ -239,22 +240,22 @@ describe('EntitiesCreator ', function() {
         });
 
 
-      describe('when field has a maxlength validation', function() {
-          it('has a \'maxlength\' string in fieldValidateRules',function() {
-            for(var i in fields) {
+      describe('when field has a maxlength validation', function(){
+          it('has a \'maxlength\' string in fieldValidateRules',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'notTooBig' ) {
+                if(field.fieldName === 'notTooBig' ){
                   expect(field.fieldValidateRules.indexOf('maxlength')).not.to.equal(-1);
                 }
               }
             }
           });
-          it('has a fieldValidateRulesMax with a value of 10',function() {
-            for(var i in fields) {
+          it('has a fieldValidateRulesMax with a value of 10',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'notTooBig' ) {
+                if(field.fieldName === 'notTooBig' ){
                   expect(field.fieldValidateRulesMaxlength === '10').to.equal(true);
                 }
               }
@@ -262,22 +263,22 @@ describe('EntitiesCreator ', function() {
           });
         });
 
-        describe('when field has a minlength validation', function() {
-          it('has a \'minlength\' string in fieldValidateRules',function() {
-            for(var i in fields) {
+        describe('when field has a minlength validation', function(){
+          it('has a \'minlength\' string in fieldValidateRules',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'notTooSmall' ) {
+                if(field.fieldName === 'notTooSmall' ){
                   expect(field.fieldValidateRules.indexOf('minlength')).not.to.equal(-1);
                 }
               }
             }
           });
-          it('has a fieldValidateRulesMin with a value of 4',function() {
-            for(var i in fields) {
+          it('has a fieldValidateRulesMin with a value of 4',function(){
+            for(var i in fields){
               if (fields.hasOwnProperty(i)) {
                 var field = fields[i];
-                if(field.fieldName === 'notTooSmall' ) {
+                if(field.fieldName === 'notTooSmall' ){
                   expect(field.fieldValidateRulesMinlength === '4').to.equal(true);
                 }
               }
@@ -286,7 +287,7 @@ describe('EntitiesCreator ', function() {
         });
       });
 
-    describe('#setRelationshipOfEntity',function() {
+    describe('#setRelationshipOfEntity',function(){
       var employeeToJob; // relation one to one owner
       var departmentToEmployee; // relation one to many
       var jobToTask; // relation many to many owner
@@ -295,37 +296,37 @@ describe('EntitiesCreator ', function() {
       var employeeToDepartment; // relation many to one
       var entities;
 
-      before(function() {
+      before(function(){
           creator.createEntities();
           entities = creator.getEntities();
 
-          for (var i=0; i<Object.keys(entities).length; i++) {
+          for (var i=0; i<Object.keys(entities).length; i++){
             var classId = Object.keys(entities)[i];
             var relationships = entities[classId].relationships;
 
             for(var j=0; j<relationships.length; j++) {
               switch(creator.getClasses()[classId].name.toLowerCase()) {
                 case 'employee':
-                  if(relationships[j].otherEntityName.toLowerCase() === 'job') {
+                  if(relationships[j].otherEntityName.toLowerCase() === 'job'){
                     employeeToJob = relationships[j];
-                  } else if(relationships[j].otherEntityName.toLowerCase() === 'department') {
+                  } else if(relationships[j].otherEntityName.toLowerCase() === 'department'){
                     employeeToDepartment = relationships[j];
                   }
                   break;
                 case 'department':
-                  if(relationships[j].otherEntityName.toLowerCase() === 'employee') {
+                  if(relationships[j].otherEntityName.toLowerCase() === 'employee'){
                     departmentToEmployee = relationships[j];
                   }
                   break;
                 case 'job':
-                  if(relationships[j].otherEntityName.toLowerCase() === 'employee') {
+                  if(relationships[j].otherEntityName.toLowerCase() === 'employee'){
                     jobToEmployee = relationships[j];
-                  }else if(relationships[j].otherEntityName.toLowerCase() === 'task') {
+                  }else if(relationships[j].otherEntityName.toLowerCase() === 'task'){
                     jobToTask = relationships[j];
                   }
                   break;
                 case 'task':
-                  if(relationships[j].otherEntityName.toLowerCase() === 'job') {
+                  if(relationships[j].otherEntityName.toLowerCase() === 'job'){
                     taskToJob = relationships[j];
                   }
                   break;
@@ -335,29 +336,22 @@ describe('EntitiesCreator ', function() {
           }
       });
 
-      describe('when trying to access a relationships', function() {
+      describe('when trying to access a relationships', function(){
 
-        describe("when the owner entity doesn't have the owned entity as field", function() {
-          var otherParser =
-            ParserFactory.createParser('./test/xmi/modelio_unidirectional.xmi', 'sql');
-          var otherCreator =
-            new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes,[],{});
-        });
-
-        describe('Employee to Job: Uni-directional One to one owner side', function() {
-          it('has a ownerSide property at true',function() {
+        describe('Employee to Job: Uni-directional One to one owner side', function(){
+          it('has a ownerSide property at true',function(){
             expect(employeeToJob.ownerSide).to.equal(true);
           });
-          it('has a one-to-one relationships type',function() {
+          it('has a one-to-one relationships type',function(){
             expect(employeeToJob.relationshipType).to.equal('one-to-one');
           });
-          it("has a relationshipFieldName set at 'job' ",function() {
+          it("has a relationshipFieldName set at 'job' ",function(){
             expect(employeeToJob.relationshipFieldName).to.equal('job');
           });
-          it("has a otherEntityRelationshipName set at 'employee' ",function() {
+          it("has a otherEntityRelationshipName set at 'employee' ",function(){
             expect(employeeToJob.otherEntityRelationshipName).to.equal('employee');
           });
-          it("has a otherEntityField set at 'id' ",function() {
+          it("has a otherEntityField set at 'id' ",function(){
             expect(employeeToJob.otherEntityField).to.equal('id');
           });
         });
@@ -368,66 +362,66 @@ describe('EntitiesCreator ', function() {
           });
         });
 
-        describe('Department to Employee : One to Many', function() {
-          it('has a one-to-many relationships type',function() {
+        describe('Department to Employee : One to Many', function(){
+          it('has a one-to-many relationships type',function(){
             expect(departmentToEmployee.relationshipType).to.equal('one-to-many');
           });
-          it('has no ownerSide property',function() {
+          it('has no ownerSide property',function(){
             expect(departmentToEmployee.ownerSide).to.be.undefined;
           });
-          it('has otherEntityRelationshipName set to department', function() {
+          it('has otherEntityRelationshipName set to department', function(){
             expect(departmentToEmployee.otherEntityRelationshipName).to.equal('department');
           });
         });
 
-        describe('Employee to Department : Many to One', function() {
-          it('has a many-to-one relationships type',function() {
+        describe('Employee to Department : Many to One', function(){
+          it('has a many-to-one relationships type',function(){
             expect(employeeToDepartment.relationshipType).to.equal('many-to-one');
           });
-          it('has no ownerSide property',function() {
+          it('has no ownerSide property',function(){
             expect(employeeToDepartment.ownerSide).to.be.undefined;
           });
         });
 
-        describe('Job to Task : Many to Many owner side', function() {
-          it('has a ownerSide property at true ',function() {
+        describe('Job to Task : Many to Many owner side', function(){
+          it('has a ownerSide property at true ',function(){
             expect(jobToTask.ownerSide).to.equal(true);
           });
-          it('has a many-to-many relationships type',function() {
+          it('has a many-to-many relationships type',function(){
             expect(jobToTask.relationshipType).to.equal('many-to-many');
           });
-          it("has a relationshipFieldName set at 'tasks' ",function() {
+          it("has a relationshipFieldName set at 'tasks' ",function(){
             expect(jobToTask.relationshipFieldName).to.equal('tasks');
           });
         });
 
-        describe('Task to Job: Many to Many not owner side', function() {
-          it('has a ownerSide property at false ',function() {
+        describe('Task to Job: Many to Many not owner side', function(){
+          it('has a ownerSide property at false ',function(){
             expect(taskToJob.ownerSide).to.equal(false);
           });
-          it('has a many-to-many relationships type',function() {
+          it('has a many-to-many relationships type',function(){
             expect(taskToJob.relationshipType).to.equal('many-to-many');
           });
 
-          it("has relationshipFieldName set at 'jobs' ",function() {
+          it("has relationshipFieldName set at 'jobs' ",function(){
             expect(taskToJob.relationshipFieldName).to.equal('jobs');
           });
-          it("has otherEntityRelationshipName set at 'task'", function() {
+          it("has otherEntityRelationshipName set at 'task'", function(){
             expect( taskToJob.otherEntityRelationshipName).to.equal('tasks');
           });
         });
       });
 
-      describe('when the model as the otherEntityField declared in a Many-to-Many relationship', function() {
+      describe('when the model as the otherEntityField declared in a Many-to-Many relationship', function(){
         var relationship;
-        before(function() {
+        before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldMM.xmi', 'sql');
           var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
-          for(var i=0; i<Object.keys(entities).length; i++) {
+          for(var i=0; i<Object.keys(entities).length; i++){
             var classId = Object.keys(entities)[i];
             var relationships = entities[classId].relationships;
             for(var j=0; j<relationships.length; j++) {
@@ -440,22 +434,22 @@ describe('EntitiesCreator ', function() {
             }
           }
         });
-        it('has the property otherEntityField ', function() {
+        it('has the property otherEntityField ', function(){
           expect(relationship.otherEntityField).to.be.equal('otherOwner');
         });
       });
 
 
-      describe('when the model as the otherEntityField declared in a One-to-Many relationship', function() {
+      describe('when the model as the otherEntityField declared in a One-to-Many relationship', function(){
         var relationship;
-        before(function() {
+        before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldOM.xmi', 'sql');
           var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
-          for(var i=0; i<Object.keys(entities).length; i++) {
+          for(var i=0; i<Object.keys(entities).length; i++){
             var classId = Object.keys(entities)[i];
             var relationships = entities[classId].relationships;
             for(var j=0; j<relationships.length; j++) {
@@ -468,7 +462,7 @@ describe('EntitiesCreator ', function() {
             }
           }
         });
-        it('has the property otherEntityField ', function() {
+        it('has the property otherEntityField ', function(){
           expect(relationship.otherEntityField).to.be.equal('otherOne');
         });
       });
@@ -511,19 +505,19 @@ describe('EntitiesCreator ', function() {
     });
   });
   });
-  describe('#createEntities with an entity called USER ', function() {
-    before(function() {
+  describe('#createEntities with an entity called USER ', function(){
+    before(function(){
       creatorUser.createEntities();
     });
-    it('there are less Entities as Classes when there is a Class called \'User\'', function() {
+    it('there are less Entities as Classes when there is a Class called \'User\'', function(){
       expect(Object.keys(creatorUser.entities).length).to.equal(Object.keys(creatorUser.parsedData.classes).length-1);
     });
 
-    describe( 'When an association goes to a USER class ' , function() {
-      before(function() {
+    describe( 'When an association goes to a USER class ' , function(){
+      before(function(){
         creatorUserWrong.createEntities();
       });
-      it('there is a relationship to USER entity after creating entities', function() {
+      it('there is a relationship to USER entity after creating entities', function(){
         expect(Object.keys(creatorUserWrong.entities['_uy4W4g9IEeWa5JwclR5VRw'].relationships).length).not.to.equal(0);
       });
     });
