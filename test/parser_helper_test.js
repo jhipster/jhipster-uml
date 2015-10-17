@@ -41,7 +41,7 @@ describe('ParserHelper', function() {
       describe('when passing valid parameters', function() {
         it('returns true', function() {
           expect(ParserHelper.isOneToMany(true, false)).to.equal(true);
-          expect(ParserHelper.isOneToMany(false, true)).to.equal(true);
+          expect(ParserHelper.isManyToOne(false, true)).to.equal(true);
         });
       });
       describe('when passing invalid parameters', function() {
