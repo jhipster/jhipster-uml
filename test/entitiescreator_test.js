@@ -345,13 +345,13 @@ describe('EntitiesCreator ', function(){
           it('has a one-to-one relationships type',function(){
             expect(employeeToJob.relationshipType).to.equal('one-to-one');
           });
-          it("has a relationshipFieldName set at 'job' ",function(){
+          it("has an relationshipFieldName set at 'job' ",function(){
             expect(employeeToJob.relationshipFieldName).to.equal('job');
           });
-          it("has a otherEntityRelationshipName set at 'employee' ",function(){
+          it("has an otherEntityRelationshipName set at 'employee' ",function(){
             expect(employeeToJob.otherEntityRelationshipName).to.equal('employee');
           });
-          it("has a otherEntityField set at 'id' ",function(){
+          it("has an otherEntityField set at 'id' ",function(){
             expect(employeeToJob.otherEntityField).to.equal('id');
           });
         });
