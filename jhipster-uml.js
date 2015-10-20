@@ -19,12 +19,12 @@ var fs = require('fs'),
 
 var type;
 
-//option DTO
+// option DTO
 var dto = false;
 var listDTO = [];
-//option force
+// option force
 var force = false;
-//option pagination
+// option pagination
 var paginate = false;
 var listPagination = {};
 
