@@ -16,7 +16,6 @@ describe('CassandraTypes', function() {
       expect(types).to.deep.have.members(
         [
           'UUID',
-          'TimeUUID',
           'String',
           'Integer',
           'Long',
@@ -90,10 +89,6 @@ describe('CassandraTypes', function() {
             {
               value: 'UUID',
               name: 'UUID'
-            },
-            {
-              value: 'TimeUUID',
-              name: 'TimeUUID'
             },
             {
               value: 'String',

@@ -99,7 +99,7 @@
 				<qualityScore value="-1"/>
 			</xmi:Extension>
 		</packagedElement>
-		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="DateTime" visibility="public" xmi:id="ekkCF7KD.AACAQR5" xmi:type="uml:PrimitiveType">
+		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="ZonedDateTime" visibility="public" xmi:id="ekkCF7KD.AACAQR5" xmi:type="uml:PrimitiveType">
 			<xmi:Extension extender="Visual Paradigm">
 				<isRoot xmi:value="false"/>
 				<modelType value="Class"/>

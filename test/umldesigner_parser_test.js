@@ -79,7 +79,7 @@ describe('UMLDesignerParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'DateTime', 'BigDecimal' ];
+        var expectedTypes = [ 'ZonedDateTime', 'BigDecimal' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(

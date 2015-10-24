@@ -154,7 +154,7 @@
       <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZS_JjEeSmmZm37nQR-w" name="dateTime"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZS_JjEeSmmZm37nQR-w" name="zonedDateTime"/>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZTPJjEeSmmZm37nQR-w" name="long"/>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iW0ZTfJjEeSmmZm37nQR-w" name="long"/>
 </uml:Model>

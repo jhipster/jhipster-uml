@@ -88,7 +88,7 @@ describe('VisualParadigmParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'BigDecimal', 'DateTime', 'Long' ];
+        var expectedTypes = [ 'BigDecimal', 'ZonedDateTime', 'Long' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(

@@ -88,7 +88,7 @@ describe('ModelioParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'DateTime', 'Long', 'Long' ];
+        var expectedTypes = [ 'ZonedDateTime', 'Long', 'Long' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(

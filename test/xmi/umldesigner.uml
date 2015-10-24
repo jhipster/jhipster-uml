@@ -24,7 +24,7 @@
       <nameExpression xmi:id="_FbXM4Ah1EeWi0sc6-CVAgg"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iBC7QAhyEeWi0sc6-CVAgg" name="DateTime"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_iBC7QAhyEeWi0sc6-CVAgg" name="ZonedDateTime"/>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_19KrcAhyEeWi0sc6-CVAgg" name="BigDecimal"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_kcWlAAj_EeWqoJCeJxiByQ" name="JobHistory">
     <ownedAttribute xmi:id="_oIVHgAj_EeWqoJCeJxiByQ" name="startDate" type="_iBC7QAhyEeWi0sc6-CVAgg"/>

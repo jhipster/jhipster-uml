@@ -20,7 +20,7 @@ describe('SQLTypes', function() {
           'Long',
           'BigDecimal',
           'LocalDate',
-          'DateTime',
+          'ZonedDateTime',
           'Boolean',
           'Enum',
           'Blob',
@@ -111,8 +111,8 @@ describe('SQLTypes', function() {
               name: 'LocalDate'
             },
             {
-              value: 'DateTime',
-              name: 'DateTime'
+              value: 'ZonedDateTime',
+              name: 'ZonedDateTime'
             },
             {
               value: 'Boolean',
