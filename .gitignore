@@ -6,3 +6,5 @@ out/
 .jhipster/
 sonar-project.properties
 .sonar
+coverage/*
+
