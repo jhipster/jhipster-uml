@@ -55,7 +55,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType(null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -66,7 +66,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType('');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -77,7 +77,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType('NoTypeAtAll');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -191,7 +191,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -202,7 +202,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -213,7 +213,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -252,7 +252,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -263,7 +263,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -274,7 +274,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'NoValidation');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });

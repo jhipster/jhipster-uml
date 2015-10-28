@@ -59,7 +59,7 @@ describe('GenMyModelParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -111,7 +111,7 @@ describe('GenMyModelParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -125,7 +125,7 @@ describe('GenMyModelParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -244,7 +244,7 @@ describe('GenMyModelParser', function() {
           it('thows an exception',  function() {
             try {
               parserWrongType.fillClassesAndFields();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
             }
@@ -262,16 +262,3 @@ describe('GenMyModelParser', function() {
     });
   });
 });
-
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();
-
-function WrongValidationException(message) {
-  this.name = 'WrongValidationException';
-  this.message = (message || '');
-}
-WrongValidationException.prototype = new Error();

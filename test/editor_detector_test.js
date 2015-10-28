@@ -9,7 +9,7 @@ describe('EditorDetector#detect', function() {
       it('throws an exception', function() {
         try {
           EditorDetector.detect(null);
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -34,9 +34,3 @@ describe('EditorDetector#detect', function() {
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

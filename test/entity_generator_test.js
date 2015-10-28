@@ -21,8 +21,3 @@ describe('#generateEntities', function() {
   });
 });
 
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

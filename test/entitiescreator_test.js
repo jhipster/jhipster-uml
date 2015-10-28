@@ -33,7 +33,7 @@ describe('EntitiesCreator ', function(){
         try {
           new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
         } catch (error) {
-          throw new ExpectationError();
+          fail();
         }
       });
       it('initializes each of its attributes', function() {
@@ -56,7 +56,7 @@ describe('EntitiesCreator ', function(){
             new EntitiesCreator(null);
             fail();
           }catch(error){
-            expect(error.name).to.equal('NullArgumentException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -468,7 +468,7 @@ describe('EntitiesCreator ', function(){
             {});
           try {
             otherCreator.createEntities();
-            throw new ExpectationError();
+            fail();
           } catch (error) {
             expect(error.name).to.equal('BidirectionalAssociationUseException');
           }
@@ -485,7 +485,7 @@ describe('EntitiesCreator ', function(){
               parserNoSQL_with_relationship.databaseTypes,
               [],
               {});
-            throw new ExpectationError();
+            fail();
           } catch (error) {
             expect(error.name).to.equal('NoSQLModelingException');
           }
@@ -513,9 +513,3 @@ describe('EntitiesCreator ', function(){
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

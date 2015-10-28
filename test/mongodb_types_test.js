@@ -55,7 +55,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.getValidationsForType(null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -66,7 +66,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.getValidationsForType('');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -77,7 +77,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.getValidationsForType('NoTypeAtAll');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -191,7 +191,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -202,7 +202,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -215,7 +215,7 @@ describe('MongoDBTypes', function() {
               'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -258,7 +258,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -269,7 +269,7 @@ describe('MongoDBTypes', function() {
             mongoDBTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -282,7 +282,7 @@ describe('MongoDBTypes', function() {
               'NoValidation');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });

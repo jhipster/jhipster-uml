@@ -75,7 +75,7 @@ describe('VisualParadigmParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -124,7 +124,7 @@ describe('VisualParadigmParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -147,7 +147,7 @@ describe('VisualParadigmParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -188,7 +188,7 @@ describe('VisualParadigmParser', function() {
           './test/xmi/visualparadigm_no_class_name_test.uml',
           'sql'
         ).parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -202,7 +202,7 @@ describe('VisualParadigmParser', function() {
             './test/xmi/visualparadigm_no_attribute_name_test.uml',
             'sql'
           ).parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -260,7 +260,7 @@ describe('VisualParadigmParser', function() {
                 './test/xmi/visualparadigm_wrong_typename.uml',
                 'sql'
               ).parse();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
             }
@@ -301,12 +301,3 @@ describe('VisualParadigmParser', function() {
     });
   });
 });
-
-
-// external functions
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

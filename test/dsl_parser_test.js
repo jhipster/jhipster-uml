@@ -84,8 +84,6 @@ describe("DSL Parser", function(){
 
        expect(parserEnum.parsedData.getEnum('Language').name).to.be.equal("Language");
        expect(parserEnum.parsedData.getEnum('Language').values.length).to.be.equal(4);
-       //expect(parserEnum.fields['language'].type)
-     //  expect(parserEnum.fields['language'].validations)
       });
 
     });
@@ -128,7 +126,7 @@ describe("DSL Parser", function(){
         parserUndeclaredEntity.fillClassesAndFields();
       });
 
-      it("thows an UndeclaredEntityException",function(){
+      it("throws an UndeclaredEntityException",function(){
         try{
           parserUndeclaredEntity.fillAssociations();
         }catch(error){

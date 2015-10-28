@@ -341,7 +341,7 @@ describe('ModelioParser', function() {
             it('throws an exception', function() {
               try {
                 parser.fillConstraints();
-                throw new ExpectationError();
+                fail();
               } catch (error) {
                 expect(error.name).to.equal('WrongValidationException');
               }
@@ -367,9 +367,3 @@ describe('ModelioParser', function() {
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

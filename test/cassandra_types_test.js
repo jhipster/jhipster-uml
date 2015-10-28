@@ -51,7 +51,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.getValidationsForType(null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -62,7 +62,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.getValidationsForType('');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -73,7 +73,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.getValidationsForType('NoTypeAtAll');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -171,7 +171,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -182,7 +182,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -195,7 +195,7 @@ describe('CassandraTypes', function() {
               'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -238,7 +238,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -249,7 +249,7 @@ describe('CassandraTypes', function() {
             cassandraTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -262,7 +262,7 @@ describe('CassandraTypes', function() {
               'NoValidation');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });

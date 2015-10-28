@@ -311,6 +311,48 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
       });
+      describe('as they do not have the same number of keys in fields', function() {
+        it('returns false', function() {
+          var firstObject = {
+            fields: [
+              {
+                id: 1,
+                theAnswer: 42,
+                yetAnother: false
+              },
+              {
+                id: 2,
+                notTheAnswer: 43
+              }
+            ],
+            relationships: [
+              {
+                id: 1,
+                anotherField: 44
+              }
+            ]
+          };
+          var secondObject = {
+            fields: [
+              {
+                id: 1,
+                theAnswer: 42
+              },
+              {
+                id: 2,
+                notTheAnswer: 43
+              }
+            ],
+            relationships: [
+              {
+                id: 1,
+                anotherField: 44
+              }
+            ]
+          };
+          expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
+        })
+      });
       describe('as they do not possess the same number of relationships', function() {
         it('returns false', function() {
           var firstObject = {
@@ -354,6 +396,52 @@ describe('ObjectHelper', function() {
             ]
           };
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
+        });
+        describe('as they do not have the same number of fields in a relationship', function() {
+          it('returns false', function() {
+            var firstObject = {
+              fields: [
+                {
+                  id: 1,
+                  theAnswer: 42
+                },
+                {
+                  id: 2,
+                  notTheAnswer: 43
+                }
+              ],
+              relationships: [
+                {
+                  id: 1,
+                  anotherField: 44
+                }
+              ]
+            };
+            var secondObject = {
+              fields: [
+                {
+                  id: 1,
+                  theAnswer: 42
+                },
+                {
+                  id: 2,
+                  notTheAnswer: 43
+                }
+              ],
+              relationships: [
+                {
+                  id: 1,
+                  anotherField: 44,
+                  yetAnother: false
+                },
+                {
+                  id: 2,
+                  anotherField: 44
+                }
+              ]
+            };
+            expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
+          });
         });
       });
     });

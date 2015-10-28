@@ -66,7 +66,7 @@ describe('UMLDesignerParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -117,7 +117,7 @@ describe('UMLDesignerParser', function() {
           initDatabaseTypeHolder('sql'));
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -140,7 +140,7 @@ describe('UMLDesignerParser', function() {
           initDatabaseTypeHolder('sql'));
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -183,7 +183,7 @@ describe('UMLDesignerParser', function() {
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -199,7 +199,7 @@ describe('UMLDesignerParser', function() {
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -260,7 +260,7 @@ describe('UMLDesignerParser', function() {
               initDatabaseTypeHolder('sql'));
             try {
               otherParser.parse();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
             }
@@ -353,9 +353,3 @@ function initDatabaseTypeHolder(databaseTypeName) {
         + "', exiting now.");
   }
 }
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();
