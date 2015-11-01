@@ -108,7 +108,7 @@ describe("DSL Parser", function(){
         expect(parser.parsedData.getAssociation("Departement_employee_to_Employee_departement").type).to.be.equal("Departement");
       });
       it("the injectedFields Object is well formed",function(){
-        expect(parser.parsedData.getInjectedField("Departement_employee").name).to.be.equal("employee");
+        expect(parser.parsedData.getInjectedField("Departement_employee").name).to.be.equal("Employee");
         expect(parser.parsedData.getInjectedField("Departement_employee").type).to.be.equal("Employee");
         expect(parser.parsedData.getInjectedField("Departement_employee").association).to.be.equal("Departement_employee_to_Employee_departement");
         expect(parser.parsedData.getInjectedField("Departement_employee").class).to.be.equal("Departement");
