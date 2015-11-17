@@ -104,18 +104,18 @@ describe("DSL Parser", function(){
         expect(Object.keys(parser.parsedData.associations).length).to.be.equal(7);
       });
       it("the associations Object is well formed",function(){
-        expect(parser.parsedData.getAssociation("Departement_employee_to_Employee_departement").name).to.be.equal("departement");
-        expect(parser.parsedData.getAssociation("Departement_employee_to_Employee_departement").type).to.be.equal("Departement");
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").name).to.be.equal("department");
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").type).to.be.equal("Department");
       });
       it("the injectedFields Object is well formed",function(){
-        expect(parser.parsedData.getInjectedField("Departement_employee").name).to.be.equal("Employee");
-        expect(parser.parsedData.getInjectedField("Departement_employee").type).to.be.equal("Employee");
-        expect(parser.parsedData.getInjectedField("Departement_employee").association).to.be.equal("Departement_employee_to_Employee_departement");
-        expect(parser.parsedData.getInjectedField("Departement_employee").class).to.be.equal("Departement");
-        expect(parser.parsedData.getInjectedField("Departement_employee").cardinality).to.be.equal("one-to-many");
+        expect(parser.parsedData.getInjectedField("Department_employee").name).to.be.equal("Employee");
+        expect(parser.parsedData.getInjectedField("Department_employee").type).to.be.equal("Employee");
+        expect(parser.parsedData.getInjectedField("Department_employee").association).to.be.equal("Department_employee_to_Employee_department");
+        expect(parser.parsedData.getInjectedField("Department_employee").class).to.be.equal("Department");
+        expect(parser.parsedData.getInjectedField("Department_employee").cardinality).to.be.equal("one-to-many");
       });
       it("the injectedField id has been injected in the corresponding class", function(){
-        expect(contains(parser.parsedData.getClass("Departement").injectedFields,"Departement_employee")).to.be.equal(true);
+        expect(contains(parser.parsedData.getClass("Department").injectedFields,"Department_employee")).to.be.equal(true);
       });
     });
 
