@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
+    fail = expect.fail,
     _ = require('underscore.string'),
     UMLDesignerParser = require('../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
@@ -218,8 +219,8 @@ describe('UMLDesignerParser', function() {
             initDatabaseTypeHolder('sql'));
         var parsedData = otherParser.parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
-          expect(parsedData.getClass(classData)).not.to.be.undefined;
-          expect(parsedData.getClass(classData)).not.to.equal('');
+          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+          expect(parsedData.getClass(classData).comment).not.to.equal('');
         });
       });
     });
@@ -237,8 +238,8 @@ describe('UMLDesignerParser', function() {
             initDatabaseTypeHolder('sql'));
           var parsedData = otherParser.parse();
           Object.keys(parsedData.fields).forEach(function(fieldData) {
-            expect(parsedData.getField(fieldData)).not.to.be.undefined;
-            expect(parsedData.getField(fieldData)).not.to.equal('');
+            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
+            expect(parsedData.getField(fieldData).comment).not.to.equal('');
           });
         });
 
@@ -250,6 +251,24 @@ describe('UMLDesignerParser', function() {
             }
           });
           expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
+        });
+
+        describe('when trying to add a field whose name is capitalized', function() {
+          it('decapitalizes and adds it', function() {
+            var otherParser = new UMLDesignerParser(
+              getRootElement(
+                readFileContent('./test/xmi/umldesigner_capitalized_field_names.uml')),
+              initDatabaseTypeHolder('sql'));
+            var parsedData = otherParser.parse();
+            if (Object.keys(parsedData.fields).length === 0) {
+              fail();
+            }
+            Object.keys(parsedData.fields).forEach(function(fieldData) {
+              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+                fail();
+              }
+            });
+          });
         });
 
         describe('when having an invalid type in the XMI', function() {
@@ -291,18 +310,6 @@ describe('UMLDesignerParser', function() {
     describe('#addInjectedField', function() {
       it('adds the injected fields', function() {
         expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(10);
-      });
-
-      it("adds the comment if there's any", function(){
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-              readFileContent('./test/xmi/umldesigner_comments.uml')),
-            initDatabaseTypeHolder('sql'));
-        var parsedData = otherParser.parse();
-        Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
-        });
       });
     });
   });

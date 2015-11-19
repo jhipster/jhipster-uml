@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
+    fail = expect.fail,
     ParserFactory = require('../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
@@ -220,8 +221,8 @@ describe('VisualParadigmParser', function() {
           'sql'
         ).parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
-          expect(parsedData.getClass(classData)).not.to.be.undefined;
-          expect(parsedData.getClass(classData)).not.to.equal('');
+          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+          expect(parsedData.getClass(classData).comment).not.to.equal('');
         });
       });
     });
@@ -238,8 +239,8 @@ describe('VisualParadigmParser', function() {
             'sql'
           ).parse();
           Object.keys(parsedData.fields).forEach(function(fieldData) {
-            expect(parsedData.getField(fieldData)).not.to.be.undefined;
-            expect(parsedData.getField(fieldData)).not.to.equal('');
+            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
+            expect(parsedData.getField(fieldData).comment).not.to.equal('');
           });
         });
 
@@ -251,6 +252,21 @@ describe('VisualParadigmParser', function() {
             }
           });
           expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
+        });
+
+        describe('when trying to add a field whose name is capitalized', function() {
+          it('decapitalizes and adds it', function() {
+            var otherParser = ParserFactory.createParser('./test/xmi/visualparadigm_capitalized_field_names.uml', 'sql');
+            var parsedData = otherParser.parse();
+            if (Object.keys(parsedData.fields).length === 0) {
+              fail();
+            }
+            Object.keys(parsedData.fields).forEach(function(fieldData) {
+              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+                fail();
+              }
+            });
+          });
         });
 
         describe('when having an invalid type in the XMI', function() {
@@ -294,8 +310,8 @@ describe('VisualParadigmParser', function() {
           'sql'
         ).parse();
         Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
+          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
         });
       });
     });
