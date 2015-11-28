@@ -21,7 +21,7 @@ describe('ModelioParser', function() {
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 19, 20, 21 ]);
+      ).to.deep.equal([ 19, 20 ]);
     });
 
     it('finds the enumerations in the document', function() {
@@ -89,7 +89,7 @@ describe('ModelioParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'ZonedDateTime', 'Long', 'Long' ];
+        var expectedTypes = [ 'ZonedDateTime', 'Long' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(

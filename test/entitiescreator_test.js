@@ -74,19 +74,10 @@ describe('EntitiesCreator ', function(){
           expect(creator.getEntities().length).equal(creator.getClasses().length);
         });
         it('all entities attributes are set',function(){
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerOneToOne).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerManyToMany).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOneToMany).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainLocalDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainCustomTime).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBigDecimal).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDateTime).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].changelogDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].dto).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].pagination).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].validation).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBlob).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].changelogDate).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].dto).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].pagination).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].javadoc).to.be.defined;
         });
       });
     });
@@ -397,7 +388,7 @@ describe('EntitiesCreator ', function(){
             expect(taskToJob.relationshipType).to.equal('many-to-many');
           });
           it("has otherEntityRelationshipName set at 'task'", function(){
-            expect( taskToJob.otherEntityRelationshipName).to.equal('tasks');
+            expect( taskToJob.otherEntityRelationshipName).to.equal('task');
           });
         });
       });
