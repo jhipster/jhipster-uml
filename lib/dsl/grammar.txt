@@ -21,50 +21,50 @@
 start = p:prog { return p; }
   
 prog
-  = space* ed:entityDecl space* p:prog                                                 {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
-  / space* rd:relationDecl space* p:prog                                               {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums};}
-  / space* end:enumDecl space* p:prog                                                  {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums)};}
-  / ""                                                                                 {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
+  = space* ed:entityDecl space* p:prog {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
+  / space* rd:relationDecl space* p:prog {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums};}
+  / space* end:enumDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums)};}
+  / ""  {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
 
 
 //Entities
 entityDecl
-  = jd:Comment? space* "entity" space* e:ENTITYNAME space* eb:entityBody                {return {"name" : e, "body":eb, "javadoc":jd};}
-  / "entity" space* e:ENTITYNAME space* eb:entityBody                                  {return {"name" : e, "body":eb, "javadoc":""};}           
+  = jd:Comment? space* "entity" space* e:ENTITYNAME space* eb:entityBody {return {"name" : e, "body":eb, "javadoc":jd};}
+  / "entity" space* e:ENTITYNAME space* eb:entityBody {return {"name" : e, "body":eb, "javadoc":""};}           
  
 entityBody
-  = "{" space* fdl:fieldDeclList space* "}"                                            {return fdl;}
-  / ""                                                                                 {return {};}
+  = "{" space* fdl:fieldDeclList space* "}" {return fdl;}
+  / "" {return {};}
 
 fieldDeclList
   = com:Comment? space* f:FIELDNAME space t:type space* vl:validationList? space* ","? space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl, "javadoc": com}], fdl );}
-  / com:Comment? space* f:FIELDNAME space t:type space* vl:validationList                                     {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
-  / ""                                                                                   {return [];}                                                
+  / com:Comment? space* f:FIELDNAME space t:type space* vl:validationList {return [{"name" : f, "type" : t, "validations" : vl, "javadoc": com}];}
+  / "" {return [];}                                                
 
 validationList
-  = v:validation space* vl:validationList                                              {return concat([v], vl);}                                    
-  / ""                                                                                   {return [];}
+  = v:validation space* vl:validationList {return concat([v], vl);}                                    
+  / "" {return [];}
 
 //Relationship
 relationDecl
-  = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}"    {rb.cardinality = rt; return rb;}  
+  = 'relationship' space rt:relationshipType space* "{" space* rb:relationshipBody space* "}" {rb.cardinality = rt; return rb;}  
 
 relationshipBody
-  = from:relationshipSide "to" space to:relationshipSide                               {return {"from" : from , "to" : to};}
+  = from:relationshipSide "to" space to:relationshipSide {return {"from" : from , "to" : to};}
 
 relationshipSide          
-  = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space*               {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
-  / jd:Comment? space* e:ENTITYNAME space* "{" space* "}" space*                       {return {"name" :e, "injectedfield" : anonymous, "javadoc": jd};}
-  / e:ENTITYNAME space                                                                 {return {"name" :e, "injectedfield" : unidir, "javadoc": ''};}
+  = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space* {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
+  / jd:Comment? space* e:ENTITYNAME space* "{" space* "}" space* {return {"name" :e, "injectedfield" : anonymous, "javadoc": jd};}
+  / e:ENTITYNAME space {return {"name" :e, "injectedfield" : unidir, "javadoc": ''};}
 
 
 //Enum
 enumDecl
-  = 'enum' space e:ENUMNAME space* '{' space* el:enumPropList space* '}'                    {return {"name":e, "values" : el };}
+  = 'enum' space e:ENUMNAME space* '{' space* el:enumPropList space* '}' {return {"name":e, "values" : el };}
 
 enumPropList
-  = e:ENUMPROP space* ',' space* el:enumPropList                                       {return concat([e],el);}
-  / e:ENUMPROP                                                                         {return [e];} 
+  = e:ENUMPROP space* ',' space* el:enumPropList {return concat([e],el);}
+  / e:ENUMPROP {return [e];} 
 
 
 
@@ -73,12 +73,12 @@ relationshipType = "OneToOne" {return "one-to-one";} / "OneToMany" {return "one-
 type "a type" = head:[A-Z]tail:[a-zA-Z0-9]* {return makeString(concat([head],tail));} //we must check afterward if the type is acceptable.
 
 validation 
-  = "required"                                                                         {return {key:'required', value:''};}
-  / "minlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'minlength', value:int};}
-  / "maxlength" space* "(" space* int:INTEGER space* ")"                               {return {key:'maxlength', value:int};}
-  / "max" space* "(" space* int:INTEGER space* ")"                                     {return {key:'max', value:int};}
-  / "min" space* "(" space* int:INTEGER space* ")"                                     {return {key:'min', value:int};}
-  / "pattern" space* "("  apostrophe regexp:REGEXP  apostrophe space* ")"              {return {key:'pattern' , value:regexp};}
+  = "required" {return {key:'required', value:''};}
+  / "minlength" space* "(" space* int:INTEGER space* ")" {return {key:'minlength', value:int};}
+  / "maxlength" space* "(" space* int:INTEGER space* ")" {return {key:'maxlength', value:int};}
+  / "max" space* "(" space* int:INTEGER space* ")" {return {key:'max', value:int};}
+  / "min" space* "(" space* int:INTEGER space* ")" {return {key:'min', value:int};}
+  / "pattern" space* "("  apostrophe regexp:REGEXP  apostrophe space* ")" {return {key:'pattern' , value:regexp};}
 
 
 
@@ -86,32 +86,32 @@ apostrophe "apostrophe"
   = a:["|']                    
 
 REGEXP "a regular expression" 
-  = word:[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/? ]*                               {return makeString(word);}
+  = word:[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/? ]* {return makeString(word);}
 
 ENUMNAME "an enum name"
-  = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
+  = head:[A-Z]tail:[a-zA-Z0-9]* {return makeString(concat([head],tail));}
 
 ENUMPROP "an enum property"
-  = underscore:[_]*head:[A-Z0-9]tail:[A-Z0-9_]*                                                                    {return makeString(concat(concat(underscore,[head]), tail));}
+  = underscore:[_]*head:[A-Z0-9]tail:[A-Z0-9_]* {return makeString(concat(concat(underscore,[head]), tail));}
 
 INTEGER "integer"
-  = int:[0-9]+                                                                         {return parseInt(int.join(""), 10);} 
+  = int:[0-9]+ {return parseInt(int.join(""), 10);} 
 
 INJECTEDFIELDNAME "an injected field"
-  = head:[a-zA-Z]tail:[a-zA-Z0-9()]*                                                     {return makeString(concat([head],tail));}
+  = head:[a-zA-Z]tail:[a-zA-Z0-9()]* {return makeString(concat([head],tail));}
 
 ENTITYNAME "an entity name"  
-  = head:[A-Z]tail:[a-zA-Z0-9]*                                                        {return makeString(concat([head],tail));}
+  = head:[A-Z]tail:[a-zA-Z0-9]* {return makeString(concat([head],tail));}
 
 FIELDNAME "a field name"
-  = head:[a-zA-Z]tail:[a-zA-Z0-9]*                                                     {return makeString(concat([head],tail));}               
+  = head:[a-zA-Z]tail:[a-zA-Z0-9]* {return makeString(concat([head],tail));}               
 
 space "a space"
-  = space:['\n'|'\t'|'\r'|' '|\u2028|\u2029]+      
+  = space:['\n'|'\t'|'\r'|' '|\u2028|\u2029]+ 
 
 
 /******************               COMMENT                 ***********************/
-Comment = ComStart nc:Not_Com* ComStop      {return makeString(nc);}
+Comment = ComStart nc:Not_Com* ComStop {return makeString(nc);}
 
 ComStart = "/**"
 
