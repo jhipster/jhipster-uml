@@ -16,16 +16,22 @@
   }
   var unidir = "*unidir*";
   var anonymous = "*anonymous*";
+  var entities = [];
+  var relationships = [];
+  var enums = [];
+  var dto = {};
+  var pagination = {};
 }
 
 start = p:prog { return p; }
   
 prog
-  = space* ed:entityDecl space* p:prog {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums};}
-  / space* rd:relationDecl space* p:prog {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums};}
-  / space* end:enumDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums)};}
-  / ""  {return {"entities" : [],"relationships": [], "enums": []};}                                                                 
-
+  = space* ed:entityDecl space* p:prog {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums, "dto": p.dto, "pagination": p.pagination};}
+  / space* rd:relationDecl space* p:prog {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums, "dto": p.dto, "pagination": p.pagination};}
+  / space* end:enumDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums), "dto": p.dto, "pagination": p.pagination};}
+  / space* dto:dtoDecl space* p:prog {return {"entities": p.entities, "relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination};}
+  / space* pagination:pagiDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination};}
+  / "" {return {"entities" : entities,"relationships": relationships, "enums": enums, "dto": dto, "pagination": pagination};}                                                                 
 
 //Entities
 entityDecl
@@ -66,7 +72,21 @@ enumPropList
   = e:ENUMPROP space* ',' space* el:enumPropList {return concat([e],el);}
   / e:ENUMPROP {return [e];} 
 
+// DTO
+dtoDecl
+  = 'dto' space+ decl:subDtoDecl { dto[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
 
+subDtoDecl
+ = e:ENTITYNAME space* ',' space* sub:subDtoDecl {return concat([e], sub);}
+ / e:ENTITYNAME space* 'with' space* method:([a-z]+) {return [e, method.toString().replace(/,/g,'')];}
+
+// Pagination
+pagiDecl
+  = 'paginate' space+ decl:subPagiDecl { pagination[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
+
+subPagiDecl
+  = e:ENTITYNAME space* ',' space* sub:subPagiDecl {return concat([e], sub);}
+  / e:ENTITYNAME space* 'with' space* method:([a-z-]+) {return [e, method.toString().replace(/,/g,'')];}
 
 relationshipType = "OneToOne" {return "one-to-one";} / "OneToMany" {return "one-to-many";} / "ManyToOne" {return "many-to-one";} / "ManyToMany" {return "many-to-many";}
 
@@ -76,6 +96,8 @@ validation
   = "required" {return {key:'required', value:''};}
   / "minlength" space* "(" space* int:INTEGER space* ")" {return {key:'minlength', value:int};}
   / "maxlength" space* "(" space* int:INTEGER space* ")" {return {key:'maxlength', value:int};}
+  / "minbytes" space* "(" space* int:INTEGER space* ")" {return {key:'minlength', value:int};}
+  / "maxbytes" space* "(" space* int:INTEGER space* ")" {return {key:'maxlength', value:int};}
   / "max" space* "(" space* int:INTEGER space* ")" {return {key:'max', value:int};}
   / "min" space* "(" space* int:INTEGER space* ")" {return {key:'min', value:int};}
   / "pattern" space* "("  apostrophe regexp:REGEXP  apostrophe space* ")" {return {key:'pattern' , value:regexp};}
@@ -108,7 +130,6 @@ FIELDNAME "a field name"
 
 space "a space"
   = space:['\n'|'\t'|'\r'|' '|\u2028|\u2029]+ 
-
 
 /******************               COMMENT                 ***********************/
 Comment = ComStart nc:Not_Com* ComStop {return makeString(nc);}
