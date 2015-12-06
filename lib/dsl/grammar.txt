@@ -56,7 +56,7 @@ relationDecl
   = 'relationship' space rt:relationshipType space* "{" space* JDLComment? space* rb:relationshipBody space* "}" {rb.cardinality = rt; return rb;}  
 
 relationshipBody
-  = from:relationshipSide space* JDLComment? space* "to" space* JDLComment? space to:relationshipSide space* JDLComment? {return {"from" : from , "to" : to};}
+  = from:relationshipSide space* JDLComment? space* "to" space* JDLComment? space* to:relationshipSide space* JDLComment? {return {"from" : from , "to" : to};}
 
 relationshipSide          
   = jd:Comment? space* e:ENTITYNAME space* "{" space* i:INJECTEDFIELDNAME space* "}" space* {return {"name" :e, "injectedfield" : i, "javadoc": jd};}
