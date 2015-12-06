@@ -132,11 +132,12 @@ space "a space"
   = space:['\n'|'\t'|'\r'|' '|\u2028|\u2029]+ 
 
 /******************               COMMENT                 ***********************/
-Comment = ComStart nc:Not_Com* ComStop {return makeString(nc);}
+Comment 
+  = ComStart nc:Not_Com* ComStop {return makeString(nc);}
 
-ComStart = "/**"
+ComStart = "/*" [*]*
 
-ComStop = "*/"
+ComStop = [*]+ "/"
 
 JDLComment = "//"
 
