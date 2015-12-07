@@ -21,17 +21,19 @@
   var enums = [];
   var dto = {};
   var pagination = {};
+  var service = {};
 }
 
 start = p:prog { return p; }
   
 prog
-  = space* ed:entityDecl space* p:prog {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums, "dto": p.dto, "pagination": p.pagination};}
-  / space* rd:relationDecl space* p:prog {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums, "dto": p.dto, "pagination": p.pagination};}
-  / space* end:enumDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums), "dto": p.dto, "pagination": p.pagination};}
-  / space* dto:dtoDecl space* p:prog {return {"entities": p.entities, "relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination};}
-  / space* pagination:pagiDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination};}
-  / "" {return {"entities" : entities,"relationships": relationships, "enums": enums, "dto": dto, "pagination": pagination};}                                                                 
+  = space* ed:entityDecl space* p:prog {return {"entities" : concat([ed],p.entities) , "relationships" : p.relationships, "enums" : p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* rd:relationDecl space* p:prog {return {"entities" : p.entities, "relationships" : concat([rd],p.relationships), "enums" : p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* end:enumDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": concat([end], p.enums), "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* dto:dtoDecl space* p:prog {return {"entities": p.entities, "relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* pagination:pagiDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* service:serviceDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / "" {return {"entities" : entities,"relationships": relationships, "enums": enums, "dto": dto, "pagination": pagination, "service": service};}                                                                 
 
 //Entities
 entityDecl
@@ -87,6 +89,15 @@ pagiDecl
 subPagiDecl
   = e:ENTITYNAME space* ',' space* sub:subPagiDecl {return concat([e], sub);}
   / e:ENTITYNAME space* 'with' space* method:([a-z-]+) {return [e, method.toString().replace(/,/g,'')];}
+
+// Service
+serviceDecl
+  = 'service' space+ decl:subServiceDecl space* JDLComment? { service[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
+
+subServiceDecl
+  = e:ENTITYNAME space* ',' space* sub:subServiceDecl {return concat([e], sub);}
+  / e:ENTITYNAME space* 'with' space* method:([a-zA-Z-]+) {return [e, method.toString().replace(/,/g,'')];}
+
 
 relationshipType = "OneToOne" {return "one-to-one";} / "OneToMany" {return "one-to-many";} / "ManyToOne" {return "many-to-one";} / "ManyToMany" {return "many-to-many";}
 
