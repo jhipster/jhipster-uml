@@ -27,6 +27,9 @@ var force = false;
 // option pagination
 var paginate = false;
 var listPagination = {};
+// option service
+var service = false;
+var listService = {};
 
 process.argv.forEach(function(val, index) {
   switch(val) {
@@ -43,6 +46,9 @@ process.argv.forEach(function(val, index) {
       break;
     case '-paginate':
       paginate = true;
+      break;
+    case '-service':
+      service = true;
       break;
     case '-help':
       dislayHelp();
@@ -81,22 +87,27 @@ try {
       filterScheduledClasses(parsedData.userClassId, scheduledClasses);
   }
 
-  if(paginate) {
+  if (dto) {
+    listDTO = jhipsterOptionHelper.askForDTO(parsedData.classes);
+  }
+
+  if (paginate) {
     listPagination = jhipsterOptionHelper.askForPagination(parsedData.classes);
   }
 
-  if(dto) {
-    listDTO = jhipsterOptionHelper.askForDTO(parsedData.classes);
+  if (service) {
+    listService = jhipsterOptionHelper.askForService(parsedData.classes);
   }
 
   var creator = new EntitiesCreator(
     parsedData,
     parser.databaseTypes,
     listDTO,
-    listPagination);
+    listPagination,
+    listService);
 
   creator.createEntities();
-  if(!force) {
+  if (!force) {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);
