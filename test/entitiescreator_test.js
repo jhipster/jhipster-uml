@@ -5,25 +5,25 @@ var expect = require('chai').expect,
     ParserFactory = require('../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
-var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [],{});
+var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [], {}, {});
 
 /* The variables set to do all the constraints */
 var parserConstraint =
   ParserFactory.createParser('./test/xmi/test_constraint.xmi', 'sql');
 var creatorConstraint =
-  new EntitiesCreator(parserConstraint.parse(), parserConstraint.databaseTypes, [],{});
+  new EntitiesCreator(parserConstraint.parse(), parserConstraint.databaseTypes, [], {}, {});
 
 /* the entity creator set to do the User Entity tests */
 var parserUser =
   ParserFactory.createParser('./test/xmi/user_entity_test.xmi', 'sql');
 var creatorUser =
-  new EntitiesCreator(parserUser.parse(), parserUser.databaseTypes, [],{});
+  new EntitiesCreator(parserUser.parse(), parserUser.databaseTypes, [], {}, {});
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong =
   ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
 var creatorUserWrong =
-  new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes,[],{});
+  new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes, [], {}, {});
 
 
 describe('EntitiesCreator ', function(){
@@ -31,7 +31,7 @@ describe('EntitiesCreator ', function(){
     describe('when passing valid argument ', function(){
       it('Successfully initialize Entities Parser', function(){
         try {
-          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
+          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [], {}, {});
         } catch (error) {
           fail();
         }
@@ -98,7 +98,7 @@ describe('EntitiesCreator ', function(){
         var otherParser =
           ParserFactory.createParser('./test/xmi/modelio_blob.xmi', 'sql');
         var otherCreator =
-          new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes,[],{});
+          new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
         otherCreator.createEntities();
 
         it('changes the type of blob fields from Blob to byte[]', function() {
@@ -124,7 +124,7 @@ describe('EntitiesCreator ', function(){
         var otherParser = ParserFactory.createParser(
           './test/xmi/modelio_enum_test.xmi',
           'sql');
-        var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser. databaseTypes,[],{});
+        var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser. databaseTypes, [], {}, {});
         otherCreator.createEntities();
 
         var enumFields;
@@ -398,7 +398,7 @@ describe('EntitiesCreator ', function(){
         before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldMM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
+          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
@@ -426,7 +426,7 @@ describe('EntitiesCreator ', function(){
         before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldOM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
+          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
@@ -456,6 +456,7 @@ describe('EntitiesCreator ', function(){
             otherParser.parse(),
             otherParser.databaseTypes,
             [],
+            {},
             {});
           try {
             otherCreator.createEntities();
