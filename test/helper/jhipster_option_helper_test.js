@@ -2,9 +2,9 @@
 
 var expect = require('chai').expect,
     fail = expect.fail,
-    isAValidDTO = require('../../lib/helper/jhipster_option_helper').isAValidDTO,
-    isAValidPagination = require('../../lib/helper/jhipster_option_helper').isAValidPagination,
-    isAValidService = require('../../lib/helper/jhipster_option_helper').isAValidService;
+    isAValidDTO = require('../../lib/helpers/jhipster_option_helper').isAValidDTO,
+    isAValidPagination = require('../../lib/helpers/jhipster_option_helper').isAValidPagination,
+    isAValidService = require('../../lib/helpers/jhipster_option_helper').isAValidService;
 
 describe('#isAValidDTO', function() {
   describe('when passing a valid DTO option', function() {
