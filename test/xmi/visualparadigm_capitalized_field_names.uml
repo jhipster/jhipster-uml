@@ -12,20 +12,8 @@
 			</eAnnotations>
 			<appliedProfile href="visualparadigm_test.profile.uml#p9OYF7KD.AACAQAQ_profile"/>
 		</profileApplication>
-
 		<packagedElement isAbstract="false" isActive="false" isLeaf="false" name="Job" visibility="public" xmi:id="v8ZYF7KD.AACAQOP" xmi:type="uml:Class">
-			<xmi:Extension extender="Visual Paradigm">
-				<isRoot xmi:value="false"/>
-				<modelType value="Class"/>
-				<businessModel xmi:value="false"/>
-				<qualityScore value="-1"/>
-			</xmi:Extension>
 			<ownedAttribute aggregation="none" isDerived="false" isDerivedUnion="false" isID="false" isLeaf="false" isReadOnly="false" isStatic="false" name="Count" type="long_id" visibility="private" xmi:id="ZxFYF7KD.AACAQOU" xmi:type="uml:Property">
-				<xmi:Extension extender="Visual Paradigm">
-					<attribute/>
-					<isVisble xmi:value="true"/>
-					<qualityScore value="-1"/>
-				</xmi:Extension>
 			</ownedAttribute>
 		</packagedElement>
 		<packagedElement name="long" visibility="public" xmi:id="long_id" xmi:type="uml:DataType"/>
