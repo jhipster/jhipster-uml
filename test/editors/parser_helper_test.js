@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    ParserHelper = require('../lib/editors/parser_helper');
+    ParserHelper = require('../../lib/editors/parser_helper');
 
 describe('ParserHelper', function() {
   describe('isAnId', function() {

@@ -1,13 +1,13 @@
 "use strict"
 
-var DSLParser = require("../lib/dsl/dsl_parser"),
+var DSLParser = require("../../lib/dsl/dsl_parser"),
     fs = require('fs'),
-    pegParser = require('../lib/dsl/jhGrammar'),
+    pegParser = require('../../lib/dsl/jhGrammar'),
     expect = require('chai').expect,
     fail = expect.fail,
-    SQLTypes = require('../lib/types/sql_types'),
-    MongoDBTypes = require('../lib/types/mongodb_types'),
-    CassandraTypes = require('../lib/types/cassandra_types');
+    SQLTypes = require('../../lib/types/sql_types'),
+    MongoDBTypes = require('../../lib/types/mongodb_types'),
+    CassandraTypes = require('../../lib/types/cassandra_types');
 
 var fileName = "test/jh/oracle.jh";
 var parser = new DSLParser(fileName, initDatabaseTypeHolder('sql'));

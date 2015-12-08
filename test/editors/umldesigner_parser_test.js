@@ -3,12 +3,12 @@
 var expect = require('chai').expect,
     fail = expect.fail,
     _ = require('underscore.string'),
-    UMLDesignerParser = require('../lib/editors/umldesigner_parser'),
+    UMLDesignerParser = require('../../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
-    SQLTypes = require('../lib/types/sql_types'),
-    MongoDBTypes = require('../lib/types/mongodb_types'),
-    CassandraTypes = require('../lib/types/cassandra_types');
+    SQLTypes = require('../../lib/types/sql_types'),
+    MongoDBTypes = require('../../lib/types/mongodb_types'),
+    CassandraTypes = require('../../lib/types/cassandra_types');
 
 var parser = new UMLDesignerParser(
   getRootElement(readFileContent('./test/xmi/umldesigner.uml')),

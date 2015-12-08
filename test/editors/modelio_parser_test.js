@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect,
     fail = expect.fail,
-    ParserFactory = require('../lib/editors/parser_factory');
+    ParserFactory = require('../../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 

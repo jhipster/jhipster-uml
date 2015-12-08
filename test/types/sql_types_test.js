@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    SQLTypes = require('../lib/types/sql_types');
+    SQLTypes = require('../../lib/types/sql_types');
 
 var sqlTypes;
 

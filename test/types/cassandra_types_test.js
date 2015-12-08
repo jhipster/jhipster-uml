@@ -1,31 +1,27 @@
 'use strict';
 
 var expect = require('chai').expect,
-    MongoDBTypes = require('../lib/types/mongodb_types');
+    CassandraTypes = require('../../lib/types/cassandra_types');
 
-var mongoDBTypes;
+var cassandraTypes;
 
-describe('MongoDBTypes', function() {
+describe('CassandraTypes', function() {
   before(function() {
-    mongoDBTypes = new MongoDBTypes();
+    cassandraTypes = new CassandraTypes();
   });
 
   describe('#getTypes', function() {
     it('only returns the supported type list', function() {
-      var types = mongoDBTypes.getTypes();
+      var types = cassandraTypes.getTypes();
       expect(types).to.deep.have.members(
         [
+          'UUID',
           'String',
           'Integer',
           'Long',
           'BigDecimal',
-          'LocalDate',
-          'ZonedDateTime',
+          'Date',
           'Boolean',
-          'Enum',
-          'Blob',
-          'AnyBlob',
-          'ImageBlob',
           'Float',
           'Double'
         ]
@@ -36,7 +32,7 @@ describe('MongoDBTypes', function() {
   describe('#getValidationsForType', function() {
     describe('when passing a valid type', function() {
       it('returns only the validation list for it', function() {
-        var validations = mongoDBTypes.getValidationsForType('String');
+        var validations = cassandraTypes.getValidationsForType('String');
         expect(validations).to.deep.have.members(
           [
             'required',
@@ -52,7 +48,7 @@ describe('MongoDBTypes', function() {
       describe('because it is null', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.getValidationsForType(null);
+            cassandraTypes.getValidationsForType(null);
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -63,7 +59,7 @@ describe('MongoDBTypes', function() {
       describe('because it is blank', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.getValidationsForType('');
+            cassandraTypes.getValidationsForType('');
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -74,7 +70,7 @@ describe('MongoDBTypes', function() {
       describe('because it does not exist', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.getValidationsForType('NoTypeAtAll');
+            cassandraTypes.getValidationsForType('NoTypeAtAll');
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -88,8 +84,12 @@ describe('MongoDBTypes', function() {
     it(
       'correctly transposes the type list into a name/value object array',
       function() {
-        expect(mongoDBTypes.toValueNameObjectArray()).to.deep.have.members(
+        expect(cassandraTypes.toValueNameObjectArray()).to.deep.have.members(
           [
+            {
+              value: 'UUID',
+              name: 'UUID'
+            },
             {
               value: 'String',
               name: 'String'
@@ -107,32 +107,12 @@ describe('MongoDBTypes', function() {
               name: 'BigDecimal'
             },
             {
-              value: 'LocalDate',
-              name: 'LocalDate'
-            },
-            {
-              value: 'ZonedDateTime',
-              name: 'ZonedDateTime'
+              value: 'Date',
+              name: 'Date'
             },
             {
               value: 'Boolean',
               name: 'Boolean'
-            },
-            {
-              value: 'Enum',
-              name: 'Enum'
-            },
-            {
-              value: 'Blob',
-              name: 'Blob'
-            },
-            {
-              value: 'AnyBlob',
-              name: 'AnyBlob'
-            },
-            {
-              value: 'ImageBlob',
-              name: 'ImageBlob'
             },
             {
               value: 'Float',
@@ -150,26 +130,26 @@ describe('MongoDBTypes', function() {
   describe('#contains', function() {
     describe('when passing a contained type', function() {
       it('returns true', function() {
-        expect(mongoDBTypes.contains('String')).to.be.true;
+        expect(cassandraTypes.contains('String')).to.be.true;
       });
     });
 
     describe('when passing a not contained type', function() {
       describe('that is null', function() {
         it('returns false', function() {
-          expect(mongoDBTypes.contains(null)).to.be.false;
+          expect(cassandraTypes.contains(null)).to.be.false;
         });
       });
 
       describe('that is blank', function() {
         it('returns false', function() {
-          expect(mongoDBTypes.contains('')).to.be.false;
+          expect(cassandraTypes.contains('')).to.be.false;
         });
       });
 
       describe('that has a valid name, but is not contained', function() {
         it('returns false', function() {
-          expect(mongoDBTypes.contains('NoTypeAtAll')).to.be.false;
+          expect(cassandraTypes.contains('NoTypeAtAll')).to.be.false;
         });
       });
     });
@@ -179,7 +159,7 @@ describe('MongoDBTypes', function() {
     describe('when the passed types and validation exist', function() {
       it('returns true', function() {
         expect(
-          mongoDBTypes.isValidationSupportedForType('String', 'required')
+          cassandraTypes.isValidationSupportedForType('String', 'required')
         ).to.be.true;
       });
     });
@@ -188,7 +168,7 @@ describe('MongoDBTypes', function() {
       describe('because it is null', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType(null, 'required');
+            cassandraTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -199,7 +179,7 @@ describe('MongoDBTypes', function() {
       describe('because it is blank', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType('', 'required');
+            cassandraTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -210,7 +190,7 @@ describe('MongoDBTypes', function() {
       describe('because it does not exist', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType(
+            cassandraTypes.isValidationSupportedForType(
               'NoTypeAtAll',
               'required');
             fail();
@@ -225,7 +205,7 @@ describe('MongoDBTypes', function() {
       describe('because it is null', function() {
         it('returns false', function() {
           expect(
-            mongoDBTypes.isValidationSupportedForType('String', null)
+            cassandraTypes.isValidationSupportedForType('String', null)
           ).to.be.false
         });
       });
@@ -233,7 +213,7 @@ describe('MongoDBTypes', function() {
       describe('because it is blank', function() {
         it('returns false', function() {
           expect(
-            mongoDBTypes.isValidationSupportedForType('String', '')
+            cassandraTypes.isValidationSupportedForType('String', '')
           ).to.be.false
         });
       });
@@ -241,7 +221,7 @@ describe('MongoDBTypes', function() {
       describe('because it does not exist', function() {
         it('returns false', function() {
           expect(
-            mongoDBTypes.isValidationSupportedForType(
+            cassandraTypes.isValidationSupportedForType(
               'String',
               'NoValidationAtAll')
           ).to.be.false
@@ -255,7 +235,7 @@ describe('MongoDBTypes', function() {
       describe('because they are null', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType(null, null);
+            cassandraTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -266,7 +246,7 @@ describe('MongoDBTypes', function() {
       describe('because they are blank', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType('', '');
+            cassandraTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
             expect(error.name).to.equal('WrongDatabaseTypeException');
@@ -277,7 +257,7 @@ describe('MongoDBTypes', function() {
       describe('because they do not exist', function() {
         it('throws an exception', function() {
           try {
-            mongoDBTypes.isValidationSupportedForType(
+            cassandraTypes.isValidationSupportedForType(
               'NoTypeAtAll',
               'NoValidation');
             fail();

@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    merge = require('../lib/helper/object_helper').merge,
-    areJHipsterEntitiesEqual = require('../lib/helper/object_helper').areJHipsterEntitiesEqual;
+    merge = require('../../lib/helper/object_helper').merge,
+    areJHipsterEntitiesEqual = require('../../lib/helper/object_helper').areJHipsterEntitiesEqual;
 
 describe('ObjectHelper', function() {
   describe('#merge', function() {

@@ -25,7 +25,7 @@
     "url": "git://github.com/jhipster/jhipster-uml.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/*"
   },
   "dependencies": {
     "chalk": "1.1.1",
