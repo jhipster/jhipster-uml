@@ -4,7 +4,6 @@ test/temp
 npm-debug.log
 out/
 .jhipster/
-sonar-project.properties
 .sonar
 coverage/*
 
