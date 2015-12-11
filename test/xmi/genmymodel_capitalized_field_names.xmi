@@ -5,15 +5,9 @@
     <details xmi:id="_p8f1Q47BEeW2I_OUujANxA" key="gmm-documentation" value="&lt;br>"/>
   </eAnnotations>
   <packageImport xmi:id="_p8f1RI7BEeW2I_OUujANxA">
-    <eAnnotations xmi:id="_p8f1RY7BEeW2I_OUujANxA" source="genmymodel">
-      <details xmi:id="_p8f1Ro7BEeW2I_OUujANxA" key="uuid" value="_P7Z7EA9CEeWa5JwclR5VRw"/>
-    </eAnnotations>
     <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
   </packageImport>
   <packageImport xmi:id="_p8f1R47BEeW2I_OUujANxA">
-    <eAnnotations xmi:id="_p8f1SI7BEeW2I_OUujANxA" source="genmymodel">
-      <details xmi:id="_p8f1SY7BEeW2I_OUujANxA" key="uuid" value="_P7gBsA9CEeWa5JwclR5VRw"/>
-    </eAnnotations>
     <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
   </packageImport>
   <packagedElement xsi:type="uml:Class" xmi:id="_p8f1So7BEeW2I_OUujANxA" name="MyClass">
@@ -23,7 +17,6 @@
     </eAnnotations>
     <ownedAttribute xmi:id="_p8f1To7BEeW2I_OUujANxA" name="Attribute">
       <eAnnotations xmi:id="_p8f1T47BEeW2I_OUujANxA" source="genmymodel">
-        <details xmi:id="_p8f1UI7BEeW2I_OUujANxA" key="uuid" value="_TE_ToAO0EDOlePwfIFdifg"/>
         <details xmi:id="_p8f1UY7BEeW2I_OUujANxA" key="gmm-documentation" value="This is an attribute &lt;i>comment&lt;/i>.&lt;br>"/>
       </eAnnotations>
       <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
@@ -31,25 +24,15 @@
   </packagedElement>
   <packagedElement xsi:type="uml:Class" xmi:id="_p8f1Uo7BEeW2I_OUujANxA" name="MyClass2">
     <eAnnotations xmi:id="_p8f1U47BEeW2I_OUujANxA" source="genmymodel">
-      <details xmi:id="_p8f1VI7BEeW2I_OUujANxA" key="uuid" value="_GGuiwDOeEDOr3dN48gSgxQ"/>
       <details xmi:id="_p8f1VY7BEeW2I_OUujANxA" key="gmm-documentation" value="Something."/>
     </eAnnotations>
   </packagedElement>
   <packagedElement xsi:type="uml:Association" xmi:id="_p8f1Vo7BEeW2I_OUujANxA" name="MyClass_MyClass2" memberEnd="_p8f1WY7BEeW2I_OUujANxA _p8f1Xo7BEeW2I_OUujANxA" navigableOwnedEnd="_p8f1WY7BEeW2I_OUujANxA _p8f1Xo7BEeW2I_OUujANxA">
-    <eAnnotations xmi:id="_p8f1V47BEeW2I_OUujANxA" source="genmymodel">
-      <details xmi:id="_p8f1WI7BEeW2I_OUujANxA" key="uuid" value="_Cej14FjEEDObb6s5T3PH_g"/>
-    </eAnnotations>
     <ownedEnd xmi:id="_p8f1WY7BEeW2I_OUujANxA" name="MyClass2" type="_p8f1Uo7BEeW2I_OUujANxA" aggregation="composite" association="_p8f1Vo7BEeW2I_OUujANxA">
-      <eAnnotations xmi:id="_p8f1Wo7BEeW2I_OUujANxA" source="genmymodel">
-        <details xmi:id="_p8f1W47BEeW2I_OUujANxA" key="uuid" value="_CehZoVjEEDObb6s5T3PH_g"/>
-      </eAnnotations>
       <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_p8f1XI7BEeW2I_OUujANxA"/>
       <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_p8f1XY7BEeW2I_OUujANxA" value="1"/>
     </ownedEnd>
     <ownedEnd xmi:id="_p8f1Xo7BEeW2I_OUujANxA" name="" type="_p8f1So7BEeW2I_OUujANxA" association="_p8f1Vo7BEeW2I_OUujANxA">
-      <eAnnotations xmi:id="_p8f1X47BEeW2I_OUujANxA" source="genmymodel">
-        <details xmi:id="_p8f1YI7BEeW2I_OUujANxA" key="uuid" value="_CejO0FjEEDObb6s5T3PH_g"/>
-      </eAnnotations>
       <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_p8f1YY7BEeW2I_OUujANxA"/>
       <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_p8f1Yo7BEeW2I_OUujANxA" value="1"/>
     </ownedEnd>
