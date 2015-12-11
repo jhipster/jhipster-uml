@@ -20,6 +20,11 @@ describe('ParserHelper', function() {
         expect(ParserHelper.isAnId('classId', 'Class')).to.equal(true);
       });
     });
+    describe('when passing fields matching: id + Another string', function() {
+      it('returns true', function() {
+        expect(ParserHelper.isAnId('idTest', 'TestClass')).to.equal(true);
+      });
+    });
   });
 
   describe('#getCardinality', function() {
