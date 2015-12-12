@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
+    fail = expect.fail,
     EditorDetector = require('../../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', function() {
