@@ -13,7 +13,7 @@ var fs = require('fs'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory'),
-    jhipsterOptionHelper = require('./lib/helper/jhipster_option_helper'),
+    jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
     generateEntities = require('./lib/entity_generator');
 
 
