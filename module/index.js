@@ -1,5 +1,5 @@
 'use strict';
- 
+
 var editors = require('../lib/editors/editors'),
 	EntitiesCreator = require('../lib/entitiescreator'),
 	ClassScheduler = require('./lib/scheduler'),
