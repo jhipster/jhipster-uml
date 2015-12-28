@@ -16,6 +16,6 @@ module.exports = (function(){
    	self.SQLTypes = new SQLTypes();
    	self.MongoDBTypes = new MongoDBTypes();
    	self.CassandraTypes = new CassandraTypes();
-
+   	
     return self;
 })();
