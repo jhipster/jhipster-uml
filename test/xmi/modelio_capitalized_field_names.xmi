@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_OqmJ8CzPEeWrLrqyNkcLwA" name="blob">
+  <eAnnotations xmi:id="_OqmJ8SzPEeWrLrqyNkcLwA" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_OqmJ8izPEeWrLrqyNkcLwA" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_OqmJ8yzPEeWrLrqyNkcLwA" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OqmJ9izPEeWrLrqyNkcLwA" name="MyClass">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_OqmJ9yzPEeWrLrqyNkcLwA" name="MyAttribute" visibility="public" type="_OqmJ-izPEeWrLrqyNkcLwA" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_OqmJ-izPEeWrLrqyNkcLwA" name="ImageBlob"/>
+</uml:Model>

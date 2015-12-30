@@ -1,12 +1,13 @@
 "use strict"
 
-var DSLParser = require("../lib/dsl/dsl_parser"),
+var DSLParser = require("../../lib/dsl/dsl_parser"),
     fs = require('fs'),
-    pegParser = require('../lib/dsl/jhGrammar'),
+    pegParser = require('../../lib/dsl/jhGrammar'),
     expect = require('chai').expect,
-    SQLTypes = require('../lib/types/sql_types'),
-    MongoDBTypes = require('../lib/types/mongodb_types'),
-    CassandraTypes = require('../lib/types/cassandra_types');
+    fail = expect.fail,
+    SQLTypes = require('../../lib/types/sql_types'),
+    MongoDBTypes = require('../../lib/types/mongodb_types'),
+    CassandraTypes = require('../../lib/types/cassandra_types');
 
 var fileName = "test/jh/oracle.jh";
 var parser = new DSLParser(fileName, initDatabaseTypeHolder('sql'));
@@ -28,10 +29,10 @@ describe("DSL Parser", function(){
   describe("#fillClassesAndFields", function(){
     describe("when the classes and fields are created",function(){
       before(function(){
-       var jh = fs.readFileSync(parser.root).toString();
-       parser.result = pegParser.parse(jh);
-       parser.fillEnums();
-       parser.fillClassesAndFields();
+        var jh = fs.readFileSync(parser.root).toString();
+        parser.result = pegParser.parse(jh);
+        parser.fillEnums();
+        parser.fillClassesAndFields();
       });
 
       it("there is the expected number of classes",function(){
@@ -40,7 +41,7 @@ describe("DSL Parser", function(){
       it("there is the expected number of field",function(){
         expect(Object.keys(parser.parsedData.fields).length).to.be.equal(20);
       });
-      it("the classe Object is well formed",function(){
+      it("the class Object is well formed",function(){
         var classObj = parser.parsedData.classes["Employee"];
         expect(classObj.name).to.be.equals('Employee');
         expect(classObj.fields.length).to.be.equals(7);
@@ -48,15 +49,34 @@ describe("DSL Parser", function(){
         expect(classObj.injectedFields.length).to.be.equals(0);
       });
       it("the field Object is well formed",function(){
-        var firstnameFields = parser.parsedData.fields["Employee_firstName"];
-        expect(firstnameFields.name).to.be.equals("firstName");
-        expect(firstnameFields.type).to.be.equals("String");
-        expect(firstnameFields.validations).to.deep.equal({});
+        var firstNameFields = parser.parsedData.fields["Employee_firstName"];
+        expect(firstNameFields.name).to.be.equals("firstName");
+        expect(firstNameFields.type).to.be.equals("String");
+        expect(firstNameFields.validations).to.deep.equal({});
       });
     });
 
-    describe("When a field has type not supported by JHipster",function(){
-      it("thows an parsing exception",function(){
+    describe('when trying to add a field whose name is capitalized', function() {
+      it('decapitalizes and adds it', function() {
+        var otherParser = new DSLParser(
+          'test/jh/capitalized_field_name.jh',
+          initDatabaseTypeHolder('sql'));
+        var jh = fs.readFileSync(otherParser.root).toString();
+        parser.result = pegParser.parse(jh);
+        parser.fillClassesAndFields();
+        if (Object.keys(parser.parsedData.fields).length === 0) {
+          fail();
+        }
+        Object.keys(parser.parsedData.fields).forEach(function(fieldData) {
+          if (parser.parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+            fail();
+          }
+        });
+      });
+    });
+
+    describe("When a field has a type not supported by JHipster",function(){
+      it("throws an parsing exception",function(){
         try{
           var jh = fs.readFileSync(parserWrongType.root).toString();
           parserWrongType.result = pegParser.parse(jh);
@@ -84,8 +104,6 @@ describe("DSL Parser", function(){
 
        expect(parserEnum.parsedData.getEnum('Language').name).to.be.equal("Language");
        expect(parserEnum.parsedData.getEnum('Language').values.length).to.be.equal(4);
-       //expect(parserEnum.fields['language'].type)
-     //  expect(parserEnum.fields['language'].validations)
       });
 
     });
@@ -93,7 +111,6 @@ describe("DSL Parser", function(){
   });
 
   describe("#fillAssociations", function(){
-
     describe("When the relationships are created",function(){
       before(function(){
         var jh = fs.readFileSync(parser.root).toString();
@@ -106,18 +123,18 @@ describe("DSL Parser", function(){
         expect(Object.keys(parser.parsedData.associations).length).to.be.equal(7);
       });
       it("the associations Object is well formed",function(){
-        expect(parser.parsedData.getAssociation("Departement_employee_to_Employee_departement").name).to.be.equal("departement");
-        expect(parser.parsedData.getAssociation("Departement_employee_to_Employee_departement").type).to.be.equal("Departement");
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").name).to.be.equal("department");
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").type).to.be.equal("Department");
       });
       it("the injectedFields Object is well formed",function(){
-        expect(parser.parsedData.getInjectedField("Departement_employee").name).to.be.equal("employee");
-        expect(parser.parsedData.getInjectedField("Departement_employee").type).to.be.equal("Employee");
-        expect(parser.parsedData.getInjectedField("Departement_employee").association).to.be.equal("Departement_employee_to_Employee_departement");
-        expect(parser.parsedData.getInjectedField("Departement_employee").class).to.be.equal("Departement");
-        expect(parser.parsedData.getInjectedField("Departement_employee").cardinality).to.be.equal("one-to-many");
+        expect(parser.parsedData.getInjectedField("Department_employee").name).to.be.equal("employee");
+        expect(parser.parsedData.getInjectedField("Department_employee").type).to.be.equal("Employee");
+        expect(parser.parsedData.getInjectedField("Department_employee").association).to.be.equal("Department_employee_to_Employee_department");
+        expect(parser.parsedData.getInjectedField("Department_employee").class).to.be.equal("Department");
+        expect(parser.parsedData.getInjectedField("Department_employee").cardinality).to.be.equal("one-to-many");
       });
       it("the injectedField id has been injected in the corresponding class", function(){
-        expect(contains(parser.parsedData.getClass("Departement").injectedFields,"Departement_employee")).to.be.equal(true);
+        expect(contains(parser.parsedData.getClass("Department").injectedFields,"Department_employee")).to.be.equal(true);
       });
     });
 
@@ -128,7 +145,7 @@ describe("DSL Parser", function(){
         parserUndeclaredEntity.fillClassesAndFields();
       });
 
-      it("thows an UndeclaredEntityException",function(){
+      it("throws an UndeclaredEntityException",function(){
         try{
           parserUndeclaredEntity.fillAssociations();
         }catch(error){

@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    ParserFactory = require('../lib/editors/parser_factory');
+    fail = expect.fail,
+    ParserFactory = require('../../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 
@@ -20,7 +21,7 @@ describe('ModelioParser', function() {
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 19, 20, 21 ]);
+      ).to.deep.equal([ 19, 20 ]);
     });
 
     it('finds the enumerations in the document', function() {
@@ -88,7 +89,7 @@ describe('ModelioParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'DateTime', 'Long', 'Long' ];
+        var expectedTypes = [ 'ZonedDateTime', 'Long' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(
@@ -231,8 +232,8 @@ describe('ModelioParser', function() {
         var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
         var parsedData = otherParser.parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
-          expect(parsedData.getClass(classData)).not.to.be.undefined;
-          expect(parsedData.getClass(classData)).not.to.equal('');
+          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+          expect(parsedData.getClass(classData).comment).not.to.equal('');
         });
       });
     });
@@ -246,11 +247,12 @@ describe('ModelioParser', function() {
         it("adds the comment if there's any", function(){
           var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
           var parsedData = otherParser.parse();
-          Object.keys(parsedData.fields).forEach(function(fieldData) {
-            expect(parsedData.getField(fieldData)).not.to.be.undefined;
-            expect(parsedData.getField(fieldData)).not.to.equal('');
+          Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
+            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
+            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
           });
         });
+
       });
 
       describe('#addRegularField', function() {
@@ -261,9 +263,24 @@ describe('ModelioParser', function() {
         it("adds the comment if there's any", function(){
           var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
           var parsedData = otherParser.parse();
-          Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-            expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
-            expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+          Object.keys(parsedData.fields).forEach(function(fieldData) {
+            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
+            expect(parsedData.getField(fieldData).comment).not.to.equal('');
+          });
+        });
+
+        describe('when trying to add a field whose name is capitalized', function() {
+          it('decapitalizes and adds it', function() {
+            var otherParser = ParserFactory.createParser('./test/xmi/modelio_capitalized_field_names.xmi', 'sql');
+            var parsedData = otherParser.parse();
+            if (Object.keys(parsedData.fields).length === 0) {
+              fail();
+            }
+            Object.keys(parsedData.fields).forEach(function(fieldData) {
+              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+                fail();
+              }
+            });
           });
         });
 
@@ -341,7 +358,7 @@ describe('ModelioParser', function() {
             it('throws an exception', function() {
               try {
                 parser.fillConstraints();
-                throw new ExpectationError();
+                fail();
               } catch (error) {
                 expect(error.name).to.equal('WrongValidationException');
               }
@@ -367,9 +384,3 @@ describe('ModelioParser', function() {
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

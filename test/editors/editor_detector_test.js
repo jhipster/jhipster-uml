@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    EditorDetector = require('../lib/editors/editor_detector');
+    fail = expect.fail,
+    EditorDetector = require('../../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', function() {
   describe('when passing an invalid root', function() {
@@ -9,7 +10,7 @@ describe('EditorDetector#detect', function() {
       it('throws an exception', function() {
         try {
           EditorDetector.detect(null);
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -34,9 +35,3 @@ describe('EditorDetector#detect', function() {
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

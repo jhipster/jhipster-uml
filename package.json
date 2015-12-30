@@ -1,7 +1,7 @@
 {
   "name": "jhipster-uml",
-  "version": "1.5.1",
-  "description": "UML support for JHipster via XMI files",
+  "version": "1.5.2",
+  "description": "UML support for JHipster via XMI and JDL files",
   "bin": {
     "jhipster-uml": "./jhipster-uml.js"
   },
@@ -9,7 +9,8 @@
     "generator-jhipster",
     "UML",
     "XMI",
-    "JSON"
+    "JSON",
+    "JDL"
   ],
   "homepage": "https://github.com/jhipster/jhipster-uml",
   "bugs": "https://github.com/jhipster/jhipster-uml/issues",
@@ -24,21 +25,21 @@
     "url": "git://github.com/jhipster/jhipster-uml.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/*"
   },
   "dependencies": {
     "chalk": "1.1.1",
     "underscore.string": "3.2.2",
-    "deasync": "0.1.3",
-    "inquirer": "0.10.1",
-    "xml2js": "0.4.12",
-    "pegjs": "0.9.0",
-    "underscore": "1.8.3"
+    "deasync": "0.1.4",
+    "inquirer": "0.11.0",
+    "xml2js": "0.4.15",
+    "pegjs": "0.9.0"
   },
   "devDependencies": {
-    "mocha": "2.3.3",
-    "chai": "3.3.0",
-    "jsdoc": "3.3.3"
+    "jscover": "1.0.0",
+    "mocha": "2.3.4",
+    "mocha-lcov-reporter": "1.0.0",
+    "chai": "3.4.1"
   },
   "peerDependencies": {},
   "engines": {

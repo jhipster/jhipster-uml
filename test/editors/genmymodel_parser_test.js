@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    ParserFactory = require('../lib/editors/parser_factory');
+    fail = expect.fail,
+    ParserFactory = require('../../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser(
   './test/xmi/genmymodel_evolve.xmi',
@@ -59,7 +60,7 @@ describe('GenMyModelParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -111,7 +112,7 @@ describe('GenMyModelParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -125,7 +126,7 @@ describe('GenMyModelParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -189,8 +190,8 @@ describe('GenMyModelParser', function() {
         var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
         var parsedData = otherParser.parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
-          expect(parsedData.getClass(classData)).not.to.be.undefined;
-          expect(parsedData.getClass(classData)).not.to.equal('');
+          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+          expect(parsedData.getClass(classData).comment).not.to.equal('');
         });
       });
     });
@@ -201,13 +202,15 @@ describe('GenMyModelParser', function() {
           expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(3);
         });
 
-
         it("adds the comment if there's any", function(){
           var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
           var parsedData = otherParser.parse();
+          if (Object.keys(parsedData.fields).length === 0) {
+            fail();
+          }
           Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-            expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
-            expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
+            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
           });
         });
       });
@@ -220,9 +223,12 @@ describe('GenMyModelParser', function() {
         it("adds the comment if there's any", function(){
           var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
           var parsedData = otherParser.parse();
+          if (Object.keys(parsedData.fields).length === 0) {
+            fail();
+          }
           Object.keys(parsedData.fields).forEach(function(fieldData) {
-            expect(parsedData.getField(fieldData)).not.to.be.undefined;
-            expect(parsedData.getField(fieldData)).not.to.equal('');
+            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
+            expect(parsedData.getField(fieldData).comment).not.to.equal('');
           });
         });
 
@@ -236,15 +242,30 @@ describe('GenMyModelParser', function() {
           expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
         });
 
-        describe("when trying to add an injectedFields with an invalid type", function(){
+        describe('when trying to add a field whose name is capitalized', function() {
+          it('decapitalizes and adds it', function() {
+            var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_capitalized_field_names.xmi', 'sql');
+            var parsedData = otherParser.parse();
+            if (Object.keys(parsedData.fields).length === 0) {
+              fail();
+            }
+            Object.keys(parsedData.fields).forEach(function(fieldData) {
+              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+                fail();
+              }
+            });
+          });
+        });
+
+        describe("when trying to add an injectedField with an invalid type", function(){
           before(function() {
             parserWrongType.findElements();
             parserWrongType.fillTypes();
           });
-          it('thows an exception',  function() {
+          it('throws an exception',  function() {
             try {
               parserWrongType.fillClassesAndFields();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
             }
@@ -262,16 +283,3 @@ describe('GenMyModelParser', function() {
     });
   });
 });
-
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();
-
-function WrongValidationException(message) {
-  this.name = 'WrongValidationException';
-  this.message = (message || '');
-}
-WrongValidationException.prototype = new Error();

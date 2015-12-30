@@ -13,20 +13,23 @@ var fs = require('fs'),
     EntitiesCreator = require('./lib/entitiescreator'),
     ClassScheduler = require('./lib/scheduler'),
     ParserFactory = require('./lib/editors/parser_factory'),
-    jhipsterOptionHelper = require('./lib/helper/jhipster_option_helper'),
+    jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
     generateEntities = require('./lib/entity_generator');
 
 
 var type;
 
-//option DTO
+// option DTO
 var dto = false;
 var listDTO = [];
-//option force
+// option force
 var force = false;
-//option pagination
+// option pagination
 var paginate = false;
 var listPagination = {};
+// option service
+var service = false;
+var listService = {};
 
 process.argv.forEach(function(val, index) {
   switch(val) {
@@ -36,6 +39,7 @@ process.argv.forEach(function(val, index) {
       }
       break;
     case '-f':
+    case '-force':
       force = true;
       break;
     case '-dto':
@@ -43,6 +47,9 @@ process.argv.forEach(function(val, index) {
       break;
     case '-paginate':
       paginate = true;
+      break;
+    case '-service':
+      service = true;
       break;
     case '-help':
       dislayHelp();
@@ -81,22 +88,27 @@ try {
       filterScheduledClasses(parsedData.userClassId, scheduledClasses);
   }
 
-  if(paginate) {
+  if (dto) {
+    listDTO = jhipsterOptionHelper.askForDTO(parsedData.classes);
+  }
+
+  if (paginate) {
     listPagination = jhipsterOptionHelper.askForPagination(parsedData.classes);
   }
 
-  if(dto) {
-    listDTO = jhipsterOptionHelper.askForDTO(parsedData.classes);
+  if (service) {
+    listService = jhipsterOptionHelper.askForService(parsedData.classes);
   }
 
   var creator = new EntitiesCreator(
     parsedData,
     parser.databaseTypes,
     listDTO,
-    listPagination);
+    listPagination,
+    listService);
 
   creator.createEntities();
-  if(!force) {
+  if (!force) {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);

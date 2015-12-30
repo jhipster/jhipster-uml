@@ -1,10 +1,10 @@
-entity Departement{
-	departementName String
+entity Department {
+	departmentName String
 }
 
-entity JobHistory{
-	startDate DateTime,
-	endDate DateTime
+entity JobHistory {
+	startDate ZonedDateTime,
+	endDate ZonedDateTime
 }
 
 entity Job {
@@ -14,14 +14,14 @@ entity Job {
 }
 
 
-entity Employee{
+entity Employee {
 	firstName String,
 	lastName String,
 	email String,
 	phoneNumber String,
-	hireDAte DateTime,
+	hireDate ZonedDateTime,
 	salary Long,
-	comissionPct Long
+	commissionPct Long
 }
 
 entity Location {
@@ -31,40 +31,40 @@ entity Location {
 	stateProvince String
 }
 
-entity Task{
+entity Task {
 	title String,
 	description String
 }
 
-entity Country{
+entity Country {
 	countryName String
 }
 
 
-relationship OneToMany{
-	Departement{employee} to Employee{departement}
+relationship OneToMany {
+	Department{employee} to Employee{department}
 }
 
-relationship OneToMany{
+relationship OneToMany {
 	Location{country} to Country{location}
 }
 
-relationship OneToOne{
-	JobHistory{departement} to Departement{jobHistory}
+relationship OneToOne {
+	JobHistory{department} to Department{jobHistory}
 }
 
-relationship OneToOne{
+relationship OneToOne {
 	Employee{manager} to Employee{employee}
 }
 
-relationship OneToOne{
+relationship OneToOne {
 	Employee{job} to Job{Employee}
 }
 
-relationship ManyToMany{
+relationship ManyToMany {
 	Job{tasks} to Task{jobs} 
 }
 
-relationship OneToOne{
-	Departement{location} to Location{department}
+relationship OneToOne {
+	Department{location} to Location{department}
 }

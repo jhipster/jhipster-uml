@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    ParserFactory = require('../lib/editors/parser_factory');
+    fail = expect.fail,
+    ParserFactory = require('../../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
 
@@ -75,7 +76,7 @@ describe('VisualParadigmParser', function() {
       it('throws an exception', function() {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('InvalidTypeException');
         }
@@ -88,7 +89,7 @@ describe('VisualParadigmParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'BigDecimal', 'DateTime', 'Long' ];
+        var expectedTypes = [ 'BigDecimal', 'ZonedDateTime', 'Long' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
             expect(
@@ -124,7 +125,7 @@ describe('VisualParadigmParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -147,7 +148,7 @@ describe('VisualParadigmParser', function() {
           'sql');
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -188,7 +189,7 @@ describe('VisualParadigmParser', function() {
           './test/xmi/visualparadigm_no_class_name_test.uml',
           'sql'
         ).parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -202,7 +203,7 @@ describe('VisualParadigmParser', function() {
             './test/xmi/visualparadigm_no_attribute_name_test.uml',
             'sql'
           ).parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -220,8 +221,8 @@ describe('VisualParadigmParser', function() {
           'sql'
         ).parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
-          expect(parsedData.getClass(classData)).not.to.be.undefined;
-          expect(parsedData.getClass(classData)).not.to.equal('');
+          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+          expect(parsedData.getClass(classData).comment).not.to.equal('');
         });
       });
     });
@@ -238,8 +239,8 @@ describe('VisualParadigmParser', function() {
             'sql'
           ).parse();
           Object.keys(parsedData.fields).forEach(function(fieldData) {
-            expect(parsedData.getField(fieldData)).not.to.be.undefined;
-            expect(parsedData.getField(fieldData)).not.to.equal('');
+            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
+            expect(parsedData.getField(fieldData).comment).not.to.equal('');
           });
         });
 
@@ -253,6 +254,21 @@ describe('VisualParadigmParser', function() {
           expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
         });
 
+        describe('when trying to add a field whose name is capitalized', function() {
+          it('decapitalizes and adds it', function() {
+            var otherParser = ParserFactory.createParser('./test/xmi/visualparadigm_capitalized_field_names.uml', 'sql');
+            var parsedData = otherParser.parse();
+            if (Object.keys(parsedData.fields).length === 0) {
+              fail();
+            }
+            Object.keys(parsedData.fields).forEach(function(fieldData) {
+              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+                fail();
+              }
+            });
+          });
+        });
+
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
             try {
@@ -260,7 +276,7 @@ describe('VisualParadigmParser', function() {
                 './test/xmi/visualparadigm_wrong_typename.uml',
                 'sql'
               ).parse();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');
             }
@@ -294,19 +310,10 @@ describe('VisualParadigmParser', function() {
           'sql'
         ).parse();
         Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.be.undefined;
-          expect(parsedData.getInjectedField(injectedFieldData)).not.to.equal('');
+          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
+          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
         });
       });
     });
   });
 });
-
-
-// external functions
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

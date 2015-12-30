@@ -5,25 +5,25 @@ var expect = require('chai').expect,
     ParserFactory = require('../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
-var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [],{});
+var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [], {}, {});
 
 /* The variables set to do all the constraints */
 var parserConstraint =
   ParserFactory.createParser('./test/xmi/test_constraint.xmi', 'sql');
 var creatorConstraint =
-  new EntitiesCreator(parserConstraint.parse(), parserConstraint.databaseTypes, [],{});
+  new EntitiesCreator(parserConstraint.parse(), parserConstraint.databaseTypes, [], {}, {});
 
 /* the entity creator set to do the User Entity tests */
 var parserUser =
   ParserFactory.createParser('./test/xmi/user_entity_test.xmi', 'sql');
 var creatorUser =
-  new EntitiesCreator(parserUser.parse(), parserUser.databaseTypes, [],{});
+  new EntitiesCreator(parserUser.parse(), parserUser.databaseTypes, [], {}, {});
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong =
   ParserFactory.createParser('./test/xmi/user_entity_wrong_side_relationship.xmi', 'sql');
 var creatorUserWrong =
-  new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes,[],{});
+  new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes, [], {}, {});
 
 
 describe('EntitiesCreator ', function(){
@@ -31,9 +31,9 @@ describe('EntitiesCreator ', function(){
     describe('when passing valid argument ', function(){
       it('Successfully initialize Entities Parser', function(){
         try {
-          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [],{});
+          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [], {}, {});
         } catch (error) {
-          throw new ExpectationError();
+          fail();
         }
       });
       it('initializes each of its attributes', function() {
@@ -56,7 +56,7 @@ describe('EntitiesCreator ', function(){
             new EntitiesCreator(null);
             fail();
           }catch(error){
-            expect(error.name).to.equal('NullArgumentException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -74,19 +74,10 @@ describe('EntitiesCreator ', function(){
           expect(creator.getEntities().length).equal(creator.getClasses().length);
         });
         it('all entities attributes are set',function(){
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerOneToOne).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOwnerManyToMany).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainOneToMany).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainLocalDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainCustomTime).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBigDecimal).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDateTime).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].changelogDate).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].dto).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].pagination).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].validation).to.be.defined;
-          expect(creator.getEntities()['_iW0Y-PJjEeSmmZm37nQR-w'].fieldsContainBlob).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].changelogDate).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].dto).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].pagination).to.be.defined;
+          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].javadoc).to.be.defined;
         });
       });
     });
@@ -107,7 +98,7 @@ describe('EntitiesCreator ', function(){
         var otherParser =
           ParserFactory.createParser('./test/xmi/modelio_blob.xmi', 'sql');
         var otherCreator =
-          new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes,[],{});
+          new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
         otherCreator.createEntities();
 
         it('changes the type of blob fields from Blob to byte[]', function() {
@@ -133,7 +124,7 @@ describe('EntitiesCreator ', function(){
         var otherParser = ParserFactory.createParser(
           './test/xmi/modelio_enum_test.xmi',
           'sql');
-        var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser. databaseTypes,[],{});
+        var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser. databaseTypes, [], {}, {});
         otherCreator.createEntities();
 
         var enumFields;
@@ -345,9 +336,6 @@ describe('EntitiesCreator ', function(){
           it('has a one-to-one relationships type',function(){
             expect(employeeToJob.relationshipType).to.equal('one-to-one');
           });
-          it("has an relationshipFieldName set at 'job' ",function(){
-            expect(employeeToJob.relationshipFieldName).to.equal('job');
-          });
           it("has an otherEntityRelationshipName set at 'employee' ",function(){
             expect(employeeToJob.otherEntityRelationshipName).to.equal('employee');
           });
@@ -390,9 +378,6 @@ describe('EntitiesCreator ', function(){
           it('has a many-to-many relationships type',function(){
             expect(jobToTask.relationshipType).to.equal('many-to-many');
           });
-          it("has a relationshipFieldName set at 'tasks' ",function(){
-            expect(jobToTask.relationshipFieldName).to.equal('tasks');
-          });
         });
 
         describe('Task to Job: Many to Many not owner side', function(){
@@ -402,12 +387,8 @@ describe('EntitiesCreator ', function(){
           it('has a many-to-many relationships type',function(){
             expect(taskToJob.relationshipType).to.equal('many-to-many');
           });
-
-          it("has relationshipFieldName set at 'jobs' ",function(){
-            expect(taskToJob.relationshipFieldName).to.equal('jobs');
-          });
           it("has otherEntityRelationshipName set at 'task'", function(){
-            expect( taskToJob.otherEntityRelationshipName).to.equal('tasks');
+            expect( taskToJob.otherEntityRelationshipName).to.equal('task');
           });
         });
       });
@@ -417,7 +398,7 @@ describe('EntitiesCreator ', function(){
         before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldMM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
+          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
@@ -445,7 +426,7 @@ describe('EntitiesCreator ', function(){
         before(function(){
           var otherParser =
             ParserFactory.createParser('./test/xmi/otherEntityFieldOM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [],{});
+          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
           otherCreator.createEntities();
           var entities = otherCreator.getEntities();
 
@@ -475,10 +456,11 @@ describe('EntitiesCreator ', function(){
             otherParser.parse(),
             otherParser.databaseTypes,
             [],
+            {},
             {});
           try {
             otherCreator.createEntities();
-            throw new ExpectationError();
+            fail();
           } catch (error) {
             expect(error.name).to.equal('BidirectionalAssociationUseException');
           }
@@ -495,7 +477,7 @@ describe('EntitiesCreator ', function(){
               parserNoSQL_with_relationship.databaseTypes,
               [],
               {});
-            throw new ExpectationError();
+            fail();
           } catch (error) {
             expect(error.name).to.equal('NoSQLModelingException');
           }
@@ -523,9 +505,3 @@ describe('EntitiesCreator ', function(){
     });
   });
 });
-
-function ExpectationError(message) {
-  this.name = 'ExpectationError';
-  this.message = (message || '');
-}
-ExpectationError.prototype = new Error();

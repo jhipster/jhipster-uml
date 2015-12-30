@@ -1,7 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-    SQLTypes = require('../lib/types/sql_types');
+    fail = expect.fail,
+    SQLTypes = require('../../lib/types/sql_types');
 
 var sqlTypes;
 
@@ -20,7 +21,7 @@ describe('SQLTypes', function() {
           'Long',
           'BigDecimal',
           'LocalDate',
-          'DateTime',
+          'ZonedDateTime',
           'Boolean',
           'Enum',
           'Blob',
@@ -55,7 +56,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType(null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -66,7 +67,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType('');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -77,7 +78,7 @@ describe('SQLTypes', function() {
             sqlTypes.getValidationsForType('NoTypeAtAll');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -111,8 +112,8 @@ describe('SQLTypes', function() {
               name: 'LocalDate'
             },
             {
-              value: 'DateTime',
-              name: 'DateTime'
+              value: 'ZonedDateTime',
+              name: 'ZonedDateTime'
             },
             {
               value: 'Boolean',
@@ -191,7 +192,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -202,7 +203,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -213,7 +214,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -252,7 +253,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -263,7 +264,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });
@@ -274,7 +275,7 @@ describe('SQLTypes', function() {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'NoValidation');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('NoElementFoundException');
+            expect(error.name).to.equal('WrongDatabaseTypeException');
           }
         });
       });

@@ -4,15 +4,9 @@
     <details xmi:id="_UlHVslFwEeW5wfYDi5CV9g" key="uuid" value="_P7W3wA9CEeWa5JwclR5VRw"/>
   </eAnnotations>
   <packageImport xmi:id="_UlHVs1FwEeW5wfYDi5CV9g">
-    <eAnnotations xmi:id="_UlHVtFFwEeW5wfYDi5CV9g" source="genmymodel">
-      <details xmi:id="_UlHVtVFwEeW5wfYDi5CV9g" key="uuid" value="_P7Z7EA9CEeWa5JwclR5VRw"/>
-    </eAnnotations>
     <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
   </packageImport>
   <packageImport xmi:id="_UlHVtlFwEeW5wfYDi5CV9g">
-    <eAnnotations xmi:id="_UlHVt1FwEeW5wfYDi5CV9g" source="genmymodel">
-      <details xmi:id="_UlHVuFFwEeW5wfYDi5CV9g" key="uuid" value="_P7gBsA9CEeWa5JwclR5VRw"/>
-    </eAnnotations>
     <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
   </packageImport>
   <packagedElement xsi:type="uml:Class" xmi:id="_UlHVuVFwEeW5wfYDi5CV9g" name="MyClass">
@@ -48,7 +42,6 @@
     </ownedEnd>
     <ownedEnd xmi:id="_UlHVzlFwEeW5wfYDi5CV9g" name="myClass" type="_UlHVuVFwEeW5wfYDi5CV9g" association="_UlHVxVFwEeW5wfYDi5CV9g">
       <eAnnotations xmi:id="_UlHVz1FwEeW5wfYDi5CV9g" source="genmymodel">
-        <details xmi:id="_UlHV0FFwEeW5wfYDi5CV9g" key="uuid" value="_JC7OIDOeEDOr3dN48gSgxQ"/>
         <details xmi:id="_UlHV0VFwEeW5wfYDi5CV9g" key="gmm-documentation" value="This is yet another comment!&lt;br&gt;&lt;br&gt;Weird...&lt;br&gt;"/>
       </eAnnotations>
       <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_UlHV0lFwEeW5wfYDi5CV9g"/>

@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    formatComment = require('../../lib/helper/comment_helper');
+    formatComment = require('../../lib/helpers/comment_helper');
 
 describe('#formatComment', function() {
   describe('when the comment is in the one-line form', function() {
@@ -44,8 +44,10 @@ describe('#formatComment', function() {
   describe('when the comment is in the multi-line form', function() {
     var multiLineComment1 = "\n* <p>first line of comment</p><br/>\n*<p>second line</p>\n";
     var multiLineComment2 = "*** <p>first line of comment</p><br/>\n* *<p>second line</p>\n\n";
+    var multiLineComment3 = "\n * abcde\n * fghij\n * nothing\n";
     var expectedResult1 = "<p>first line of comment</p><br/><p>second line</p>";
     var expectedResult2 = "<p>first line of comment</p><br/>*<p>second line</p>";
+    var expectedResult3 = "abcdefghijnothing";
 
     describe(buildTestTitle(multiLineComment1), function() {
       it('returns ' + buildTestTitle(expectedResult1), function() {
@@ -55,6 +57,11 @@ describe('#formatComment', function() {
     describe(buildTestTitle(multiLineComment2), function() {
       it('returns ' + buildTestTitle(expectedResult2), function() {
         expect(formatComment(multiLineComment2)).to.eq(expectedResult2);
+      });
+    });
+    describe(buildTestTitle(multiLineComment3), function() {
+      it('returns ' + buildTestTitle(expectedResult3), function() {
+        expect(formatComment(multiLineComment3)).to.eq(expectedResult3);
       });
     });
   });

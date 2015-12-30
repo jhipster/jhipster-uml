@@ -9,7 +9,7 @@ var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 
 var parsedData = parser.parse();
 
-var employeeId = '_iW0ZH_JjEeSmmZm37nQR-w';
+var employeeId = '_qlOV3ZWyEeWgPqZDqm9Now';
 
 var scheduler = new ClassScheduler(
   Object.keys(parsedData.classes),
@@ -293,25 +293,25 @@ describe('ClassScheduler', function() {
     it('sorts the classes and resolves dependencies', function() {
       scheduler.schedule();
       var expectedPathA = [
-        '_iW0ZQfJjEeSmmZm37nQR-w',
-        '_iW0ZRPJjEeSmmZm37nQR-w',
-        '_iW0ZSPJjEeSmmZm37nQR-w',
-        '_iW0ZBfJjEeSmmZm37nQR-w',
-        '_iW0ZO_JjEeSmmZm37nQR-w',
-        '_iW0ZMvJjEeSmmZm37nQR-w',
-        '_iW0ZEfJjEeSmmZm37nQR-w',
-        '_iW0ZH_JjEeSmmZm37nQR-w',
-        '_iW0Y-PJjEeSmmZm37nQR-w' ];
+        '_qlOV_5WyEeWgPqZDqm9Now', // Region
+        '_qlOWApWyEeWgPqZDqm9Now', // Task
+        '_qlOWBpWyEeWgPqZDqm9Now', // BugFixing
+        '_qlOVw5WyEeWgPqZDqm9Now', // Job
+        '_qlOV-ZWyEeWgPqZDqm9Now', // Country
+        '_qlOV8JWyEeWgPqZDqm9Now', // Location
+        '_qlOVz5WyEeWgPqZDqm9Now', // Department
+        '_qlOV3ZWyEeWgPqZDqm9Now', // Employee
+        '_qlOVtpWyEeWgPqZDqm9Now' ]; // JobHistory
       var expectedPathB = [
-        '_iW0ZQfJjEeSmmZm37nQR-w',
-        '_iW0ZSPJjEeSmmZm37nQR-w',
-        '_iW0ZO_JjEeSmmZm37nQR-w',
-        '_iW0ZMvJjEeSmmZm37nQR-w',
-        '_iW0ZEfJjEeSmmZm37nQR-w',
-        '_iW0ZRPJjEeSmmZm37nQR-w',
-        '_iW0ZBfJjEeSmmZm37nQR-w',
-        '_iW0ZH_JjEeSmmZm37nQR-w',
-        '_iW0Y-PJjEeSmmZm37nQR-w' ];
+        '_qlOWApWyEeWgPqZDqm9Now', // Task
+        '_qlOV_5WyEeWgPqZDqm9Now', // Region
+        '_qlOWBpWyEeWgPqZDqm9Now', // BugFixing
+        '_qlOVw5WyEeWgPqZDqm9Now', // Job
+        '_qlOV-ZWyEeWgPqZDqm9Now', // Country
+        '_qlOV8JWyEeWgPqZDqm9Now', // Location
+        '_qlOVz5WyEeWgPqZDqm9Now', // Department
+        '_qlOV3ZWyEeWgPqZDqm9Now', // Employee
+        '_qlOVtpWyEeWgPqZDqm9Now' ]; // JobHistory
 
       expect(
         scheduler.orderedPool.length === expectedPathA.length
