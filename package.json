@@ -19,7 +19,7 @@
     "email": "",
     "url": "https://github.com/MathieuAA"
   },
-  "main": "app/jhipster-uml.js",
+  "main": "module/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/jhipster/jhipster-uml.git"
