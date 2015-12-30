@@ -39,6 +39,7 @@ process.argv.forEach(function(val, index) {
       }
       break;
     case '-f':
+    case '-force':
       force = true;
       break;
     case '-dto':
