@@ -8,7 +8,10 @@ var expect = require('chai').expect,
     fs = require('fs'),
     SQLTypes = require('../../lib/types/sql_types'),
     MongoDBTypes = require('../../lib/types/mongodb_types'),
-    CassandraTypes = require('../../lib/types/cassandra_types');
+    CassandraTypes = require('../../lib/types/cassandra_types'),
+    WrongDatabaseTypeException = require('../../lib/exceptions/wrong_database_type_exception'),
+    WrongPassedArgumentException = require('../../lib/exceptions/wrong_passed_argument_exception'),
+    NoRootElementException = require('../../lib/exceptions/no_root_element_exception');
 
 var parser = new UMLDesignerParser(
   getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
