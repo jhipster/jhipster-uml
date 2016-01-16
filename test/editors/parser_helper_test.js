@@ -31,49 +31,4 @@ describe('ParserHelper', function() {
       });
     });
   });
-
-  describe('#getCardinality', function() {
-    describe('#isOneToOne', function() {
-      describe('when passing valid parameters', function() {
-        it('returns true', function() {
-          expect(ParserHelper.isOneToOne(false, false)).to.equal(true);
-        });
-      });
-      describe('when passing invalid parameters', function() {
-        it('returns false', function() {
-          expect(ParserHelper.isOneToOne(true, true)).to.equal(false);
-          expect(ParserHelper.isOneToOne(true, false)).to.equal(false);
-          expect(ParserHelper.isOneToOne(false, true)).to.equal(false);
-        });
-      });
-    });
-    describe('#isOneToMany', function() {
-      describe('when passing valid parameters', function() {
-        it('returns true', function() {
-          expect(ParserHelper.isOneToMany(true, false)).to.equal(true);
-          expect(ParserHelper.isManyToOne(false, true)).to.equal(true);
-        });
-      });
-      describe('when passing invalid parameters', function() {
-        it('returns false', function() {
-          expect(ParserHelper.isOneToMany(true, true)).to.equal(false);
-          expect(ParserHelper.isOneToMany(false, false)).to.equal(false);
-        });
-      });
-    });
-    describe('#isManyToMany', function() {
-      describe('when passing valid parameters', function() {
-        it('returns true', function() {
-          expect(ParserHelper.isManyToMany(true, true)).to.equal(true);
-        });
-      });
-      describe('when passing invalid parameters', function() {
-        it('returns false', function() {
-          expect(ParserHelper.isManyToMany(false, false)).to.equal(false);
-          expect(ParserHelper.isManyToMany(false, true)).to.equal(false);
-          expect(ParserHelper.isManyToMany(true, false)).to.equal(false);
-        });
-      });
-    });
-  });
 });
