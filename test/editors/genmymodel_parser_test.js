@@ -21,13 +21,13 @@ describe('GenMyModelParser', function() {
     it('finds the classes in the document', function() {
       expect(
         parser.rawClassesIndexes
-      ).to.deep.equal([ 0, 3, 6]);
+      ).to.deep.equal([ 0, 2, 4, 7, 10, 15, 17, 19 ]);
     });
 
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 1,2]);
+      ).to.deep.equal([ 1, 5 ]);
     });
 
     it('find the enumerations in the document', function() {
@@ -40,7 +40,7 @@ describe('GenMyModelParser', function() {
     it('finds the associations in the document', function() {
        expect(
         parser.rawAssociationsIndexes
-      ).to.deep.equal([ 4,5,7 ]);
+      ).to.deep.equal([ 3, 6, 9, 11, 12, 13, 14, 16, 18, 20 ]);
     });
   });
 
@@ -73,7 +73,7 @@ describe('GenMyModelParser', function() {
       });
 
       it('assigns their id with their capitalized name', function() {
-        var expectedTypes = [ 'LocalDate', 'BigDecimal' ];
+        var expectedTypes = [ 'ZonedDateTime', 'Long' ];
 
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
@@ -172,7 +172,7 @@ describe('GenMyModelParser', function() {
     });
 
     it('inserts the found associations', function() {
-      expect(Object.keys(parser.parsedData.associations).length).to.equal(3);
+      expect(Object.keys(parser.parsedData.associations).length).to.equal(10);
     });
   });
 
@@ -183,7 +183,7 @@ describe('GenMyModelParser', function() {
 
     describe('#addClass', function() {
       it('adds the found classes', function() {
-        expect(Object.keys(parser.parsedData.classes).length).to.equal(3);
+        expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
       });
 
       it("adds the comment if there's any", function(){
@@ -197,27 +197,9 @@ describe('GenMyModelParser', function() {
     });
 
     describe('#addField', function() {
-      describe('#addInjectedField', function() {
-        it('adds the injected fields', function() {
-          expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(3);
-        });
-
-        it("adds the comment if there's any", function(){
-          var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
-          var parsedData = otherParser.parse();
-          if (Object.keys(parsedData.fields).length === 0) {
-            fail();
-          }
-          Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
-            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
-          });
-        });
-      });
-
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(2);
+          expect(Object.keys(parser.parsedData.fields).length).to.equal(21);
         });
 
         it("adds the comment if there's any", function(){
