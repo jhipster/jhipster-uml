@@ -1,6 +1,6 @@
 entity Department {
   departmentId Long,
-  departmentName String
+  departmentName String required
 }
 
 entity JobHistory {
@@ -9,7 +9,7 @@ entity JobHistory {
 }
 
 entity Job {
-  joId Long,
+  jobId Long,
   jobTitle String,
   minSalary Long,
   maxSalary Long
@@ -49,6 +49,11 @@ entity Task {
 entity Country {
   countryId Long,
   countryName String
+}
+
+entity Region {
+  regionId Long,
+  regionName String
 }
 
 relationship OneToOne {
@@ -97,3 +102,10 @@ relationship OneToOne {
 relationship OneToOne {
   Country{region} to Region
 }
+
+paginate JobHistory, Employee with infinite-scroll
+paginate Job with pagination
+
+dto Employee with mapstruct
+
+service Employee with serviceClass
