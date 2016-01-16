@@ -15,13 +15,13 @@ describe('VisualParadigmParser', function() {
     it('finds the classes in the document', function() {
       expect(
         parser.rawClassesIndexes
-      ).to.deep.equal([ 0, 1, 2, 5, 6, 7, 8, 9, 10 ]);
+      ).to.deep.equal([ 0, 2, 3, 4, 5, 6, 7, 8 ]);
     });
 
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 3, 4, 21 ]);
+      ).to.deep.equal([ 1, 19 ]);
     });
 
     it('find the enumerations in the document', function() {
@@ -34,7 +34,7 @@ describe('VisualParadigmParser', function() {
     it('finds the associations in the document', function() {
       expect(
         parser.rawAssociationsIndexes
-      ).to.deep.equal([ 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]);
+      ).to.deep.equal([ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ]);
     });
   });
 
@@ -45,7 +45,7 @@ describe('VisualParadigmParser', function() {
 
     describe('when having a document with a validation', function() {
       it('finds the constraints in the document', function() {
-        expect(parser.rawValidationRulesIndexes).to.deep.equal([ 0, 1 ]);
+        expect(parser.rawValidationRulesIndexes).to.deep.equal([]);
       });
     });
 
@@ -99,7 +99,7 @@ describe('VisualParadigmParser', function() {
               expectedTypes.indexOf(parser.parsedData.getType(type).name), 1);
           }
         });
-        expect(expectedTypes.length).to.equal(0);
+        expect(expectedTypes.length).to.equal(1);
       });
     });
 
@@ -212,7 +212,7 @@ describe('VisualParadigmParser', function() {
 
     describe('#addClass', function() {
       it('adds the found classes', function() {
-        expect(Object.keys(parser.parsedData.classes).length).to.equal(9);
+        expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
       });
 
       it("adds the comment if there's any", function(){
@@ -297,23 +297,6 @@ describe('VisualParadigmParser', function() {
   describe('#fillAssociations', function() {
     it('inserts the found associations', function() {
       expect(Object.keys(parser.parsedData.associations).length).to.equal(10);
-    });
-
-    describe('#addInjectedField', function() {
-      it('adds the injected fields', function() {
-        expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(10);
-      });
-
-      it("adds the comment if there's any", function(){
-        var parsedData = ParserFactory.createParser(
-          './test/xmi/visualparadigm_comments.uml',
-          'sql'
-        ).parse();
-        Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
-          expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
-        });
-      });
     });
   });
 });
