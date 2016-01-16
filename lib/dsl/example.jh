@@ -52,23 +52,23 @@ entity Country {
 }
 
 relationship OneToOne {
-  JobHistory{department} to Department{}
+  JobHistory{department} to Department
 }
 
 relationship OneToOne {
-  JobHistory{job} to Job{}
+  JobHistory{job} to Job
 }
 
 relationship OneToOne {
-  JobHistory{employee} to Employee{}
+  JobHistory{employee} to Employee
 }
 
 relationship ManyToMany {
-  Job{tasks} to Task{jobs}
+  Job{task(title)} to Task{job(jobTitle)}
 }
 
 relationship OneToOne {
-  Department{location} to Location{}
+  Department{location} to Location
 }
 
 relationship OneToMany {
@@ -79,21 +79,21 @@ relationship OneToMany {
   /**
    * Another side of the same relationship
    */
-  Employee{}
+  Employee
 }
 
 relationship ManyToOne {
-  Employee{manager} to Employee{}
+  Employee{manager} to Employee
 }
 
 relationship OneToMany {
-  Employee{job} to Job{}
+  Employee{job} to Job
 }
 
 relationship OneToOne {
-  Location{country} to Country{}
+  Location{country} to Country
 }
 
 relationship OneToOne {
-  Country{region} to Region{}
+  Country{region} to Region
 }
