@@ -36,23 +36,21 @@ describe("DSL Parser", function(){
       });
 
       it("there is the expected number of classes",function(){
-        expect(Object.keys(parser.parsedData.classes).length).to.be.equal(7);
+        expect(Object.keys(parser.parsedData.classes).length).to.be.equal(8);
       });
       it("there is the expected number of field",function(){
-        expect(Object.keys(parser.parsedData.fields).length).to.be.equal(20);
+        expect(Object.keys(parser.parsedData.fields).length).to.be.equal(21);
       });
       it("the class Object is well formed",function(){
         var classObj = parser.parsedData.classes["Employee"];
         expect(classObj.name).to.be.equals('Employee');
         expect(classObj.fields.length).to.be.equals(7);
-        //the property injectedFields is not set yet
-        expect(classObj.injectedFields.length).to.be.equals(0);
       });
       it("the field Object is well formed",function(){
         var firstNameFields = parser.parsedData.fields["Employee_firstName"];
         expect(firstNameFields.name).to.be.equals("firstName");
         expect(firstNameFields.type).to.be.equals("String");
-        expect(firstNameFields.validations).to.deep.equal({});
+        expect(firstNameFields.validations).to.deep.equal([]);
       });
     });
 
@@ -120,21 +118,11 @@ describe("DSL Parser", function(){
         parser.fillAssociations();
       });
       it("there is the expected number of relationships",function(){
-        expect(Object.keys(parser.parsedData.associations).length).to.be.equal(7);
+        expect(Object.keys(parser.parsedData.associations).length).to.be.equal(10);
       });
       it("the associations Object is well formed",function(){
-        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").name).to.be.equal("department");
-        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_department").type).to.be.equal("Department");
-      });
-      it("the injectedFields Object is well formed",function(){
-        expect(parser.parsedData.getInjectedField("Department_employee").name).to.be.equal("employee");
-        expect(parser.parsedData.getInjectedField("Department_employee").type).to.be.equal("Employee");
-        expect(parser.parsedData.getInjectedField("Department_employee").association).to.be.equal("Department_employee_to_Employee_department");
-        expect(parser.parsedData.getInjectedField("Department_employee").class).to.be.equal("Department");
-        expect(parser.parsedData.getInjectedField("Department_employee").cardinality).to.be.equal("one-to-many");
-      });
-      it("the injectedField id has been injected in the corresponding class", function(){
-        expect(contains(parser.parsedData.getClass("Department").injectedFields,"Department_employee")).to.be.equal(true);
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_null").from).to.be.equal("Department");
+        expect(parser.parsedData.getAssociation("Department_employee_to_Employee_null").type).to.be.equal("one-to-many");
       });
     });
 
