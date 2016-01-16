@@ -15,13 +15,13 @@ describe('ModelioParser', function() {
     it('finds the classes in the document', function() {
       expect(
         parser.rawClassesIndexes
-      ).to.deep.equal([ 0, 4, 6, 9, 12, 14, 16, 17, 18 ]);
+      ).to.deep.equal([ 0, 4, 6, 9, 12, 14, 16, 17 ]);
     });
 
     it('finds the types in the document', function() {
       expect(
         parser.rawTypesIndexes
-      ).to.deep.equal([ 19, 20 ]);
+      ).to.deep.equal([ 18, 19 ]);
     });
 
     it('finds the enumerations in the document', function() {
@@ -225,7 +225,7 @@ describe('ModelioParser', function() {
 
     describe('#addClass', function() {
       it('adds the found classes', function() {
-        expect(Object.keys(parser.parsedData.classes).length).to.equal(9);
+        expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
       });
 
       it("adds the comment if there's any", function(){
@@ -239,25 +239,9 @@ describe('ModelioParser', function() {
     });
 
     describe('#addField', function() {
-      describe('#addInjectedField', function() {
-        it('adds the injected fields', function() {
-          expect(Object.keys(parser.parsedData.injectedFields).length).to.equal(10);
-        });
-
-        it("adds the comment if there's any", function(){
-          var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
-          var parsedData = otherParser.parse();
-          Object.keys(parsedData.injectedFields).forEach(function(injectedFieldData) {
-            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.be.undefined;
-            expect(parsedData.getInjectedField(injectedFieldData).comment).not.to.equal('');
-          });
-        });
-
-      });
-
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(22);
+          expect(Object.keys(parser.parsedData.fields).length).to.equal(21);
         });
 
         it("adds the comment if there's any", function(){
