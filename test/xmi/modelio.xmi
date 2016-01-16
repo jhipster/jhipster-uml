@@ -144,12 +144,6 @@
       <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_0iCzJrieEeW4ip1mZlCqPg" name="BugFixing">
-    <generalization xmi:type="uml:Generalization" xmi:id="_0iCzJ7ieEeW4ip1mZlCqPg" general="_0iCzIrieEeW4ip1mZlCqPg"/>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCzKLieEeW4ip1mZlCqPg" name="numberOfBugs" visibility="private" isUnique="false">
-      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer"/>
-    </ownedAttribute>
-  </packagedElement>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_0iCzKbieEeW4ip1mZlCqPg" name="zonedDateTime"/>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_0iCzKrieEeW4ip1mZlCqPg" name="long"/>
 </uml:Model>
