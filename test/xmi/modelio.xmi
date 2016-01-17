@@ -95,7 +95,7 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_0iCzDLieEeW4ip1mZlCqPg" memberEnd="_0iCy_7ieEeW4ip1mZlCqPg _0iCzDbieEeW4ip1mZlCqPg">
-    <ownedEnd xmi:type="uml:Property" xmi:id="_0iCzDbieEeW4ip1mZlCqPg" name="subordinates" visibility="public" type="_0iCy-7ieEeW4ip1mZlCqPg" association="_0iCzDLieEeW4ip1mZlCqPg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_0iCzDbieEeW4ip1mZlCqPg" name="" visibility="public" type="_0iCy-7ieEeW4ip1mZlCqPg" association="_0iCzDLieEeW4ip1mZlCqPg">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0iCzDrieEeW4ip1mZlCqPg" value="*"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0iCzD7ieEeW4ip1mZlCqPg"/>
     </ownedEnd>
