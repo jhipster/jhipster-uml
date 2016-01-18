@@ -40,7 +40,6 @@ describe('EntitiesCreator ', function(){
         expect(creator.getPrimitiveTypes()).to.deep.equal(parser.parsedData.types);
         expect(creator.getClasses()).to.deep.equal(parser.parsedData.classes);
         expect(creator.getFields()).to.deep.equal(parser.parsedData.fields);
-        expect(creator.getInjectedFields()).to.deep.equal(parser.parsedData.injectedFields);
         expect(creator.getAssociations()).to.deep.equal(parser.parsedData.associations);
 
         expect(creator.getEntities()).to.deep.equal({});
@@ -74,10 +73,10 @@ describe('EntitiesCreator ', function(){
           expect(creator.getEntities().length).equal(creator.getClasses().length);
         });
         it('all entities attributes are set',function(){
-          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].changelogDate).to.be.defined;
-          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].dto).to.be.defined;
-          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].pagination).to.be.defined;
-          expect(creator.getEntities()['_qlOVtpWyEeWgPqZDqm9Now'].javadoc).to.be.defined;
+          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].changelogDate).to.be.defined;
+          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].dto).to.be.defined;
+          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].pagination).to.be.defined;
+          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].javadoc).to.be.defined;
         });
       });
     });
@@ -132,31 +131,6 @@ describe('EntitiesCreator ', function(){
         Object.keys(otherCreator.entities).forEach(function(element) {
           enumFields = otherCreator.entities[element].fields;
         });
-/*
-        it('adds the values of the enum', function() {
-          enumFields.forEach(function(field) {
-            if (!field.fieldIsEnum) {
-              expect(field.fieldValues).to.equal(undefined);
-            } else {
-              switch (field.id) {
-                case 2:
-                case 4:
-                  expect(field.fieldValues).to.deep.equal(['VALUE_A,VALUE_B']);
-                  break;
-                case 3:
-                  expect(field.fieldValues).to.deep.equal(['VALUE_A']);
-                  break;
-              }
-            }
-          });
-        });
-        it('creates them by true-ing the enum flag', function() {
-          enumFields.forEach(function(field) {
-            if (field.fieldValues) {
-              expect(field.fieldIsEnum).to.equal(true);
-            }
-          });
-        });*/
       });
 
       describe('when fields trying to access an entity field ', function(){
@@ -329,24 +303,24 @@ describe('EntitiesCreator ', function(){
 
       describe('when trying to access a relationships', function(){
 
-        describe('Employee to Job: Uni-directional One to one owner side', function(){
-          it('has a ownerSide property at true',function(){
-            expect(employeeToJob.ownerSide).to.equal(true);
+        describe('Employee to Job: Uni-directional One-to-Many owner side', function(){
+          it('has no ownerSide property',function(){
+            expect(employeeToJob.ownerSide).to.be.undefined;
           });
           it('has a one-to-one relationships type',function(){
-            expect(employeeToJob.relationshipType).to.equal('one-to-one');
+            expect(employeeToJob.relationshipType).to.equal('one-to-many');
           });
           it("has an otherEntityRelationshipName set at 'employee' ",function(){
             expect(employeeToJob.otherEntityRelationshipName).to.equal('employee');
           });
-          it("has an otherEntityField set at 'id' ",function(){
-            expect(employeeToJob.otherEntityField).to.equal('id');
+          it("has no otherEntityField",function(){
+            expect(employeeToJob.otherEntityField).to.be.undefined;
           });
         });
 
         describe('Job to Employee: Uni-directional One-to-One', function() {
-          it("doesn't have any information about the relationship", function() {
-            expect(jobToEmployee).to.be.undefined;
+          it('has  information about the relationship', function() {
+            expect(jobToEmployee).not.to.be.undefined;
           });
         });
 
@@ -388,85 +362,11 @@ describe('EntitiesCreator ', function(){
             expect(taskToJob.relationshipType).to.equal('many-to-many');
           });
           it("has otherEntityRelationshipName set at 'task'", function(){
-            expect( taskToJob.otherEntityRelationshipName).to.equal('task');
+            expect(taskToJob.otherEntityRelationshipName).to.equal('task');
           });
         });
       });
 
-      describe('when the model as the otherEntityField declared in a Many-to-Many relationship', function(){
-        var relationship;
-        before(function(){
-          var otherParser =
-            ParserFactory.createParser('./test/xmi/otherEntityFieldMM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
-          otherCreator.createEntities();
-          var entities = otherCreator.getEntities();
-
-          for(var i=0; i<Object.keys(entities).length; i++){
-            var classId = Object.keys(entities)[i];
-            var relationships = entities[classId].relationships;
-            for(var j=0; j<relationships.length; j++) {
-              switch(otherCreator.getClasses()[classId].name) {
-                case 'Owner':
-                  relationship = relationships[0];
-                  break;
-                default:
-              }
-            }
-          }
-        });
-        it('has the property otherEntityField ', function(){
-          expect(relationship.otherEntityField).to.be.equal('otherOwner');
-        });
-      });
-
-
-      describe('when the model as the otherEntityField declared in a One-to-Many relationship', function(){
-        var relationship;
-        before(function(){
-          var otherParser =
-            ParserFactory.createParser('./test/xmi/otherEntityFieldOM.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {});
-          otherCreator.createEntities();
-          var entities = otherCreator.getEntities();
-
-          for(var i=0; i<Object.keys(entities).length; i++){
-            var classId = Object.keys(entities)[i];
-            var relationships = entities[classId].relationships;
-            for(var j=0; j<relationships.length; j++) {
-              switch(otherCreator.getClasses()[classId].name) {
-                case 'Many':
-                  relationship = relationships[0];
-                  break;
-                default:
-              }
-            }
-          }
-        });
-        it('has the property otherEntityField ', function(){
-          expect(relationship.otherEntityField).to.be.equal('otherOne');
-        });
-      });
-
-      describe('when the model has a bidirectional relationship', function() {
-        it('throw an exception', function() {
-          var otherParser =
-            ParserFactory.createParser('./test/xmi/modelio_bidirectional.xmi', 'sql');
-          var otherCreator = new EntitiesCreator(
-            otherParser.parse(),
-            otherParser.databaseTypes,
-            [],
-            {},
-            {});
-          try {
-            otherCreator.createEntities();
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('BidirectionalAssociationUseException');
-          }
-
-        });
-      });
       describe('when the model has relationships and the app has a NoSQL database', function() {
         it('throw an exception', function() {
           try {
