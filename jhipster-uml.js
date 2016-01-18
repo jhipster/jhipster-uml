@@ -67,11 +67,9 @@ if (!fs.existsSync('.yo-rc.json') && !type) {
   );
 }
 
-if (fs.existsSync('.yo-rc.json')) {
-  type = JSON.parse(
-    fs.readFileSync('./.yo-rc.json')
-  )['generator-jhipster'].databaseType;
-}
+type = JSON.parse(
+  fs.readFileSync('./.yo-rc.json')
+)['generator-jhipster'].databaseType;
 
 try {
   var parser = ParserFactory.createParser(process.argv[2], type);

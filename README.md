@@ -1,4 +1,7 @@
+![version](https://badge.fury.io/js/jhipster-uml.svg)
 [![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml)
+[![Issue Stats](http://issuestats.com/github/jhipster/jhipster-uml/badge/issue?style=flat)](http://issuestats.com/github/jhipster/jhipster-uml)
+[![Issue Stats](http://issuestats.com/github/jhipster/jhipster-uml/badge/pr?style=flat)](http://issuestats.com/github/jhipster/jhipster-uml)
 
 Welcome to JHipster-UML!
 
