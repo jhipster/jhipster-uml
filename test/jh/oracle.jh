@@ -69,7 +69,7 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-  Job{task(title)} to Task{job(jobTitle)}
+  Job{task(title)} to Task{job}
 }
 
 relationship OneToOne {

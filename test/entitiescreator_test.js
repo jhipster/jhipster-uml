@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').expect,
-  EntitiesCreator = require('../lib/entitiescreator'),
-  ParserFactory = require('../lib/editors/parser_factory');
+    EntitiesCreator = require('../lib/entitiescreator'),
+    ParserFactory = require('../lib/editors/parser_factory');
 
 var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [], {}, {});

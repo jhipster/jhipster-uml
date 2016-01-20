@@ -9,11 +9,11 @@ var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
 
 var parsedData = parser.parse();
 
-var employeeId = '_qlOV3ZWyEeWgPqZDqm9Now';
+var employeeId = '_0iCy-7ieEeW4ip1mZlCqPg';
 
 var scheduler = new ClassScheduler(
   Object.keys(parsedData.classes),
-  parsedData.injectedFields);
+  parsedData.associations);
 
 describe('ClassScheduler', function() {
   describe('#initialize', function() {
@@ -21,9 +21,7 @@ describe('ClassScheduler', function() {
       describe('for the class names', function() {
         it('throws an exception', function() {
           try {
-            new ClassScheduler(
-              null,
-              parsedData.injectedFields);
+            new ClassScheduler(null, parsedData.associations);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
           }
@@ -33,9 +31,7 @@ describe('ClassScheduler', function() {
       describe('for the injected fields', function() {
         it('throws an exception', function() {
           try {
-            new ClassScheduler(
-              Object.keys(parsedData.classes),
-              null);
+            new ClassScheduler(Object.keys(parsedData.classes), null);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
           }
@@ -45,9 +41,7 @@ describe('ClassScheduler', function() {
       describe('for both', function() {
         it('throws an exception', function() {
           try {
-            new ClassScheduler(
-              null,
-              null);
+            new ClassScheduler(null, null);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
           }
@@ -56,24 +50,14 @@ describe('ClassScheduler', function() {
     });
 
     it ('successfully creates a scheduler', function() {
-      new ClassScheduler(
-        Object.keys(parsedData.classes),
-        parsedData.injectedFields);
+      new ClassScheduler(Object.keys(parsedData.classes), parsedData.associations);
     });
 
     it('initializes each of its attributes', function() {
-      expect(
-        scheduler.classNames
-      ).not.to.be.undefined;
-      expect(
-        scheduler.injectedFields
-      ).not.to.be.undefined;
-      expect(
-        scheduler.pool
-      ).not.to.be.undefined;
-      expect(
-        scheduler.orderedPool
-      ).not.to.be.undefined;
+      expect(scheduler.classNames).not.to.be.undefined;
+      expect(scheduler.associations).not.to.be.undefined;
+      expect(scheduler.pool).not.to.be.undefined;
+      expect(scheduler.orderedPool).not.to.be.undefined;
     });
   });
 
@@ -87,7 +71,7 @@ describe('ClassScheduler', function() {
       var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(parsedData.classes),
-        parsedData.injectedFields);
+        parsedData.associations);
       expect(
         otherScheduler.schedule().length
       ).to.equal(Object.keys(parsedData.classes).length);
@@ -101,9 +85,9 @@ describe('ClassScheduler', function() {
       it('fills the pool with correct objects', function() {
         expect(
           scheduler.pool.length
-        ).to.equal(Object.keys(parsedData.injectedFields).length);
+        ).to.equal(Object.keys(parsedData.associations).length);
 
-        for (var i = 0; i < Object.keys(parsedData.injectedFields).length; i++) {
+        for (var i = 0; i < Object.keys(parsedData.associations).length; i++) {
           var relation = scheduler.pool[i];
 
           expect(relation).not.to.be.undefined;
@@ -114,8 +98,8 @@ describe('ClassScheduler', function() {
       });
 
       it('detects the cardinalities', function() {
-        var expectedOneToOneCount = 7;
-        var expectedOneToManyCount = 1;
+        var expectedOneToOneCount = 6;
+        var expectedOneToManyCount = 2;
         var expectedManyToOneCount = 0;
         var expectedManyToManyCount = 1;
 
@@ -124,7 +108,7 @@ describe('ClassScheduler', function() {
         var manyToOneCount = 0;
         var manyToManyCount = 0;
 
-        for (var i = 0; i < Object.keys(parsedData.injectedFields).length; i++) {
+        for (var i = 0; i < Object.keys(parsedData.associations).length; i++) {
           var relation = scheduler.pool[i];
 
           switch(relation.type) {
@@ -175,12 +159,8 @@ describe('ClassScheduler', function() {
 
       describe('given an invalid class', function() {
         it('returns an empty dependency list', function() {
-          expect(
-            scheduler.getDependencies('NoClass')
-          ).to.deep.equal([]);
-          expect(
-            scheduler.getDependencies(null)
-          ).to.deep.equal([]);
+          expect(scheduler.getDependencies('NoClass')).to.deep.equal([]);
+          expect(scheduler.getDependencies(null)).to.deep.equal([]);
         });
       });
     });
@@ -293,25 +273,23 @@ describe('ClassScheduler', function() {
     it('sorts the classes and resolves dependencies', function() {
       scheduler.schedule();
       var expectedPathA = [
-        '_qlOV_5WyEeWgPqZDqm9Now', // Region
-        '_qlOWApWyEeWgPqZDqm9Now', // Task
-        '_qlOWBpWyEeWgPqZDqm9Now', // BugFixing
-        '_qlOVw5WyEeWgPqZDqm9Now', // Job
-        '_qlOV-ZWyEeWgPqZDqm9Now', // Country
-        '_qlOV8JWyEeWgPqZDqm9Now', // Location
-        '_qlOVz5WyEeWgPqZDqm9Now', // Department
-        '_qlOV3ZWyEeWgPqZDqm9Now', // Employee
-        '_qlOVtpWyEeWgPqZDqm9Now' ]; // JobHistory
+        '_0iCzH7ieEeW4ip1mZlCqPg', // Region
+        '_0iCzIrieEeW4ip1mZlCqPg', // Task
+        '_0iCy47ieEeW4ip1mZlCqPg', // Job
+        '_0iCzGbieEeW4ip1mZlCqPg', // Country
+        '_0iCzELieEeW4ip1mZlCqPg', // Location
+        '_0iCy77ieEeW4ip1mZlCqPg', // Department
+        '_0iCy-7ieEeW4ip1mZlCqPg', // Employee
+        '_0iCy1rieEeW4ip1mZlCqPg' ]; // JobHistory
       var expectedPathB = [
-        '_qlOWApWyEeWgPqZDqm9Now', // Task
-        '_qlOV_5WyEeWgPqZDqm9Now', // Region
-        '_qlOWBpWyEeWgPqZDqm9Now', // BugFixing
-        '_qlOVw5WyEeWgPqZDqm9Now', // Job
-        '_qlOV-ZWyEeWgPqZDqm9Now', // Country
-        '_qlOV8JWyEeWgPqZDqm9Now', // Location
-        '_qlOVz5WyEeWgPqZDqm9Now', // Department
-        '_qlOV3ZWyEeWgPqZDqm9Now', // Employee
-        '_qlOVtpWyEeWgPqZDqm9Now' ]; // JobHistory
+        '_0iCzIrieEeW4ip1mZlCqPg', // Task
+        '_0iCzH7ieEeW4ip1mZlCqPg', // Region
+        '_0iCy47ieEeW4ip1mZlCqPg', // Job
+        '_0iCzGbieEeW4ip1mZlCqPg', // Country
+        '_0iCzELieEeW4ip1mZlCqPg', // Location
+        '_0iCy77ieEeW4ip1mZlCqPg', // Department
+        '_0iCy-7ieEeW4ip1mZlCqPg', // Employee
+        '_0iCy1rieEeW4ip1mZlCqPg' ]; // JobHistory
 
       expect(
         scheduler.orderedPool.length === expectedPathA.length
@@ -332,7 +310,7 @@ describe('ClassScheduler', function() {
       var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(
         Object.keys(parsedData.classes),
-        parsedData.injectedFields);
+        parsedData.associations);
       try {
         otherScheduler.schedule();
         fail();
