@@ -10,11 +10,11 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-    EntitiesCreator = require('./lib/entitiescreator'),
-    ClassScheduler = require('./lib/scheduler'),
-    ParserFactory = require('./lib/editors/parser_factory'),
-    jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
-    generateEntities = require('./lib/entity_generator');
+  EntitiesCreator = require('./lib/entitiescreator'),
+  ClassScheduler = require('./lib/scheduler'),
+  ParserFactory = require('./lib/editors/parser_factory'),
+  jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
+  generateEntities = require('./lib/entity_generator');
 
 
 var type;
@@ -67,8 +67,8 @@ if (!type && !fs.existsSync('./.yo-rc.json')) {
   );
 } else {
   type = type || JSON.parse(
-    fs.readFileSync('./.yo-rc.json')
-  )['generator-jhipster'].databaseType;
+      fs.readFileSync('./.yo-rc.json')
+    )['generator-jhipster'].databaseType;
 }
 
 
