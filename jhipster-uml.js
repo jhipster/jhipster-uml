@@ -10,11 +10,11 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-    EntitiesCreator = require('./lib/entitiescreator'),
-    ClassScheduler = require('./lib/scheduler'),
-    ParserFactory = require('./lib/editors/parser_factory'),
-    jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
-    generateEntities = require('./lib/entity_generator');
+  EntitiesCreator = require('./lib/entitiescreator'),
+  ClassScheduler = require('./lib/scheduler'),
+  ParserFactory = require('./lib/editors/parser_factory'),
+  jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
+  generateEntities = require('./lib/entity_generator');
 
 
 var type;
@@ -34,7 +34,7 @@ var listService = {};
 process.argv.forEach(function(val, index) {
   switch(val) {
     case '-db':
-      if(!fs.existsSync('./.yo-rc.json') ){
+      if (!fs.existsSync('./.yo-rc.json')) {
         type = process.argv[index+1];
       }
       break;
@@ -59,17 +59,18 @@ process.argv.forEach(function(val, index) {
   }
 });
 
-if (!fs.existsSync('.yo-rc.json') && !type) {
+if (!type && !fs.existsSync('./.yo-rc.json')) {
   throw new ArgumentException(
     'The database type must either be supplied with the -db option, '
     + 'or a .yo-rc.json file must exist in the current directory.\n'
     + "Use the command 'jhipster-uml -help' to see the available options."
   );
+} else {
+  type = type || JSON.parse(
+      fs.readFileSync('./.yo-rc.json')
+    )['generator-jhipster'].databaseType;
 }
 
-type = JSON.parse(
-  fs.readFileSync('./.yo-rc.json')
-)['generator-jhipster'].databaseType;
 
 try {
   var parser = ParserFactory.createParser(process.argv[2], type);
@@ -77,7 +78,7 @@ try {
 
   var scheduler = new ClassScheduler(
     Object.keys(parsedData.classes),
-    parsedData.injectedFields
+    parsedData.associations
   );
 
   var scheduledClasses = scheduler.schedule();
