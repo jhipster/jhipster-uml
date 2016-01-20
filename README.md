@@ -12,4 +12,4 @@ You'll be able to create your entities by supplying a UML file (made with your f
 We support: Modelio, UML Designer, GenMyModel and Visual Paradigm... and our DSL!
 
 
-For more information, visit our [Wiki page](http://jhipster.github.io/jhipster_uml.html) in JHipster's wiki.
+For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
