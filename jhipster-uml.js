@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
+var ArgumentException = require('./lib/exceptions/argument_exception');
+
 if (process.argv.length < 3) {
   throw new ArgumentException(
     'Wrong argument number specified, an input file and (optionally) '
@@ -136,9 +138,3 @@ function dislayHelp() {
     + '\t-paginate \tChoose your entities\' for pagination.'
   );
 }
-
-function ArgumentException(message) {
-  this.name = 'ArgumentException';
-  this.message = (message || '');
-}
-ArgumentException.prototype = new Error();
