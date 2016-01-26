@@ -67,10 +67,10 @@ relationshipSide
 
 //Enum
 enumDecl
-  = 'enum' space e:ENUMNAME space* '{' space* el:enumPropList space* '}' {return {"name":e, "values" : el };}
+  = 'enum' space e:ENUMNAME space* '{' space* JDLComment? space* el:enumPropList space* JDLComment? space* '}' {return {"name":e, "values" : el };}
 
 enumPropList
-  = e:ENUMPROP space* ',' space* el:enumPropList {return concat([e],el);}
+  = e:ENUMPROP space* ',' space* JDLComment? space* el:enumPropList {return concat([e],el);}
   / e:ENUMPROP {return [e];} 
 
 // DTO
