@@ -79,6 +79,8 @@ dtoDecl
 
 subDtoDecl
  = e:ENTITYNAME space* ',' space* sub:subDtoDecl {return concat([e], sub);}
+ / '*' space* 'with' space* method:([a-z]+) {return ['*', method.toString().replace(/,/g,'')];}
+ / 'all' space* 'with' space* method:([a-z]+) {return ['*', method.toString().replace(/,/g,'')];}
  / e:ENTITYNAME space* 'with' space* method:([a-z]+) {return [e, method.toString().replace(/,/g,'')];}
 
 // Pagination
@@ -87,6 +89,8 @@ pagiDecl
 
 subPagiDecl
   = e:ENTITYNAME space* ',' space* sub:subPagiDecl {return concat([e], sub);}
+  / '*' space* 'with' space* method:([a-z-]+) {return ['*', method.toString().replace(/,/g,'')];}
+  / 'all' space* 'with' space* method:([a-z-]+) {return ['*', method.toString().replace(/,/g,'')];}
   / e:ENTITYNAME space* 'with' space* method:([a-z-]+) {return [e, method.toString().replace(/,/g,'')];}
 
 // Service
@@ -95,6 +99,8 @@ serviceDecl
 
 subServiceDecl
   = e:ENTITYNAME space* ',' space* sub:subServiceDecl {return concat([e], sub);}
+  / '*' space* 'with' space* method:([a-zA-Z-]+) {return ['*', method.toString().replace(/,/g,'')];}
+  / 'all' space* 'with' space* method:([a-zA-Z-]+) {return ['*', method.toString().replace(/,/g,'')];}
   / e:ENTITYNAME space* 'with' space* method:([a-zA-Z-]+) {return [e, method.toString().replace(/,/g,'')];}
 
 
