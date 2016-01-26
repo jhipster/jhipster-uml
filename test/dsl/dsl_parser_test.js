@@ -141,6 +141,37 @@ describe("DSL Parser", function(){
         }
       });
     });
+
+    describe('when generating entities with options', function() {
+      describe("and using the '*' keyword", function() {
+        it('assigns the option for each entity', function() {
+          var parser = new DSLParser(
+            'test/jh/all_keyword_1.jh',
+            initDatabaseTypeHolder('sql'));
+          var parsedData = parser.parse();
+          expect(Object.keys(parsedData.classes).length).to.eq(3);
+          Object.keys(parsedData.classes).forEach(function(className) {
+            expect(parsedData.getClass(className).dto).to.eq('mapstruct');
+            expect(parsedData.getClass(className).pagination).to.eq('pager');
+            expect(parsedData.getClass(className).service).to.eq('serviceClass');
+          });
+        });
+      });
+      describe("and using the 'all' keyword", function() {
+        it('assigns the option for each entity', function() {
+          var parser = new DSLParser(
+            'test/jh/all_keyword_2.jh',
+            initDatabaseTypeHolder('sql'));
+          var parsedData = parser.parse();
+          expect(Object.keys(parsedData.classes).length).to.eq(3);
+          Object.keys(parsedData.classes).forEach(function(className) {
+            expect(parsedData.getClass(className).dto).to.eq('mapstruct');
+            expect(parsedData.getClass(className).pagination).to.eq('pager');
+            expect(parsedData.getClass(className).service).to.eq('serviceClass');
+          });
+        });
+      });
+    });
   });
 
 });

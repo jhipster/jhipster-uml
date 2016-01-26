@@ -1,0 +1,9 @@
+entity A {}
+entity B {}
+entity C {}
+
+dto * with mapstruct
+
+service * with serviceClass
+
+paginate * with pager
