@@ -199,7 +199,7 @@ describe('GenMyModelParser', function() {
     describe('#addField', function() {
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(21);
+          expect(Object.keys(parser.parsedData.fields).length).to.equal(28);
         });
 
         it("adds the comment if there's any", function(){

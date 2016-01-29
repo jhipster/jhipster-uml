@@ -39,12 +39,12 @@ describe("DSL Parser", function(){
         expect(Object.keys(parser.parsedData.classes).length).to.be.equal(8);
       });
       it("there is the expected number of field",function(){
-        expect(Object.keys(parser.parsedData.fields).length).to.be.equal(21);
+        expect(Object.keys(parser.parsedData.fields).length).to.be.equal(28);
       });
       it("the class Object is well formed",function(){
         var classObj = parser.parsedData.classes["Employee"];
         expect(classObj.name).to.be.equals('Employee');
-        expect(classObj.fields.length).to.be.equals(7);
+        expect(classObj.fields.length).to.be.equals(8);
       });
       it("the field Object is well formed",function(){
         var firstNameFields = parser.parsedData.fields["Employee_firstName"];
