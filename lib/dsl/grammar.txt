@@ -31,6 +31,7 @@ prog
   / space* dto:dtoDecl space* p:prog {return {"entities": p.entities, "relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
   / space* pagination:pagiDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
   / space* service:serviceDecl space* p:prog {return {"entities" : p.entities, "relationships" : p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
+  / space* Comment space* p:prog {return {"entities" : p.entities,"relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
   / space* JDLComment space* p:prog {return {"entities" : p.entities,"relationships": p.relationships, "enums": p.enums, "dto": p.dto, "pagination": p.pagination, "service": service};}
   / "" {return {"entities" : entities,"relationships": relationships, "enums": enums, "dto": dto, "pagination": pagination, "service": service};}                                                                 
 
