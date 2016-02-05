@@ -12,11 +12,11 @@ if (process.argv.length < 3) {
 }
 
 var fs = require('fs'),
-  EntitiesCreator = require('./lib/entitiescreator'),
-  ClassScheduler = require('./lib/scheduler'),
-  ParserFactory = require('./lib/editors/parser_factory'),
-  jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
-  generateEntities = require('./lib/entity_generator');
+    EntitiesCreator = require('./lib/entitiescreator'),
+    ClassScheduler = require('./lib/scheduler'),
+    ParserFactory = require('./lib/editors/parser_factory'),
+    jhipsterOptionHelper = require('./lib/helpers/jhipster_option_helper'),
+    generateEntities = require('./lib/entity_generator');
 
 
 var type;
@@ -26,6 +26,8 @@ var dto = false;
 var listDTO = [];
 // option force
 var force = false;
+// regenerate flag
+var regenerate = false;
 // option pagination
 var paginate = false;
 var listPagination = {};
@@ -44,6 +46,10 @@ process.argv.forEach(function(val, index) {
     case '-force':
       force = true;
       break;
+    case '-r':
+    case '-regenerate':
+      regenerate = true;
+      break;
     case '-dto':
       dto = true;
       break;
@@ -60,6 +66,15 @@ process.argv.forEach(function(val, index) {
     default:
   }
 });
+
+try {
+  fs.statSync('.juml').isFile(); // first-time user
+} catch (error) {
+  force = true;
+  regenerate = true;
+  fs.writeFileSync('.juml', '');
+}
+
 
 if (!type && !fs.existsSync('./.yo-rc.json')) {
   throw new ArgumentException(
@@ -113,7 +128,7 @@ try {
     scheduledClasses = creator.filterOutUnchangedEntities(scheduledClasses);
   }
   creator.writeJSON(scheduledClasses);
-  generateEntities(scheduledClasses, parsedData.classes);
+  generateEntities(scheduledClasses, parsedData.classes, force, regenerate);
 } catch (error) {
   console.error(error.message);
   console.error(error.stack);
