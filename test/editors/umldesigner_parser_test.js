@@ -231,7 +231,7 @@ describe('UMLDesignerParser', function() {
     describe('#addField', function() {
       describe('#addRegularField', function() {
         it('adds the fields', function() {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(19);
+          expect(Object.keys(parser.parsedData.fields).length).to.equal(26);
         });
 
         it("adds the comment if there's any", function(){
