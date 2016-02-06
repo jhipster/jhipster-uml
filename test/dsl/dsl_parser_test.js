@@ -189,7 +189,7 @@ function initDatabaseTypeHolder(databaseTypeName) {
         'The passed database type is incorrect. '
         + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
         + databaseTypeName
-        + "', exiting now.");
+        + "'.");
   }
 }
 
