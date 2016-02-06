@@ -37,12 +37,12 @@ prog
 
 //Entities
 entityDecl
-  = jd:Comment? space* JDLComment? space* "entity" space* e:ENTITYNAME space* eb:entityBody space* JDLComment? {return {"name" : e, "body":eb, "javadoc":jd};}
-  / "entity" space* e:ENTITYNAME space* eb:entityBody {return {"name" : e, "body":eb, "javadoc":""};}           
+  = jd:Comment? space* JDLComment? space* "entity" space* e:ENTITYNAME space* eb:entityBody? space* JDLComment? {return {"name" : e, "body":eb, "javadoc":jd};}
+  / "entity" space* e:ENTITYNAME space* eb:entityBody? {return {"name" : e, "body":eb, "javadoc":""};}           
  
 entityBody
   = "{" space* JDLComment? space* fdl:fieldDeclList space* JDLComment? space* "}" {return fdl;}
-  / "" {return {};}
+  / "" {return [];}
 
 fieldDeclList
   = JDLComment? space* com:Comment? space* JDLComment? space* f:FIELDNAME space t:type space* vl:validationList? space* ","? space* JDLComment? space* fdl:fieldDeclList {return concat([{"name" : f, "type" : t, "validations" : vl, "javadoc": com}], fdl );}
