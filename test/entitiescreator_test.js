@@ -37,14 +37,6 @@ describe('EntitiesCreator ', function(){
         }
       });
       it('initializes each of its attributes', function() {
-        expect(creator.getPrimitiveTypes()).to.deep.equal(parser.parsedData.types);
-        expect(creator.getClasses()).to.deep.equal(parser.parsedData.classes);
-        expect(creator.getFields()).to.deep.equal(parser.parsedData.fields);
-        expect(creator.getAssociations()).to.deep.equal(parser.parsedData.associations);
-
-        expect(creator.getEntities()).to.deep.equal({});
-      });
-      it('initializes each of its attributes', function() {
         expect(creator.getEntities()).to.deep.equal({});
       });
     });
@@ -69,9 +61,6 @@ describe('EntitiesCreator ', function(){
         creatorUser.initializeEntities();
       });
       describe('when we initialize Entities', function(){
-        it('there are as many Entities as Classes',function(){
-          expect(creator.getEntities().length).equal(creator.getClasses().length);
-        });
         it('all entities attributes are set',function(){
           expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].changelogDate).to.be.defined;
           expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].dto).to.be.defined;
@@ -87,7 +76,7 @@ describe('EntitiesCreator ', function(){
       var fields;
 
       before(function(){
-        firstClassId = Object.keys(creatorConstraint.getClasses())[0];
+        firstClassId = Object.keys(creatorConstraint.parsedData.classes)[0];
         creatorConstraint.initializeEntities();
         creatorConstraint.setFieldsOfEntity(firstClassId);
         fields = creatorConstraint.getEntities()[firstClassId].fields;
@@ -270,7 +259,7 @@ describe('EntitiesCreator ', function(){
             var relationships = entities[classId].relationships;
 
             for(var j=0; j<relationships.length; j++) {
-              switch(creator.getClasses()[classId].name.toLowerCase()) {
+              switch(creator.parsedData.getClass(classId).name.toLowerCase()) {
                 case 'employee':
                   if(relationships[j].otherEntityName.toLowerCase() === 'job'){
                     employeeToJob = relationships[j];
