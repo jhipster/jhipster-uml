@@ -146,15 +146,6 @@ describe('EntitiesCreator ', function(){
 
       });
 
-      /**
-       * Here we check the validation gestion, for that purpose we created
-       *   a xmi of a class constraint with 4 attributs, each with different
-       *   constraints:
-       *   - notTooSmall [ required , minlength : 4 ]
-       *   - notTooBig [maxlength : 10]
-       *   - onlyRequired [ required ]
-       *   - noConstraint []
-       */
       describe('#setValidationsOfField: ',function(){
         describe('when field has no validation', function(){
           it('fieldValidate is false',function(){
