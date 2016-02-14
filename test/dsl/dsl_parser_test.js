@@ -171,6 +171,24 @@ describe("DSL Parser", function(){
           });
         });
       });
+      describe("and using the 'except' keyword", function() {
+        it("doesn't the option to the excluded entity", function() {
+          var parser = new DSLParser(
+            'test/jh/except_keyword.jh',
+            initDatabaseTypeHolder('sql'));
+          var parsedData = parser.parse();
+          expect(Object.keys(parsedData.classes).length).to.eq(3);
+          expect(parsedData.getClass('A').dto).to.eq('no');
+          expect(parsedData.getClass('B').dto).to.eq('no');
+          expect(parsedData.getClass('C').dto).to.eq('mapstruct');
+          expect(parsedData.getClass('A').pagination).to.eq('pager');
+          expect(parsedData.getClass('B').pagination).to.eq('no');
+          expect(parsedData.getClass('C').pagination).to.eq('no');
+          expect(parsedData.getClass('A').service).to.eq('no');
+          expect(parsedData.getClass('B').service).to.eq('serviceClass');
+          expect(parsedData.getClass('C').service).to.eq('no');
+        });
+      });
     });
   });
 

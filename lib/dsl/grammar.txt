@@ -74,9 +74,16 @@ enumPropList
   = e:ENUMPROP space* ',' space* JDLComment? space* el:enumPropList {return concat([e],el);}
   / e:ENUMPROP {return [e];} 
 
+exclusion
+  = 'except' space+ sub:exclusionSub {return sub;}
+
+exclusionSub
+  = e:ENTITYNAME space* ',' space* sub:exclusionSub {return concat([e], sub);}
+  / e:ENTITYNAME {return [e];}
+
 // DTO
 dtoDecl
-  = 'dto' space+ decl:subDtoDecl space* JDLComment? { dto[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
+  = 'dto' space+ decl:subDtoDecl space* ex:exclusion? space* JDLComment? { dto[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
 
 subDtoDecl
  = e:ENTITYNAME space* ',' space* sub:subDtoDecl {return concat([e], sub);}
@@ -86,7 +93,7 @@ subDtoDecl
 
 // Pagination
 pagiDecl
-  = 'paginate' space+ decl:subPagiDecl space* JDLComment? { pagination[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
+  = 'paginate' space+ decl:subPagiDecl space* ex:exclusion? space* JDLComment? { pagination[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
 
 subPagiDecl
   = e:ENTITYNAME space* ',' space* sub:subPagiDecl {return concat([e], sub);}
@@ -96,7 +103,7 @@ subPagiDecl
 
 // Service
 serviceDecl
-  = 'service' space+ decl:subServiceDecl space* JDLComment? { service[decl[decl.length - 1]] = decl.slice(0, decl.length-1); }
+  = 'service' space+ decl:subServiceDecl space* ex:exclusion? space* JDLComment? { service[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
 
 subServiceDecl
   = e:ENTITYNAME space* ',' space* sub:subServiceDecl {return concat([e], sub);}

@@ -1,0 +1,7 @@
+entity A
+entity B
+entity C
+
+dto * with mapstruct except A, B
+paginate * with pager except B, C
+service * with serviceClass except C, A
