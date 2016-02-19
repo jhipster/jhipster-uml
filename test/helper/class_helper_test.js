@@ -15,15 +15,15 @@ describe('#getClassNames', function() {
 
     it("returns the classes' names", function() {
       var classNames = getClassNames(classDataHolder);
-      expect(classNames).to.deep.equal(['a', 'b', 'c', 'd']);
+      expect(classNames).to.deep.equal({0: 'a', 1: 'b', 2: 'c', 3: 'd'});
     });
   });
 
   describe('when passing an invalid classes object', function() {
     describe('such as an empty object', function() {
-      it('returns an empty array', function() {
+      it('returns an empty object', function() {
         var classNames = getClassNames({});
-        expect(classNames).to.deep.equal([]);
+        expect(classNames).to.deep.equal({});
       });
     });
     describe('such as a null object', function() {
