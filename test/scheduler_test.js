@@ -11,9 +11,7 @@ var parsedData = parser.parse();
 
 var employeeId = '_0iCy-7ieEeW4ip1mZlCqPg';
 
-var scheduler = new ClassScheduler(
-  Object.keys(parsedData.classes),
-  parsedData.associations);
+var scheduler = new ClassScheduler(parsedData.classes, parsedData.associations);
 
 describe('ClassScheduler', function() {
   describe('#initialize', function() {
@@ -31,7 +29,7 @@ describe('ClassScheduler', function() {
       describe('for the injected fields', function() {
         it('throws an exception', function() {
           try {
-            new ClassScheduler(Object.keys(parsedData.classes), null);
+            new ClassScheduler(parsedData.classes, null);
           } catch (error) {
             expect(error.name).to.equal('NullPointerException');
           }
@@ -50,7 +48,7 @@ describe('ClassScheduler', function() {
     });
 
     it ('successfully creates a scheduler', function() {
-      new ClassScheduler(Object.keys(parsedData.classes), parsedData.associations);
+      new ClassScheduler(parsedData.classes, parsedData.associations);
     });
 
     it('initializes each of its attributes', function() {
@@ -69,9 +67,7 @@ describe('ClassScheduler', function() {
       var otherParser =
         ParserFactory.createParser('./test/xmi/mappedby_test.xmi', 'sql');
       var parsedData = otherParser.parse();
-      var otherScheduler = new ClassScheduler(
-        Object.keys(parsedData.classes),
-        parsedData.associations);
+      var otherScheduler = new ClassScheduler(parsedData.classes, parsedData.associations);
       expect(
         otherScheduler.schedule().length
       ).to.equal(Object.keys(parsedData.classes).length);
@@ -308,9 +304,7 @@ describe('ClassScheduler', function() {
       var otherParser =
         ParserFactory.createParser('./test/xmi/modelio_circular_dep_test.xmi', 'sql');
       var parsedData = otherParser.parse();
-      var otherScheduler = new ClassScheduler(
-        Object.keys(parsedData.classes),
-        parsedData.associations);
+      var otherScheduler = new ClassScheduler(parsedData.classes, parsedData.associations);
       try {
         otherScheduler.schedule();
         fail();
