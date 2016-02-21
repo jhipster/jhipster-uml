@@ -1,6 +1,6 @@
 "use strict"
 
-var DSLParser = require("../../lib/dsl/dsl_parser"),
+var DSLParser = require('../../lib/dsl/dsl_parser'),
     fs = require('fs'),
     pegParser = require('../../lib/dsl/jhGrammar'),
     expect = require('chai').expect,
@@ -146,7 +146,7 @@ describe("DSL Parser", function(){
       describe("and using the '*' keyword", function() {
         it('assigns the option for each entity', function() {
           var parser = new DSLParser(
-            'test/jh/all_keyword_1.jh',
+            fs.readFileSync('test/jh/all_keyword_1.jh').toString(),
             initDatabaseTypeHolder('sql'));
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);
@@ -160,7 +160,7 @@ describe("DSL Parser", function(){
       describe("and using the 'all' keyword", function() {
         it('assigns the option for each entity', function() {
           var parser = new DSLParser(
-            'test/jh/all_keyword_2.jh',
+            fs.readFileSync('test/jh/all_keyword_2.jh').toString(),
             initDatabaseTypeHolder('sql'));
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);
@@ -174,7 +174,7 @@ describe("DSL Parser", function(){
       describe("and using the 'except' keyword", function() {
         it("doesn't the option to the excluded entity", function() {
           var parser = new DSLParser(
-            'test/jh/except_keyword.jh',
+            fs.readFileSync('test/jh/except_keyword.jh').toString(),
             initDatabaseTypeHolder('sql'));
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);

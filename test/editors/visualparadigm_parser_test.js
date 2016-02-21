@@ -4,7 +4,10 @@ var expect = require('chai').expect,
     fail = expect.fail,
     ParserFactory = require('../../lib/editors/parser_factory');
 
-var parser = ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
+var parser = ParserFactory.createParser({
+  file:'./test/xmi/visualparadigm.uml',
+  databaseType: 'sql'
+});
 
 describe('VisualParadigmParser', function() {
   describe('#findElements',function() {
@@ -26,7 +29,10 @@ describe('VisualParadigmParser', function() {
 
     it('find the enumerations in the document', function() {
       var otherParser =
-        ParserFactory.createParser('./test/xmi/visualparadigm_enum_test.uml', 'sql');
+        ParserFactory.createParser({
+          file:'./test/xmi/visualparadigm_enum_test.uml',
+          databaseType: 'sql'
+        });
       otherParser.findElements();
       expect(otherParser.rawEnumsIndexes).to.deep.equal([ 1, 2 ]);
     });
@@ -51,9 +57,10 @@ describe('VisualParadigmParser', function() {
 
     describe('when having a document with no validation', function() {
       it('does not do anything', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/visualparadigm_user_class_test.uml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_user_class_test.uml',
+          databaseType: 'sql'
+        });
         otherParser.findConstraints();
         expect(otherParser.rawValidationRulesIndexes).to.deep.equal([]);
       });
@@ -105,8 +112,10 @@ describe('VisualParadigmParser', function() {
 
     describe('if the types are not capitalized', function() {
       it('capitalizes and adds them', function() {
-        var otherParser =
-          ParserFactory.createParser('./test/xmi/visualparadigm.uml', 'sql');
+        var otherParser = ParserFactory.createParser({
+          file:'./test/xmi/visualparadigm.uml',
+          databaseType: 'sql'
+        });
         otherParser.fillTypes();
         Object.keys(otherParser.parsedData.types).forEach(function(type) {
           expect(
@@ -120,9 +129,10 @@ describe('VisualParadigmParser', function() {
   describe('#fillEnums', function() {
     describe('when an enum has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/visualparadigm_enum_no_name_test.uml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_enum_no_name_test.uml',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           fail();
@@ -134,18 +144,20 @@ describe('VisualParadigmParser', function() {
 
     describe('when an enum has no value', function() {
       it("doesn't throw any exception", function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/visualparadigm_enum_no_value_test.uml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_enum_no_value_test.uml',
+          databaseType: 'sql'
+        });
         otherParser.parse();
       });
     });
 
     describe('when an enum attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/visualparadigm_enum_no_attribute_name_test.uml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_enum_no_attribute_name_test.uml',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           fail();
@@ -157,10 +169,10 @@ describe('VisualParadigmParser', function() {
 
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
-        var parsedData = ParserFactory.createParser(
-          './test/xmi/visualparadigm_enum_test.uml',
-          'sql'
-        ).parse();
+        var parsedData = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_enum_test.uml',
+          databaseType: 'sql'
+        }).parse();
         var expectedNames = ['MyEnumeration2', 'MyEnumeration'];
         var expectedNValues = ['VALUE_A', 'VALUE_A', 'VALUE_B'];
         var names = [];
@@ -185,10 +197,10 @@ describe('VisualParadigmParser', function() {
     describe('when a class has no name', function() {
       it('throws an exception', function() {
         try {
-          ParserFactory.createParser(
-          './test/xmi/visualparadigm_no_class_name_test.uml',
-          'sql'
-        ).parse();
+          ParserFactory.createParser({
+            file: './test/xmi/visualparadigm_no_class_name_test.uml',
+            databaseType: 'sql'
+          }).parse();
           fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -199,10 +211,10 @@ describe('VisualParadigmParser', function() {
     describe('when an attribute has no name', function() {
       it('throws an exception', function() {
         try {
-          ParserFactory.createParser(
-            './test/xmi/visualparadigm_no_attribute_name_test.uml',
-            'sql'
-          ).parse();
+          ParserFactory.createParser({
+            file: './test/xmi/visualparadigm_no_attribute_name_test.uml',
+            databaseType: 'sql'
+          }).parse();
           fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
@@ -216,10 +228,10 @@ describe('VisualParadigmParser', function() {
       });
 
       it("adds the comment if there's any", function(){
-        var parsedData = ParserFactory.createParser(
-          './test/xmi/visualparadigm_comments.uml',
-          'sql'
-        ).parse();
+        var parsedData = ParserFactory.createParser({
+          file: './test/xmi/visualparadigm_comments.uml',
+          databaseType: 'sql'
+        }).parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
           expect(parsedData.getClass(classData).comment).not.to.be.undefined;
           expect(parsedData.getClass(classData).comment).not.to.equal('');
@@ -234,10 +246,10 @@ describe('VisualParadigmParser', function() {
         });
 
         it("adds the comment if there's any", function(){
-          var parsedData = ParserFactory.createParser(
-            './test/xmi/visualparadigm_comments.uml',
-            'sql'
-          ).parse();
+          var parsedData = ParserFactory.createParser({
+            file: './test/xmi/visualparadigm_comments.uml',
+            databaseType: 'sql'
+          }).parse();
           Object.keys(parsedData.fields).forEach(function(fieldData) {
             expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
             expect(parsedData.getField(fieldData).comment).not.to.equal('');
@@ -256,7 +268,10 @@ describe('VisualParadigmParser', function() {
 
         describe('when trying to add a field whose name is capitalized', function() {
           it('decapitalizes and adds it', function() {
-            var otherParser = ParserFactory.createParser('./test/xmi/visualparadigm_capitalized_field_names.uml', 'sql');
+            var otherParser = ParserFactory.createParser({
+              file:'./test/xmi/visualparadigm_capitalized_field_names.uml',
+              databaseType: 'sql'
+            });
             var parsedData = otherParser.parse();
             if (Object.keys(parsedData.fields).length === 0) {
               fail();
@@ -272,10 +287,10 @@ describe('VisualParadigmParser', function() {
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
             try {
-              ParserFactory.createParser(
-                './test/xmi/visualparadigm_wrong_typename.uml',
-                'sql'
-              ).parse();
+              ParserFactory.createParser({
+                file: './test/xmi/visualparadigm_wrong_typename.uml',
+                databaseType: 'sql'
+              }).parse();
               fail();
             } catch (error) {
               expect(error.name).to.equal('InvalidTypeException');

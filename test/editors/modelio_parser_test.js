@@ -4,7 +4,10 @@ var expect = require('chai').expect,
     fail = expect.fail,
     ParserFactory = require('../../lib/editors/parser_factory');
 
-var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
+var parser = ParserFactory.createParser({
+  file:'./test/xmi/modelio.xmi',
+  databaseType: 'sql'
+});
 
 describe('ModelioParser', function() {
   describe('#findElements',function() {
@@ -26,7 +29,10 @@ describe('ModelioParser', function() {
 
     it('finds the enumerations in the document', function() {
       var otherParser =
-        ParserFactory.createParser('./test/xmi/modelio_enum_test.xmi', 'sql');
+        ParserFactory.createParser({
+          file:'./test/xmi/modelio_enum_test.xmi',
+          databaseType: 'sql'
+        });
       otherParser.findElements();
       expect(otherParser.rawEnumsIndexes).to.deep.equal([ 1, 2 ]);
     });
@@ -51,9 +57,10 @@ describe('ModelioParser', function() {
 
     describe('when having a document with no validation', function() {
       it('does not do anything', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_user_class_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_user_class_test.xmi',
+          databaseType: 'sql'
+        });
         otherParser.findConstraints();
         expect(otherParser.rawValidationRulesIndexes).to.deep.equal([]);
       });
@@ -104,9 +111,10 @@ describe('ModelioParser', function() {
 
       describe('if the types are not capitalized', function() {
         it('capitalizes and adds them', function() {
-          var otherParser = ParserFactory.createParser(
-            './test/xmi/modelio_lowercased_string_type.xmi',
-            'sql');
+          var otherParser = ParserFactory.createParser({
+            file: './test/xmi/modelio_lowercased_string_type.xmi',
+            databaseType: 'sql'
+          });
           otherParser.fillTypes();
           Object.keys(otherParser.parsedData.types).forEach(function(type) {
             expect(
@@ -121,9 +129,10 @@ describe('ModelioParser', function() {
   describe('#fillEnums', function() {
     describe('when an enum has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_enum_no_name_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_enum_no_name_test.xmi',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           throw new ExpectationError();
@@ -135,18 +144,20 @@ describe('ModelioParser', function() {
 
     describe('when an enum has no value', function() {
       it("doesn't throw any exception", function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_enum_no_value_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_enum_no_value_test.xmi',
+          databaseType: 'sql'
+        });
         otherParser.parse();
       });
     });
 
     describe('when an enum attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_enum_no_attribute_name_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_enum_no_attribute_name_test.xmi',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           throw new ExpectationError();
@@ -158,9 +169,10 @@ describe('ModelioParser', function() {
 
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_enum_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_enum_test.xmi',
+          databaseType: 'sql'
+        });
         otherParser.parse();
         var expectedNames = ['MyEnumeration', 'MySecondEnumeration'];
         var expectedNValues = ['VALUE_A', 'VALUE_B', 'VALUE_A'];
@@ -195,9 +207,10 @@ describe('ModelioParser', function() {
 
     describe('when a class has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_no_class_name_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_no_class_name_test.xmi',
+          databaseType: 'sql'
+        });
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
@@ -210,9 +223,10 @@ describe('ModelioParser', function() {
 
     describe('when an attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/modelio_no_attribute_name_test.xmi',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_no_attribute_name_test.xmi',
+          databaseType: 'sql'
+        });
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
@@ -228,8 +242,11 @@ describe('ModelioParser', function() {
         expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
       });
 
-      it("adds the comment if there's any", function(){
-        var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
+      it("adds the comment if there's any", function() {
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_comments.xmi',
+          databaseType: 'sql'
+        });
         var parsedData = otherParser.parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
           expect(parsedData.getClass(classData).comment).not.to.be.undefined;
@@ -244,8 +261,11 @@ describe('ModelioParser', function() {
           expect(Object.keys(parser.parsedData.fields).length).to.equal(28);
         });
 
-        it("adds the comment if there's any", function(){
-          var otherParser = ParserFactory.createParser('./test/xmi/modelio_comments.xmi', 'sql');
+        it("adds the comment if there's any", function() {
+          var otherParser = ParserFactory.createParser({
+            file: './test/xmi/modelio_comments.xmi',
+            databaseType: 'sql'
+          });
           var parsedData = otherParser.parse();
           Object.keys(parsedData.fields).forEach(function(fieldData) {
             expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
@@ -255,7 +275,10 @@ describe('ModelioParser', function() {
 
         describe('when trying to add a field whose name is capitalized', function() {
           it('decapitalizes and adds it', function() {
-            var otherParser = ParserFactory.createParser('./test/xmi/modelio_capitalized_field_names.xmi', 'sql');
+            var otherParser = ParserFactory.createParser({
+              file: './test/xmi/modelio_capitalized_field_names.xmi',
+              databaseType: 'sql'
+            });
             var parsedData = otherParser.parse();
             if (Object.keys(parsedData.fields).length === 0) {
               fail();
@@ -280,9 +303,10 @@ describe('ModelioParser', function() {
 
         describe('when having an invalid type in the XMI', function() {
           it('throws an exception', function() {
-            var otherParser = ParserFactory.createParser(
-              './test/xmi/modelio_wrong_typename.xmi',
-              'sql');
+            var otherParser = ParserFactory.createParser({
+              file: './test/xmi/modelio_wrong_typename.xmi',
+              databaseType: 'sql'
+            });
             try {
               otherParser.parse();
               throw new ExpectationError();
@@ -308,9 +332,10 @@ describe('ModelioParser', function() {
 
           describe('because it has a value but no name', function() {
             it('throws an exception', function() {
-              var otherParser = ParserFactory.createParser(
-                './test/xmi/modelio_no_validation_name_test.xmi',
-                'sql');
+              var otherParser = ParserFactory.createParser({
+                file: './test/xmi/modelio_no_validation_name_test.xmi',
+                databaseType: 'sql'
+              });
               otherParser.findConstraints();
               try {
                 otherParser.fillConstraints();

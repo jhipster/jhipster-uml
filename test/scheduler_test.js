@@ -5,7 +5,10 @@ var expect = require('chai').expect,
   	ParserFactory = require('../lib/editors/parser_factory'),
     cardinalities = require('../lib/cardinalities');
 
-var parser = ParserFactory.createParser('./test/xmi/modelio.xmi', 'sql');
+var parser = ParserFactory.createParser({
+  file:'./test/xmi/modelio.xmi',
+  databaseType: 'sql'
+});
 
 var parsedData = parser.parse();
 
@@ -64,8 +67,10 @@ describe('ClassScheduler', function() {
     describe(
         'when scheduling classes sorted so as to blend sorted and unsorted classes',
         function() {
-      var otherParser =
-        ParserFactory.createParser('./test/xmi/mappedby_test.xmi', 'sql');
+      var otherParser = ParserFactory.createParser({
+        file: './test/xmi/mappedby_test.xmi',
+        databaseType: 'sql'
+      });
       var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(parsedData.classes, parsedData.associations);
       expect(
@@ -302,7 +307,10 @@ describe('ClassScheduler', function() {
     it('throws an exception if it cannot sort anymore', function() {
 
       var otherParser =
-        ParserFactory.createParser('./test/xmi/modelio_circular_dep_test.xmi', 'sql');
+        ParserFactory.createParser({
+          file: './test/xmi/modelio_circular_dep_test.xmi',
+          databaseType: 'sql'
+        });
       var parsedData = otherParser.parse();
       var otherScheduler = new ClassScheduler(parsedData.classes, parsedData.associations);
       try {

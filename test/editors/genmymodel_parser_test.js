@@ -4,13 +4,15 @@ var expect = require('chai').expect,
     fail = expect.fail,
     ParserFactory = require('../../lib/editors/parser_factory');
 
-var parser = ParserFactory.createParser(
-  './test/xmi/genmymodel_evolve.xmi',
-  'sql');
+var parser = ParserFactory.createParser({
+  file: './test/xmi/genmymodel_evolve.xmi',
+  databaseType: 'sql'
+});
 
-var parserWrongType = ParserFactory.createParser(
-  './test/xmi/genmymodel_wrong_type.xmi',
-  'sql');
+var parserWrongType = ParserFactory.createParser({
+  file: './test/xmi/genmymodel_wrong_type.xmi',
+  databaseType: 'sql'
+});
 
 describe('GenMyModelParser', function() {
   describe('#findElements',function() {
@@ -32,7 +34,10 @@ describe('GenMyModelParser', function() {
 
     it('find the enumerations in the document', function() {
       var otherParser =
-        ParserFactory.createParser('./test/xmi/genmymodel_enum_test.xml', 'sql');
+        ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_test.xml',
+          databaseType: 'sql'
+        });
       otherParser.findElements();
       expect(otherParser.rawEnumsIndexes).to.deep.equal([ 1, 2 ]);
     });
@@ -91,9 +96,10 @@ describe('GenMyModelParser', function() {
 
     describe('if the types are not capitalized', function() {
       it('capitalizes and adds them', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/genmymodel_lowercased_string_type.xml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_lowercased_string_type.xml',
+          databaseType: 'sql'
+        });
         otherParser.fillTypes();
         Object.keys(otherParser.parsedData.types).forEach(function(type) {
           expect(
@@ -107,9 +113,10 @@ describe('GenMyModelParser', function() {
   describe('#fillConstraints', function() {
     describe('when an enum has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/genmymodel_enum_no_name_test.xml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_no_name_test.xml',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           fail();
@@ -121,9 +128,10 @@ describe('GenMyModelParser', function() {
 
     describe('when an enum attribute has no name', function() {
       it('throws an exception', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/genmymodel_enum_no_attribute_name_test.xml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_no_attribute_name_test.xml',
+          databaseType: 'sql'
+        });
         try {
           otherParser.parse();
           fail();
@@ -135,18 +143,20 @@ describe('GenMyModelParser', function() {
 
     describe('when an enum has no value', function() {
       it("doesn't throw any exception", function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/genmymodel_enum_no_value_test.xml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_no_value_test.xml',
+          databaseType: 'sql'
+        });
         otherParser.parse();
       });
     });
 
     describe('when an enum is well formed', function() {
       it('is parsed', function() {
-        var otherParser = ParserFactory.createParser(
-          './test/xmi/genmymodel_enum_test.xml',
-          'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_test.xml',
+          databaseType: 'sql'
+        });
         otherParser.parse();
         var expectedNames = ['MyEnumeration', 'MyEnumeration2'];
         var expectedNValues = ['LITERAL1', 'LITERAL2', 'LITERAL'];
@@ -187,7 +197,10 @@ describe('GenMyModelParser', function() {
       });
 
       it("adds the comment if there's any", function(){
-        var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_comments.xml',
+          databaseType: 'sql'
+        });
         var parsedData = otherParser.parse();
         Object.keys(parsedData.classes).forEach(function(classData) {
           expect(parsedData.getClass(classData).comment).not.to.be.undefined;
@@ -203,7 +216,10 @@ describe('GenMyModelParser', function() {
         });
 
         it("adds the comment if there's any", function(){
-          var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_comments.xml', 'sql');
+          var otherParser = ParserFactory.createParser({
+            file: './test/xmi/genmymodel_comments.xml',
+            databaseType: 'sql'
+          });
           var parsedData = otherParser.parse();
           if (Object.keys(parsedData.fields).length === 0) {
             fail();
@@ -226,7 +242,10 @@ describe('GenMyModelParser', function() {
 
         describe('when trying to add a field whose name is capitalized', function() {
           it('decapitalizes and adds it', function() {
-            var otherParser = ParserFactory.createParser('./test/xmi/genmymodel_capitalized_field_names.xmi', 'sql');
+            var otherParser = ParserFactory.createParser({
+              file: './test/xmi/genmymodel_capitalized_field_names.xmi',
+              databaseType:'sql'
+            });
             var parsedData = otherParser.parse();
             if (Object.keys(parsedData.fields).length === 0) {
               fail();
