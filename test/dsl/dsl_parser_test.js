@@ -1,36 +1,39 @@
 "use strict"
 
-var DSLParser = require('../../lib/dsl/dsl_parser'),
-    fs = require('fs'),
-    pegParser = require('../../lib/dsl/jhGrammar'),
+var ParserFactory = require('../../lib/editors/parser_factory'),
     expect = require('chai').expect,
     fail = expect.fail,
     SQLTypes = require('../../lib/types/sql_types'),
     MongoDBTypes = require('../../lib/types/mongodb_types'),
     CassandraTypes = require('../../lib/types/cassandra_types');
 
-var fileName = "test/jh/oracle.jh";
-var parser = new DSLParser(fileName, initDatabaseTypeHolder('sql'));
+var parser = ParserFactory.createParser({
+  file: 'test/jh/oracle.jh',
+  databaseType: 'sql'
+});
 
 /* The parser with an undeclared entity in a relationship */
-var parserUndeclaredEntity = new DSLParser("test/jh/UndeclaredEntity.jh",
-  initDatabaseTypeHolder('sql'));
+var parserUndeclaredEntity = ParserFactory.createParser({
+  file: 'test/jh/UndeclaredEntity.jh',
+  databaseType: 'sql'
+});
 
 /* The parser with a wrong type */
-var parserWrongType = new DSLParser("test/jh/WrongType.jh",
-  initDatabaseTypeHolder('sql'));
+var parserWrongType = ParserFactory.createParser({
+  file: 'test/jh/WrongType.jh',
+  databaseType: 'sql'
+});
 
 /* The parser with an enum */
-var parserEnum = new DSLParser("test/jh/enum.jh",
-  initDatabaseTypeHolder('sql'));
-
+var parserEnum = ParserFactory.createParser({
+  file: 'test/jh/enum.jh',
+  databaseType: 'sql'
+});
 
 describe("DSL Parser", function(){
   describe("#fillClassesAndFields", function(){
     describe("when the classes and fields are created",function(){
       before(function(){
-        var jh = fs.readFileSync(parser.root).toString();
-        parser.result = pegParser.parse(jh);
         parser.fillEnums();
         parser.fillClassesAndFields();
       });
@@ -56,17 +59,16 @@ describe("DSL Parser", function(){
 
     describe('when trying to add a field whose name is capitalized', function() {
       it('decapitalizes and adds it', function() {
-        var otherParser = new DSLParser(
-          'test/jh/capitalized_field_name.jh',
-          initDatabaseTypeHolder('sql'));
-        var jh = fs.readFileSync(otherParser.root).toString();
-        parser.result = pegParser.parse(jh);
-        parser.fillClassesAndFields();
-        if (Object.keys(parser.parsedData.fields).length === 0) {
+        var otherParser = ParserFactory.createParser({
+          file: 'test/jh/capitalized_field_name.jh',
+          databaseType: 'sql'
+        });
+        otherParser.fillClassesAndFields();
+        if (Object.keys(otherParser.parsedData.fields).length === 0) {
           fail();
         }
-        Object.keys(parser.parsedData.fields).forEach(function(fieldData) {
-          if (parser.parsedData.fields[fieldData].name.match('^[A-Z].*')) {
+        Object.keys(otherParser.parsedData.fields).forEach(function(fieldData) {
+          if (otherParser.parsedData.fields[fieldData].name.match('^[A-Z].*')) {
             fail();
           }
         });
@@ -76,8 +78,6 @@ describe("DSL Parser", function(){
     describe("When a field has a type not supported by JHipster",function(){
       it("throws an parsing exception",function(){
         try{
-          var jh = fs.readFileSync(parserWrongType.root).toString();
-          parserWrongType.result = pegParser.parse(jh);
           parserWrongType.fillEnums();
           parserWrongType.fillClassesAndFields();
         }catch(error){
@@ -88,15 +88,11 @@ describe("DSL Parser", function(){
 
     describe("When an enum is declared", function(){
       it("the enums in result are well formed",function(){
-        var jh = fs.readFileSync(parserEnum.root).toString();
-       parserEnum.result = pegParser.parse(jh);
        expect(parserEnum.result.enums[0].name).to.be.equal("Language");
        expect(parserEnum.result.enums[0].values.length).to.be.equal(4);
       });
 
       it("the enum Object is well formed",function(){
-       var jh = fs.readFileSync(parserEnum.root).toString();
-       parserEnum.result = pegParser.parse(jh);
        parserEnum.fillEnums();
        parserEnum.fillClassesAndFields();
 
@@ -111,8 +107,6 @@ describe("DSL Parser", function(){
   describe("#fillAssociations", function(){
     describe("When the relationships are created",function(){
       before(function(){
-        var jh = fs.readFileSync(parser.root).toString();
-        parser.result = pegParser.parse(jh);
         parser.fillEnums();
         parser.fillClassesAndFields();
         parser.fillAssociations();
@@ -128,8 +122,6 @@ describe("DSL Parser", function(){
 
     describe("When an entity in a relationship is not declared",function(){
       before(function(){
-        var jh = fs.readFileSync(parserUndeclaredEntity.root).toString();
-        parserUndeclaredEntity.result = pegParser.parse(jh);
         parserUndeclaredEntity.fillClassesAndFields();
       });
 
@@ -145,9 +137,10 @@ describe("DSL Parser", function(){
     describe('when generating entities with options', function() {
       describe("and using the '*' keyword", function() {
         it('assigns the option for each entity', function() {
-          var parser = new DSLParser(
-            fs.readFileSync('test/jh/all_keyword_1.jh').toString(),
-            initDatabaseTypeHolder('sql'));
+          var parser = ParserFactory.createParser({
+            file: 'test/jh/all_keyword_1.jh',
+            databaseType: 'sql'
+          });
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);
           Object.keys(parsedData.classes).forEach(function(className) {
@@ -159,9 +152,10 @@ describe("DSL Parser", function(){
       });
       describe("and using the 'all' keyword", function() {
         it('assigns the option for each entity', function() {
-          var parser = new DSLParser(
-            fs.readFileSync('test/jh/all_keyword_2.jh').toString(),
-            initDatabaseTypeHolder('sql'));
+          var parser = ParserFactory.createParser({
+            file: 'test/jh/all_keyword_2.jh',
+            databaseType: 'sql'
+          });
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);
           Object.keys(parsedData.classes).forEach(function(className) {
@@ -173,9 +167,10 @@ describe("DSL Parser", function(){
       });
       describe("and using the 'except' keyword", function() {
         it("doesn't the option to the excluded entity", function() {
-          var parser = new DSLParser(
-            fs.readFileSync('test/jh/except_keyword.jh').toString(),
-            initDatabaseTypeHolder('sql'));
+          var parser = ParserFactory.createParser({
+            file: 'test/jh/except_keyword.jh',
+            databaseType: 'sql'
+          });
           var parsedData = parser.parse();
           expect(Object.keys(parsedData.classes).length).to.eq(3);
           expect(parsedData.getClass('A').dto).to.eq('no');
@@ -191,26 +186,7 @@ describe("DSL Parser", function(){
       });
     });
   });
-
 });
-
-function initDatabaseTypeHolder(databaseTypeName) {
-  switch (databaseTypeName) {
-    case 'sql':
-      return new SQLTypes();
-    case 'mongodb':
-      return new MongoDBTypes();
-    case 'cassandra':
-      return new CassandraTypes();
-    default:
-      throw new WrongDatabaseTypeException(
-        'The passed database type is incorrect. '
-        + "Must either be 'sql', 'mongodb', or 'cassandra'. Got '"
-        + databaseTypeName
-        + "'.");
-  }
-}
-
 
 function contains(a, obj) {
     var i = a.length;
