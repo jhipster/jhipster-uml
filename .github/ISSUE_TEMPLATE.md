@@ -16,4 +16,5 @@
 ### Versions
 
 JHipster:
+
 JHipster UML:
