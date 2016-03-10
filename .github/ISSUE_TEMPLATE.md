@@ -1,20 +1,30 @@
 ### The issue
 
 
+---
+#### The stacktrace
 
+```
+Paste it here!
+```
+
+---
 
 ### Steps to reproduce
 
 
 
+---
 
 ### The XMI or JDL file
 
 
 
+---
 
 ### Versions
 
-JHipster:
+| JHipster           | JHipster UML           |
+| ------------------ | ---------------------- |
+| `JHipster Version` | `JHipster UML version` |
 
-JHipster UML:
