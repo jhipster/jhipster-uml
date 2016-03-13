@@ -1,8 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    getClassNames = require('../../lib/helpers/class_helper').getClassNames,
-    extractClassName = require('../../lib/helpers/class_helper').extractClassName;
+    getClassNames = require('../../lib/helpers/class_helper').getClassNames;
 
 describe('#getClassNames', function() {
   describe('when passing a valid classes object', function() {
