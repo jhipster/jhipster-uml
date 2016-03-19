@@ -115,7 +115,13 @@ exclusionSub
 
 // DTO
 dtoDecl
-  = 'dto' space+ decl:subDtoDecl space* ex:exclusion? space* JDLComment? { dto[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
+  = 'dto' space+ decl:subDtoDecl space* ex:exclusion? space* JDLComment? {
+    dto[decl[decl.length - 1]] = dto[decl[decl.length - 1]] || { list: [], excluded: [] };
+    concat(dto[decl[decl.length - 1]].list, decl.slice(0, decl.length-1));
+    if (ex) {
+    	concat(dto[decl[decl.length - 1]].excluded, ex);
+    }
+  }
 
 subDtoDecl
  = e:ENTITYNAME space* ',' space* sub:subDtoDecl {return concat([e], sub);}
@@ -125,7 +131,13 @@ subDtoDecl
 
 // Pagination
 pagiDecl
-  = 'paginate' space+ decl:subPagiDecl space* ex:exclusion? space* JDLComment? { pagination[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
+  = 'paginate' space+ decl:subPagiDecl space* ex:exclusion? space* JDLComment? {
+  	pagination[decl[decl.length - 1]] = pagination[decl[decl.length - 1]] || { list: [], excluded: [] };
+    concat(pagination[decl[decl.length - 1]].list, decl.slice(0, decl.length-1));
+    if (ex) {
+    	concat(pagination[decl[decl.length - 1]].excluded, ex);
+    }
+  }
 
 subPagiDecl
   = e:ENTITYNAME space* ',' space* sub:subPagiDecl {return concat([e], sub);}
@@ -135,7 +147,13 @@ subPagiDecl
 
 // Service
 serviceDecl
-  = 'service' space+ decl:subServiceDecl space* ex:exclusion? space* JDLComment? { service[decl[decl.length - 1]] = {list: decl.slice(0, decl.length-1), excluded: ex === null ? [] : ex}; }
+  = 'service' space+ decl:subServiceDecl space* ex:exclusion? space* JDLComment? {
+  	service[decl[decl.length - 1]] = service[decl[decl.length - 1]] || { list: [], excluded: [] };
+    concat(service[decl[decl.length - 1]].list, decl.slice(0, decl.length-1));
+    if (ex) {
+    	concat(service[decl[decl.length - 1]].excluded, ex);
+    }
+  }
 
 subServiceDecl
   = e:ENTITYNAME space* ',' space* sub:subServiceDecl {return concat([e], sub);}

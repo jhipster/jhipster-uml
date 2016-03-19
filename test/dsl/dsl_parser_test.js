@@ -166,7 +166,7 @@ describe("DSL Parser", function(){
         });
       });
       describe("and using the 'except' keyword", function() {
-        it("doesn't the option to the excluded entity", function() {
+        it("doesn't set the option to the excluded entity", function() {
           var parser = ParserFactory.createParser({
             file: 'test/jh/except_keyword.jh',
             databaseType: 'sql'
