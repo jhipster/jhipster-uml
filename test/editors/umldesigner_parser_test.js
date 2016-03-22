@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect,
     fail = expect.fail,
-    _ = require('underscore.string'),
+    _ = require('lodash'),
     UMLDesignerParser = require('../../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
@@ -82,7 +82,7 @@ describe('UMLDesignerParser', function() {
         parser.fillTypes();
       });
 
-      it('assigns their id with their capitalized name', function() {
+      it('assigns their id with their upperFirstd name', function() {
         var expectedTypes = [ 'ZonedDateTime', 'BigDecimal' ];
         Object.keys(parser.parsedData.types).forEach(function(type) {
           if(parser.parsedData.types.hasOwnProperty(type)) {
@@ -97,8 +97,8 @@ describe('UMLDesignerParser', function() {
       });
     });
 
-    describe('if the types are not capitalized', function() {
-      it('capitalizes and adds them', function() {
+    describe('if the types are not upperFirstd', function() {
+      it('upperFirsts and adds them', function() {
         var otherParser = new UMLDesignerParser(
           getRootElement(
             readFileContent('./test/xmi/umldesigner_lowercased_string_type.xmi')),
@@ -107,7 +107,7 @@ describe('UMLDesignerParser', function() {
         Object.keys(parser.parsedData.types).forEach(function(type) {
           expect(
             parser.parsedData.getType(type).name
-          ).to.equal(_.capitalize(parser.parsedData.getType(type).name));
+          ).to.equal(_.upperFirst(parser.parsedData.getType(type).name));
         });
       });
     });
@@ -256,8 +256,8 @@ describe('UMLDesignerParser', function() {
           expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
         });
 
-        describe('when trying to add a field whose name is capitalized', function() {
-          it('decapitalizes and adds it', function() {
+        describe('when trying to add a field whose name is upperFirstd', function() {
+          it('deupperFirsts and adds it', function() {
             var otherParser = new UMLDesignerParser(
               getRootElement(
                 readFileContent('./test/xmi/umldesigner_capitalized_field_names.uml')),
