@@ -1,6 +1,7 @@
 ### The issue
 
 
+
 ---
 #### The stacktrace
 
@@ -26,5 +27,5 @@ Paste it here!
 
 | JHipster           | JHipster UML           |
 | ------------------ | ---------------------- |
-| `JHipster Version` | `JHipster UML version` |
+| `JHipster Version` |    `jhipster-uml -v`   |
 
