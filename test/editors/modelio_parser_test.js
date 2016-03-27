@@ -339,7 +339,7 @@ describe('ModelioParser', function () {
               otherParser.findConstraints();
               try {
                 otherParser.fillConstraints();
-                throw new ExpectationError();
+                fail();
               } catch (error) {
                 expect(
                     error.name
