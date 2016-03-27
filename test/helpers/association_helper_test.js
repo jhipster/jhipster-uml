@@ -17,7 +17,7 @@ describe('#checkValidityOfAssociation', function() {
           try {
             checkValidityOfAssociation({ type: cardinalities.ONE_TO_ONE });
           } catch (error) {
-            expect(error.name).to.eq('AssociationException');
+            expect(error.name).to.eq('MalformedAssociationException');
           }
         });
       });
@@ -41,7 +41,7 @@ describe('#checkValidityOfAssociation', function() {
           try {
             checkValidityOfAssociation({ type: cardinalities.MANY_TO_ONE, injectedFieldInFrom: 'NOTNULL', injectedFieldInTo: 'NOTNULL' });
           } catch (error) {
-            expect(error.name).to.eq('AssociationException');
+            expect(error.name).to.eq('MalformedAssociationException');
           }
         });
       });
@@ -59,12 +59,12 @@ describe('#checkValidityOfAssociation', function() {
           try {
             checkValidityOfAssociation({ type: cardinalities.MANY_TO_ONE, injectedFieldInFrom: 'NOTNULL' });
           } catch (error) {
-            expect(error.name).to.eq('AssociationException');
+            expect(error.name).to.eq('MalformedAssociationException');
           }
           try {
             checkValidityOfAssociation({ type: cardinalities.MANY_TO_ONE, injectedFieldInTo: 'NOTNULL' });
           } catch (error) {
-            expect(error.name).to.eq('AssociationException');
+            expect(error.name).to.eq('MalformedAssociationException');
           }
         });
       });
@@ -94,7 +94,7 @@ describe('#checkValidityOfAssociation', function() {
         try {
           checkValidityOfAssociation({ type: 'UNSUPPORTED' });
         } catch (error) {
-          expect(error.name).to.eq('AssociationException');
+          expect(error.name).to.eq('WrongAssociationException');
         }
       });
     });

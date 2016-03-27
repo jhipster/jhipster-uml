@@ -11,7 +11,7 @@ describe('#parseOptions', function () {
         try {
           parseOptions(null);
         } catch (error) {
-          expect(error.name).to.eq('WrongPassedArgumentException');
+          expect(error.name).to.eq('IllegalArgumentException');
         }
       });
     });
@@ -20,7 +20,7 @@ describe('#parseOptions', function () {
         try {
           parseOptions([]);
         } catch (error) {
-          expect(error.name).to.eq('WrongPassedArgumentException');
+          expect(error.name).to.eq('IllegalArgumentException');
         }
       });
     });
@@ -29,7 +29,7 @@ describe('#parseOptions', function () {
         try {
           parseOptions([1, 2]);
         } catch (error) {
-          expect(error.name).to.eq('WrongPassedArgumentException');
+          expect(error.name).to.eq('IllegalArgumentException');
         }
       });
     });
