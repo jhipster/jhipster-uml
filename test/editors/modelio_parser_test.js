@@ -83,7 +83,7 @@ describe('ModelioParser', function () {
       it('throws an exception', function () {
         try {
           parser.fillTypes();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('WrongTypeException');
         }
@@ -135,7 +135,7 @@ describe('ModelioParser', function () {
         });
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -160,7 +160,7 @@ describe('ModelioParser', function () {
         });
         try {
           otherParser.parse();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -214,7 +214,7 @@ describe('ModelioParser', function () {
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -230,7 +230,7 @@ describe('ModelioParser', function () {
         otherParser.findElements();
         try {
           otherParser.fillClassesAndFields();
-          throw new ExpectationError();
+          fail();
         } catch (error) {
           expect(error.name).to.equal('NullPointerException');
         }
@@ -309,7 +309,7 @@ describe('ModelioParser', function () {
             });
             try {
               otherParser.parse();
-              throw new ExpectationError();
+              fail();
             } catch (error) {
               expect(error.name).to.equal('WrongTypeException');
             }
