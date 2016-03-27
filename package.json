@@ -43,8 +43,8 @@
   },
   "peerDependencies": {},
   "engines": {
-    "node": ">=0.10.25",
-    "npm": ">=1.4.21"
+    "node": ">=4.0.0",
+    "npm": ">=2.14.2"
   },
   "license": "Apache-2.0",
   "licenses": [
