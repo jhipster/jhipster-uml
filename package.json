@@ -25,7 +25,8 @@
     "url": "git://github.com/jhipster/jhipster-uml.git"
   },
   "scripts": {
-    "test": "mocha test/*"
+    "test": "mocha test/*",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha test/**/*.js test/*.js -- --ui bdd -R spec -t 5000"
   },
   "dependencies": {
     "chalk": "1.1.1",
@@ -36,10 +37,9 @@
     "xml2js": "0.4.16"
   },
   "devDependencies": {
-    "jscover": "1.0.0",
     "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.2.0",
-    "chai": "3.5.0"
+    "chai": "3.5.0",
+    "istanbul": "0.4.2"
   },
   "peerDependencies": {},
   "engines": {
