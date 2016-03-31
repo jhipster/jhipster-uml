@@ -433,10 +433,6 @@ describe('ObjectHelper', function() {
                   id: 1,
                   anotherField: 44,
                   yetAnother: false
-                },
-                {
-                  id: 2,
-                  anotherField: 44
                 }
               ]
             };
