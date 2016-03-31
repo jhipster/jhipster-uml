@@ -35,6 +35,12 @@ describe('#parseOptions', function () {
     });
   });
   describe('when passing a valid arg array', function () {
+    describe('having the force option', function() {
+      it('sets the flag', function() {
+        var options = parseOptions([1, 2, '-db', 'sql', '-f']);
+        expect(options.force).to.be.true;
+      });
+    });
     describe('having the version option', function () {
       it('has a fail fast behavior', function () {
         var options = parseOptions([1, 2, '-db', 'sql', '-v', '-dto']);
@@ -56,7 +62,15 @@ describe('#parseOptions', function () {
     describe('having files', function () {
       it('keeps track of them', function () {
         var options = parseOptions([1, 2, '-db', 'sql', '-service', '-dto', 'myfile1', 'myfile2', 'myfile3']);
-        expect(options.files).to.deep.equal(['myfile1', 'myfile2', 'myfile3'])
+        expect(options.files).to.deep.equal(['myfile1', 'myfile2', 'myfile3']);
+      });
+    });
+    describe('having all the options', function() {
+      it('sets the flags', function() {
+        var options = parseOptions([1, 2, '-paginate', '-dto', '-service']);
+        expect(options.paginate).to.be.true;
+        expect(options.dto).to.be.true;
+        expect(options.service).to.be.true;
       });
     });
   });
