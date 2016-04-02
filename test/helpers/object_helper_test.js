@@ -4,8 +4,8 @@ var expect = require('chai').expect,
     merge = require('../../lib/helpers/object_helper').merge,
     areJHipsterEntitiesEqual = require('../../lib/helpers/object_helper').areJHipsterEntitiesEqual;
 
-describe('ObjectHelper', function() {
-  describe('#merge', function() {
+describe('ObjectHelper', function () {
+  describe('#merge', function () {
     var object1 = {
       a: 1,
       b: 2
@@ -16,33 +16,49 @@ describe('ObjectHelper', function() {
       c: 4
     };
 
-    describe('when merging two object', function() {
-      it('returns the merged object by merging the second into the first', function() {
+    describe('when merging two object', function () {
+      describe('with the first being nil or empty', function () {
+        it('returns the second', function () {
+          var merged1 = merge(null, {a: 1});
+          var merged2 = merge({}, {a: 1});
+          expect(merged1).to.deep.eq({a: 1});
+          expect(merged2).to.deep.eq({a: 1});
+        });
+      });
+      describe('with the second being nil or empty', function () {
+        it('returns the first', function () {
+          var merged1 = merge({a: 1}, null);
+          var merged2 = merge({a: 1}, null);
+          expect(merged1).to.deep.eq({a: 1});
+          expect(merged2).to.deep.eq({a: 1});
+        });
+      });
+      it('returns the merged object by merging the second into the first', function () {
         expect(
-          merge(object1, object2)
-        ).to.deep.equal({ a: 1, b: 3, c: 4 });
+            merge(object1, object2)
+        ).to.deep.equal({a: 1, b: 3, c: 4});
 
         expect(
-          merge(object2, object1)
-        ).to.deep.equal({ a: 1, b: 2, c: 4 });
+            merge(object2, object1)
+        ).to.deep.equal({a: 1, b: 2, c: 4});
       });
 
-      it('does not modify any of the two objects', function() {
+      it('does not modify any of the two objects', function () {
         merge(object1, object2);
         expect(
-          object1
-        ).to.deep.equal({ a: 1, b: 2 });
+            object1
+        ).to.deep.equal({a: 1, b: 2});
         expect(
-          object2
-        ).to.deep.equal({ b: 3,  c: 4 });
+            object2
+        ).to.deep.equal({b: 3, c: 4});
       });
     });
   });
 
-  describe('#areJHipsterEntitiesEqual', function() {
-    describe('when comparing two equal objects', function() {
-      describe('as they are empty', function() {
-        it('returns true', function() {
+  describe('#areJHipsterEntitiesEqual', function () {
+    describe('when comparing two equal objects', function () {
+      describe('as they are empty', function () {
+        it('returns true', function () {
           var firstEmptyObject = {
             fields: [],
             relationships: []
@@ -54,8 +70,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstEmptyObject, secondEmptyObject)).to.be.true;
         });
       });
-      describe('they have no fields, but only relationships', function() {
-        it('returns true', function() {
+      describe('they have no fields, but only relationships', function () {
+        it('returns true', function () {
           var firstObject = {
             fields: [],
             relationships: [
@@ -85,8 +101,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.true;
         });
       });
-      describe('they have fields but no relationships', function() {
-        it('returns true', function() {
+      describe('they have fields but no relationships', function () {
+        it('returns true', function () {
           var firstObject = {
             fields: [
               {
@@ -116,8 +132,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.true;
         });
       });
-      describe('they have both fields and relationships', function() {
-        it('returns true', function() {
+      describe('they have both fields and relationships', function () {
+        it('returns true', function () {
           var firstObject = {
             fields: [
               {
@@ -166,9 +182,9 @@ describe('ObjectHelper', function() {
         });
       });
     });
-    describe('when comparing two unequal objects', function() {
-      describe('as one of them is not empty, the other is', function() {
-        it('returns false', function() {
+    describe('when comparing two unequal objects', function () {
+      describe('as one of them is not empty, the other is', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [],
             relationships: []
@@ -207,8 +223,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
       });
-      describe('as both of them have different fields', function() {
-        it('returns false', function() {
+      describe('as both of them have different fields', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [
               {
@@ -238,8 +254,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
       });
-      describe('as both of them have different relationships', function() {
-        it('returns false', function() {
+      describe('as both of them have different relationships', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [
               {
@@ -279,8 +295,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
       });
-      describe('as they do not possess the same number of fields', function() {
-        it('returns false', function() {
+      describe('as they do not possess the same number of fields', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [],
             relationships: [
@@ -311,8 +327,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
       });
-      describe('as they do not have the same number of keys in fields', function() {
-        it('returns false', function() {
+      describe('as they do not have the same number of keys in fields', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [
               {
@@ -353,8 +369,8 @@ describe('ObjectHelper', function() {
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         })
       });
-      describe('as they do not possess the same number of relationships', function() {
-        it('returns false', function() {
+      describe('as they do not possess the same number of relationships', function () {
+        it('returns false', function () {
           var firstObject = {
             fields: [
               {
@@ -397,8 +413,8 @@ describe('ObjectHelper', function() {
           };
           expect(areJHipsterEntitiesEqual(firstObject, secondObject)).to.be.false;
         });
-        describe('as they do not have the same number of fields in a relationship', function() {
-          it('returns false', function() {
+        describe('as they do not have the same number of fields in a relationship', function () {
+          it('returns false', function () {
             var firstObject = {
               fields: [
                 {
