@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
+    fail = expect.fail,
     EntitiesCreator = require('../lib/entitiescreator'),
     ParserFactory = require('../lib/editors/parser_factory');
 

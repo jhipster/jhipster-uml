@@ -1,6 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
+    fail = expect.fail,
     ClassScheduler = require('../lib/scheduler'),
   	ParserFactory = require('../lib/editors/parser_factory'),
     cardinalities = require('../lib/cardinalities');
