@@ -9,39 +9,50 @@ var parser = ParserFactory.createParser({
   file: './test/xmi/modelio.xmi',
   databaseType: 'sql'
 });
-var creator = new EntitiesCreator(parser.parse(), parser.databaseTypes, [], {}, {}, {}, []);
+var creator = new EntitiesCreator({
+  parsedData: parser.parse(),
+  databaseTypes: parser.databaseTypes
+});
 
 /* The variables set to do all the constraints */
 var parserConstraint = ParserFactory.createParser({
   file: './test/xmi/test_constraint.xmi',
   databaseType: 'sql'
 });
-var creatorConstraint =
-    new EntitiesCreator(parserConstraint.parse(), parserConstraint.databaseTypes, [], {}, {}, {}, []);
+var creatorConstraint = new EntitiesCreator({
+  parsedData: parserConstraint.parse(),
+  databaseTypes: parserConstraint.databaseTypes
+});
 
 /* the entity creator set to do the User Entity tests */
 var parserUser = ParserFactory.createParser({
   file: './test/xmi/user_entity_test.xmi',
   databaseType: 'sql'
 });
-var creatorUser =
-    new EntitiesCreator(parserUser.parse(), parserUser.databaseTypes, [], {}, {}, {}, []);
+var creatorUser = new EntitiesCreator({
+  parsedData: parserUser.parse(),
+  databaseTypes: parserUser.databaseTypes
+});
 
 /* the entity creator set to do the User Entity tests */
 var parserUserWrong = ParserFactory.createParser({
   file: './test/xmi/user_entity_wrong_side_relationship.xmi',
   databaseType: 'sql'
 });
-var creatorUserWrong =
-    new EntitiesCreator(parserUserWrong.parse(), parserUserWrong.databaseTypes, [], {}, {}, {}, []);
-
+var creatorUserWrong = new EntitiesCreator({
+  parsedData: parserUserWrong.parse(),
+  databaseTypes: parserUserWrong.databaseTypes
+});
 
 describe('EntitiesCreator ', function () {
   describe('#initialize ', function () {
     describe('when passing valid argument ', function () {
       it('Successfully initialize Entities Parser', function () {
         try {
-          new EntitiesCreator(creator.parsedData, parser.databaseTypes, [], {}, {}, {}, []);
+          new EntitiesCreator({
+            parsedData: creator.parsedData,
+            databaseTypes: parser.databaseTypes
+          });
         } catch (error) {
           fail();
         }
@@ -97,8 +108,10 @@ describe('EntitiesCreator ', function () {
           file: './test/xmi/modelio_blob.xmi',
           databaseType: 'sql'
         });
-        var otherCreator =
-            new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {}, {}, []);
+        var otherCreator = new EntitiesCreator({
+          parsedData: otherParser.parse(),
+          databaseTypes: otherParser.databaseTypes
+        });
         otherCreator.createEntities();
 
         it('changes the type of blob fields from Blob to byte[]', function () {
@@ -125,8 +138,10 @@ describe('EntitiesCreator ', function () {
           file: './test/xmi/modelio_enum_test.xmi',
           databaseType: 'sql'
         });
-        var otherCreator =
-            new EntitiesCreator(otherParser.parse(), otherParser.databaseTypes, [], {}, {}, {}, []);
+        var otherCreator = new EntitiesCreator({
+          parsedData: otherParser.parse(),
+          databaseTypes: otherParser.databaseTypes
+        });
         otherCreator.createEntities();
 
         var enumFields;
@@ -369,13 +384,10 @@ describe('EntitiesCreator ', function () {
                     file: './test/xmi/modelio.xmi',
                     databaseType: 'mongodb'
                   });
-              new EntitiesCreator(
-                  parserNoSQL_with_relationship.parse(),
-                  parserNoSQL_with_relationship.databaseTypes,
-                  [],
-                  {},
-                  {},
-                  []);
+              new EntitiesCreator({
+                parsedData: parserNoSQL_with_relationship.parse(),
+                databaseTypes: parserNoSQL_with_relationship.databaseTypes
+              });
               fail();
             } catch (error) {
               expect(error.name).to.equal('NoSQLModelingException');
