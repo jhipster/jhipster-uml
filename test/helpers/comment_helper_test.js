@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect,
-    formatComment = require('../../lib/helpers/comment_helper');
+    formatComment = require('../../lib/helpers/comment_helper').formatComment;
 
 describe('#formatComment', function() {
   describe('when the comment is in the one-line form', function() {
