@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect,
     fail = expect.fail,
-    parseOptions = require('../../lib/jhipsteruml/jhipsteruml_options');
+    parseOptions = require('../../lib/jhipsteruml/jhipsteruml_options').parseOptions;
 
 describe('#parseOptions', function () {
   describe('when passing an invalid arg array', function () {
