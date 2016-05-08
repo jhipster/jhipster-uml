@@ -1,417 +1,125 @@
 'use strict';
 
-var expect = require('chai').expect,
+const expect = require('chai').expect,
     fail = expect.fail,
-    EntitiesCreator = require('../lib/entitiescreator'),
-    ParserFactory = require('../lib/editors/parser_factory');
+    createEntities = require('../lib/entitiescreator').createEntities,
+    ParserFactory = require('../lib/editors/parser_factory'),
+    MongoDBTypes = require('../lib/types/mongodb_types');
 
 var parser = ParserFactory.createParser({
   file: './test/xmi/modelio.xmi',
   databaseType: 'sql'
 });
-var creator = new EntitiesCreator({
-  parsedData: parser.parse(),
+var parsedData = parser.parse();
+var generatedEntities = createEntities({
+  parsedData: parsedData,
   databaseTypes: parser.databaseTypes
 });
 
-/* The variables set to do all the constraints */
-var parserConstraint = ParserFactory.createParser({
-  file: './test/xmi/test_constraint.xmi',
-  databaseType: 'sql'
-});
-var creatorConstraint = new EntitiesCreator({
-  parsedData: parserConstraint.parse(),
-  databaseTypes: parserConstraint.databaseTypes
-});
-
-/* the entity creator set to do the User Entity tests */
-var parserUser = ParserFactory.createParser({
-  file: './test/xmi/user_entity_test.xmi',
-  databaseType: 'sql'
-});
-var creatorUser = new EntitiesCreator({
-  parsedData: parserUser.parse(),
-  databaseTypes: parserUser.databaseTypes
-});
-
-/* the entity creator set to do the User Entity tests */
-var parserUserWrong = ParserFactory.createParser({
-  file: './test/xmi/user_entity_wrong_side_relationship.xmi',
-  databaseType: 'sql'
-});
-var creatorUserWrong = new EntitiesCreator({
-  parsedData: parserUserWrong.parse(),
-  databaseTypes: parserUserWrong.databaseTypes
-});
-
-describe('EntitiesCreator ', function () {
-  describe('#initialize ', function () {
-    describe('when passing valid argument ', function () {
-      it('Successfully initialize Entities Parser', function () {
-        try {
-          new EntitiesCreator({
-            parsedData: creator.parsedData,
-            databaseTypes: parser.databaseTypes
-          });
-        } catch (error) {
-          fail();
-        }
-      });
-      it('initializes each of its attributes', function () {
-        expect(creator.getEntities()).to.deep.equal({});
-      });
-    });
-    describe('when passing invalid argument', function () {
-      describe('when passing a null argument', function () {
-        it('throws an exception', function () {
-          try {
-            new EntitiesCreator(null);
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('NullPointerException');
-          }
-        });
-      });
-    });
-  });
+describe('EntitiesCreator', function () {
   describe('#createEntities', function () {
-
-    describe('#initializeEntities', function () {
-      before(function () {
-        creator.initializeEntities();
-        creatorUser.initializeEntities();
+    describe('when passing invalid args', function () {
+      describe('because there is no argument', function () {
+        it('fails', function () {
+          try {
+            createEntities();
+          } catch (error) {
+            expect(error.name).to.eq('NullPointerException');
+          }
+        });
       });
-      describe('when we initialize Entities', function () {
-        it('all entities attributes are set', function () {
-          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].changelogDate).to.be.defined;
-          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].dto).to.be.defined;
-          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].pagination).to.be.defined;
-          expect(creator.getEntities()['_0iCzELieEeW4ip1mZlCqPg'].javadoc).to.be.defined;
+      describe('because there are empty args', function () {
+        it('fails', function () {
+          try {
+            createEntities({});
+          } catch (error) {
+            expect(error.name).to.eq('NullPointerException');
+          }
+        });
+      });
+      describe('because there is no parsed data', function () {
+        it('fails', function () {
+          try {
+            createEntities({databaseTypes: 'NotNull'});
+          } catch (error) {
+            expect(error.name).to.eq('NullPointerException');
+          }
+        });
+      });
+      describe('because there are no database types', function () {
+        it('fails', function () {
+          try {
+            createEntities({parsedData: 'NotNull'});
+          } catch (error) {
+            expect(error.name).to.eq('NullPointerException');
+          }
+        });
+      });
+      describe('because the user has relationships with a NoSQL database type', function () {
+        it('fails', function () {
+          var parser = ParserFactory.createParser({
+            file: './test/xmi/modelio.xmi',
+            databaseType: 'sql'
+          });
+          try {
+            createEntities({
+              parsedData: parser.parse(),
+              databaseTypes: new MongoDBTypes()
+            });
+          } catch (error) {
+            expect(error.name).to.eq('NoSQLModelingException');
+          }
         });
       });
     });
-
-
-    describe('#setFieldsOfEntity', function () {
-      var firstClassId;
-      var fields;
-
-      before(function () {
-        firstClassId = Object.keys(creatorConstraint.parsedData.classes)[0];
-        creatorConstraint.initializeEntities();
-        creatorConstraint.setFieldsOfEntity(firstClassId);
-        fields = creatorConstraint.getEntities()[firstClassId].fields;
+    describe('when passing valid args', function () {
+      var parser = ParserFactory.createParser({
+        file: './test/xmi/modelio.xmi',
+        databaseType: 'sql'
       });
-
-      describe('when dealing with blobs', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/modelio_blob.xmi',
-          databaseType: 'sql'
+      var parsedData = parser.parse();
+      var entities = null;
+      it('works', function() {
+        entities = createEntities({
+          parsedData: parsedData,
+          databaseTypes: parser.databaseTypes
         });
-        var otherCreator = new EntitiesCreator({
-          parsedData: otherParser.parse(),
-          databaseTypes: otherParser.databaseTypes
-        });
-        otherCreator.createEntities();
-
-        it('changes the type of blob fields from Blob to byte[]', function () {
-          Object.keys(otherCreator.getEntities()).forEach(function (element) {
-            otherCreator.getEntities()[element].fields.forEach(function (field) {
-              expect(field.type).not.to.equal('Blob');
-              expect(field.type).not.to.equal('AnyBlob');
-              expect(field.type).not.to.equal('ImageBlob');
-            });
-          });
-        });
-
-        it('fills the blob type attribute', function () {
-          Object.keys(otherCreator.getEntities()).forEach(function (element) {
-            otherCreator.getEntities()[element].fields.forEach(function (field) {
-              expect(field.fieldTypeBlobContent).to.match(/image|any/);
-            });
-          });
-        });
+        expect(entities == null).to.be.false;
       });
-
-      describe('when creating enums', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/modelio_enum_test.xmi',
-          databaseType: 'sql'
-        });
-        var otherCreator = new EntitiesCreator({
-          parsedData: otherParser.parse(),
-          databaseTypes: otherParser.databaseTypes
-        });
-        otherCreator.createEntities();
-
-        var enumFields;
-
-        Object.keys(otherCreator.entities).forEach(function (element) {
-          enumFields = otherCreator.entities[element].fields;
-        });
-      });
-
-      describe('when fields trying to access an entity field ', function () {
-        var field;
-        before(function () {
-          field = fields[0];
-        });
-
-        it('has fieldId property', function () {
-          expect(field.fieldId).to.be.defined;
-        });
-
-        it('has fieldName property', function () {
-          expect(field.fieldName).to.be.defined;
-        });
-
-        it('has fieldType property', function () {
-          expect(field.fieldType).to.be.defined;
-        });
-
-        it('has fieldValidate property', function () {
-          expect(field.fieldValidate).to.be.defined;
-        });
-
-      });
-
-      describe('#setValidationsOfField: ', function () {
-        describe('when field has no validation', function () {
-          it('fieldValidate is false', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'noContraint') {
-                  expect(field.fieldValidate).to.equal(false);
-                }
-              }
-            }
-          });
-
-          it('fieldValidateRules is undefined', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'noContraint') {
-                  expect(field.fieldValidateRules).to.be.undefined;
-                }
-              }
-            }
-          });
-
-        });
-        describe('when field has a required validation', function () {
-          it('has a \'required\' string in fieldValidateRules', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'notTooSmall' || field.fieldName === 'onlyRequired') {
-                  expect(field.fieldValidateRules.indexOf('required')).not.to.equal(-1);
-                }
-              }
-            }
-          });
-        });
-
-
-        describe('when field has a maxlength validation', function () {
-          it('has a \'maxlength\' string in fieldValidateRules', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'notTooBig') {
-                  expect(field.fieldValidateRules.indexOf('maxlength')).not.to.equal(-1);
-                }
-              }
-            }
-          });
-          it('has a fieldValidateRulesMax with a value of 10', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'notTooBig') {
-                  expect(field.fieldValidateRulesMaxlength === '10').to.equal(true);
-                }
-              }
-            }
-          });
-        });
-
-        describe('when field has a minlength validation', function () {
-          it('has a \'minlength\' string in fieldValidateRules', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'notTooSmall') {
-                  expect(field.fieldValidateRules.indexOf('minlength')).not.to.equal(-1);
-                }
-              }
-            }
-          });
-          it('has a fieldValidateRulesMin with a value of 4', function () {
-            for (var i in fields) {
-              if (fields.hasOwnProperty(i)) {
-                var field = fields[i];
-                if (field.fieldName === 'notTooSmall') {
-                  expect(field.fieldValidateRulesMinlength === '4').to.equal(true);
-                }
-              }
-            }
-          });
-        });
-      });
-
-      describe('#setRelationshipOfEntity', function () {
-        var employeeToJob; // relation one to one owner
-        var departmentToEmployee; // relation one to many
-        var jobToTask; // relation many to many owner
-        var jobToEmployee; // relation one to one not owner
-        var taskToJob; // relation many to many not owner
-        var employeeToDepartment; // relation many to one
-        var entities;
-
-        before(function () {
-          creator.createEntities();
-          entities = creator.getEntities();
-
-          for (var i = 0; i < Object.keys(entities).length; i++) {
-            var classId = Object.keys(entities)[i];
-            var relationships = entities[classId].relationships;
-
-            for (var j = 0; j < relationships.length; j++) {
-              switch (creator.parsedData.getClass(classId).name.toLowerCase()) {
-                case 'employee':
-                  if (relationships[j].otherEntityName.toLowerCase() === 'job') {
-                    employeeToJob = relationships[j];
-                  } else if (relationships[j].otherEntityName.toLowerCase() === 'department') {
-                    employeeToDepartment = relationships[j];
-                  }
-                  break;
-                case 'department':
-                  if (relationships[j].otherEntityName.toLowerCase() === 'employee') {
-                    departmentToEmployee = relationships[j];
-                  }
-                  break;
-                case 'job':
-                  if (relationships[j].otherEntityName.toLowerCase() === 'employee') {
-                    jobToEmployee = relationships[j];
-                  } else if (relationships[j].otherEntityName.toLowerCase() === 'task') {
-                    jobToTask = relationships[j];
-                  }
-                  break;
-                case 'task':
-                  if (relationships[j].otherEntityName.toLowerCase() === 'job') {
-                    taskToJob = relationships[j];
-                  }
-                  break;
-                default:
-              }
+      describe('with no option and no microservice', function () {
+        it('initializes entities with default values', function () {
+          for (let entity in entities) {
+            if (entities.hasOwnProperty(entity)) {
+              expect(entities[entity].hasOwnProperty('fields')).to.be.true;
+              expect(entities[entity].hasOwnProperty('relationships')).to.be.true;
+              expect(entities[entity].dto).to.eq('no');
+              expect(entities[entity].pagination).to.eq('no');
+              expect(entities[entity].service).to.eq('no');
+              expect(entities[entity].changelogDate).not.to.be.null;
+              expect(entities[entity].entityTableName).not.to.be.null;
             }
           }
         });
-
-        describe('when trying to access a relationships', function () {
-
-          describe('Employee to Job: Uni-directional One-to-Many owner side', function () {
-            it('has no ownerSide property', function () {
-              expect(employeeToJob.ownerSide).to.be.undefined;
-            });
-            it('has a one-to-one relationships type', function () {
-              expect(employeeToJob.relationshipType).to.equal('one-to-many');
-            });
-            it("has an otherEntityRelationshipName set at 'employee' ", function () {
-              expect(employeeToJob.otherEntityRelationshipName).to.equal('employee');
-            });
-            it("has no otherEntityField", function () {
-              expect(employeeToJob.otherEntityField).to.be.undefined;
-            });
-          });
-
-          describe('Job to Employee: Uni-directional One-to-One', function () {
-            it('has  information about the relationship', function () {
-              expect(jobToEmployee).not.to.be.undefined;
-            });
-          });
-
-          describe('Department to Employee : One to Many', function () {
-            it('has a one-to-many relationships type', function () {
-              expect(departmentToEmployee.relationshipType).to.equal('one-to-many');
-            });
-            it('has no ownerSide property', function () {
-              expect(departmentToEmployee.ownerSide).to.be.undefined;
-            });
-            it('has otherEntityRelationshipName set to department', function () {
-              expect(departmentToEmployee.otherEntityRelationshipName).to.equal('department');
-            });
-          });
-
-          describe('Employee to Department : Many to One', function () {
-            it('has a many-to-one relationships type', function () {
-              expect(employeeToDepartment.relationshipType).to.equal('many-to-one');
-            });
-            it('has no ownerSide property', function () {
-              expect(employeeToDepartment.ownerSide).to.be.undefined;
-            });
-          });
-
-          describe('Job to Task : Many to Many owner side', function () {
-            it('has a ownerSide property at true ', function () {
-              expect(jobToTask.ownerSide).to.equal(true);
-            });
-            it('has a many-to-many relationships type', function () {
-              expect(jobToTask.relationshipType).to.equal('many-to-many');
-            });
-          });
-
-          describe('Task to Job: Many to Many not owner side', function () {
-            it('has a ownerSide property at false ', function () {
-              expect(taskToJob.ownerSide).to.equal(false);
-            });
-            it('has a many-to-many relationships type', function () {
-              expect(taskToJob.relationshipType).to.equal('many-to-many');
-            });
-            it("has otherEntityRelationshipName set at 'task'", function () {
-              expect(taskToJob.otherEntityRelationshipName).to.equal('task');
-            });
-          });
-        });
-
-        describe('when the model has relationships and the app has a NoSQL database', function () {
-          it('throw an exception', function () {
-            try {
-              var parserNoSQL_with_relationship =
-                  ParserFactory.createParser({
-                    file: './test/xmi/modelio.xmi',
-                    databaseType: 'mongodb'
-                  });
-              new EntitiesCreator({
-                parsedData: parserNoSQL_with_relationship.parse(),
-                databaseTypes: parserNoSQL_with_relationship.databaseTypes
-              });
-              fail();
-            } catch (error) {
-              expect(error.name).to.equal('NoSQLModelingException');
+      });
+      describe('with no option but with microservice enabled', function () {
+        it('adds the options in the JSON', function () {
+          var microserviceNames = {};
+          for (let clazz in parsedData.classes) {
+            if (parsedData.classes.hasOwnProperty(clazz)) {
+              microserviceNames[clazz] = 'ms';
             }
-
+          }
+          entities = createEntities({
+            parsedData: parsedData,
+            databaseTypes: parser.databaseTypes,
+            microserviceNames: microserviceNames
           });
+          for (let clazz in parsedData.classes) {
+            if (parsedData.classes.hasOwnProperty(clazz)) {
+              expect(entities[clazz].microserviceName).to.eq('ms');
+            }
+          }
         });
-      });
-    });
-  });
-  describe('#createEntities with an entity called USER ', function () {
-    before(function () {
-      creatorUser.createEntities();
-    });
-    it('there are less Entities as Classes when there is a Class called \'User\'', function () {
-      expect(Object.keys(creatorUser.entities).length).to.equal(Object.keys(creatorUser.parsedData.classes).length - 1);
-    });
-
-    describe('When an association goes to a USER class', function () {
-      before(function () {
-        creatorUserWrong.createEntities();
-      });
-      it('there is a relationship to USER entity after creating entities', function () {
-        expect(Object.keys(creatorUserWrong.entities['_uy4W4g9IEeWa5JwclR5VRw'].relationships).length).not.to.equal(0);
       });
     });
   });
