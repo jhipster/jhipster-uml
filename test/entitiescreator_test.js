@@ -79,7 +79,7 @@ describe('EntitiesCreator', function () {
       });
       var parsedData = parser.parse();
       var entities = null;
-      it('works', function() {
+      it('works', function () {
         entities = createEntities({
           parsedData: parsedData,
           databaseTypes: parser.databaseTypes
@@ -101,22 +101,54 @@ describe('EntitiesCreator', function () {
           }
         });
       });
-      describe('with no option but with microservice enabled', function () {
+      describe('with microservice and search engine', function () {
         it('adds the options in the JSON', function () {
           var microserviceNames = {};
+          var searchEngines = [];
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
-              microserviceNames[clazz] = 'ms';
+              microserviceNames[parsedData.classes[clazz].name] = 'ms';
+              searchEngines.push(parsedData.classes[clazz].name);
             }
           }
           entities = createEntities({
             parsedData: parsedData,
             databaseTypes: parser.databaseTypes,
-            microserviceNames: microserviceNames
+            microserviceNames: microserviceNames,
+            searchEngines: searchEngines
           });
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
               expect(entities[clazz].microserviceName).to.eq('ms');
+              expect(entities[clazz].searchEngine).to.eq('elasticsearch');
+            }
+          }
+        });
+      });
+      describe('with options', function () {
+        it('adds them', function() {
+          var listDTO = [];
+          var listPagination = {};
+          var listService = {};
+          for (let clazz in parsedData.classes) {
+            if (parsedData.classes.hasOwnProperty(clazz)) {
+              listDTO.push(parsedData.classes[clazz].name);
+              listPagination[parsedData.classes[clazz].name] = 'pager';
+              listService[parsedData.classes[clazz].name] = 'serviceClass';
+            }
+          }
+          entities = createEntities({
+            parsedData: parsedData,
+            databaseTypes: parser.databaseTypes,
+            listDTO: listDTO,
+            listPagination: listPagination,
+            listService: listService
+          });
+          for (let clazz in parsedData.classes) {
+            if (parsedData.classes.hasOwnProperty(clazz)) {
+              expect(entities[clazz].dto).to.eq('mapstruct');
+              expect(entities[clazz].service).to.eq('serviceClass');
+              expect(entities[clazz].pagination).to.eq('pager');
             }
           }
         });
