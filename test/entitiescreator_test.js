@@ -85,6 +85,290 @@ describe('EntitiesCreator', function () {
           databaseTypes: parser.databaseTypes
         });
         expect(entities == null).to.be.false;
+        expect(Object.keys(entities).length).to.eq(8);
+      });
+      describe('with fields and relationships', function () {
+        it('sets them', function () {
+          var expectedRegion = {
+            fields: [
+              {
+                "fieldName": "regionId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "regionName",
+                "fieldType": "String"
+              }
+            ],
+            relationships: []
+          };
+          var expectedCountry = {
+            fields: [
+              {
+                "fieldName": "countryId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "countryName",
+                "fieldType": "String"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "region",
+                "otherEntityName": "region",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "country"
+              }
+            ]
+          };
+          var expectedLocation = {
+            fields: [
+              {
+                "fieldName": "locationId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "streetAddress",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "postalCode",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "city",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "stateProvince",
+                "fieldType": "String"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "country",
+                "otherEntityName": "country",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "location"
+              }
+            ]
+          };
+          var expectedDepartment = {
+            fields: [
+              {
+                "fieldName": "departmentId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "departmentName",
+                "fieldType": "String"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "location",
+                "otherEntityName": "location",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "department"
+              },
+              {
+                "relationshipType": "one-to-many",
+                "relationshipName": "employee",
+                "otherEntityName": "employee",
+                "otherEntityRelationshipName": "department"
+              }
+            ]
+          };
+          var expectedEmployee = {
+            fields: [
+              {
+                "fieldName": "employeeId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "firstName",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "lastName",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "email",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "phoneNumber",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "hireDate",
+                "fieldType": "ZonedDateTime"
+              },
+              {
+                "fieldName": "salary",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "commissionPct",
+                "fieldType": "Long"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipName": "department",
+                "otherEntityName": "department",
+                "relationshipType": "many-to-one",
+                "otherEntityField": "id"
+              },
+              {
+                "relationshipType": "one-to-many",
+                "relationshipName": "job",
+                "otherEntityName": "job",
+                "otherEntityRelationshipName": "employee"
+              },
+              {
+                "relationshipType": "many-to-one",
+                "relationshipName": "manager",
+                "otherEntityName": "employee",
+                "otherEntityField": "id"
+              }
+
+            ]
+          };
+          var expectedJobHistory = {
+            fields: [
+              {
+                "fieldName": "startDate",
+                "fieldType": "ZonedDateTime",
+                "fieldValidateRules": [
+                  "required"
+                ]
+              },
+              {
+                "fieldName": "endDate",
+                "fieldType": "ZonedDateTime"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "job",
+                "otherEntityName": "job",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "jobHistory"
+              },
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "department",
+                "otherEntityName": "department",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "jobHistory"
+              },
+              {
+                "relationshipType": "one-to-one",
+                "relationshipName": "employee",
+                "otherEntityName": "employee",
+                "otherEntityField": "id",
+                "ownerSide": true,
+                "otherEntityRelationshipName": "jobHistory"
+              }
+            ]
+          };
+          var expectedJob = {
+            fields: [
+              {
+                "fieldName": "jobId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "jobTitle",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "minSalary",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "maxSalary",
+                "fieldType": "Long"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "many-to-many",
+                "relationshipName": "task",
+                "otherEntityName": "task",
+                "otherEntityField": "id",
+                "ownerSide": true
+              },
+              {
+                "relationshipName": "employee",
+                "otherEntityName": "employee",
+                "relationshipType": "many-to-one",
+                "otherEntityField": "id"
+              }
+            ]
+          };
+          var expectedTask = {
+            fields: [
+              {
+                "fieldName": "taskId",
+                "fieldType": "Long"
+              },
+              {
+                "fieldName": "title",
+                "fieldType": "String"
+              },
+              {
+                "fieldName": "description",
+                "fieldType": "String"
+              }
+            ],
+            relationships: [
+              {
+                "relationshipType": "many-to-many",
+                "relationshipName": "job",
+                "otherEntityName": "job",
+                "ownerSide": false,
+                "otherEntityRelationshipName": "task"
+              }
+            ]
+          };
+          var expected = {
+            Region: expectedRegion,
+            Country: expectedCountry,
+            Location: expectedLocation,
+            Department: expectedDepartment,
+            Employee: expectedEmployee,
+            JobHistory: expectedJobHistory,
+            Job: expectedJob,
+            Task: expectedTask
+          };
+          for (let clazz in parsedData.classes) {
+            if (parsedData.classes.hasOwnProperty(clazz)) {
+              expect(
+                  entities[clazz].fields
+              ).to.deep.eq(
+                  expected[parsedData.classes[clazz].name].fields
+              );
+              expect(
+                  entities[clazz].relationships
+              ).to.deep.eq(
+                  expected[parsedData.classes[clazz].name].relationships
+              );
+            }
+          }
+        });
       });
       describe('with no option and no microservice', function () {
         it('initializes entities with default values', function () {
@@ -126,7 +410,7 @@ describe('EntitiesCreator', function () {
         });
       });
       describe('with options', function () {
-        it('adds them', function() {
+        it('adds them', function () {
           var listDTO = [];
           var listPagination = {};
           var listService = {};
