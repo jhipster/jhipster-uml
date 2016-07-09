@@ -12,5 +12,5 @@ We support: Modelio, UML Designer, GenMyModel and Visual Paradigm... and our DSL
 
 For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
 
-**Pretty important note**: v1.7.0 will **only** support JHipster v3.0+. The versions before v1.7.0 will still support anterior versions of JHipster.
+**Pretty important note**: v2.0.0 (the next release) will **only** support JHipster v3.0+. The versions before v1.7.0 will still support anterior versions of JHipster.
 **Thank you**.
