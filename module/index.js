@@ -5,7 +5,8 @@ const Editors = require('../lib/editors/editors'),
     Parser = require('../lib/editors/parser'),
     AbstractParser = require('../lib/editors/abstract_parser'),
     entityGenerator = require('../lib/entity_generator').generateEntities,
-    EntitiesCreator = require('../lib/entitiescreator').createEntities;
+    EntitiesCreator = require('../lib/entitiescreator').createEntities,
+    JDLExporter = require('../lib/export/jdl_exporter');
 
 module.exports = {
   Editors: Editors,
@@ -13,5 +14,7 @@ module.exports = {
   Parser: Parser,
   AbstractParser: AbstractParser,
   createEntities: createEntities,
-  generateEntities: generateEntities
+  generateEntities: generateEntities,
+  toJDL: JDLExporter.toJDL,
+  toJDLString: JDLExporter.toJDLString
 };
