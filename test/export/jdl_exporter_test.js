@@ -94,6 +94,30 @@ relationship ManyToMany {
 `);
         });
       });
+      describe('with options', function() {
+        it('adds them', function() {
+          var parser = ParserFactory.createParser({
+            file: './test/xmi/modelio.xmi',
+            databaseType: 'sql'
+          });
+          var parsedData = parser.parse();
+          /*
+           *                - listDTO,
+           *                - listPagination,
+           *                - listService,
+           *                - listOfNoClient,
+           *                - listOfNoServer,
+           *                - angularSuffixes,
+           *                - microserviceNames,
+           *                - searchEngines
+           */
+          var jdl = toJDL(parsedData, {
+            listDTO: ['Job'],
+            listPagination: {Employee: 'pager', Job: 'pager'},
+            listService: {JobHistory: 'serviceClass', Job: 'serviceClass', Employee: 'serviceImpl'}
+          });
+        });
+      });
     });
   });
 });
