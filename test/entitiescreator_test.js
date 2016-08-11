@@ -307,6 +307,7 @@ describe('EntitiesCreator', function () {
               {
                 "relationshipType": "many-to-many",
                 "relationshipName": "task",
+                "otherEntityRelationshipName": "job",
                 "otherEntityName": "task",
                 "otherEntityField": "id",
                 "ownerSide": true
@@ -367,6 +368,9 @@ describe('EntitiesCreator', function () {
                   expected[parsedData.classes[clazz].name].relationships
               );
             }
+          }
+          for (let i = 0, entityNames = Object.keys(entities); i < entityNames.length; i++) {
+            expect(entities[entityNames[i]].fluentMethods).to.eq(true);
           }
         });
       });
