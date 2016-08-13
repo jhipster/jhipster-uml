@@ -12,6 +12,7 @@ describe('JDLExporter', function () {
       it('fails', function () {
         try {
           toJDL();
+          fail();
         } catch (error) {
           expect(error.name).to.eq('NullPointerException');
         }
@@ -118,6 +119,30 @@ relationship ManyToMany {
           expect(jdl.toString().indexOf('service Employee with serviceImpl') !== -1).to.be.true;
         });
       });
+    });
+  });
+  describe('::toJDLString', function() {
+    it('is a stringified version of ::toJDL', function() {
+      var parser = ParserFactory.createParser({
+        file: './test/xmi/modelio.xmi',
+        databaseType: 'sql'
+      });
+      var parsedData = parser.parse();
+      var jdlString = toJDLString(parsedData, {
+        listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
+        listPagination: {Employee: 'pager', Job: 'pager'},
+        listService: {
+          JobHistory: 'serviceClass',
+          Job: 'serviceClass',
+          Employee: 'serviceImpl'
+        },
+        listOfNoClient: ['Employee'],
+        listOfNoServer: ['Region'],
+        microserviceNames: {Employee: 'MySuperMicroservice'}
+      });
+      expect(jdlString.indexOf('dto * with mapstruct') !== -1).to.be.true;
+      expect(jdlString.indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
+      expect(jdlString.indexOf('service Employee with serviceImpl') !== -1).to.be.true;
     });
   });
 });
