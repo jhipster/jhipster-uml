@@ -6,10 +6,10 @@ const expect = require('chai').expect,
     toJDL = require('../../lib/export/jdl_exporter').toJDL,
     toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
 
-describe('JDLExporter', function() {
-  describe('::toJDL', function() {
-    describe('when passing nil parsed data', function() {
-      it('fails', function() {
+describe('JDLExporter', function () {
+  describe('::toJDL', function () {
+    describe('when passing nil parsed data', function () {
+      it('fails', function () {
         try {
           toJDL();
         } catch (error) {
@@ -17,9 +17,9 @@ describe('JDLExporter', function() {
         }
       });
     });
-    describe('when passing a valid parsed data', function() {
-      describe('with no option', function() {
-        it('creates the corresponding JDL', function() {
+    describe('when passing a valid parsed data', function () {
+      describe('with no option', function () {
+        it('creates the corresponding JDL', function () {
           var parser = ParserFactory.createParser({
             file: './test/xmi/modelio.xmi',
             databaseType: 'sql'
@@ -27,7 +27,7 @@ describe('JDLExporter', function() {
           var parsedData = parser.parse();
           var jdl = toJDL(parsedData);
           expect(jdl.toString()).to.eq(
-`entity JobHistory (job_history) {
+              `entity JobHistory (job_history) {
   startDate ZonedDateTime required,
   endDate ZonedDateTime
 }
@@ -94,28 +94,28 @@ relationship ManyToMany {
 `);
         });
       });
-      describe('with options', function() {
-        it('adds them', function() {
+      describe('with options', function () {
+        it('adds them', function () {
           var parser = ParserFactory.createParser({
             file: './test/xmi/modelio.xmi',
             databaseType: 'sql'
           });
           var parsedData = parser.parse();
-          /*
-           *                - listDTO,
-           *                - listPagination,
-           *                - listService,
-           *                - listOfNoClient,
-           *                - listOfNoServer,
-           *                - angularSuffixes,
-           *                - microserviceNames,
-           *                - searchEngines
-           */
           var jdl = toJDL(parsedData, {
-            listDTO: ['Job'],
+            listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
             listPagination: {Employee: 'pager', Job: 'pager'},
-            listService: {JobHistory: 'serviceClass', Job: 'serviceClass', Employee: 'serviceImpl'}
+            listService: {
+              JobHistory: 'serviceClass',
+              Job: 'serviceClass',
+              Employee: 'serviceImpl'
+            },
+            listOfNoClient: ['Employee'],
+            listOfNoServer: ['Region'],
+            microserviceNames: {Employee: 'MySuperMicroservice'}
           });
+          expect(jdl.toString().indexOf('dto * with mapstruct') !== -1).to.be.true;
+          expect(jdl.toString().indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
+          expect(jdl.toString().indexOf('service Employee with serviceImpl') !== -1).to.be.true;
         });
       });
     });
