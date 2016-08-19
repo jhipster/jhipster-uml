@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_PlNckGF0EeavRNYX9XGyBQ" name="required">
+  <eAnnotations xmi:id="_PlNckWF0EeavRNYX9XGyBQ" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_PlNckmF0EeavRNYX9XGyBQ" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_PlNck2F0EeavRNYX9XGyBQ" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlNclGF0EeavRNYX9XGyBQ" name="Class1">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PlNclWF0EeavRNYX9XGyBQ" name="class2" visibility="public" type="_PlNcmGF0EeavRNYX9XGyBQ" aggregation="composite" association="_PlNclmF0EeavRNYX9XGyBQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PlNclmF0EeavRNYX9XGyBQ" memberEnd="_PlNclWF0EeavRNYX9XGyBQ _PlNcl2F0EeavRNYX9XGyBQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PlNcl2F0EeavRNYX9XGyBQ" visibility="public" type="_PlNclGF0EeavRNYX9XGyBQ" association="_PlNclmF0EeavRNYX9XGyBQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlNcmGF0EeavRNYX9XGyBQ" name="Class2"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlNcmWF0EeavRNYX9XGyBQ" name="Class3">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PlNcmmF0EeavRNYX9XGyBQ" name="class4" visibility="public" type="_PlNcnmF0EeavRNYX9XGyBQ" aggregation="shared" association="_PlNcnGF0EeavRNYX9XGyBQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PlNcm2F0EeavRNYX9XGyBQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PlNcnGF0EeavRNYX9XGyBQ" memberEnd="_PlNcmmF0EeavRNYX9XGyBQ _PlNcnWF0EeavRNYX9XGyBQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PlNcnWF0EeavRNYX9XGyBQ" visibility="public" type="_PlNcmWF0EeavRNYX9XGyBQ" association="_PlNcnGF0EeavRNYX9XGyBQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlNcnmF0EeavRNYX9XGyBQ" name="Class4"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlNcn2F0EeavRNYX9XGyBQ" name="Class5">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PlODoGF0EeavRNYX9XGyBQ" name="class6" visibility="public" type="_PlODpGF0EeavRNYX9XGyBQ" aggregation="shared" association="_PlODoWF0EeavRNYX9XGyBQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PlODoWF0EeavRNYX9XGyBQ" memberEnd="_PlODoGF0EeavRNYX9XGyBQ _PlODomF0EeavRNYX9XGyBQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PlODomF0EeavRNYX9XGyBQ" visibility="public" type="_PlNcn2F0EeavRNYX9XGyBQ" association="_PlODoWF0EeavRNYX9XGyBQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PlODo2F0EeavRNYX9XGyBQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlODpGF0EeavRNYX9XGyBQ" name="Class6"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlODpWF0EeavRNYX9XGyBQ" name="Class7">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PlODpmF0EeavRNYX9XGyBQ" name="class8" visibility="public" type="_PlODq2F0EeavRNYX9XGyBQ" aggregation="shared" association="_PlODqGF0EeavRNYX9XGyBQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PlODp2F0EeavRNYX9XGyBQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PlODqGF0EeavRNYX9XGyBQ" memberEnd="_PlODpmF0EeavRNYX9XGyBQ _PlODqWF0EeavRNYX9XGyBQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PlODqWF0EeavRNYX9XGyBQ" visibility="public" type="_PlODpWF0EeavRNYX9XGyBQ" association="_PlODqGF0EeavRNYX9XGyBQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PlODqmF0EeavRNYX9XGyBQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PlODq2F0EeavRNYX9XGyBQ" name="Class8"/>
+</uml:Model>

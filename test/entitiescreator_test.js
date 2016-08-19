@@ -120,7 +120,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "region",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "country"
+                "otherEntityRelationshipName": "country",
+                "relationshipValidateRules": "required"
               }
             ]
           };
@@ -154,7 +155,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "country",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "location"
+                "otherEntityRelationshipName": "location",
+                "relationshipValidateRules": "required"
               }
             ]
           };
@@ -176,7 +178,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "location",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "department"
+                "otherEntityRelationshipName": "department",
+                "relationshipValidateRules": "required"
               },
               {
                 "relationshipType": "one-to-many",
@@ -264,7 +267,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "job",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "jobHistory"
+                "otherEntityRelationshipName": "jobHistory",
+                "relationshipValidateRules": "required"
               },
               {
                 "relationshipType": "one-to-one",
@@ -272,7 +276,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "department",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "jobHistory"
+                "otherEntityRelationshipName": "jobHistory",
+                "relationshipValidateRules": "required"
               },
               {
                 "relationshipType": "one-to-one",
@@ -280,7 +285,8 @@ describe('EntitiesCreator', function () {
                 "otherEntityName": "employee",
                 "otherEntityField": "id",
                 "ownerSide": true,
-                "otherEntityRelationshipName": "jobHistory"
+                "otherEntityRelationshipName": "jobHistory",
+                "relationshipValidateRules": "required"
               }
             ]
           };
