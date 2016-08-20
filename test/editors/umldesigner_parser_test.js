@@ -209,6 +209,22 @@ describe('UMLDesignerParser', function () {
       });
     });
 
+    describe('when a class has a reserved word as table name', function () {
+      it('fails', function () {
+        var otherParser = new UMLDesignerParser(
+            getRootElement(
+                readFileContent('./test/xmi/umldesigner_reserved_table_name_test.uml')),
+            initDatabaseTypeHolder('sql'));
+        otherParser.findElements();
+        try {
+          otherParser.fillClassesAndFields();
+          fail();
+        } catch (error) {
+          expect(error.name).to.equal('IllegalNameException');
+        }
+      });
+    });
+
     describe('when an attribute has no name', function () {
       it('throws an exception', function () {
         var otherParser = new UMLDesignerParser(

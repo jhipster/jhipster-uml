@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_rasqMLvHEeWM0I0nquuJQA" name="model">
+  <eAnnotations xmi:id="_rasqMbvHEeWM0I0nquuJQA" source="genmymodel">
+    <details xmi:id="_rasqMrvHEeWM0I0nquuJQA" key="uuid" value="_P7W3wA9CEeWa5JwclR5VRw"/>
+    <details xmi:id="_rasqM7vHEeWM0I0nquuJQA" key="gmm-documentation" value=""/>
+  </eAnnotations>
+  <packageImport xmi:id="_rasqNLvHEeWM0I0nquuJQA">
+    <eAnnotations xmi:id="_rasqNbvHEeWM0I0nquuJQA" source="genmymodel">
+      <details xmi:id="_rasqNrvHEeWM0I0nquuJQA" key="uuid" value="_P7Z7EA9CEeWa5JwclR5VRw"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_rasqN7vHEeWM0I0nquuJQA">
+    <eAnnotations xmi:id="_rasqOLvHEeWM0I0nquuJQA" source="genmymodel">
+      <details xmi:id="_rasqObvHEeWM0I0nquuJQA" key="uuid" value="_P7gBsA9CEeWa5JwclR5VRw"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Class" xmi:id="_ratR2LvHEeWM0I0nquuJQA" name="MyClass(Analyze)">
+  </packagedElement>
+</uml:Model>
