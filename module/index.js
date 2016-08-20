@@ -4,8 +4,8 @@ const Editors = require('../lib/editors/editors'),
     createParser = require('../lib/editors/parser_factory').createParser,
     Parser = require('../lib/editors/parser'),
     AbstractParser = require('../lib/editors/abstract_parser'),
-    entityGenerator = require('../lib/entity_generator').generateEntities,
-    EntitiesCreator = require('../lib/entitiescreator').createEntities,
+    generateEntities = require('../lib/entity_generator').generateEntities,
+    createEntities = require('../lib/entitiescreator').createEntities,
     JDLExporter = require('../lib/export/jdl_exporter');
 
 module.exports = {
