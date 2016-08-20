@@ -224,6 +224,21 @@ describe('GenMyModelParser', function () {
           }
         });
       });
+
+      describe('when a field has a reserved word as name', function () {
+        it('fails', function () {
+          try {
+            var otherParser = ParserFactory.createParser({
+              file: './test/xmi/genmymodel_reserved_field_name_test.xmi',
+              databaseType: 'sql'
+            });
+            otherParser.parse();
+            fail();
+          } catch (error) {
+            expect(error.name).to.eq('IllegalNameException');
+          }
+        });
+      });
     });
 
     describe('#addField', function () {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_0iCy0LieEeW4ip1mZlCqPg" name="base">
+  <eAnnotations xmi:id="_0iCy0bieEeW4ip1mZlCqPg" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_0iCy0rieEeW4ip1mZlCqPg" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_0iCy07ieEeW4ip1mZlCqPg" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_0iCzIrieEeW4ip1mZlCqPg" name="Task" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCzJbieEeW4ip1mZlCqPg" name="continue" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Model>

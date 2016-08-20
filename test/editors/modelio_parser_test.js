@@ -221,6 +221,22 @@ describe('ModelioParser', function () {
       });
     });
 
+    describe('when a field has a reserved word as name', function () {
+      it('fails', function () {
+        var otherParser = ParserFactory.createParser({
+          file: './test/xmi/modelio_reserved_field_name_test.xmi',
+          databaseType: 'sql'
+        });
+        otherParser.findElements();
+        try {
+          otherParser.fillClassesAndFields();
+          fail();
+        } catch (error) {
+          expect(error.name).to.equal('IllegalNameException');
+        }
+      });
+    });
+
     describe('when a class has no name', function () {
       it('throws an exception', function () {
         var otherParser = ParserFactory.createParser({
