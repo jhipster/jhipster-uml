@@ -192,19 +192,36 @@ describe('GenMyModelParser', function () {
     });
 
     describe('#addClass', function () {
-      it('adds the found classes', function () {
-        expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
+      describe('when adding a class', function () {
+        it('adds the found classes', function () {
+          expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
+        });
+
+        it("adds the comment if there's any", function () {
+          var otherParser = ParserFactory.createParser({
+            file: './test/xmi/genmymodel_comments.xml',
+            databaseType: 'sql'
+          });
+          var parsedData = otherParser.parse();
+          Object.keys(parsedData.classes).forEach(function (classData) {
+            expect(parsedData.getClass(classData).comment).not.to.be.undefined;
+            expect(parsedData.getClass(classData).comment).not.to.equal('');
+          });
+        });
       });
 
-      it("adds the comment if there's any", function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_comments.xml',
-          databaseType: 'sql'
-        });
-        var parsedData = otherParser.parse();
-        Object.keys(parsedData.classes).forEach(function (classData) {
-          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
-          expect(parsedData.getClass(classData).comment).not.to.equal('');
+      describe('when a class has a reserved word as name', function () {
+        it('fails', function () {
+          try {
+            var otherParser = ParserFactory.createParser({
+              file: './test/xmi/genmymodel_reserved_class_name_test.xmi',
+              databaseType: 'sql'
+            });
+            otherParser.parse();
+            fail();
+          } catch (error) {
+            expect(error.name).to.eq('IllegalNameException');
+          }
         });
       });
     });
