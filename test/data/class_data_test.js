@@ -1,6 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect,
+    fail = expect.fail,
     ClassData = require('../../lib/data/class_data');
 
 describe('ClassData', function () {
@@ -36,8 +37,31 @@ describe('ClassData', function () {
         expect(data.dto).to.eq('yes');
         expect(data.pagination).to.eq('always');
         expect(data.service).to.eq('never');
-        expect(data.fields).to.deep.eq([1,2]);
+        expect(data.fields).to.deep.eq([1, 2]);
         expect(data.tableName).to.eq('something');
+      });
+    });
+    describe('when passing a reserved word', function() {
+      describe('as class name', function() {
+        it('fails', function() {
+          try {
+            new ClassData({
+              name: 'Class',
+              tableName: 'something'
+            });
+            fail();
+          } catch (error) {
+            expect(error.name).to.eq('IllegalNameException');
+          }
+        });
+      });
+      describe('as a table name', function() {
+        it("doesn't fail", function() { // a warning is shown
+          new ClassData({
+            name: 'MyClass',
+            tableName: 'ANALYZE'
+          });
+        });
       });
     });
   });

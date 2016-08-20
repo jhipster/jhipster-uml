@@ -31,5 +31,15 @@ describe('FieldData', function () {
         expect(data.validations).to.deep.eq([1, 2]);
       });
     });
+    describe('when passing a reserved word', function() {
+      describe('as field name', function() {
+        it("doesn't fail", function() { // a warning is shown though
+          new FieldData({
+            name: 'ANALYZE',
+            type: 'None',
+          });
+        });
+      });
+    });
   });
 });
