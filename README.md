@@ -7,10 +7,10 @@ This project's main goal is to bring support of UML (more precisely, XMI) files 
 
 You'll be able to create your entities by supplying a UML file (made with your favorite editor, if it supports XMI) to JHipster, and we'll take care of creating your entities for you!
 
-We support: Modelio, UML Designer, GenMyModel and Visual Paradigm... and our DSL!
-
+We support: Modelio, UML Designer and GenMyModel.
+Moreover, we can convert your XMI file to a JDL one, so that you can use it with [JDL Studio](https://github.com/jhipster/jdl-studio)!
 
 For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
 
-**Pretty important note**: v2.0.0 (the next release) will **only** support JHipster v3.0+. The versions before v1.7.0 will still support anterior versions of JHipster.
+**Pretty important note**: v2.0.0 (the next release) will **only** support JHipster v3.0+. The versions before v2.0.0 will still support anterior versions of JHipster.
 **Thank you**.
