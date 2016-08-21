@@ -398,11 +398,11 @@ describe('EntitiesCreator', function () {
       describe('with microservice and search engine', function () {
         it('adds the options in the JSON', function () {
           var microserviceNames = {};
-          var searchEngines = [];
+          var searchEngines = {};
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
               microserviceNames[parsedData.classes[clazz].name] = 'ms';
-              searchEngines.push(parsedData.classes[clazz].name);
+              searchEngines[parsedData.classes[clazz].name] = 'elasticsearch';
             }
           }
           entities = createEntities({
@@ -421,12 +421,12 @@ describe('EntitiesCreator', function () {
       });
       describe('with options', function () {
         it('adds them', function () {
-          var listDTO = [];
+          var listDTO = {};
           var listPagination = {};
           var listService = {};
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
-              listDTO.push(parsedData.classes[clazz].name);
+              listDTO[parsedData.classes[clazz].name] = 'mapstruct';
               listPagination[parsedData.classes[clazz].name] = 'pager';
               listService[parsedData.classes[clazz].name] = 'serviceClass';
             }
