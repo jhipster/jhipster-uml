@@ -10,11 +10,7 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_0iCy1rieEeW4ip1mZlCqPg" name="JobHistory">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy17ieEeW4ip1mZlCqPg" name="job" visibility="private" type="_0iCy47ieEeW4ip1mZlCqPg" aggregation="composite" association="_0iCy3bieEeW4ip1mZlCqPg"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy2LieEeW4ip1mZlCqPg" name="department" visibility="private" type="_0iCy77ieEeW4ip1mZlCqPg" aggregation="composite" association="_0iCy37ieEeW4ip1mZlCqPg"/>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy2bieEeW4ip1mZlCqPg" name="employee" visibility="private" type="_0iCy-7ieEeW4ip1mZlCqPg" aggregation="composite" association="_0iCy4bieEeW4ip1mZlCqPg">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_0iCy2rieEeW4ip1mZlCqPg">
-        <body>&lt;Enter note text here&gt;</body>
-      </ownedComment>
-    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy2bieEeW4ip1mZlCqPg" name="employee" visibility="private" type="_0iCy-7ieEeW4ip1mZlCqPg" aggregation="composite" association="_0iCy4bieEeW4ip1mZlCqPg"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy27ieEeW4ip1mZlCqPg" name="startDate" visibility="private" type="_0iCzKbieEeW4ip1mZlCqPg" isUnique="false"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_0iCy3LieEeW4ip1mZlCqPg" name="endDate" visibility="private" type="_0iCzKbieEeW4ip1mZlCqPg" isUnique="false"/>
   </packagedElement>
