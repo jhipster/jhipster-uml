@@ -1,332 +1,275 @@
 'use strict';
 
-var expect = require('chai').expect,
+const expect = require('chai').expect,
     fail = expect.fail,
     ParserFactory = require('../../lib/editors/parser_factory');
 
-var parser = ParserFactory.createParser({
-  file: './test/xmi/genmymodel_evolve.xmi',
-  databaseType: 'sql'
-});
-
-var parserWrongType = ParserFactory.createParser({
-  file: './test/xmi/genmymodel_wrong_type.xmi',
-  databaseType: 'sql'
-});
 
 describe('GenMyModelParser', function () {
-  describe('#findElements', function () {
-    before(function () {
-      parser.findElements();
-    });
-
-    it('finds the classes in the document', function () {
-      expect(
-          parser.rawClassesIndexes
-      ).to.deep.equal([0, 2, 4, 7, 10, 15, 17, 19]);
-    });
-
-    it('finds the types in the document', function () {
-      expect(
-          parser.rawTypesIndexes
-      ).to.deep.equal([1, 5]);
-    });
-
-    it('find the enumerations in the document', function () {
-      var otherParser =
-          ParserFactory.createParser({
-            file: './test/xmi/genmymodel_enum_test.xml',
-            databaseType: 'sql'
-          });
-      otherParser.findElements();
-      expect(otherParser.rawEnumsIndexes).to.deep.equal([1, 2]);
-    });
-
-    it('finds the associations in the document', function () {
-      expect(
-          parser.rawAssociationsIndexes
-      ).to.deep.equal([3, 6, 9, 11, 12, 13, 14, 16, 18, 20]);
-    });
-  });
-
-  describe('#fillTypes', function () {
-    // we need this var to roll back to the previous state after the test.
-    var previousTypes = parser.databaseTypes.types;
-
-    describe('when the types do not have a type from the XMI', function () {
-      before(function () {
-        parser.databaseTypes.types = {};
+  describe('when passing a valid diagram', function() {
+    describe('taken from the HR example', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel.xmi',
+        databaseType: 'sql'
       });
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
 
-      after(function () {
-        parser.databaseTypes.types = previousTypes;
+      it('parses it', function() {
+        expect(parsedData).not.to.be.null;
       });
-
-      it('throws an exception', function () {
-        try {
-          parser.fillTypes();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('WrongTypeException');
-        }
+      it('correctly parses the JobHistory class', function() {
+        var jobHistory = parsedData.classes['_rasqOrvHEeWM0I0nquuJQA'];
+        expect(jobHistory.name).to.eq('JobHistory');
+        expect(jobHistory.tableName).to.eq('job_history');
+        expect(jobHistory.fields).to.deep.eq([
+          '_rasqPbvHEeWM0I0nquuJQA',
+          '_rasqQLvHEeWM0I0nquuJQA'
+        ]);
+        expect(jobHistory.comment).to.eq('');
+        expect(jobHistory.dto).to.eq('no');
+        expect(jobHistory.pagination).to.eq('no');
+        expect(jobHistory.service).to.eq('no');
+      });
+      it('correctly parses the Job class', function() {
+        var job = parsedData.classes['_rasqXLvHEeWM0I0nquuJQA'];
+        expect(job.name).to.eq('Job');
+        expect(job.tableName).to.eq('job');
+        expect(job.fields).to.deep.eq([
+          '_rasqX7vHEeWM0I0nquuJQA',
+          '_rasqYrvHEeWM0I0nquuJQA',
+          '_rasqZbvHEeWM0I0nquuJQA',
+          '_rasqaLvHEeWM0I0nquuJQA'
+        ]);
+        expect(job.comment).to.eq('');
+        expect(job.dto).to.eq('no');
+        expect(job.pagination).to.eq('no');
+        expect(job.service).to.eq('no');
+      });
+      it('correctly parses the Department class', function() {
+        var department = parsedData.classes['_rasqRrvHEeWM0I0nquuJQA'];
+        expect(department.name).to.eq('Department');
+        expect(department.tableName).to.eq('department');
+        expect(department.fields).to.deep.eq([
+          '_rasqSbvHEeWM0I0nquuJQA',
+          '_rasqTLvHEeWM0I0nquuJQA'
+        ]);
+        expect(department.comment).to.eq('');
+        expect(department.dto).to.eq('no');
+        expect(department.pagination).to.eq('no');
+        expect(department.service).to.eq('no');
+      });
+      it('correctly parses the Employee class', function() {
+        var employee = parsedData.classes['_ratRVLvHEeWM0I0nquuJQA'];
+        expect(employee.name).to.eq('Employee');
+        expect(employee.tableName).to.eq('employee');
+        expect(employee.fields).to.deep.eq([
+          '_ratRV7vHEeWM0I0nquuJQA',
+          '_ratRWrvHEeWM0I0nquuJQA',
+          '_ratRXbvHEeWM0I0nquuJQA',
+          '_ratRYLvHEeWM0I0nquuJQA',
+          '_ratRY7vHEeWM0I0nquuJQA',
+          '_ratRZrvHEeWM0I0nquuJQA',
+          '_ratRabvHEeWM0I0nquuJQA',
+          '_ratRbLvHEeWM0I0nquuJQA'
+        ]);
+        expect(employee.comment).to.eq('');
+        expect(employee.dto).to.eq('no');
+        expect(employee.pagination).to.eq('no');
+        expect(employee.service).to.eq('no');
+      });
+      it('correctly parses the Location class', function() {
+        var location = parsedData.classes['_ratRo7vHEeWM0I0nquuJQA'];
+        expect(location.name).to.eq('Location');
+        expect(location.tableName).to.eq('location');
+        expect(location.fields).to.deep.eq([
+          '_ratRprvHEeWM0I0nquuJQA',
+          '_ratRqbvHEeWM0I0nquuJQA',
+          '_ratRrLvHEeWM0I0nquuJQA',
+          '_ratRr7vHEeWM0I0nquuJQA',
+          '_ratRsrvHEeWM0I0nquuJQA'
+        ]);
+        expect(location.comment).to.eq('');
+        expect(location.dto).to.eq('no');
+        expect(location.pagination).to.eq('no');
+        expect(location.service).to.eq('no');
+      });
+      it('correctly parses the Country class', function() {
+        var country = parsedData.classes['_ratRwrvHEeWM0I0nquuJQA'];
+        expect(country.name).to.eq('Country');
+        expect(country.tableName).to.eq('country');
+        expect(country.fields).to.deep.eq([
+          '_ratRxbvHEeWM0I0nquuJQA',
+          '_ratRyLvHEeWM0I0nquuJQA'
+        ]);
+        expect(country.comment).to.eq('');
+        expect(country.dto).to.eq('no');
+        expect(country.pagination).to.eq('no');
+        expect(country.service).to.eq('no');
+      });
+      it('correctly parses the Region class', function() {
+        var region = parsedData.classes['_ratR2LvHEeWM0I0nquuJQA'];
+        expect(region.name).to.eq('Region');
+        expect(region.tableName).to.eq('region');
+        expect(region.fields).to.deep.eq([
+          '_ratR27vHEeWM0I0nquuJQA',
+          '_ratR3rvHEeWM0I0nquuJQA'
+        ]);
+        expect(region.comment).to.eq('');
+        expect(region.dto).to.eq('no');
+        expect(region.pagination).to.eq('no');
+        expect(region.service).to.eq('no');
+      });
+      it('correctly parses the Task class', function() {
+        var task = parsedData.classes['_rasqe7vHEeWM0I0nquuJQA'];
+        expect(task.name).to.eq('Task');
+        expect(task.tableName).to.eq('task');
+        expect(task.fields).to.deep.eq([
+          '_rasqfrvHEeWM0I0nquuJQA',
+          '_rasqgbvHEeWM0I0nquuJQA',
+          '_ratRQbvHEeWM0I0nquuJQA'
+        ]);
+        expect(task.comment).to.eq('');
+        expect(task.dto).to.eq('no');
+        expect(task.pagination).to.eq('no');
+        expect(task.service).to.eq('no');
+      });
+      it('correctly adds the class names', function() {
+        expect(parsedData.classNames).to.deep.eq([
+          'JobHistory',
+          'Department',
+          'Job',
+          'Task',
+          'Employee',
+          'Location',
+          'Country',
+          'Region'
+        ]);
       });
     });
-
-    describe('when types have the types from the XMI', function () {
-      before(function () {
-        parser.fillTypes();
+    describe('with required relationships', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_required_relationships.xmi',
+        databaseType: 'sql'
       });
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
 
-      it('assigns their id with their capitalized name', function () {
-        var expectedTypes = ['ZonedDateTime', 'Long'];
-
-        Object.keys(parser.parsedData.types).forEach(function (type) {
-          if (parser.parsedData.types.hasOwnProperty(type)) {
-            expect(
-                expectedTypes
-            ).to.include(parser.parsedData.getType(type).name);
-            expectedTypes.splice(
-                expectedTypes.indexOf(parser.parsedData.getType(type).name), 1);
-          }
-        });
-
-        expect(expectedTypes.length).to.equal(0);
-      });
-    });
-
-    describe('if the types are not capitalized', function () {
-      it('capitalizes and adds them', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_lowercased_string_type.xml',
-          databaseType: 'sql'
-        });
-        otherParser.fillTypes();
-        Object.keys(otherParser.parsedData.types).forEach(function (type) {
+      it('sets the required flag in the AssociationData objects', function() {
+        for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
-              parser.parsedData.getType(type).name
-          ).to.equal(_.capitalize(parser.parsedData.getType(type).name));
-        });
-      });
-    });
-  });
-
-  describe('#fillConstraints', function () {
-    describe('when an enum has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_enum_no_name_test.xml',
-          databaseType: 'sql'
-        });
-        try {
-          otherParser.parse();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
+            parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
+              && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
+          ).to.be.true;
         }
       });
     });
+    describe('with a lowercase type', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_lowercased_string_type.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
 
-    describe('when an enum attribute has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_enum_no_attribute_name_test.xml',
-          databaseType: 'sql'
-        });
-        try {
-          otherParser.parse();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
-        }
+      it('adds it capitalized', function() {
+        expect(parsedData.types['String'].name).to.eq('String');
       });
     });
+    describe('with comments', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_comments.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
 
-    describe('when an enum has no value', function () {
-      it("doesn't throw any exception", function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_enum_no_value_test.xml',
-          databaseType: 'sql'
-        });
-        otherParser.parse();
+      it('parses it', function() {
+        expect(parsedData).not.to.be.null;
+      });
+      it('adds comments in classes', function() {
+        expect(parsedData.classes['_UlHVuVFwEeW5wfYDi5CV9g'].comment).to.eq(
+`This is a class <b>comment</b>!<br>`
+        );
+        expect(parsedData.classes['_UlHVwVFwEeW5wfYDi5CV9g'].comment).to.eq(
+`Something.`
+        );
+      });
+      it('adds comments in fields', function() {
+        expect(parsedData.fields['_UlHVvVFwEeW5wfYDi5CV9g'].comment).to.eq(
+`This is an attribute <i>comment</i>.<br>`
+        );
+      });
+      it('adds comments in relationships', function() {
+        expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInFrom).to.eq(
+`This is yet another comment!<br><br>Weird...<br>`
+        );
+        expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInTo).to.eq(
+`This is a relationship comment.<br>`
+        );
       });
     });
+    describe('with a user class', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_user_class_test.xmi',
+        databaseType: 'sql',
+        noUserManagement: true
+      });
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
 
-    describe('when an enum is well formed', function () {
-      it('is parsed', function () {
-        var otherParser = ParserFactory.createParser({
-          file: './test/xmi/genmymodel_enum_test.xml',
-          databaseType: 'sql'
-        });
-        otherParser.parse();
-        var expectedNames = ['MyEnumeration', 'MyEnumeration2'];
-        var expectedNValues = ['LITERAL1', 'LITERAL2', 'LITERAL'];
-        var names = [];
-        var values = [];
-
-        Object.keys(otherParser.parsedData.enums).forEach(function (enumId) {
-          names.push(otherParser.parsedData.getEnum(enumId).name);
-          otherParser.parsedData.getEnum(enumId).values.forEach(function (value) {
-            values.push(value);
-          });
-        });
-        expect(names).to.deep.equal(expectedNames);
-        expect(values).to.deep.equal(expectedNValues);
+      it('parses it', function() {
+        expect(parsedData).not.to.be.null;
+      });
+      it('includes the user class', function() {
+        expect(parsedData.classes['_YzPHjORNEeSNGZq_xSbn1w']).not.to.be.null;
+        expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
-  });
-
-  describe('#fillAssociations', function () {
-    before(function () {
-      parser.fillClassesAndFields();
-      parser.fillAssociations();
-    });
-
-    it('inserts the found associations', function () {
-      expect(Object.keys(parser.parsedData.associations).length).to.equal(10);
-    });
-  });
-
-  describe('#fillClassesAndFields', function () {
-    before(function () {
-      parser.fillClassesAndFields();
-    });
-
-    describe('#addClass', function () {
-      describe('when adding a class', function () {
-        it('adds the found classes', function () {
-          expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
+    describe('with enums', function() {
+      describe('with values', function() {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_test.xmi',
+          databaseType: 'sql',
+          noUserManagement: true
         });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
 
-        it("adds the comment if there's any", function () {
-          var otherParser = ParserFactory.createParser({
-            file: './test/xmi/genmymodel_comments.xml',
-            databaseType: 'sql'
-          });
-          var parsedData = otherParser.parse();
-          Object.keys(parsedData.classes).forEach(function (classData) {
-            expect(parsedData.getClass(classData).comment).not.to.be.undefined;
-            expect(parsedData.getClass(classData).comment).not.to.equal('');
-          });
+        it('parses it', function() {
+          expect(parsedData).not.to.be.null;
+        });
+        it('adds the enum and the values', function() {
+          expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
+          expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw'].name).to.eq('MyEnumeration');
+          expect(
+            parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw'].values
+          ).to.deep.eq(['VALUE_A', 'VALUE_B']);
+          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw']).not.to.be.null;
+          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].name).to.eq('MySecondEnumeration');
+          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].values).to.deep.eq(['VALUE_A']);
+        });
+        it('uses the enums as types for fields', function() {
+          expect(parsedData.fields['_LwhPViFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
+          expect(parsedData.fields['_LwhPVyFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPXCFnEeWP5-PV_D3nAw');
+          expect(parsedData.fields['_LwhPWCFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
         });
       });
-
-      describe('when a class has a reserved word as name', function () {
-        it('fails', function () {
-          try {
-            var otherParser = ParserFactory.createParser({
-              file: './test/xmi/genmymodel_reserved_class_name_test.xmi',
-              databaseType: 'sql'
-            });
-            otherParser.parse();
-            fail();
-          } catch (error) {
-            expect(error.name).to.eq('IllegalNameException');
-          }
+      describe('without values', function() {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/genmymodel_enum_no_value_test.xmi',
+          databaseType: 'sql',
+          noUserManagement: true
         });
-      });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
 
-      describe('when a class has a reserved word as table name', function () {
-        it('fails', function () {
-          try {
-            var otherParser = ParserFactory.createParser({
-              file: './test/xmi/genmymodel_reserved_table_name_test.xmi',
-              databaseType: 'sql'
-            });
-            otherParser.parse();
-            fail();
-          } catch (error) {
-            expect(error.name).to.eq('IllegalNameException');
-          }
+        it('parses it', function() {
+          expect(parsedData).not.to.be.null;
         });
-      });
-
-      describe('when a field has a reserved word as name', function () {
-        it('fails', function () {
-          try {
-            var otherParser = ParserFactory.createParser({
-              file: './test/xmi/genmymodel_reserved_field_name_test.xmi',
-              databaseType: 'sql'
-            });
-            otherParser.parse();
-            fail();
-          } catch (error) {
-            expect(error.name).to.eq('IllegalNameException');
-          }
+        it('still adds the enum', function() {
+          expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
         });
-      });
-    });
-
-    describe('#addField', function () {
-      describe('#addRegularField', function () {
-        it('adds the fields', function () {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(28);
-        });
-
-        it("adds the comment if there's any", function () {
-          var otherParser = ParserFactory.createParser({
-            file: './test/xmi/genmymodel_comments.xml',
-            databaseType: 'sql'
-          });
-          var parsedData = otherParser.parse();
-          if (Object.keys(parsedData.fields).length === 0) {
-            fail();
-          }
-          Object.keys(parsedData.fields).forEach(function (fieldData) {
-            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
-            expect(parsedData.getField(fieldData).comment).not.to.equal('');
-          });
-        });
-
-        it('adds the fields to the classes', function () {
-          var count = 0;
-          Object.keys(parser.parsedData.classes).forEach(function (element) {
-            if (parser.parsedData.classes.hasOwnProperty(element)) {
-              count += parser.parsedData.getClass(element).fields.length;
-            }
-          });
-          expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
-        });
-
-        describe('when trying to add a field whose name is capitalized', function () {
-          it('decapitalizes and adds it', function () {
-            var otherParser = ParserFactory.createParser({
-              file: './test/xmi/genmymodel_capitalized_field_names.xmi',
-              databaseType: 'sql'
-            });
-            var parsedData = otherParser.parse();
-            if (Object.keys(parsedData.fields).length === 0) {
-              fail();
-            }
-            Object.keys(parsedData.fields).forEach(function (fieldData) {
-              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
-                fail();
-              }
-            });
-          });
-        });
-
-        describe("when trying to add an injectedField with an invalid type", function () {
-          before(function () {
-            parserWrongType.findElements();
-            parserWrongType.fillTypes();
-          });
-          it('throws an exception', function () {
-            try {
-              parserWrongType.fillClassesAndFields();
-              fail();
-            } catch (error) {
-              expect(error.name).to.equal('WrongTypeException');
-            }
-          });
-        });
-
-        describe(
-            'when a type was not defined in a primitiveType tag',
-            function () {
-              it('is deduced from the field element, and added', function () {
-                expect(parser.parsedData.getType('String').name).to.equal('String');
-              });
-            });
       });
     });
   });

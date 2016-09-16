@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_YzOgYORNEeSNGZq_xSbn1w" name="Projet IFT604">
+  <eAnnotations xmi:id="_YzOgYeRNEeSNGZq_xSbn1w" source="genmymodel">
+    <details xmi:id="_YzOgYuRNEeSNGZq_xSbn1w" key="uuid" value="_UprYwFovEeS18qaWE5MM-A"/>
+  </eAnnotations>
+  <packageImport xmi:id="_YzOgY-RNEeSNGZq_xSbn1w">
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_YzOgZuRNEeSNGZq_xSbn1w">
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Class" xmi:id="_YzPHjORNEeSNGZq_xSbn1w" name="User">
+    <ownedAttribute xmi:id="_YzPHj-RNEeSNGZq_xSbn1w" name="wrght">
+      <type xsi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#//String"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Model>

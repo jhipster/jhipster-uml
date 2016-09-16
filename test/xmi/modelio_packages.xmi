@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_vC4FsHdfEeaWkfx80xqrTw" name="packages">
+  <eAnnotations xmi:id="_vC4swHdfEeaWkfx80xqrTw" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_vC4swXdfEeaWkfx80xqrTw" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_vC4swndfEeaWkfx80xqrTw" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Package" xmi:id="_vC4sw3dfEeaWkfx80xqrTw" name="mypackage">
+    <packagedElement xmi:type="uml:Class" xmi:id="_vC4sxHdfEeaWkfx80xqrTw" name="Class1">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_vC4sxXdfEeaWkfx80xqrTw" name="class2" visibility="public" type="_vC4sz3dfEeaWkfx80xqrTw" aggregation="composite" association="_vC4sx3dfEeaWkfx80xqrTw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vC4sxndfEeaWkfx80xqrTw"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_vC4sx3dfEeaWkfx80xqrTw" memberEnd="_vC4sxXdfEeaWkfx80xqrTw _vC4syHdfEeaWkfx80xqrTw">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_vC4syHdfEeaWkfx80xqrTw" visibility="public" type="_vC4sxHdfEeaWkfx80xqrTw" association="_vC4sx3dfEeaWkfx80xqrTw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_vC4syXdfEeaWkfx80xqrTw" name="myotherpackage">
+      <packagedElement xmi:type="uml:Class" xmi:id="_vC4syndfEeaWkfx80xqrTw" name="Class3">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_vC4sy3dfEeaWkfx80xqrTw" name="class1" visibility="public" type="_vC4sxHdfEeaWkfx80xqrTw" aggregation="composite" association="_vC4szXdfEeaWkfx80xqrTw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vC4szHdfEeaWkfx80xqrTw"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_vC4szXdfEeaWkfx80xqrTw" memberEnd="_vC4sy3dfEeaWkfx80xqrTw _vC4szndfEeaWkfx80xqrTw">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_vC4szndfEeaWkfx80xqrTw" visibility="public" type="_vC4syndfEeaWkfx80xqrTw" association="_vC4szXdfEeaWkfx80xqrTw"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_vC4sz3dfEeaWkfx80xqrTw" name="Class2"/>
+</uml:Model>
