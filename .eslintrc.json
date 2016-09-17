@@ -1,0 +1,20 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "indent": [2, 2, { "VariableDeclarator": 2 }],
+    "linebreak-style": 0,
+    "eol-last": 2,
+    "quotes": [1, "single"],
+    "semi": [2, "always"],
+    "eqeqeq": [2, "smart"],
+    "no-use-before-define": [2, "nofunc"],
+    "no-unused-vars": [2, {"vars": "local", "args": "none"}],
+    "no-multi-str": 2,
+    "no-irregular-whitespace": 2,
+    "no-console": 0
+  }
+}
