@@ -240,19 +240,19 @@ describe('GenMyModelParser', function () {
           expect(parsedData).not.to.be.null;
         });
         it('adds the enum and the values', function() {
-          expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
-          expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw'].name).to.eq('MyEnumeration');
+          expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q']).not.to.be.null;
+          expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration');
           expect(
-            parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw'].values
-          ).to.deep.eq(['VALUE_A', 'VALUE_B']);
-          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw']).not.to.be.null;
-          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].name).to.eq('MySecondEnumeration');
-          expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].values).to.deep.eq(['VALUE_A']);
+            parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q'].values
+          ).to.deep.eq(['LITERAL1', 'LITERAL2']);
+          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q']).not.to.be.null;
+          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration2');
+          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].values).to.deep.eq(['LITERAL']);
         });
         it('uses the enums as types for fields', function() {
-          expect(parsedData.fields['_LwhPViFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
-          expect(parsedData.fields['_LwhPVyFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPXCFnEeWP5-PV_D3nAw');
-          expect(parsedData.fields['_LwhPWCFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
+          expect(parsedData.fields['_fxHezyGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
+          expect(parsedData.fields['_fxHe0iGGEeW9keBtFZy97Q'].type).to.eq('_fxHe4SGGEeW9keBtFZy97Q');
+          expect(parsedData.fields['_fxHe1SGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
         });
       });
       describe('without values', function() {
