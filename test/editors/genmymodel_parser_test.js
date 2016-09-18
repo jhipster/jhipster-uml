@@ -273,4 +273,134 @@ describe('GenMyModelParser', function () {
       });
     });
   });
+  describe('when passing an invalid diagram', function() {
+    describe('as a class has no name', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_no_class_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('NullPointerException');
+        }
+      });
+    });
+    describe('as a field has no name', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_no_attribute_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('NullPointerException');
+        }
+      });
+    });
+    describe("as an enum's value as no name", function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_enum_no_attribute_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('NullPointerException');
+        }
+      });
+    });
+    describe('as an enum has no name', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_enum_no_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('NullPointerException');
+        }
+      });
+    });
+    describe('as a class name is a reserved word', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_reserved_class_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
+      });
+    });
+    describe('as a field name is a reserved word', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_reserved_field_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
+      });
+    });
+    describe('as a table name is a reserved word', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_reserved_table_name_test.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
+      });
+    });
+    describe('as an invalid type is used', function() {
+      var parserData = ParserFactory.createParser({
+        file: './test/xmi/genmymodel_wrong_type.xmi',
+        databaseType: 'sql'
+      });
+      var parser = parserData.parser;
+
+      it('fails', function() {
+        try {
+          parser.parse(parserData.data);
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('WrongTypeException');
+        }
+      });
+    });
+  });
 });
