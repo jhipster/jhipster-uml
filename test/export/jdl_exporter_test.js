@@ -20,14 +20,15 @@ describe('JDLExporter', () => {
     });
     describe('when passing a valid parsed data', () => {
       describe('with no option', () => {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio.xmi',
+          databaseType: 'sql'
+        });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
+        var jdl = toJDL(parsedData);
+
         it('creates the corresponding JDL', () => {
-          var parserData = ParserFactory.createParser({
-            file: './test/xmi/modelio.xmi',
-            databaseType: 'sql'
-          });
-          var parser = parserData.parser;
-          var parsedData = parser.parse(parserData.data);
-          var jdl = toJDL(parsedData);
           expect(jdl.toString()).to.eq(
               `entity JobHistory (job_history) {
   startDate ZonedDateTime required,
@@ -97,25 +98,26 @@ relationship ManyToMany {
         });
       });
       describe('with options', () => {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio.xmi',
+          databaseType: 'sql'
+        });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
+        var jdl = toJDL(parsedData, {
+          listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
+          listPagination: {Employee: 'pager', Job: 'pager'},
+          listService: {
+            JobHistory: 'serviceClass',
+            Job: 'serviceClass',
+            Employee: 'serviceImpl'
+          },
+          listOfNoClient: ['Employee'],
+          listOfNoServer: ['Region'],
+          microserviceNames: {Employee: 'MySuperMicroservice'}
+        });
+
         it('adds them', () => {
-          var parserData = ParserFactory.createParser({
-            file: './test/xmi/modelio.xmi',
-            databaseType: 'sql'
-          });
-          var parser = parserData.parser;
-          var parsedData = parser.parse(parserData.data);
-          var jdl = toJDL(parsedData, {
-            listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
-            listPagination: {Employee: 'pager', Job: 'pager'},
-            listService: {
-              JobHistory: 'serviceClass',
-              Job: 'serviceClass',
-              Employee: 'serviceImpl'
-            },
-            listOfNoClient: ['Employee'],
-            listOfNoServer: ['Region'],
-            microserviceNames: {Employee: 'MySuperMicroservice'}
-          });
           expect(jdl.toString().indexOf('dto * with mapstruct') !== -1).to.be.true;
           expect(jdl.toString().indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
           expect(jdl.toString().indexOf('service Employee with serviceImpl') !== -1).to.be.true;
@@ -124,25 +126,26 @@ relationship ManyToMany {
     });
   });
   describe('::toJDLString', () => {
-    it('is a stringified version of ::toJDL', function() {
-      var parserData = ParserFactory.createParser({
-        file: './test/xmi/modelio.xmi',
-        databaseType: 'sql'
-      });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
-      var jdlString = toJDLString(parsedData, {
-        listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
-        listPagination: {Employee: 'pager', Job: 'pager'},
-        listService: {
-          JobHistory: 'serviceClass',
-          Job: 'serviceClass',
-          Employee: 'serviceImpl'
-        },
-        listOfNoClient: ['Employee'],
-        listOfNoServer: ['Region'],
-        microserviceNames: {Employee: 'MySuperMicroservice'}
-      });
+    var parserData = ParserFactory.createParser({
+      file: './test/xmi/modelio.xmi',
+      databaseType: 'sql'
+    });
+    var parser = parserData.parser;
+    var parsedData = parser.parse(parserData.data);
+    var jdlString = toJDLString(parsedData, {
+      listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
+      listPagination: {Employee: 'pager', Job: 'pager'},
+      listService: {
+        JobHistory: 'serviceClass',
+        Job: 'serviceClass',
+        Employee: 'serviceImpl'
+      },
+      listOfNoClient: ['Employee'],
+      listOfNoServer: ['Region'],
+      microserviceNames: {Employee: 'MySuperMicroservice'}
+    });
+
+    it('is a stringified version of ::toJDL', () => {
       expect(jdlString.indexOf('dto * with mapstruct') !== -1).to.be.true;
       expect(jdlString.indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
       expect(jdlString.indexOf('service Employee with serviceImpl') !== -1).to.be.true;
