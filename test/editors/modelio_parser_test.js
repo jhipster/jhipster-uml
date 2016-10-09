@@ -4,9 +4,9 @@ const expect = require('chai').expect,
     fail = expect.fail,
     ParserFactory = require('../../lib/editors/parser_factory');
 
-describe('ModelioParser', function () {
-  describe('when passing a valid diagram', function() {
-    describe('taken from the HR example', function() {
+describe('ModelioParser', () => {
+  describe('when passing a valid diagram', () => {
+    describe('taken from the HR example', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio.xmi',
         databaseType: 'sql'
@@ -14,10 +14,10 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('correctly parses the JobHistory class', function() {
+      it('correctly parses the JobHistory class', () => {
         var jobHistory = parsedData.classes['_0iCy1rieEeW4ip1mZlCqPg'];
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
@@ -30,7 +30,7 @@ describe('ModelioParser', function () {
         expect(jobHistory.pagination).to.eq('no');
         expect(jobHistory.service).to.eq('no');
       });
-      it('correctly parses the Job class', function() {
+      it('correctly parses the Job class', () => {
         var job = parsedData.classes['_0iCy47ieEeW4ip1mZlCqPg'];
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
@@ -45,7 +45,7 @@ describe('ModelioParser', function () {
         expect(job.pagination).to.eq('no');
         expect(job.service).to.eq('no');
       });
-      it('correctly parses the Department class', function() {
+      it('correctly parses the Department class', () => {
         var department = parsedData.classes['_0iCy77ieEeW4ip1mZlCqPg'];
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
@@ -58,7 +58,7 @@ describe('ModelioParser', function () {
         expect(department.pagination).to.eq('no');
         expect(department.service).to.eq('no');
       });
-      it('correctly parses the Employee class', function() {
+      it('correctly parses the Employee class', () => {
         var employee = parsedData.classes['_0iCy-7ieEeW4ip1mZlCqPg'];
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
@@ -77,7 +77,7 @@ describe('ModelioParser', function () {
         expect(employee.pagination).to.eq('no');
         expect(employee.service).to.eq('no');
       });
-      it('correctly parses the Location class', function() {
+      it('correctly parses the Location class', () => {
         var location = parsedData.classes['_0iCzELieEeW4ip1mZlCqPg'];
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
@@ -93,7 +93,7 @@ describe('ModelioParser', function () {
         expect(location.pagination).to.eq('no');
         expect(location.service).to.eq('no');
       });
-      it('correctly parses the Country class', function() {
+      it('correctly parses the Country class', () => {
         var country = parsedData.classes['_0iCzGbieEeW4ip1mZlCqPg'];
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
@@ -106,7 +106,7 @@ describe('ModelioParser', function () {
         expect(country.pagination).to.eq('no');
         expect(country.service).to.eq('no');
       });
-      it('correctly parses the Region class', function() {
+      it('correctly parses the Region class', () => {
         var region = parsedData.classes['_0iCzH7ieEeW4ip1mZlCqPg'];
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
@@ -119,7 +119,7 @@ describe('ModelioParser', function () {
         expect(region.pagination).to.eq('no');
         expect(region.service).to.eq('no');
       });
-      it('correctly parses the Task class', function() {
+      it('correctly parses the Task class', () => {
         var task = parsedData.classes['_0iCzIrieEeW4ip1mZlCqPg'];
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
@@ -133,7 +133,7 @@ describe('ModelioParser', function () {
         expect(task.pagination).to.eq('no');
         expect(task.service).to.eq('no');
       });
-      it('correctly adds the class names', function() {
+      it('correctly adds the class names', () => {
         expect(parsedData.classNames).to.deep.eq([
           'JobHistory',
           'Job',
@@ -146,7 +146,7 @@ describe('ModelioParser', function () {
         ]);
       });
     });
-    describe('with required relationships', function() {
+    describe('with required relationships', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_required_relationships.xmi',
         databaseType: 'sql'
@@ -154,7 +154,7 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('sets the required flag in the AssociationData objects', function() {
+      it('sets the required flag in the AssociationData objects', () => {
         for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
             parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
@@ -163,7 +163,7 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('with a lowercase type', function() {
+    describe('with a lowercase type', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_lowercased_string_type.xmi',
         databaseType: 'sql'
@@ -171,11 +171,11 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('adds it capitalized', function() {
+      it('adds it capitalized', () => {
         expect(parsedData.types['_qlOWCZWyEeWgPqZDqm9Now'].name).to.eq('ZonedDateTime');
       });
     });
-    describe('with comments', function() {
+    describe('with comments', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_comments.xmi',
         databaseType: 'sql'
@@ -183,10 +183,10 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('adds comments in classes', function() {
+      it('adds comments in classes', () => {
         expect(parsedData.classes['_MlHMlHgFEeaD3-9XbEOL5Q'].comment).to.eq(
 `<p>Description for a <strong>class:</strong></p>
 
@@ -201,12 +201,12 @@ describe('ModelioParser', function () {
 `<p>Another description.</p>`
         );
       });
-      it('adds comments in fields', function() {
+      it('adds comments in fields', () => {
         expect(parsedData.fields['_MlHMmXgFEeaD3-9XbEOL5Q'].comment).to.eq(
 `<p>Description for an <strong>attribute</strong>.</p>`
         );
       });
-      it('adds comments in relationships', function() {
+      it('adds comments in relationships', () => {
         expect(parsedData.associations['_MlHMm3gFEeaD3-9XbEOL5Q'].commentInFrom).to.eq(
 `<p>Comment for a relationship.</p>`
         );
@@ -215,7 +215,7 @@ describe('ModelioParser', function () {
         );
       });
     });
-    describe('with a user class', function() {
+    describe('with a user class', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_user_class_test.xmi',
         databaseType: 'sql',
@@ -224,16 +224,16 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('includes the user class', function() {
+      it('includes the user class', () => {
         expect(parsedData.classes['_66WytRBlEeW5RsvjsYghDw']).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
-    describe('with enums', function() {
-      describe('with values', function() {
+    describe('with enums', () => {
+      describe('with values', () => {
         var parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_enum_test.xmi',
           databaseType: 'sql',
@@ -242,10 +242,10 @@ describe('ModelioParser', function () {
         var parser = parserData.parser;
         var parsedData = parser.parse(parserData.data);
 
-        it('parses it', function() {
+        it('parses it', () => {
           expect(parsedData).not.to.be.null;
         });
-        it('adds the enum and the values', function() {
+        it('adds the enum and the values', () => {
           expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
           expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw'].name).to.eq('MyEnumeration');
           expect(
@@ -255,13 +255,13 @@ describe('ModelioParser', function () {
           expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].name).to.eq('MySecondEnumeration');
           expect(parsedData.enums['_LwhPXCFnEeWP5-PV_D3nAw'].values).to.deep.eq(['VALUE_A']);
         });
-        it('uses the enums as types for fields', function() {
+        it('uses the enums as types for fields', () => {
           expect(parsedData.fields['_LwhPViFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
           expect(parsedData.fields['_LwhPVyFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPXCFnEeWP5-PV_D3nAw');
           expect(parsedData.fields['_LwhPWCFnEeWP5-PV_D3nAw'].type).to.eq('_LwhPWSFnEeWP5-PV_D3nAw');
         });
       });
-      describe('without values', function() {
+      describe('without values', () => {
         var parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_enum_no_value_test.xmi',
           databaseType: 'sql',
@@ -270,15 +270,15 @@ describe('ModelioParser', function () {
         var parser = parserData.parser;
         var parsedData = parser.parse(parserData.data);
 
-        it('parses it', function() {
+        it('parses it', () => {
           expect(parsedData).not.to.be.null;
         });
-        it('still adds the enum', function() {
+        it('still adds the enum', () => {
           expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
         });
       });
     });
-    describe('with packages', function() {
+    describe('with packages', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_packages.xmi',
         databaseType: 'sql'
@@ -286,23 +286,23 @@ describe('ModelioParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('works by adding all the classes', function() {
+      it('works by adding all the classes', () => {
         expect(parsedData.classNames).to.deep.eq(['Class2'])
       });
     });
   });
-  describe('when passing an invalid diagram', function() {
-    describe('as a class has no name', function() {
+  describe('when passing an invalid diagram', () => {
+    describe('as a class has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_class_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -311,14 +311,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as a field has no name', function() {
+    describe('as a field has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -327,14 +327,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as a validation has no name', function() {
+    describe('as a validation has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_validation_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -343,14 +343,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe("as an enum's value as no name", function() {
+    describe("as an enum's value as no name", () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -359,14 +359,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as an enum has no name', function() {
+    describe('as an enum has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_enum_no_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -375,14 +375,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as a class name is a reserved word', function() {
+    describe('as a class name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_class_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -391,14 +391,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as a field name is a reserved word', function() {
+    describe('as a field name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_field_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -407,14 +407,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as a table name is a reserved word', function() {
+    describe('as a table name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_table_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -423,14 +423,14 @@ describe('ModelioParser', function () {
         }
       });
     });
-    describe('as an invalid type is used', function() {
+    describe('as an invalid type is used', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_wrong_typename.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();

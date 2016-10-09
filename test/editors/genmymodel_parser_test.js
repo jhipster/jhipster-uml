@@ -5,9 +5,9 @@ const expect = require('chai').expect,
     ParserFactory = require('../../lib/editors/parser_factory');
 
 
-describe('GenMyModelParser', function () {
-  describe('when passing a valid diagram', function() {
-    describe('taken from the HR example', function() {
+describe('GenMyModelParser', () => {
+  describe('when passing a valid diagram', () => {
+    describe('taken from the HR example', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel.xmi',
         databaseType: 'sql'
@@ -15,10 +15,10 @@ describe('GenMyModelParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('correctly parses the JobHistory class', function() {
+      it('correctly parses the JobHistory class', () => {
         var jobHistory = parsedData.classes['_rasqOrvHEeWM0I0nquuJQA'];
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
@@ -31,7 +31,7 @@ describe('GenMyModelParser', function () {
         expect(jobHistory.pagination).to.eq('no');
         expect(jobHistory.service).to.eq('no');
       });
-      it('correctly parses the Job class', function() {
+      it('correctly parses the Job class', () => {
         var job = parsedData.classes['_rasqXLvHEeWM0I0nquuJQA'];
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
@@ -46,7 +46,7 @@ describe('GenMyModelParser', function () {
         expect(job.pagination).to.eq('no');
         expect(job.service).to.eq('no');
       });
-      it('correctly parses the Department class', function() {
+      it('correctly parses the Department class', () => {
         var department = parsedData.classes['_rasqRrvHEeWM0I0nquuJQA'];
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
@@ -59,7 +59,7 @@ describe('GenMyModelParser', function () {
         expect(department.pagination).to.eq('no');
         expect(department.service).to.eq('no');
       });
-      it('correctly parses the Employee class', function() {
+      it('correctly parses the Employee class', () => {
         var employee = parsedData.classes['_ratRVLvHEeWM0I0nquuJQA'];
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
@@ -78,7 +78,7 @@ describe('GenMyModelParser', function () {
         expect(employee.pagination).to.eq('no');
         expect(employee.service).to.eq('no');
       });
-      it('correctly parses the Location class', function() {
+      it('correctly parses the Location class', () => {
         var location = parsedData.classes['_ratRo7vHEeWM0I0nquuJQA'];
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
@@ -94,7 +94,7 @@ describe('GenMyModelParser', function () {
         expect(location.pagination).to.eq('no');
         expect(location.service).to.eq('no');
       });
-      it('correctly parses the Country class', function() {
+      it('correctly parses the Country class', () => {
         var country = parsedData.classes['_ratRwrvHEeWM0I0nquuJQA'];
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
@@ -107,7 +107,7 @@ describe('GenMyModelParser', function () {
         expect(country.pagination).to.eq('no');
         expect(country.service).to.eq('no');
       });
-      it('correctly parses the Region class', function() {
+      it('correctly parses the Region class', () => {
         var region = parsedData.classes['_ratR2LvHEeWM0I0nquuJQA'];
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
@@ -120,7 +120,7 @@ describe('GenMyModelParser', function () {
         expect(region.pagination).to.eq('no');
         expect(region.service).to.eq('no');
       });
-      it('correctly parses the Task class', function() {
+      it('correctly parses the Task class', () => {
         var task = parsedData.classes['_rasqe7vHEeWM0I0nquuJQA'];
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
@@ -134,7 +134,7 @@ describe('GenMyModelParser', function () {
         expect(task.pagination).to.eq('no');
         expect(task.service).to.eq('no');
       });
-      it('correctly adds the class names', function() {
+      it('correctly adds the class names', () => {
         expect(parsedData.classNames).to.deep.eq([
           'JobHistory',
           'Department',
@@ -147,7 +147,7 @@ describe('GenMyModelParser', function () {
         ]);
       });
     });
-    describe('with required relationships', function() {
+    describe('with required relationships', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_required_relationships.xmi',
         databaseType: 'sql'
@@ -155,7 +155,7 @@ describe('GenMyModelParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('sets the required flag in the AssociationData objects', function() {
+      it('sets the required flag in the AssociationData objects', () => {
         for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
             parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
@@ -164,7 +164,7 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('with a lowercase type', function() {
+    describe('with a lowercase type', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_lowercased_string_type.xmi',
         databaseType: 'sql'
@@ -172,11 +172,11 @@ describe('GenMyModelParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('adds it capitalized', function() {
+      it('adds it capitalized', () => {
         expect(parsedData.types['String'].name).to.eq('String');
       });
     });
-    describe('with comments', function() {
+    describe('with comments', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_comments.xmi',
         databaseType: 'sql'
@@ -184,10 +184,10 @@ describe('GenMyModelParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('adds comments in classes', function() {
+      it('adds comments in classes', () => {
         expect(parsedData.classes['_UlHVuVFwEeW5wfYDi5CV9g'].comment).to.eq(
 `This is a class <b>comment</b>!<br>`
         );
@@ -195,12 +195,12 @@ describe('GenMyModelParser', function () {
 `Something.`
         );
       });
-      it('adds comments in fields', function() {
+      it('adds comments in fields', () => {
         expect(parsedData.fields['_UlHVvVFwEeW5wfYDi5CV9g'].comment).to.eq(
 `This is an attribute <i>comment</i>.<br>`
         );
       });
-      it('adds comments in relationships', function() {
+      it('adds comments in relationships', () => {
         expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInFrom).to.eq(
 `This is yet another comment!<br><br>Weird...<br>`
         );
@@ -209,7 +209,7 @@ describe('GenMyModelParser', function () {
         );
       });
     });
-    describe('with a user class', function() {
+    describe('with a user class', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_user_class_test.xmi',
         databaseType: 'sql',
@@ -218,16 +218,16 @@ describe('GenMyModelParser', function () {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
 
-      it('parses it', function() {
+      it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
-      it('includes the user class', function() {
+      it('includes the user class', () => {
         expect(parsedData.classes['_YzPHjORNEeSNGZq_xSbn1w']).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
-    describe('with enums', function() {
-      describe('with values', function() {
+    describe('with enums', () => {
+      describe('with values', () => {
         var parserData = ParserFactory.createParser({
           file: './test/xmi/genmymodel_enum_test.xmi',
           databaseType: 'sql',
@@ -236,10 +236,10 @@ describe('GenMyModelParser', function () {
         var parser = parserData.parser;
         var parsedData = parser.parse(parserData.data);
 
-        it('parses it', function() {
+        it('parses it', () => {
           expect(parsedData).not.to.be.null;
         });
-        it('adds the enum and the values', function() {
+        it('adds the enum and the values', () => {
           expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q']).not.to.be.null;
           expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration');
           expect(
@@ -249,13 +249,13 @@ describe('GenMyModelParser', function () {
           expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration2');
           expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].values).to.deep.eq(['LITERAL']);
         });
-        it('uses the enums as types for fields', function() {
+        it('uses the enums as types for fields', () => {
           expect(parsedData.fields['_fxHezyGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
           expect(parsedData.fields['_fxHe0iGGEeW9keBtFZy97Q'].type).to.eq('_fxHe4SGGEeW9keBtFZy97Q');
           expect(parsedData.fields['_fxHe1SGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
         });
       });
-      describe('without values', function() {
+      describe('without values', () => {
         var parserData = ParserFactory.createParser({
           file: './test/xmi/genmymodel_enum_no_value_test.xmi',
           databaseType: 'sql',
@@ -264,24 +264,24 @@ describe('GenMyModelParser', function () {
         var parser = parserData.parser;
         var parsedData = parser.parse(parserData.data);
 
-        it('parses it', function() {
+        it('parses it', () => {
           expect(parsedData).not.to.be.null;
         });
-        it('still adds the enum', function() {
+        it('still adds the enum', () => {
           expect(parsedData.enums['_LwhPWSFnEeWP5-PV_D3nAw']).not.to.be.null;
         });
       });
     });
   });
-  describe('when passing an invalid diagram', function() {
-    describe('as a class has no name', function() {
+  describe('when passing an invalid diagram', () => {
+    describe('as a class has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_no_class_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -290,14 +290,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as a field has no name', function() {
+    describe('as a field has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -306,14 +306,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe("as an enum's value as no name", function() {
+    describe("as an enum's value as no name", () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -322,14 +322,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as an enum has no name', function() {
+    describe('as an enum has no name', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_enum_no_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -338,14 +338,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as a class name is a reserved word', function() {
+    describe('as a class name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_class_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -354,14 +354,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as a field name is a reserved word', function() {
+    describe('as a field name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_field_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -370,14 +370,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as a table name is a reserved word', function() {
+    describe('as a table name is a reserved word', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_table_name_test.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
@@ -386,14 +386,14 @@ describe('GenMyModelParser', function () {
         }
       });
     });
-    describe('as an invalid type is used', function() {
+    describe('as an invalid type is used', () => {
       var parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_wrong_type.xmi',
         databaseType: 'sql'
       });
       var parser = parserData.parser;
 
-      it('fails', function() {
+      it('fails', () => {
         try {
           parser.parse(parserData.data);
           fail();
