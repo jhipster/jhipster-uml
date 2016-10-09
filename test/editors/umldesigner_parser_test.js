@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect,
     fail = expect.fail,
-    _ = require('lodash'),
+    DatabaseTypes = require('jhipster-core').JHipsterDatabaseTypes.Types,
     UMLDesignerParser = require('../../lib/editors/umldesigner_parser'),
     xml2js = require('xml2js'),
     fs = require('fs'),
@@ -12,337 +12,365 @@ const expect = require('chai').expect,
     buildException = require('../../lib/exceptions/exception_factory').buildException,
     exceptions = require('../../lib/exceptions/exception_factory').exceptions;
 
-var parser = new UMLDesignerParser(
-    getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
-    initDatabaseTypeHolder('sql'));
-
-describe('UMLDesignerParser', function () {
-  describe('#findElements', function () {
-    before(function () {
-      parser.findElements();
+describe('UMLDesignerParser', () => {
+  describe('when passing a valid diagram', () => {
+    describe('taken from the HR example', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+      });
+      
+      it('parses it', () => {
+        expect(parsedData).not.to.be.null;
+      });
+      it('correctly parses the JobHistory class', () => {
+        var jobHistory = parsedData.classes['_q9OKYLvPEeWmS7iaRSwQeQ'];
+        expect(jobHistory.name).to.eq('JobHistory');
+        expect(jobHistory.tableName).to.eq('job_history');
+        expect(jobHistory.fields).to.deep.eq([
+          '_KsO50LvQEeWmS7iaRSwQeQ',
+          '_MkO9QLvQEeWmS7iaRSwQeQ'
+        ]);
+        expect(jobHistory.comment).to.eq('');
+        expect(jobHistory.dto).to.eq('no');
+        expect(jobHistory.pagination).to.eq('no');
+        expect(jobHistory.service).to.eq('no');
+      });
+      it('correctly parses the Job class', () => {
+        var job = parsedData.classes['_4wnzYLvQEeWmS7iaRSwQeQ'];
+        expect(job.name).to.eq('Job');
+        expect(job.tableName).to.eq('job');
+        expect(job.fields).to.deep.eq([
+          '_7MxFsLvQEeWmS7iaRSwQeQ',
+          '_9SifYLvQEeWmS7iaRSwQeQ'
+        ]);
+        expect(job.comment).to.eq('');
+        expect(job.dto).to.eq('no');
+        expect(job.pagination).to.eq('no');
+        expect(job.service).to.eq('no');
+      });
+      it('correctly parses the Department class', () => {
+        var department = parsedData.classes['_RAdQ8LvQEeWmS7iaRSwQeQ'];
+        expect(department.name).to.eq('Department');
+        expect(department.tableName).to.eq('department');
+        expect(department.fields).to.deep.eq([
+          '_SM09cLvQEeWmS7iaRSwQeQ',
+          '_WspXsLvQEeWmS7iaRSwQeQ'
+        ]);
+        expect(department.comment).to.eq('');
+        expect(department.dto).to.eq('no');
+        expect(department.pagination).to.eq('no');
+        expect(department.service).to.eq('no');
+      });
+      it('correctly parses the Employee class', () => {
+        var employee = parsedData.classes['_1_M_MLvREeWmS7iaRSwQeQ'];
+        expect(employee.name).to.eq('Employee');
+        expect(employee.tableName).to.eq('employee');
+        expect(employee.fields).to.deep.eq([
+          '_Ujyi4LvSEeWmS7iaRSwQeQ',
+          '_XZUlkLvSEeWmS7iaRSwQeQ',
+          '_cUZ_gLvSEeWmS7iaRSwQeQ',
+          '_elRO4LvSEeWmS7iaRSwQeQ',
+          '_hQJgwLvSEeWmS7iaRSwQeQ',
+          '_kp98QLvSEeWmS7iaRSwQeQ',
+          '_n7ySULvSEeWmS7iaRSwQeQ',
+          '_qm_7YLvSEeWmS7iaRSwQeQ'
+        ]);
+        expect(employee.comment).to.eq('');
+        expect(employee.dto).to.eq('no');
+        expect(employee.pagination).to.eq('no');
+        expect(employee.service).to.eq('no');
+      });
+      it('correctly parses the Location class', () => {
+        var location = parsedData.classes['_DCZ6ULvTEeWmS7iaRSwQeQ'];
+        expect(location.name).to.eq('Location');
+        expect(location.tableName).to.eq('location');
+        expect(location.fields).to.deep.eq([
+          '_EfSvELvTEeWmS7iaRSwQeQ',
+          '_GrL-4LvTEeWmS7iaRSwQeQ',
+          '_KWzVALvTEeWmS7iaRSwQeQ',
+          '_NQNLELvTEeWmS7iaRSwQeQ',
+          '_P_k7YLvTEeWmS7iaRSwQeQ'
+        ]);
+        expect(location.comment).to.eq('');
+        expect(location.dto).to.eq('no');
+        expect(location.pagination).to.eq('no');
+        expect(location.service).to.eq('no');
+      });
+      it('correctly parses the Country class', () => {
+        var country = parsedData.classes['_igcOgLvTEeWmS7iaRSwQeQ'];
+        expect(country.name).to.eq('Country');
+        expect(country.tableName).to.eq('country');
+        expect(country.fields).to.deep.eq([
+          '_ka5JALvTEeWmS7iaRSwQeQ',
+          '_meCFcLvTEeWmS7iaRSwQeQ'
+        ]);
+        expect(country.comment).to.eq('');
+        expect(country.dto).to.eq('no');
+        expect(country.pagination).to.eq('no');
+        expect(country.service).to.eq('no');
+      });
+      it('correctly parses the Region class', () => {
+        var region = parsedData.classes['_tCa_gLvTEeWmS7iaRSwQeQ'];
+        expect(region.name).to.eq('Region');
+        expect(region.tableName).to.eq('region');
+        expect(region.fields).to.deep.eq([
+          '_vF-LoLvTEeWmS7iaRSwQeQ',
+          '_xksQ0LvTEeWmS7iaRSwQeQ'
+        ]);
+        expect(region.comment).to.eq('');
+        expect(region.dto).to.eq('no');
+        expect(region.pagination).to.eq('no');
+        expect(region.service).to.eq('no');
+      });
+      it('correctly parses the Task class', () => {
+        var task = parsedData.classes['_xC4PILvREeWmS7iaRSwQeQ'];
+        expect(task.name).to.eq('Task');
+        expect(task.tableName).to.eq('task');
+        expect(task.fields).to.deep.eq([
+          '_4l-NILvREeWmS7iaRSwQeQ',
+          '_6-KMgLvREeWmS7iaRSwQeQ',
+          '_9hCY8LvREeWmS7iaRSwQeQ'
+        ]);
+        expect(task.comment).to.eq('');
+        expect(task.dto).to.eq('no');
+        expect(task.pagination).to.eq('no');
+        expect(task.service).to.eq('no');
+      });
+      it('correctly adds the class names', () => {
+        expect(parsedData.classNames).to.deep.eq([
+          'JobHistory',
+          'Department',
+          'Job',
+          'Task',
+          'Employee',
+          'Location',
+          'Country',
+          'Region'
+        ]);
+      });
     });
-
-    it('finds the classes in the document', function () {
-      expect(
-          parser.rawClassesIndexes
-      ).to.deep.equal([0, 2, 4, 6, 8, 13, 15, 17]);
-    });
-
-    it('finds the types in the document', function () {
-      expect(
-          parser.rawTypesIndexes
-      ).to.deep.equal([1]);
-    });
-
-    it('find the enumerations in the document', function () {
-      var otherParser = new UMLDesignerParser(
-          getRootElement(readFileContent('./test/xmi/umldesigner_enum_test.uml')),
-          initDatabaseTypeHolder('sql'));
-      otherParser.findElements();
-      expect(otherParser.rawEnumsIndexes).to.deep.equal([1, 2]);
-    });
-
-    it('finds the associations in the document', function () {
-      expect(
-          parser.rawAssociationsIndexes
-      ).to.deep.equal([3, 5, 7, 9, 10, 11, 12, 14, 16, 18]);
-    });
-  });
-
-  describe('#findConstraints', function () {
-    // not supported by the editor yet
-  });
-
-  describe('#fillTypes', function () {
-    // we need this var to roll back to the previous state after the test.
-    var previousTypes = parser.databaseTypes.types;
-
-    describe('when the types do not have a type from the XMI', function () {
-      before(function () {
-        parser.databaseTypes.types = {};
+    describe('with required relationships', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_required_relationships.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
       });
 
-      after(function () {
-        parser.databaseTypes.types = previousTypes;
-      });
-
-      it('throws an exception', function () {
-        try {
-          parser.fillTypes();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('WrongTypeException');
-        }
-      });
-    });
-
-    describe('when types have the types from the XMI', function () {
-      before(function () {
-        parser.fillTypes();
-      });
-
-      it('assigns their id with their upperFirstd name', function () {
-        var expectedTypes = ['ZonedDateTime', 'BigDecimal'];
-        Object.keys(parser.parsedData.types).forEach(function (type) {
-          if (parser.parsedData.types.hasOwnProperty(type)) {
-            expect(
-                expectedTypes
-            ).to.include(parser.parsedData.getType(type).name);
-            expectedTypes.splice(
-                expectedTypes.indexOf(parser.parsedData.getType(type).name), 1);
-          }
-        });
-        expect(expectedTypes.length).to.equal(1);
-      });
-    });
-
-    describe('if the types are not upperFirstd', function () {
-      it('upperFirsts and adds them', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_lowercased_string_type.xmi')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.fillTypes();
-        Object.keys(parser.parsedData.types).forEach(function (type) {
+      it('sets the required flag in the AssociationData objects', () => {
+        for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
-              parser.parsedData.getType(type).name
-          ).to.equal(_.upperFirst(parser.parsedData.getType(type).name));
+            parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
+              && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
+          ).to.be.true;
+        }
+      });
+    });
+    describe('with a lowercase type', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_lowercased_string_type.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+      });
+
+      it('adds it capitalized', () => {
+        expect(parsedData.types['_IEL5gLvQEeWmS7iaRSwQeQ'].name).to.eq('String');
+      });
+    });
+    describe('with comments', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_comments.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+      });
+
+      it('parses it', () => {
+        expect(parsedData).not.to.be.null;
+      });
+      it('adds comments in classes', () => {
+        expect(parsedData.classes['_2q878FFXEeWn8vWfxOEIOg'].comment).to.eq(
+`This is a class comment.<br/>
+This <b>sucks</b>.`
+        );
+        expect(parsedData.classes['_5fY9AFFYEeWn8vWfxOEIOg'].comment).to.eq('Another&nbsp;comment.');
+      });
+      it('adds comments in fields', () => {
+        expect(parsedData.fields['_MYveEFFYEeWn8vWfxOEIOg'].comment).to.eq(
+`This is an attribute comment.<br/>
+<p>This sucks <i>too</i></p>`
+        );
+      });
+      it('adds comments in relationships, but does not support both sides', () => {
+        expect(parsedData.associations['_9ZgpMFFYEeWn8vWfxOEIOg'].commentInFrom).to.eq('Comment on a relationship.');
+        expect(parsedData.associations['_9ZgpMFFYEeWn8vWfxOEIOg'].commentInTo).to.eq('Comment on a relationship.');
+      });
+    });
+    describe('with a user class', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_user.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql),
+        noUserManagement: true
+      });
+
+      it('parses it', () => {
+        expect(parsedData).not.to.be.null;
+      });
+      it('includes the user class', () => {
+        expect(parsedData.classes['_tCa_gLvTEeWmS7iaRSwQeQ']).not.to.be.null;
+        expect(parsedData.classNames).to.deep.eq(['User']);
+      });
+    });
+    describe('with enums', () => {
+      describe('with values', () => {
+        var parsedData = UMLDesignerParser.parse({
+          root: getRootElement(readFileContent('./test/xmi/umldesigner_enum_test.uml')),
+          databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+        });
+
+        it('parses it', () => {
+          expect(parsedData).not.to.be.null;
+        });
+        it('adds the enums and the values', () => {
+          expect(parsedData.enums['_iYeo8CGOEeW-sfm-95cxKg']).not.to.be.null;
+          expect(parsedData.enums['_iYeo8CGOEeW-sfm-95cxKg'].name).to.eq('MyEnumeration');
+          expect(parsedData.enums['_iYeo8CGOEeW-sfm-95cxKg'].values).to.deep.eq(['VALUE_A', 'VALUE_B']);
+          expect(parsedData.enums['_jzWEcCGOEeW-sfm-95cxKg']).not.to.be.null;
+          expect(parsedData.enums['_jzWEcCGOEeW-sfm-95cxKg'].name).to.eq('MyEnumeration2');
+          expect(parsedData.enums['_jzWEcCGOEeW-sfm-95cxKg'].values).to.deep.eq(['VALUE_A']);
+        });
+      });
+      describe('without values', () => {
+        var parsedData = UMLDesignerParser.parse({
+          root: getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_value_test.uml')),
+          databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+        });
+
+        it('parses it', () => {
+          expect(parsedData).not.to.be.null;
+        });
+        it('still adds the enum', () => {
+          expect(parsedData.enums['_iYeo8CGOEeW-sfm-95cxKg']).not.to.be.null;
         });
       });
     });
   });
-
-  describe('#fillEnums', function () {
-    describe('when an enum has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
+  describe('when passing an invalid diagram', () => {
+    describe('as a class has no name', () => {
+      it('fails', () => {
         try {
-          otherParser.parse();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
-        }
-      });
-    });
-
-    describe('when an enum has no value', function () {
-      it("doesn't throw any exception", function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_value_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.parse();
-      });
-    });
-
-    describe('when an enum attribute has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_attribute_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        try {
-          otherParser.parse();
-          fail();
-        } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
-        }
-      });
-    });
-
-    describe('when an enum is well formed', function () {
-      it('is parsed', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(readFileContent('./test/xmi/umldesigner_enum_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.parse();
-        var expectedNames = ['MyEnumeration', 'MyEnumeration2'];
-        var expectedNValues = ['VALUE_A', 'VALUE_B', 'VALUE_A'];
-        var names = [];
-        var values = [];
-        Object.keys(otherParser.parsedData.enums).forEach(function (enumId) {
-          names.push(otherParser.parsedData.getEnum(enumId).name);
-          otherParser.parsedData.getEnum(enumId).values.forEach(function (value) {
-            values.push(value);
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_no_class_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
           });
-        });
-        expect(names).to.deep.equal(expectedNames);
-        expect(values).to.deep.equal(expectedNValues);
-      });
-    });
-  });
-
-  describe('#fillClassesAndFields', function () {
-    before(function () {
-      parser.fillClassesAndFields();
-    });
-
-    describe('when a class has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_no_class_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
-        try {
-          otherParser.fillClassesAndFields();
           fail();
         } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
+          expect(error.name).to.eq('NullPointerException');
         }
       });
     });
-
-    describe('when a class has a reserved word as name', function () {
-      it('fails', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_reserved_class_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
+    describe('as a field has no name', () => {
+      it('fails', () => {
         try {
-          otherParser.fillClassesAndFields();
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_no_attribute_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
           fail();
         } catch (error) {
-          expect(error.name).to.equal('IllegalNameException');
+          expect(error.name).to.eq('NullPointerException');
         }
       });
     });
-
-    describe('when a class has a reserved word as table name', function () {
-      it('fails', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_reserved_table_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
+    describe("as an enum's value as no name", () => {
+      it('fails', () => {
         try {
-          otherParser.fillClassesAndFields();
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_attribute_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
           fail();
         } catch (error) {
-          expect(error.name).to.equal('IllegalNameException');
+          expect(error.name).to.eq('NullPointerException');
         }
       });
     });
-
-    describe('when an attribute has no name', function () {
-      it('throws an exception', function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_no_attribute_name_test.uml')),
-            initDatabaseTypeHolder('sql'));
-        otherParser.findElements();
+    describe('as an enum has no name', () => {
+      it('fails', () => {
         try {
-          otherParser.fillClassesAndFields();
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_enum_no_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
           fail();
         } catch (error) {
-          expect(error.name).to.equal('NullPointerException');
+          expect(error.name).to.eq('NullPointerException');
         }
       });
     });
-
-    describe('#addClass', function () {
-      it('adds the found classes', function () {
-        expect(Object.keys(parser.parsedData.classes).length).to.equal(8);
-      });
-
-      it("adds the comment if there's any", function () {
-        var otherParser = new UMLDesignerParser(
-            getRootElement(
-                readFileContent('./test/xmi/umldesigner_comments.uml')),
-            initDatabaseTypeHolder('sql'));
-        var parsedData = otherParser.parse();
-        Object.keys(parsedData.classes).forEach(function (classData) {
-          expect(parsedData.getClass(classData).comment).not.to.be.undefined;
-          expect(parsedData.getClass(classData).comment).not.to.equal('');
-        });
+    describe('as a class name is a reserved word', () => {
+      it('fails', () => {
+        try {
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_reserved_class_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
       });
     });
-
-    describe('#addField', function () {
-      describe('#addRegularField', function () {
-        it('adds the fields', function () {
-          expect(Object.keys(parser.parsedData.fields).length).to.equal(26);
-        });
-
-        it("adds the comment if there's any", function () {
-          var otherParser = new UMLDesignerParser(
-              getRootElement(
-                  readFileContent('./test/xmi/umldesigner_comments.uml')),
-              initDatabaseTypeHolder('sql'));
-          var parsedData = otherParser.parse();
-          Object.keys(parsedData.fields).forEach(function (fieldData) {
-            expect(parsedData.getField(fieldData).comment).not.to.be.undefined;
-            expect(parsedData.getField(fieldData).comment).not.to.equal('');
+    describe('as a field name is a reserved word', function() {
+      it('fails', function() {
+        try {
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_reserved_field_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
           });
-        });
-
-        it('adds the fields to the classes', function () {
-          var count = 0;
-          Object.keys(parser.parsedData.classes).forEach(function (element) {
-            if (parser.parsedData.classes.hasOwnProperty(element)) {
-              count += parser.parsedData.getClass(element).fields.length;
-            }
-          });
-          expect(count).to.equal(Object.keys(parser.parsedData.fields).length);
-        });
-
-        describe('when trying to add a field whose name is upperFirstd', function () {
-          it('deupperFirsts and adds it', function () {
-            var otherParser = new UMLDesignerParser(
-                getRootElement(
-                    readFileContent('./test/xmi/umldesigner_capitalized_field_names.uml')),
-                initDatabaseTypeHolder('sql'));
-            var parsedData = otherParser.parse();
-            if (Object.keys(parsedData.fields).length === 0) {
-              fail();
-            }
-            Object.keys(parsedData.fields).forEach(function (fieldData) {
-              if (parsedData.fields[fieldData].name.match('^[A-Z].*')) {
-                fail();
-              }
-            });
-          });
-        });
-
-        describe('when having an invalid type in the XMI', function () {
-          it('throws an exception', function () {
-            var otherParser = new UMLDesignerParser(
-                getRootElement(
-                    readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
-                initDatabaseTypeHolder('sql'));
-            try {
-              otherParser.parse();
-              fail();
-            } catch (error) {
-              expect(error.name).to.equal('WrongTypeException');
-            }
-          });
-        });
-
-        describe(
-            'when a type was not defined in a primitiveType tag',
-            function () {
-              it('is deduced from the field element, and added', function () {
-                expect(parser.parsedData.getType('String').name).to.equal('String');
-              });
-            });
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
       });
     });
-  });
-
-  describe('#fillAssociations', function () {
-    before(function () {
-      parser.fillAssociations();
+    describe('as a table name is a reserved word', function() {
+      it('fails', function() {
+        try {
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_reserved_table_name_test.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalNameException');
+        }
+      });
     });
-
-    it('inserts the found associations', function () {
-      expect(Object.keys(parser.parsedData.associations).length).to.equal(10);
+    describe('as an invalid type is used', function() {
+      it('fails', function() {
+        try {
+          UMLDesignerParser.parse({
+            root: getRootElement(readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),
+            databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+          });
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('WrongTypeException');
+        }
+      });
     });
   });
 });
 
 // external functions
+
+function readFileContent(file) {
+  try {
+    fs.statSync(file).isFile();
+  } catch (error) {
+    throw new buildException(
+        exceptions.WrongFile,
+        `The passed file '${file}' must exist and must not be a directory.`);
+  }
+  return fs.readFileSync(file, 'utf-8');
+}
 
 function getRootElement(content) {
   var root;
@@ -361,27 +389,18 @@ function getRootElement(content) {
   return root;
 }
 
-function readFileContent(file) {
-  if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-    throw new buildException(
-        exceptions.WrongFile,
-        `The passed file '${file}' must exist and must not be a directory.`);
-  }
-  return fs.readFileSync(file, 'utf-8');
-}
-
 function initDatabaseTypeHolder(databaseTypeName) {
   switch (databaseTypeName) {
-    case 'sql':
-      return new SQLTypes();
-    case 'mongodb':
-      return new MongoDBTypes();
-    case 'cassandra':
-      return new CassandraTypes();
-    default:
-      throw new buildException(exceptions.WrongDatabaseType,
-          'The passed database type is incorrect. '
-          + "It must either be 'sql', 'mongodb', or 'cassandra'."
-          + `Got '${databaseTypeName}'.`);
+  case DatabaseTypes.sql:
+    return new SQLTypes();
+  case DatabaseTypes.mongodb:
+    return new MongoDBTypes();
+  case DatabaseTypes.cassandra:
+    return new CassandraTypes();
+  default:
+    throw new buildException(exceptions.WrongDatabaseType,
+        'The passed database type is incorrect. '
+        + "It must either be 'sql', 'mongodb', or 'cassandra'. "
+        + `Got '${databaseTypeName}'.`);
   }
 }

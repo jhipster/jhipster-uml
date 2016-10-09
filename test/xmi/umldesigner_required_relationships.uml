@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_P4KOwI1bEeajyYpMNWXISA" name="NewModel">
+  <packagedElement xmi:type="uml:Class" xmi:id="_WFkzQI1bEeajyYpMNWXISA" name="Class1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WgP9EI1bEeajyYpMNWXISA" name="Class2"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WsK5MI1bEeajyYpMNWXISA" name="Class3"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_W6xV4I1bEeajyYpMNWXISA" name="Class4"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Yda0YI1bEeajyYpMNWXISA" name="Class5"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Y3C1UI1bEeajyYpMNWXISA" name="Class6"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZRRTMI1bEeajyYpMNWXISA" name="Class7"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aB2bkI1bEeajyYpMNWXISA" name="Class8"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bAlUsI1bEeajyYpMNWXISA" memberEnd="_bAlUsY1bEeajyYpMNWXISA _bAlUtI1bEeajyYpMNWXISA" navigableOwnedEnd="_bAlUtI1bEeajyYpMNWXISA">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_bAlUsY1bEeajyYpMNWXISA" name="class1s" type="_WFkzQI1bEeajyYpMNWXISA" association="_bAlUsI1bEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bAlUso1bEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bAlUs41bEeajyYpMNWXISA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_bAlUtI1bEeajyYpMNWXISA" name="class2s" type="_WgP9EI1bEeajyYpMNWXISA" aggregation="composite" association="_bAlUsI1bEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bAlUtY1bEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bAlUto1bEeajyYpMNWXISA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qcS_UI1cEeajyYpMNWXISA" name="class3sToClass4s" memberEnd="_qcS_UY1cEeajyYpMNWXISA _qcS_VI1cEeajyYpMNWXISA" navigableOwnedEnd="_qcS_VI1cEeajyYpMNWXISA">
+    <ownedEnd xmi:id="_qcS_UY1cEeajyYpMNWXISA" name="class3s" type="_WsK5MI1bEeajyYpMNWXISA" association="_qcS_UI1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qcS_Uo1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qcS_U41cEeajyYpMNWXISA" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_qcS_VI1cEeajyYpMNWXISA" name="class4s" type="_W6xV4I1bEeajyYpMNWXISA" aggregation="shared" association="_qcS_UI1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qcS_VY1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qcS_Vo1cEeajyYpMNWXISA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_rdHjII1cEeajyYpMNWXISA" name="class7sToClass8s" memberEnd="_rdHjIY1cEeajyYpMNWXISA _rdHjJI1cEeajyYpMNWXISA" navigableOwnedEnd="_rdHjJI1cEeajyYpMNWXISA">
+    <ownedEnd xmi:id="_rdHjIY1cEeajyYpMNWXISA" name="class7s" type="_ZRRTMI1bEeajyYpMNWXISA" association="_rdHjII1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rdHjIo1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rdHjI41cEeajyYpMNWXISA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_rdHjJI1cEeajyYpMNWXISA" name="class8s" type="_aB2bkI1bEeajyYpMNWXISA" aggregation="shared" association="_rdHjII1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rdHjJY1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rdHjJo1cEeajyYpMNWXISA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_r-M28I1cEeajyYpMNWXISA" name="class5sToClass6s" memberEnd="_r-M28Y1cEeajyYpMNWXISA _r-M29I1cEeajyYpMNWXISA" navigableOwnedEnd="_r-M29I1cEeajyYpMNWXISA">
+    <ownedEnd xmi:id="_r-M28Y1cEeajyYpMNWXISA" name="class5s" type="_Yda0YI1bEeajyYpMNWXISA" association="_r-M28I1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_r-M28o1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_r-M2841cEeajyYpMNWXISA" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_r-M29I1cEeajyYpMNWXISA" name="class6s" type="_Y3C1UI1bEeajyYpMNWXISA" aggregation="shared" association="_r-M28I1cEeajyYpMNWXISA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_r-M29Y1cEeajyYpMNWXISA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_r-M29o1cEeajyYpMNWXISA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
