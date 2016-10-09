@@ -12,5 +12,5 @@ Moreover, we can convert your XMI file to a JDL one, so that you can use it with
 
 For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
 
-**Pretty important note**: v2.0.0 (the next release) will **only** support JHipster v3.0+. The versions before v2.0.0 will still support anterior versions of JHipster.
+**Pretty important note**: v2.0.0 only supports JHipster v3.0+. The versions before v2.0.0 still support anterior versions of JHipster.
 **Thank you**.
