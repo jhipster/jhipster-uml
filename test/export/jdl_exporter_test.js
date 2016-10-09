@@ -6,10 +6,10 @@ const expect = require('chai').expect,
     toJDL = require('../../lib/export/jdl_exporter').toJDL,
     toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
 
-describe('JDLExporter', function () {
-  describe('::toJDL', function () {
-    describe('when passing nil parsed data', function () {
-      it('fails', function () {
+describe('JDLExporter', () => {
+  describe('::toJDL', () => {
+    describe('when passing nil parsed data', () => {
+      it('fails', () => {
         try {
           toJDL();
           fail();
@@ -18,14 +18,15 @@ describe('JDLExporter', function () {
         }
       });
     });
-    describe('when passing a valid parsed data', function () {
-      describe('with no option', function () {
-        it('creates the corresponding JDL', function () {
-          var parser = ParserFactory.createParser({
+    describe('when passing a valid parsed data', () => {
+      describe('with no option', () => {
+        it('creates the corresponding JDL', () => {
+          var parserData = ParserFactory.createParser({
             file: './test/xmi/modelio.xmi',
             databaseType: 'sql'
           });
-          var parsedData = parser.parse();
+          var parser = parserData.parser;
+          var parsedData = parser.parse(parserData.data);
           var jdl = toJDL(parsedData);
           expect(jdl.toString()).to.eq(
               `entity JobHistory (job_history) {
@@ -95,13 +96,14 @@ relationship ManyToMany {
 `);
         });
       });
-      describe('with options', function () {
-        it('adds them', function () {
-          var parser = ParserFactory.createParser({
+      describe('with options', () => {
+        it('adds them', () => {
+          var parserData = ParserFactory.createParser({
             file: './test/xmi/modelio.xmi',
             databaseType: 'sql'
           });
-          var parsedData = parser.parse();
+          var parser = parserData.parser;
+          var parsedData = parser.parse(parserData.data);
           var jdl = toJDL(parsedData, {
             listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
             listPagination: {Employee: 'pager', Job: 'pager'},
@@ -121,13 +123,14 @@ relationship ManyToMany {
       });
     });
   });
-  describe('::toJDLString', function() {
+  describe('::toJDLString', () => {
     it('is a stringified version of ::toJDL', function() {
-      var parser = ParserFactory.createParser({
+      var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio.xmi',
         databaseType: 'sql'
       });
-      var parsedData = parser.parse();
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
       var jdlString = toJDLString(parsedData, {
         listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
         listPagination: {Employee: 'pager', Job: 'pager'},

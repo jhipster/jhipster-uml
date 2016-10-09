@@ -6,89 +6,89 @@ const expect = require('chai').expect,
     ParserFactory = require('../lib/editors/parser_factory'),
     MongoDBTypes = require('../lib/types/mongodb_types');
 
-var parser = ParserFactory.createParser({
-  file: './test/xmi/modelio.xmi',
-  databaseType: 'sql'
-});
-var parsedData = parser.parse();
-var generatedEntities = createEntities({
-  parsedData: parsedData,
-  databaseTypes: parser.databaseTypes
-});
-
-describe('EntitiesCreator', function () {
-  describe('#createEntities', function () {
-    describe('when passing invalid args', function () {
-      describe('because there is no argument', function () {
-        it('fails', function () {
+describe('EntitiesCreator', () => {
+  describe('#createEntities', () => {
+    describe('when passing invalid args', () => {
+      describe('because there is no argument', () => {
+        it('fails', () => {
           try {
             createEntities();
+            fail();
           } catch (error) {
             expect(error.name).to.eq('NullPointerException');
           }
         });
       });
-      describe('because there are empty args', function () {
-        it('fails', function () {
+      describe('because there are empty args', () => {
+        it('fails', () => {
           try {
             createEntities({});
+            fail();
           } catch (error) {
             expect(error.name).to.eq('NullPointerException');
           }
         });
       });
-      describe('because there is no parsed data', function () {
-        it('fails', function () {
+      describe('because there is no parsed data', () => {
+        it('fails', () => {
           try {
             createEntities({databaseTypes: 'NotNull'});
+            fail();
           } catch (error) {
             expect(error.name).to.eq('NullPointerException');
           }
         });
       });
-      describe('because there are no database types', function () {
-        it('fails', function () {
+      describe('because there are no database types', () => {
+        it('fails', () => {
           try {
             createEntities({parsedData: 'NotNull'});
+            fail();
           } catch (error) {
             expect(error.name).to.eq('NullPointerException');
           }
         });
       });
-      describe('because the user has relationships with a NoSQL database type', function () {
-        it('fails', function () {
-          var parser = ParserFactory.createParser({
-            file: './test/xmi/modelio.xmi',
-            databaseType: 'sql'
-          });
+      describe('because the user has relationships with a NoSQL database type', () => {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio.xmi',
+          databaseType: 'sql'
+        });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
+
+        it('fails', () => {
           try {
             createEntities({
-              parsedData: parser.parse(),
+              parsedData: parsedData,
               databaseTypes: new MongoDBTypes()
             });
+            fail();
           } catch (error) {
             expect(error.name).to.eq('NoSQLModelingException');
           }
         });
       });
     });
-    describe('when passing valid args', function () {
-      var parser = ParserFactory.createParser({
+    describe('when passing valid args', () => {
+      var parserData = ParserFactory.createParser({
         file: './test/xmi/modelio.xmi',
         databaseType: 'sql'
       });
-      var parsedData = parser.parse();
+      var parser = parserData.parser;
+      var parsedData = parser.parse(parserData.data);
       var entities = null;
-      it('works', function () {
+
+      it('works', () => {
         entities = createEntities({
           parsedData: parsedData,
-          databaseTypes: parser.databaseTypes
+          databaseTypes: parserData.data.databaseTypes
         });
         expect(entities == null).to.be.false;
         expect(Object.keys(entities).length).to.eq(8);
       });
-      describe('with fields and relationships', function () {
-        it('sets them', function () {
+      describe('with fields and relationships', () => {
+        it('sets them', () => {
           var expectedRegion = {
             fields: [
               {
@@ -380,8 +380,8 @@ describe('EntitiesCreator', function () {
           }
         });
       });
-      describe('with no option and no microservice', function () {
-        it('initializes entities with default values', function () {
+      describe('with no option and no microservice', () => {
+        it('initializes entities with default values', () => {
           for (let entity in entities) {
             if (entities.hasOwnProperty(entity)) {
               expect(entities[entity].hasOwnProperty('fields')).to.be.true;
@@ -395,8 +395,8 @@ describe('EntitiesCreator', function () {
           }
         });
       });
-      describe('with microservice and search engine', function () {
-        it('adds the options in the JSON', function () {
+      describe('with microservice and search engine', () => {
+        it('adds the options in the JSON', () => {
           var microserviceNames = {};
           var searchEngines = {};
           for (let clazz in parsedData.classes) {
@@ -407,7 +407,7 @@ describe('EntitiesCreator', function () {
           }
           entities = createEntities({
             parsedData: parsedData,
-            databaseTypes: parser.databaseTypes,
+            databaseTypes: parserData.data.databaseTypes,
             microserviceNames: microserviceNames,
             searchEngines: searchEngines
           });
@@ -419,8 +419,8 @@ describe('EntitiesCreator', function () {
           }
         });
       });
-      describe('with options', function () {
-        it('adds them', function () {
+      describe('with options', () => {
+        it('adds them', () => {
           var listDTO = {};
           var listPagination = {};
           var listService = {};
@@ -433,7 +433,7 @@ describe('EntitiesCreator', function () {
           }
           entities = createEntities({
             parsedData: parsedData,
-            databaseTypes: parser.databaseTypes,
+            databaseTypes: parserData.data.databaseTypes,
             listDTO: listDTO,
             listPagination: listPagination,
             listService: listService
