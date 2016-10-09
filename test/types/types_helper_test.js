@@ -6,23 +6,23 @@ var expect = require('chai').expect,
     MongoDBTypes = require('../../lib/types/mongodb_types'),
     CassandraTypes = require('../../lib/types/cassandra_types');
 
-describe('TypesHelper', function() {
-  describe('#isNoSQL', function() {
-    describe('when passing a SQL type', function() {
-      describe('such as SQLTypes', function() {
-        it('returns false', function() {
+describe('TypesHelper', () => {
+  describe('#isNoSQL', () => {
+    describe('when passing a SQL type', () => {
+      describe('such as SQLTypes', () => {
+        it('returns false', () => {
           expect(TypesHelper.isNoSQL(SQLTypes));
         });
       });
     });
-    describe('when passing a NoSQL type', function() {
-      describe('such as MongoDBTypes', function() {
-        it('returns true', function() {
+    describe('when passing a NoSQL type', () => {
+      describe('such as MongoDBTypes', () => {
+        it('returns true', () => {
           expect(TypesHelper.isNoSQL(MongoDBTypes));
         });
       });
-      describe('such as CassandraTypes', function() {
-        it('returns true', function() {
+      describe('such as CassandraTypes', () => {
+        it('returns true', () => {
           expect(TypesHelper.isNoSQL(CassandraTypes));
         });
       });

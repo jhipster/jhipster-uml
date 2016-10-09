@@ -3,31 +3,31 @@
 var expect = require('chai').expect,
     getClassNames = require('../../lib/helpers/class_helper').getClassNames;
 
-describe('#getClassNames', function() {
-  describe('when passing a valid classes object', function() {
+describe('#getClassNames', () => {
+  describe('when passing a valid classes object', () => {
     var classDataHolder = {};
-    before(function() {
+    before(() => {
       classDataHolder[0] = { name: 'a' };
       classDataHolder[1] = { name: 'b' };
       classDataHolder[2] = { name: 'c' };
       classDataHolder[3] = { name: 'd' };
     });
 
-    it("returns the classes' names", function() {
-      var classNames = getClassNames(classDataHolder);
-      expect(classNames).to.deep.equal({0: 'a', 1: 'b', 2: 'c', 3: 'd'});
+    it("returns the classes' names", () => {
+      expect(getClassNames(classDataHolder)).to.deep.equal({0: 'a', 1: 'b', 2: 'c', 3: 'd'});
     });
   });
 
-  describe('when passing an invalid classes object', function() {
-    describe('such as an empty object', function() {
-      it('returns an empty object', function() {
-        var classNames = getClassNames({});
+  describe('when passing an invalid classes object', () => {
+    describe('such as an empty object', () => {
+      var classNames = getClassNames({});
+
+      it('returns an empty object', () => {
         expect(classNames).to.deep.equal({});
       });
     });
-    describe('such as a null object', function() {
-      it('throws an error', function() {
+    describe('such as a null object', () => {
+      it('throws an error', () => {
         try {
           getClassNames(null);
         } catch (error) {

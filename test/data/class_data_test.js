@@ -4,13 +4,13 @@ const expect = require('chai').expect,
     fail = expect.fail,
     ClassData = require('../../lib/data/class_data');
 
-describe('ClassData', function () {
-  describe('#new', function () {
-    describe('when not passing any argument', function () {
-      it('does not fail', function () {
+describe('ClassData', () => {
+  describe('#new', () => {
+    describe('when not passing any argument', () => {
+      it('does not fail', () => {
         new ClassData();
       });
-      it('sets the default values instead', function () {
+      it('sets the default values instead', () => {
         var data = new ClassData();
         expect(data.name).to.eq('');
         expect(data.comment).to.eq('');
@@ -21,17 +21,18 @@ describe('ClassData', function () {
         expect(data.tableName).to.eq('');
       });
     });
-    describe('when passing arguments', function () {
-      it('sets them', function () {
-        var data = new ClassData({
-          name: 'Abc',
-          comment: '42',
-          dto: 'yes',
-          pagination: 'always',
-          service: 'never',
-          fields: [1, 2],
-          tableName: 'something'
-        });
+    describe('when passing arguments', () => {
+      var data = new ClassData({
+        name: 'Abc',
+        comment: '42',
+        dto: 'yes',
+        pagination: 'always',
+        service: 'never',
+        fields: [1, 2],
+        tableName: 'something'
+      });
+
+      it('sets them', () => {
         expect(data.name).to.eq('Abc');
         expect(data.comment).to.eq('42');
         expect(data.dto).to.eq('yes');
@@ -41,9 +42,9 @@ describe('ClassData', function () {
         expect(data.tableName).to.eq('something');
       });
     });
-    describe('when passing a reserved word', function() {
-      describe('as class name', function() {
-        it('fails', function() {
+    describe('when passing a reserved word', () => {
+      describe('as class name', () => {
+        it('fails', () => {
           try {
             new ClassData({
               name: 'Class',
@@ -55,8 +56,8 @@ describe('ClassData', function () {
           }
         });
       });
-      describe('as a table name', function() {
-        it("doesn't fail", function() { // a warning is shown
+      describe('as a table name', () => {
+        it("doesn't fail", () => { // a warning is shown
           new ClassData({
             name: 'MyClass',
             tableName: 'ANALYZE'

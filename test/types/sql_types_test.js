@@ -6,13 +6,13 @@ var expect = require('chai').expect,
 
 var sqlTypes;
 
-describe('SQLTypes', function() {
-  before(function() {
+describe('SQLTypes', () => {
+  before(() => {
     sqlTypes = new SQLTypes();
   });
 
-  describe('#getTypes', function() {
-    it('only returns the supported type list', function() {
+  describe('#getTypes', () => {
+    it('only returns the supported type list', () => {
       var types = sqlTypes.getTypes();
       expect(types).to.deep.have.members(
         [
@@ -35,9 +35,9 @@ describe('SQLTypes', function() {
     });
   });
 
-  describe('#getValidationsForType', function() {
-    describe('when passing a valid type', function() {
-      it('returns only the validation list for it', function() {
+  describe('#getValidationsForType', () => {
+    describe('when passing a valid type', () => {
+      it('returns only the validation list for it', () => {
         var validations = sqlTypes.getValidationsForType('String');
         expect(validations).to.deep.have.members(
           [
@@ -50,9 +50,9 @@ describe('SQLTypes', function() {
       });
     });
 
-    describe('when passing an invalid type', function() {
-      describe('because it is null', function() {
-        it('throws an exception', function() {
+    describe('when passing an invalid type', () => {
+      describe('because it is null', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.getValidationsForType(null);
             fail();
@@ -62,8 +62,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because it is blank', function() {
-        it('throws an exception', function() {
+      describe('because it is blank', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.getValidationsForType('');
             fail();
@@ -73,8 +73,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because it does not exist', function() {
-        it('throws an exception', function() {
+      describe('because it does not exist', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.getValidationsForType('NoTypeAtAll');
             fail();
@@ -86,113 +86,111 @@ describe('SQLTypes', function() {
     });
   });
 
-  describe('#toValueNameObjectArray', function() {
-    it(
-      'correctly transposes the type list into a name/value object array',
-      function() {
-        expect(sqlTypes.toValueNameObjectArray()).to.deep.have.members(
-          [
-            {
-              value: 'String',
-              name: 'String'
-            },
-            {
-              value: 'Integer',
-              name: 'Integer'
-            },
-            {
-              value: 'Long',
-              name: 'Long'
-            },
-            {
-              value: 'BigDecimal',
-              name: 'BigDecimal'
-            },
-            {
-              value: 'LocalDate',
-              name: 'LocalDate'
-            },
-            {
-              value: 'ZonedDateTime',
-              name: 'ZonedDateTime'
-            },
-            {
-              value: 'Boolean',
-              name: 'Boolean'
-            },
-            {
-              value: 'Enum',
-              name: 'Enum'
-            },
-            {
-              value: 'Blob',
-              name: 'Blob'
-            },
-            {
-              value: 'AnyBlob',
-              name: 'AnyBlob'
-            },
-            {
-              value: 'ImageBlob',
-              name: 'ImageBlob'
-            },
-            {
-              value: 'TextBlob',
-              name: 'TextBlob'
-            },
-            {
-              value: 'Float',
-              name: 'Float'
-            },
-            {
-              value: 'Double',
-              name: 'Double'
-            }
-          ]
-        );
+  describe('#toValueNameObjectArray', () => {
+    it('correctly transposes the type list into a name/value object array', () => {
+      expect(sqlTypes.toValueNameObjectArray()).to.deep.have.members(
+        [
+          {
+            value: 'String',
+            name: 'String'
+          },
+          {
+            value: 'Integer',
+            name: 'Integer'
+          },
+          {
+            value: 'Long',
+            name: 'Long'
+          },
+          {
+            value: 'BigDecimal',
+            name: 'BigDecimal'
+          },
+          {
+            value: 'LocalDate',
+            name: 'LocalDate'
+          },
+          {
+            value: 'ZonedDateTime',
+            name: 'ZonedDateTime'
+          },
+          {
+            value: 'Boolean',
+            name: 'Boolean'
+          },
+          {
+            value: 'Enum',
+            name: 'Enum'
+          },
+          {
+            value: 'Blob',
+            name: 'Blob'
+          },
+          {
+            value: 'AnyBlob',
+            name: 'AnyBlob'
+          },
+          {
+            value: 'ImageBlob',
+            name: 'ImageBlob'
+          },
+          {
+            value: 'TextBlob',
+            name: 'TextBlob'
+          },
+          {
+            value: 'Float',
+            name: 'Float'
+          },
+          {
+            value: 'Double',
+            name: 'Double'
+          }
+        ]
+      );
     });
   });
 
-  describe('#contains', function() {
-    describe('when passing a contained type', function() {
-      it('returns true', function() {
+  describe('#contains', () => {
+    describe('when passing a contained type', () => {
+      it('returns true', () => {
         expect(sqlTypes.contains('String')).to.be.true;
       });
     });
 
-    describe('when passing a not contained type', function() {
-      describe('that is null', function() {
-        it('returns false', function() {
+    describe('when passing a not contained type', () => {
+      describe('that is null', () => {
+        it('returns false', () => {
           expect(sqlTypes.contains(null)).to.be.false;
         });
       });
 
-      describe('that is blank', function() {
-        it('returns false', function() {
+      describe('that is blank', () => {
+        it('returns false', () => {
           expect(sqlTypes.contains('')).to.be.false;
         });
       });
 
-      describe('that has a valid name, but is not contained', function() {
-        it('returns false', function() {
+      describe('that has a valid name, but is not contained', () => {
+        it('returns false', () => {
           expect(sqlTypes.contains('NoTypeAtAll')).to.be.false;
         });
       });
     });
   });
 
-  describe('#isValidationSupportedForType', function() {
-    describe('when the passed types and validation exist', function() {
-      it('returns true', function() {
+  describe('#isValidationSupportedForType', () => {
+    describe('when the passed types and validation exist', () => {
+      it('returns true', () => {
         expect(
           sqlTypes.isValidationSupportedForType('String', 'required')
         ).to.be.true;
       });
     });
 
-    describe('when the passed type is invalid', function() {
-      describe('because it is null', function() {
-        it('throws an exception', function() {
+    describe('when the passed type is invalid', () => {
+      describe('because it is null', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType(null, 'required');
             fail();
@@ -202,8 +200,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because it is blank', function() {
-        it('throws an exception', function() {
+      describe('because it is blank', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType('', 'required');
             fail();
@@ -213,8 +211,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because it does not exist', function() {
-        it('throws an exception', function() {
+      describe('because it does not exist', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'required');
             fail();
@@ -225,35 +223,35 @@ describe('SQLTypes', function() {
       });
     });
 
-    describe('when the passed validation is invalid', function() {
-      describe('because it is null', function() {
-        it('returns false', function() {
+    describe('when the passed validation is invalid', () => {
+      describe('because it is null', () => {
+        it('returns false', () => {
           expect(
             sqlTypes.isValidationSupportedForType('String', null)
-          ).to.be.false
+          ).to.be.false;
         });
       });
 
-      describe('because it is blank', function() {
-        it('returns false', function() {
+      describe('because it is blank', () => {
+        it('returns false', () => {
           expect(
             sqlTypes.isValidationSupportedForType('String', '')
-          ).to.be.false
+          ).to.be.false;
         });
       });
 
-      describe('because it does not exist', function() {
-        it('returns false', function() {
+      describe('because it does not exist', () => {
+        it('returns false', () => {
           expect(
             sqlTypes.isValidationSupportedForType('String', 'NoValidationAtAll')
-          ).to.be.false
+          ).to.be.false;
         });
       });
     });
 
-    describe('when both the passed type and validation are invalid', function() {
-      describe('because they are null', function() {
-        it('throws an exception', function() {
+    describe('when both the passed type and validation are invalid', () => {
+      describe('because they are null', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType(null, null);
             fail();
@@ -263,8 +261,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because they are blank', function() {
-        it('throws an exception', function() {
+      describe('because they are blank', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType('', '');
             fail();
@@ -274,8 +272,8 @@ describe('SQLTypes', function() {
         });
       });
 
-      describe('because they do not exist', function() {
-        it('throws an exception', function() {
+      describe('because they do not exist', () => {
+        it('throws an exception', () => {
           try {
             sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'NoValidation');
             fail();

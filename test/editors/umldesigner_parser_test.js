@@ -317,8 +317,8 @@ This <b>sucks</b>.`
         }
       });
     });
-    describe('as a field name is a reserved word', function() {
-      it('fails', function() {
+    describe('as a field name is a reserved word', () => {
+      it('fails', () => {
         try {
           UMLDesignerParser.parse({
             root: getRootElement(readFileContent('./test/xmi/umldesigner_reserved_field_name_test.uml')),
@@ -330,8 +330,8 @@ This <b>sucks</b>.`
         }
       });
     });
-    describe('as a table name is a reserved word', function() {
-      it('fails', function() {
+    describe('as a table name is a reserved word', () => {
+      it('fails', () => {
         try {
           UMLDesignerParser.parse({
             root: getRootElement(readFileContent('./test/xmi/umldesigner_reserved_table_name_test.uml')),
@@ -343,8 +343,8 @@ This <b>sucks</b>.`
         }
       });
     });
-    describe('as an invalid type is used', function() {
-      it('fails', function() {
+    describe('as an invalid type is used', () => {
+      it('fails', () => {
         try {
           UMLDesignerParser.parse({
             root: getRootElement(readFileContent('./test/xmi/umldesigner_wrong_typename.uml')),

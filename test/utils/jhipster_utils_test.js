@@ -6,16 +6,16 @@ const expect = require('chai').expect,
     checkForReservedTableName = require('../../lib/utils/jhipster_utils').checkForReservedTableName,
     checkForReservedFieldName = require('../../lib/utils/jhipster_utils').checkForReservedFieldName;
 
-describe('JHipsterUtils', function () {
-  describe('::checkForReservedClassName', function () {
-    describe('when passing no arg', function () {
-      it("doesn't fail", function () {
+describe('JHipsterUtils', () => {
+  describe('::checkForReservedClassName', () => {
+    describe('when passing no arg', () => {
+      it("doesn't fail", () => {
         checkForReservedClassName();
       });
     });
-    describe('when passing valid args', function() {
-      describe('with a valid class name', function() {
-        it("doesn't fail", function() {
+    describe('when passing valid args', () => {
+      describe('with a valid class name', () => {
+        it("doesn't fail", () => {
           checkForReservedClassName({
             name: 'Job',
             databaseTypeName: 'sql',
@@ -23,9 +23,9 @@ describe('JHipsterUtils', function () {
           });
         });
       });
-      describe('with an invalid class name', function() {
-        describe('with the shouldThrow flag to true', function() {
-          it('fails', function() {
+      describe('with an invalid class name', () => {
+        describe('with the shouldThrow flag to true', () => {
+          it('fails', () => {
             try {
               checkForReservedClassName({
                 name: 'Class',
@@ -38,8 +38,8 @@ describe('JHipsterUtils', function () {
             }
           });
         });
-        describe('with the shouldThrow flag to false', function() {
-          it("doesn't fail", function() {
+        describe('with the shouldThrow flag to false', () => {
+          it("doesn't fail", () => {
             checkForReservedClassName({
               name: 'Class',
               databaseTypeName: 'sql',
@@ -50,15 +50,15 @@ describe('JHipsterUtils', function () {
       });
     });
   });
-  describe('::checkForReservedTableName', function () {
-    describe('when passing no arg', function () {
-      it("doesn't fail", function () {
+  describe('::checkForReservedTableName', () => {
+    describe('when passing no arg', () => {
+      it("doesn't fail", () => {
         checkForReservedTableName();
       });
     });
-    describe('when passing valid args', function() {
-      describe('with a valid class name', function() {
-        it("doesn't fail", function() {
+    describe('when passing valid args', () => {
+      describe('with a valid class name', () => {
+        it("doesn't fail", () => {
           checkForReservedTableName({
             name: 'Job',
             databaseTypeName: 'sql',
@@ -66,9 +66,9 @@ describe('JHipsterUtils', function () {
           });
         });
       });
-      describe('with an invalid class name', function() {
-        describe('with the shouldThrow flag to true', function() {
-          it('fails', function() {
+      describe('with an invalid class name', () => {
+        describe('with the shouldThrow flag to true', () => {
+          it('fails', () => {
             try {
               checkForReservedTableName({
                 name: 'ANALYZE',
@@ -81,8 +81,8 @@ describe('JHipsterUtils', function () {
             }
           });
         });
-        describe('with the shouldThrow flag to false', function() {
-          it("doesn't fail", function() {
+        describe('with the shouldThrow flag to false', () => {
+          it("doesn't fail", () => {
             checkForReservedTableName({
               name: 'ANALYZE',
               databaseTypeName: 'sql',
@@ -93,15 +93,15 @@ describe('JHipsterUtils', function () {
       });
     });
   });
-  describe('::checkForReservedFieldName', function () {
-    describe('when passing no arg', function () {
-      it("doesn't fail", function () {
+  describe('::checkForReservedFieldName', () => {
+    describe('when passing no arg', () => {
+      it("doesn't fail", () => {
         checkForReservedFieldName();
       });
     });
-    describe('when passing valid args', function() {
-      describe('with a valid class name', function() {
-        it("doesn't fail", function() {
+    describe('when passing valid args', () => {
+      describe('with a valid class name', () => {
+        it("doesn't fail", () => {
           checkForReservedFieldName({
             name: 'name',
             databaseTypeName: 'sql',
@@ -109,9 +109,9 @@ describe('JHipsterUtils', function () {
           });
         });
       });
-      describe('with an invalid class name', function() {
-        describe('with the shouldThrow flag to true', function() {
-          it('fails', function() {
+      describe('with an invalid class name', () => {
+        describe('with the shouldThrow flag to true', () => {
+          it('fails', () => {
             try {
               checkForReservedFieldName({
                 name: 'continue',
@@ -124,8 +124,8 @@ describe('JHipsterUtils', function () {
             }
           });
         });
-        describe('with the shouldThrow flag to false', function() {
-          it("doesn't fail", function() {
+        describe('with the shouldThrow flag to false', () => {
+          it("doesn't fail", () => {
             checkForReservedFieldName({
               name: 'continue',
               databaseTypeName: 'sql',

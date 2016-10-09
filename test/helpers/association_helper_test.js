@@ -4,19 +4,19 @@ var expect = require('chai').expect,
     cardinalities = require('../../lib/cardinalities'),
     checkValidityOfAssociation = require('../../lib/helpers/association_helper').checkValidityOfAssociation;
 
-describe('#checkValidityOfAssociation', function () {
-  describe('when passing a valid association', function () {
-    describe('as it is a One-to-One association', function () {
-      describe('that does possess a source end', function () {
-        it("doesn't throw any exception", function () {
+describe('#checkValidityOfAssociation', () => {
+  describe('when passing a valid association', () => {
+    describe('as it is a One-to-One association', () => {
+      describe('that does possess a source end', () => {
+        it("doesn't throw any exception", () => {
           checkValidityOfAssociation({
             type: cardinalities.ONE_TO_ONE,
             injectedFieldInFrom: 'notnull'
           });
         });
       });
-      describe("that doesn't possess a source end", function () {
-        it('throws an exception', function () {
+      describe("that doesn't possess a source end", () => {
+        it('throws an exception', () => {
           try {
             checkValidityOfAssociation({type: cardinalities.ONE_TO_ONE});
           } catch (error) {
@@ -26,15 +26,15 @@ describe('#checkValidityOfAssociation', function () {
       });
     });
 
-    describe('as it is a One-to-Many association', function () {
-      it('is valid by default', function () {
+    describe('as it is a One-to-Many association', () => {
+      it('is valid by default', () => {
         // do nothing
       });
     });
 
-    describe('as it is a Many-to-One association', function () {
-      describe('that only have a source or an destination end', function () {
-        it('does not throw', function () {
+    describe('as it is a Many-to-One association', () => {
+      describe('that only have a source or an destination end', () => {
+        it('does not throw', () => {
           checkValidityOfAssociation({
             type: cardinalities.MANY_TO_ONE,
             injectedFieldInTo: 'NOTNULL'
@@ -45,8 +45,8 @@ describe('#checkValidityOfAssociation', function () {
           });
         });
       });
-      describe('that have both source and destination ends', function () {
-        it('throws an exception', function () {
+      describe('that have both source and destination ends', () => {
+        it('throws an exception', () => {
           try {
             checkValidityOfAssociation({
               type: cardinalities.MANY_TO_ONE,
@@ -60,9 +60,9 @@ describe('#checkValidityOfAssociation', function () {
       });
     });
 
-    describe('as it is a Many-to-Many association', function () {
-      describe('that have both source and destination ends', function () {
-        it('does not throw', function () {
+    describe('as it is a Many-to-Many association', () => {
+      describe('that have both source and destination ends', () => {
+        it('does not throw', () => {
           checkValidityOfAssociation({
             type: cardinalities.MANY_TO_MANY,
             injectedFieldInFrom: 'NOTNULL',
@@ -71,8 +71,8 @@ describe('#checkValidityOfAssociation', function () {
         });
       });
 
-      describe('that only have a source or an destination end', function () {
-        it('throws an exception', function () {
+      describe('that only have a source or an destination end', () => {
+        it('throws an exception', () => {
           try {
             checkValidityOfAssociation({
               type: cardinalities.MANY_TO_MANY,
@@ -93,9 +93,9 @@ describe('#checkValidityOfAssociation', function () {
       });
     });
   });
-  describe('when passing an invalid association', function () {
-    describe('as it is nil', function () {
-      it('throws an exception', function () {
+  describe('when passing an invalid association', () => {
+    describe('as it is nil', () => {
+      it('throws an exception', () => {
         try {
           checkValidityOfAssociation(null);
         } catch (error) {
@@ -103,8 +103,8 @@ describe('#checkValidityOfAssociation', function () {
         }
       });
     });
-    describe('as its type is nil', function () {
-      it('throws an exception', function () {
+    describe('as its type is nil', () => {
+      it('throws an exception', () => {
         try {
           checkValidityOfAssociation({});
         } catch (error) {
@@ -112,8 +112,8 @@ describe('#checkValidityOfAssociation', function () {
         }
       });
     });
-    describe('as it is not a One-to-One, a One-to-Many, a Many-to-One or a Many-to-Many', function () {
-      it('throws an exception', function () {
+    describe('as it is not a One-to-One, a One-to-Many, a Many-to-One or a Many-to-Many', () => {
+      it('throws an exception', () => {
         try {
           checkValidityOfAssociation({type: 'UNSUPPORTED'});
         } catch (error) {

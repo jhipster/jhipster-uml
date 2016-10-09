@@ -3,13 +3,13 @@
 const expect = require('chai').expect,
     AssociationData = require('../../lib/data/association_data');
 
-describe('AssociationData', function () {
-  describe('#new', function () {
-    describe('when not passing any argument', function () {
-      it('does not fail', function () {
+describe('AssociationData', () => {
+  describe('#new', () => {
+    describe('when not passing any argument', () => {
+      it('does not fail', () => {
         new AssociationData();
       });
-      it('sets the default values instead', function () {
+      it('sets the default values instead', () => {
         var data = new AssociationData();
         expect(data.from).to.eq(null);
         expect(data.to).to.eq(null);
@@ -20,17 +20,17 @@ describe('AssociationData', function () {
         expect(data.type).to.eq('');
       });
     });
-    describe('when passing arguments', function () {
-      it('sets them', function () {
-        var data = new AssociationData({
-          from: '1',
-          to: '2',
-          injectedFieldInFrom: '3',
-          injectedFieldInTo: '4',
-          commentInTo: '5',
-          commentInFrom: '6',
-          type: '7'
-        });
+    describe('when passing arguments', () => {
+      var data = new AssociationData({
+        from: '1',
+        to: '2',
+        injectedFieldInFrom: '3',
+        injectedFieldInTo: '4',
+        commentInTo: '5',
+        commentInFrom: '6',
+        type: '7'
+      });
+      it('sets them', () => {
         expect(data.from).to.eq('1');
         expect(data.to).to.eq('2');
         expect(data.injectedFieldInFrom).to.eq('3');

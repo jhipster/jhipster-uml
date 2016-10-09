@@ -5,8 +5,8 @@ const expect = require('chai').expect,
     merge = require('../../lib/utils/object_utils').merge,
     values = require('../../lib/utils/object_utils').values;
 
-describe('ObjectUtils', function () {
-  describe('::merge', function () {
+describe('ObjectUtils', () => {
+  describe('::merge', () => {
     var object1 = {
       a: 1,
       b: 2
@@ -17,24 +17,26 @@ describe('ObjectUtils', function () {
       c: 4
     };
 
-    describe('when merging two object', function () {
-      describe('with the first being nil or empty', function () {
-        it('returns the second', function () {
-          var merged1 = merge(null, {a: 1});
-          var merged2 = merge({}, {a: 1});
+    describe('when merging two object', () => {
+      describe('with the first being nil or empty', () => {
+        var merged1 = merge(null, {a: 1});
+        var merged2 = merge({}, {a: 1});
+
+        it('returns the second', () => {
           expect(merged1).to.deep.eq({a: 1});
           expect(merged2).to.deep.eq({a: 1});
         });
       });
-      describe('with the second being nil or empty', function () {
-        it('returns the first', function () {
-          var merged1 = merge({a: 1}, null);
-          var merged2 = merge({a: 1}, null);
+      describe('with the second being nil or empty', () => {
+        var merged1 = merge({a: 1}, null);
+        var merged2 = merge({a: 1}, null);
+
+        it('returns the first', () => {
           expect(merged1).to.deep.eq({a: 1});
           expect(merged2).to.deep.eq({a: 1});
         });
       });
-      it('returns the merged object by merging the second into the first', function () {
+      it('returns the merged object by merging the second into the first', () => {
         expect(
             merge(object1, object2)
         ).to.deep.equal({a: 1, b: 3, c: 4});
@@ -44,7 +46,7 @@ describe('ObjectUtils', function () {
         ).to.deep.equal({a: 1, b: 2, c: 4});
       });
 
-      it('does not modify any of the two objects', function () {
+      it('does not modify any of the two objects', () => {
         merge(object1, object2);
         expect(
             object1
@@ -55,9 +57,9 @@ describe('ObjectUtils', function () {
       });
     });
   });
-  describe('::values', function () {
-    describe('when passing a nil object', function () {
-      it('fails', function () {
+  describe('::values', () => {
+    describe('when passing a nil object', () => {
+      it('fails', () => {
         try {
           values(null);
           fail();
@@ -72,8 +74,8 @@ describe('ObjectUtils', function () {
         }
       });
     });
-    describe('when passing a valid object', function () {
-      it("returns its keys' values", function () {
+    describe('when passing a valid object', () => {
+      it("returns its keys' values", () => {
         expect(values({
           a: 42,
           b: 'A string',
