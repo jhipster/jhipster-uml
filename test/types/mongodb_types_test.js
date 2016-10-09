@@ -27,6 +27,7 @@ describe('MongoDBTypes', function() {
           'Blob',
           'AnyBlob',
           'ImageBlob',
+          'TextBlob',
           'Float',
           'Double'
         ]
@@ -134,6 +135,10 @@ describe('MongoDBTypes', function() {
             {
               value: 'ImageBlob',
               name: 'ImageBlob'
+            },
+            {
+              value: 'TextBlob',
+              name: 'TextBlob'
             },
             {
               value: 'Float',
