@@ -38,9 +38,10 @@
     "yargs": "5.0.0"
   },
   "devDependencies": {
-    "mocha": "3.0.2",
     "chai": "3.5.0",
-    "istanbul": "0.4.5"
+    "istanbul": "0.4.5",
+    "mocha": "3.0.2",
+    "mocha-clean": "1.0.0"
   },
   "peerDependencies": {},
   "engines": {
