@@ -290,7 +290,7 @@ describe('ModelioParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('works by adding all the classes', () => {
-        expect(parsedData.classNames).to.deep.eq(['Class2'])
+        expect(parsedData.classNames).to.deep.eq(['Class2']);
       });
     });
   });
