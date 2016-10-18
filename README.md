@@ -14,4 +14,4 @@ For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-
 
 **Pretty important note**: v2.0.0 only supports JHipster v3.0+. The versions before v2.0.0 still support anterior versions of JHipster.
 
-**Another pretty important note**: if you don't supply all the information we ask (JHipster UML's version, XMI file, etc.)  when submitting an issue, nobody can help you.
+**Another pretty important note**: if you don't supply all the information we ask (JHipster UML's version, XMI file, etc.)  when submitting an issue, nobody can help you... So please, provide us with all the data we need. Thanks.
