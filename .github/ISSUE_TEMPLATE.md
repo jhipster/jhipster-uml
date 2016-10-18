@@ -17,7 +17,7 @@ Paste it here!
 
 ---
 
-### The XMI or JDL file
+### The XMI file
 
 
 
