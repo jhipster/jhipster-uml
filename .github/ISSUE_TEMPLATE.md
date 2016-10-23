@@ -1,9 +1,13 @@
-<!-- If it's not an issue, disregard the whole template and propose something! Thanks =) -->
+<!-- If it's not an issue, disregard the whole template and ask/propose something! Thanks =) -->
 
 ### The issue
 
 
+---
+### The command
 
+
+| `Replace the content` |
 ---
 #### The stacktrace
 
@@ -30,7 +34,7 @@ Paste it here!
 ---
 
 ### Versions 
-<!-- You have to specify the versions, where applicable. -->
+<!-- You have to specify the versions. -->
 | JHipster           | JHipster UML           |
 | ------------------ | ---------------------- |
 | `JHipster Version` |    `jhipster-uml -v`   |
