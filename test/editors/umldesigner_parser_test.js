@@ -155,6 +155,10 @@ describe('UMLDesignerParser', () => {
         root: getRootElement(readFileContent('./test/xmi/umldesigner_required_relationships.uml')),
         databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
       });
+      var parsedData2 = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_no_lower_bound.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+      });
 
       it('sets the required flag in the AssociationData objects', () => {
         for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
@@ -163,6 +167,17 @@ describe('UMLDesignerParser', () => {
               && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
           ).to.be.true;
         }
+      });
+
+      describe('when parsing a file containing a relationship with no lower bound', () => {
+        it('must not set it as required', () => {
+          for (let i = 0, associationKeys = Object.keys(parsedData2.associations); i < associationKeys.length; i++) {
+            expect(
+              parsedData2.associations[associationKeys[i]].isInjectedFieldInFromRequired
+                && parsedData2.associations[associationKeys[i]].isInjectedFieldInToRequired
+            ).to.be.false;
+          }
+        });
       });
     });
     describe('with a lowercase type', () => {
