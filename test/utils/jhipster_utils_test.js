@@ -2,11 +2,57 @@
 
 const expect = require('chai').expect,
     fail = expect.fail,
-    checkForReservedClassName = require('../../lib/utils/jhipster_utils').checkForReservedClassName,
-    checkForReservedTableName = require('../../lib/utils/jhipster_utils').checkForReservedTableName,
-    checkForReservedFieldName = require('../../lib/utils/jhipster_utils').checkForReservedFieldName;
+    fs = require('fs'),
+    JHipsterUtils = require('../../lib/utils/jhipster_utils'),
+    isYoRcFilePresent = JHipsterUtils.isYoRcFilePresent,
+    readJSONFiles = JHipsterUtils.readJSONFiles,
+    checkForReservedClassName = JHipsterUtils.checkForReservedClassName,
+    checkForReservedTableName = JHipsterUtils.checkForReservedTableName,
+    checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName;
 
 describe('JHipsterUtils', () => {
+  describe('::isYoRcFilePresent', () => {
+    it('returns whether the .yo-rc.json file exists', () => {
+      expect(isYoRcFilePresent()).to.be.false;
+      fs.open('.yo-rc.json', 'w', (error, fileDescriptor) => {
+        if (error) {
+          throw error;
+        }
+        expect(isYoRcFilePresent()).to.be.true;
+        fs.unlinkSync('.yo-rc.json');
+      });
+    });
+  });
+  describe('::readJSONFiles', () => {
+    describe('when passing valid entity names', () => {
+      it('reads the files', () => {
+        fs.mkdirSync('.jhipster');
+        fs.writeFileSync('./.jhipster/A.json', '{"name": "toto"}');
+        var read = readJSONFiles(['A']);
+        expect(read.A.name).to.eq('toto');
+        fs.unlinkSync('./.jhipster/A.json');
+        fs.rmdirSync('.jhipster');
+      });
+    });
+    describe('when passing entity names for files that do not exist', () => {
+      it('does nothing', () => {
+        fs.mkdirSync('.jhipster');
+        var read = readJSONFiles(['A']);
+        expect(read).to.deep.eq({});
+        fs.rmdirSync('.jhipster');
+      });
+    });
+    describe('when passing nothing', () => {
+      it('fails', () => {
+        try {
+          readJSONFiles();
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalArgumentException');
+        }
+      });
+    });
+  });
   describe('::checkForReservedClassName', () => {
     describe('when passing no arg', () => {
       it("doesn't fail", () => {
