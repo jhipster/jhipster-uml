@@ -78,6 +78,12 @@ describe('EntitiesCreator', () => {
       var parser = parserData.parser;
       var parsedData = parser.parse(parserData.data);
       var entities = null;
+      var invalidRequiredRelationshipParserData = ParserFactory.createParser({
+        file: './test/xmi/modelio_required_one_to_many.xmi',
+        databaseType: 'sql'
+      });
+      var invalidParser = invalidRequiredRelationshipParserData.parser;
+      var invalidParsedData = invalidParser.parse(invalidRequiredRelationshipParserData.data);
 
       it('works', () => {
         entities = createEntities({
@@ -447,6 +453,20 @@ describe('EntitiesCreator', () => {
           }
         });
       });
+      describe('when passing a model with a one-to-many (required)', () => {
+        it('fails', () => {
+          try {
+            createEntities({
+              parsedData: invalidParsedData,
+              databaseTypes: invalidRequiredRelationshipParserData.data.databaseTypes
+            });
+            fail();
+          } catch (error) {
+            expect(error.name).to.eq('IllegalStateException');
+          }
+        });
+      });
     });
   });
 });
+

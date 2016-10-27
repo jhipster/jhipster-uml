@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><uml:Model xmlns:uml="http://www.omg.org/spec/UML/20110701" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="_mgbVUJxzEeaZi-kcc79rSQ" name="project1">
+  <eAnnotations xmi:id="_mgbVUZxzEeaZi-kcc79rSQ" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_mgbVUpxzEeaZi-kcc79rSQ" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_mgbVU5xzEeaZi-kcc79rSQ" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mgbVVJxzEeaZi-kcc79rSQ" name="Class1">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mgbVVZxzEeaZi-kcc79rSQ" name="class2" visibility="public" type="_mgbVWZxzEeaZi-kcc79rSQ" aggregation="shared" association="_mgbVV5xzEeaZi-kcc79rSQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mgbVVpxzEeaZi-kcc79rSQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mgbVV5xzEeaZi-kcc79rSQ" memberEnd="_mgbVVZxzEeaZi-kcc79rSQ _mgbVWJxzEeaZi-kcc79rSQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_mgbVWJxzEeaZi-kcc79rSQ" visibility="public" type="_mgbVVJxzEeaZi-kcc79rSQ" association="_mgbVV5xzEeaZi-kcc79rSQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mgbVWZxzEeaZi-kcc79rSQ" name="Class2"/>
+</uml:Model>
