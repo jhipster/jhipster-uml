@@ -454,16 +454,11 @@ describe('EntitiesCreator', () => {
         });
       });
       describe('when passing a model with a one-to-many (required)', () => {
-        it('fails', () => {
-          try {
-            createEntities({
-              parsedData: invalidParsedData,
-              databaseTypes: invalidRequiredRelationshipParserData.data.databaseTypes
-            });
-            fail();
-          } catch (error) {
-            expect(error.name).to.eq('IllegalStateException');
-          }
+        it('does not fail', () => {
+          createEntities({
+            parsedData: invalidParsedData,
+            databaseTypes: invalidRequiredRelationshipParserData.data.databaseTypes
+          });
         });
       });
     });
