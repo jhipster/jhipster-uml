@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_54pHIJ-oEeawbN_F_HFDxg" name="model">
+  <eAnnotations xmi:id="_54pHIZ-oEeawbN_F_HFDxg" source="genmymodel">
+    <details xmi:id="_54pHIp-oEeawbN_F_HFDxg" key="uuid" value="_kYuB4J-oEeawbN_F_HFDxg"/>
+    <details xmi:id="_54pHI5-oEeawbN_F_HFDxg" key="author" value="Dufgui"/>
+  </eAnnotations>
+  <packageImport xmi:id="_54pHJJ-oEeawbN_F_HFDxg">
+    <eAnnotations xmi:id="_54pHJZ-oEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_54pHJp-oEeawbN_F_HFDxg" key="uuid" value="_kYuB4Z-oEeawbN_F_HFDxg"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_54pHJ5-oEeawbN_F_HFDxg">
+    <eAnnotations xmi:id="_54pHKJ-oEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_54pHKZ-oEeawbN_F_HFDxg" key="uuid" value="_kYuo8J-oEeawbN_F_HFDxg"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Package" xmi:id="_54pHKp-oEeawbN_F_HFDxg" name="jhipsterPackage">
+    <eAnnotations xmi:id="_54pHK5-oEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_54pHLJ-oEeawbN_F_HFDxg" key="uuid" value="_mTywsIHWEDSGzr-EIvwYWA"/>
+    </eAnnotations>
+    <packagedElement xsi:type="uml:Class" xmi:id="_54pHLZ-oEeawbN_F_HFDxg" name="A">
+      <eAnnotations xmi:id="_54pHLp-oEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_54pHL5-oEeawbN_F_HFDxg" key="uuid" value="_oVnegIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_54pHMJ-oEeawbN_F_HFDxg" name="A_B" memberEnd="_54pHOJ-oEeawbN_F_HFDxg _54pHM5-oEeawbN_F_HFDxg" navigableOwnedEnd="_54pHM5-oEeawbN_F_HFDxg _54pHOJ-oEeawbN_F_HFDxg">
+      <eAnnotations xmi:id="_54pHMZ-oEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_54pHMp-oEeawbN_F_HFDxg" key="uuid" value="_raCRwIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+      <ownedEnd xmi:id="_54pHM5-oEeawbN_F_HFDxg" name="b" type="_54pHQJ-oEeawbN_F_HFDxg" association="_54pHMJ-oEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_54pHNJ-oEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_54pHNZ-oEeawbN_F_HFDxg" key="uuid" value="_rZ-nYIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_54pHNp-oEeawbN_F_HFDxg"/>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_54pHN5-oEeawbN_F_HFDxg" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_54pHOJ-oEeawbN_F_HFDxg" name="a" type="_54pHLZ-oEeawbN_F_HFDxg" association="_54pHMJ-oEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_54pHOZ-oEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_54pHOp-oEeawbN_F_HFDxg" key="uuid" value="_raBDoIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_54pHO5-oEeawbN_F_HFDxg"/>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_54pHPJ-oEeawbN_F_HFDxg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Package" xmi:id="_54pHPZ-oEeawbN_F_HFDxg" name="mypackage">
+      <eAnnotations xmi:id="_54pHPp-oEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_54pHP5-oEeawbN_F_HFDxg" key="uuid" value="_u2xeYIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+      <packagedElement xsi:type="uml:Class" xmi:id="_54pHQJ-oEeawbN_F_HFDxg" name="B">
+        <eAnnotations xmi:id="_54pHQZ-oEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_54pHQp-oEeawbN_F_HFDxg" key="uuid" value="_pSpHcIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
