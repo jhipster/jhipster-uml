@@ -284,12 +284,13 @@ describe('GenMyModelParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('includes classes in package', () => {
-        expect(parsedData.classes['_54pHLZ-oEeawbN_F_HFDxg']).not.to.be.null;
-        expect(parsedData.classes['_54pHQJ-oEeawbN_F_HFDxg']).not.to.be.null;
+        expect(parsedData.classes['_z3DqLaFTEeawbN_F_HFDxg']).not.to.be.null;
+        expect(parsedData.classes['_z3DqQ6FTEeawbN_F_HFDxg']).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['A','B']);
+        expect(parsedData.enums['_z3DqRqFTEeawbN_F_HFDxg']).not.to.be.null;
+        expect(parsedData.associations['_z3DqM6FTEeawbN_F_HFDxg']).not.to.be.null;
       });
     });
-
   });
   describe('when passing an invalid diagram', () => {
     describe('as a class has no name', () => {

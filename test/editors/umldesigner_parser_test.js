@@ -368,7 +368,10 @@ This <b>sucks</b>.`
       it('includes classes in package', () => {
         expect(parsedData.classes['_wx0Db4PVEeaFY_lPQPbINQ']).not.to.be.null;
         expect(parsedData.classes['_wx0DdoPVEeaFY_lPQPbINQ']).not.to.be.null;
-        expect(parsedData.classNames).to.deep.eq(['A','B']);
+        expect(parsedData.classNames).to.deep.eq(['B','A']);
+        expect(parsedData.enums['_dRpdIKFLEeaWHdu8QjKipg']).not.to.be.null;
+        expect(parsedData.associations['_vB6ZwKFLEeaWHdu8QjKipg']).not.to.be.null;
+        expect(parsedData.associations['_9ZrJgKFLEeaWHdu8QjKipg']).not.to.be.null;
       });
     });
   });
