@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_z3DqIKFTEeawbN_F_HFDxg" name="model">
+  <eAnnotations xmi:id="_z3DqIaFTEeawbN_F_HFDxg" source="genmymodel">
+    <details xmi:id="_z3DqIqFTEeawbN_F_HFDxg" key="uuid" value="_kYuB4J-oEeawbN_F_HFDxg"/>
+    <details xmi:id="_z3DqI6FTEeawbN_F_HFDxg" key="author" value="Dufgui"/>
+  </eAnnotations>
+  <packageImport xmi:id="_z3DqJKFTEeawbN_F_HFDxg">
+    <eAnnotations xmi:id="_z3DqJaFTEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_z3DqJqFTEeawbN_F_HFDxg" key="uuid" value="_kYuB4Z-oEeawbN_F_HFDxg"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packageImport xmi:id="_z3DqJ6FTEeawbN_F_HFDxg">
+    <eAnnotations xmi:id="_z3DqKKFTEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_z3DqKaFTEeawbN_F_HFDxg" key="uuid" value="_kYuo8J-oEeawbN_F_HFDxg"/>
+    </eAnnotations>
+    <importedPackage href="pathmap://GENMYMODEL_LIBRARIES/GenMyModelPrimitiveTypes.library.uml#/"/>
+  </packageImport>
+  <packagedElement xsi:type="uml:Package" xmi:id="_z3DqKqFTEeawbN_F_HFDxg" name="jhipsterPackage">
+    <eAnnotations xmi:id="_z3DqK6FTEeawbN_F_HFDxg" source="genmymodel">
+      <details xmi:id="_z3DqLKFTEeawbN_F_HFDxg" key="uuid" value="_mTywsIHWEDSGzr-EIvwYWA"/>
+    </eAnnotations>
+    <packagedElement xsi:type="uml:Class" xmi:id="_z3DqLaFTEeawbN_F_HFDxg" name="A">
+      <eAnnotations xmi:id="_z3DqLqFTEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_z3DqL6FTEeawbN_F_HFDxg" key="uuid" value="_oVnegIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+      <ownedAttribute xmi:id="_z3DqMKFTEeawbN_F_HFDxg" name="testEnum" type="_z3DqRqFTEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_z3DqMaFTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqMqFTEeawbN_F_HFDxg" key="uuid" value="_r1o6oIOBEDS157ozcj18oQ"/>
+        </eAnnotations>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_z3DqM6FTEeawbN_F_HFDxg" name="A_B" memberEnd="_z3DqNqFTEeawbN_F_HFDxg _z3DqO6FTEeawbN_F_HFDxg" navigableOwnedEnd="_z3DqNqFTEeawbN_F_HFDxg _z3DqO6FTEeawbN_F_HFDxg">
+      <eAnnotations xmi:id="_z3DqNKFTEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_z3DqNaFTEeawbN_F_HFDxg" key="uuid" value="_raCRwIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+      <ownedEnd xmi:id="_z3DqNqFTEeawbN_F_HFDxg" name="b" type="_z3DqQ6FTEeawbN_F_HFDxg" association="_z3DqM6FTEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_z3DqN6FTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqOKFTEeawbN_F_HFDxg" key="uuid" value="_rZ-nYIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_z3DqOaFTEeawbN_F_HFDxg"/>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_z3DqOqFTEeawbN_F_HFDxg" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_z3DqO6FTEeawbN_F_HFDxg" name="a" type="_z3DqLaFTEeawbN_F_HFDxg" association="_z3DqM6FTEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_z3DqPKFTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqPaFTEeawbN_F_HFDxg" key="uuid" value="_raBDoIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_z3DqPqFTEeawbN_F_HFDxg"/>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_z3DqP6FTEeawbN_F_HFDxg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Package" xmi:id="_z3DqQKFTEeawbN_F_HFDxg" name="mypackage">
+      <eAnnotations xmi:id="_z3DqQaFTEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_z3DqQqFTEeawbN_F_HFDxg" key="uuid" value="_u2xeYIHWEDSGzr-EIvwYWA"/>
+      </eAnnotations>
+      <packagedElement xsi:type="uml:Class" xmi:id="_z3DqQ6FTEeawbN_F_HFDxg" name="B">
+        <eAnnotations xmi:id="_z3DqRKFTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqRaFTEeawbN_F_HFDxg" key="uuid" value="_pSpHcIHWEDSGzr-EIvwYWA"/>
+        </eAnnotations>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Enumeration" xmi:id="_z3DqRqFTEeawbN_F_HFDxg" name="MyEnumeration">
+      <eAnnotations xmi:id="_z3DqR6FTEeawbN_F_HFDxg" source="genmymodel">
+        <details xmi:id="_z3DqSKFTEeawbN_F_HFDxg" key="uuid" value="_iUVjgIOBEDS157ozcj18oQ"/>
+      </eAnnotations>
+      <ownedLiteral xmi:id="_z3DqSaFTEeawbN_F_HFDxg" name="TOTO" classifier="_z3DqRqFTEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_z3DqSqFTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqS6FTEeawbN_F_HFDxg" key="uuid" value="_ji5oYIOBEDS157ozcj18oQ"/>
+        </eAnnotations>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_z3DqTKFTEeawbN_F_HFDxg" name="TITI" classifier="_z3DqRqFTEeawbN_F_HFDxg">
+        <eAnnotations xmi:id="_z3DqTaFTEeawbN_F_HFDxg" source="genmymodel">
+          <details xmi:id="_z3DqTqFTEeawbN_F_HFDxg" key="uuid" value="_kd9icIOBEDS157ozcj18oQ"/>
+        </eAnnotations>
+      </ownedLiteral>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

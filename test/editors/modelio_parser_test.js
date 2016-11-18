@@ -279,18 +279,49 @@ describe('ModelioParser', () => {
       });
     });
     describe('with packages', () => {
-      var parserData = ParserFactory.createParser({
-        file: './test/xmi/modelio_packages.xmi',
-        databaseType: 'sql'
-      });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      describe('simple model', () => {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio_packages.xmi',
+          databaseType: 'sql'
+        });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
 
-      it('parses it', () => {
-        expect(parsedData).not.to.be.null;
+        it('parses it', () => {
+          expect(parsedData).not.to.be.null;
+        });
+        it('works by adding all the classes', () => {
+          expect(parsedData.classNames).to.deep.eq(['Class1', 'Class3', 'Class2']);
+          expect(parsedData.classes['_vC4sxHdfEeaWkfx80xqrTw']).not.to.be.null;
+          expect(parsedData.classes['_vC4syndfEeaWkfx80xqrTw']).not.to.be.null;
+          expect(parsedData.classes['_vC4sz3dfEeaWkfx80xqrTw']).not.to.be.null;
+          expect(parsedData.associations['_vC4sx3dfEeaWkfx80xqrTw']).not.to.be.null;
+          expect(parsedData.associations['_vC4szXdfEeaWkfx80xqrTw']).not.to.be.null;
+
+        });
       });
-      it('works by adding all the classes', () => {
-        expect(parsedData.classNames).to.deep.eq(['Class2']);
+      describe('more complex model', () => {
+        var parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio_packages2.xmi',
+          databaseType: 'sql'
+        });
+        var parser = parserData.parser;
+        var parsedData = parser.parse(parserData.data);
+
+        it('parses it', () => {
+          expect(parsedData).not.to.be.null;
+        });
+        it('works by adding all the classes', () => {
+          expect(parsedData.classNames).to.deep.eq(['Class1', 'Class3', 'Class2']);
+          expect(parsedData.classes['_bYuIdaFSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.classes['_bYuviqFSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.classes['_bYuvj6FSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.enums['_bYuvi6FSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.associations['_bYuvhaFSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.associations['_bYuvg6FSEeaVvapPODu8lg']).not.to.be.null;
+          expect(parsedData.associations['_bYuvh6FSEeaVvapPODu8lg']).not.to.be.null;
+
+        });
       });
     });
   });

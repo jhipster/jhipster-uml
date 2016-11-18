@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_bYuIcKFSEeaVvapPODu8lg" name="project1">
+  <eAnnotations xmi:id="_bYuIcaFSEeaVvapPODu8lg" source="Objing">
+    <contents xmi:type="uml:Property" xmi:id="_bYuIcqFSEeaVvapPODu8lg" name="exporterVersion">
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_bYuIc6FSEeaVvapPODu8lg" value="3.0.0"/>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Package" xmi:id="_bYuIdKFSEeaVvapPODu8lg" name="mypackage">
+    <packagedElement xmi:type="uml:Class" xmi:id="_bYuIdaFSEeaVvapPODu8lg" name="Class1">
+      <ownedAttribute xmi:id="_bYuIdqFSEeaVvapPODu8lg" name="class2" visibility="public" type="_bYuvj6FSEeaVvapPODu8lg" aggregation="composite" association="_bYuvg6FSEeaVvapPODu8lg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bYuId6FSEeaVvapPODu8lg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bYuIeKFSEeaVvapPODu8lg" name="class3" visibility="public" type="_bYuviqFSEeaVvapPODu8lg" aggregation="composite" association="_bYuvhaFSEeaVvapPODu8lg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bYuvgKFSEeaVvapPODu8lg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bYuvgaFSEeaVvapPODu8lg" name="enumeration1" visibility="public" type="_bYuvi6FSEeaVvapPODu8lg" aggregation="composite" association="_bYuvh6FSEeaVvapPODu8lg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bYuvgqFSEeaVvapPODu8lg"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_bYuvg6FSEeaVvapPODu8lg" memberEnd="_bYuIdqFSEeaVvapPODu8lg _bYuvhKFSEeaVvapPODu8lg">
+      <ownedEnd xmi:id="_bYuvhKFSEeaVvapPODu8lg" visibility="public" type="_bYuIdaFSEeaVvapPODu8lg" association="_bYuvg6FSEeaVvapPODu8lg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_bYuvhaFSEeaVvapPODu8lg" memberEnd="_bYuIeKFSEeaVvapPODu8lg _bYuvhqFSEeaVvapPODu8lg">
+      <ownedEnd xmi:id="_bYuvhqFSEeaVvapPODu8lg" visibility="public" type="_bYuIdaFSEeaVvapPODu8lg" association="_bYuvhaFSEeaVvapPODu8lg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_bYuvh6FSEeaVvapPODu8lg" memberEnd="_bYuvgaFSEeaVvapPODu8lg _bYuviKFSEeaVvapPODu8lg">
+      <ownedEnd xmi:id="_bYuviKFSEeaVvapPODu8lg" visibility="public" type="_bYuIdaFSEeaVvapPODu8lg" association="_bYuvh6FSEeaVvapPODu8lg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_bYuviaFSEeaVvapPODu8lg" name="myotherpackage">
+      <packagedElement xmi:type="uml:Class" xmi:id="_bYuviqFSEeaVvapPODu8lg" name="Class3"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_bYuvi6FSEeaVvapPODu8lg" name="Enumeration1">
+      <ownedLiteral xmi:id="_bYuvjKFSEeaVvapPODu8lg" name="TOTO"/>
+      <ownedLiteral xmi:id="_bYuvjaFSEeaVvapPODu8lg" name="TATA"/>
+      <ownedLiteral xmi:id="_bYuvjqFSEeaVvapPODu8lg" name="TITI"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bYuvj6FSEeaVvapPODu8lg" name="Class2"/>
+</uml:Model>

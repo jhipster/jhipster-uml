@@ -19,7 +19,7 @@ describe('UMLDesignerParser', () => {
         root: getRootElement(readFileContent('./test/xmi/umldesigner.uml')),
         databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
       });
-      
+
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
@@ -369,6 +369,24 @@ This <b>sucks</b>.`
         } catch (error) {
           expect(error.name).to.eq('WrongTypeException');
         }
+      });
+    });
+    describe('with a user package', () => {
+      var parsedData = UMLDesignerParser.parse({
+        root: getRootElement(readFileContent('./test/xmi/umldesigner_package.uml')),
+        databaseTypes: initDatabaseTypeHolder(DatabaseTypes.sql)
+      });
+
+      it('parses it', () => {
+        expect(parsedData).not.to.be.null;
+      });
+      it('includes classes in package', () => {
+        expect(parsedData.classes['_wx0Db4PVEeaFY_lPQPbINQ']).not.to.be.null;
+        expect(parsedData.classes['_wx0DdoPVEeaFY_lPQPbINQ']).not.to.be.null;
+        expect(parsedData.classNames).to.deep.eq(['B','A']);
+        expect(parsedData.enums['_dRpdIKFLEeaWHdu8QjKipg']).not.to.be.null;
+        expect(parsedData.associations['_vB6ZwKFLEeaWHdu8QjKipg']).not.to.be.null;
+        expect(parsedData.associations['_9ZrJgKFLEeaWHdu8QjKipg']).not.to.be.null;
       });
     });
   });
