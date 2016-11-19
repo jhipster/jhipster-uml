@@ -30,11 +30,11 @@
   "dependencies": {
     "chalk": "1.1.3",
     "deasync": "0.1.9",
-    "inquirer": "1.2.2",
+    "inquirer": "1.2.3",
     "jhipster-core": "1.2.0",
-    "lodash": "4.16.6",
+    "lodash": "4.17.2",
     "xml2js": "0.4.17",
-    "yargs": "6.3.0"
+    "yargs": "6.4.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
