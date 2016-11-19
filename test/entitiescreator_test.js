@@ -19,7 +19,7 @@ describe('EntitiesCreator', () => {
           }
         });
       });
-      describe('because there are empty args', () => {
+      describe('because there are empty args, no parsed data and no database types', () => {
         it('fails', () => {
           try {
             createEntities({});
@@ -32,7 +32,7 @@ describe('EntitiesCreator', () => {
       describe('because there is no parsed data', () => {
         it('fails', () => {
           try {
-            createEntities({databaseTypes: 'NotNull'});
+            createEntities(null, 'databaseTypes', {});
             fail();
           } catch (error) {
             expect(error.name).to.eq('NullPointerException');
@@ -42,9 +42,10 @@ describe('EntitiesCreator', () => {
       describe('because there are no database types', () => {
         it('fails', () => {
           try {
-            createEntities({parsedData: 'NotNull'});
+            createEntities('parsedData', null, {});
             fail();
           } catch (error) {
+            console.error(error);
             expect(error.name).to.eq('NullPointerException');
           }
         });
@@ -59,10 +60,7 @@ describe('EntitiesCreator', () => {
 
         it('fails', () => {
           try {
-            createEntities({
-              parsedData: parsedData,
-              databaseTypes: new MongoDBTypes()
-            });
+            createEntities(parsedData, new MongoDBTypes(), {});
             fail();
           } catch (error) {
             expect(error.name).to.eq('NoSQLModelingException');
@@ -86,10 +84,7 @@ describe('EntitiesCreator', () => {
       var invalidParsedData = invalidParser.parse(invalidRequiredRelationshipParserData.data);
 
       it('works', () => {
-        entities = createEntities({
-          parsedData: parsedData,
-          databaseTypes: parserData.data.databaseTypes
-        });
+        entities = createEntities(parsedData, parserData.data.databaseTypes, {});
         expect(entities == null).to.be.false;
         expect(Object.keys(entities).length).to.eq(8);
       });
@@ -411,9 +406,7 @@ describe('EntitiesCreator', () => {
               searchEngines[parsedData.classes[clazz].name] = 'elasticsearch';
             }
           }
-          entities = createEntities({
-            parsedData: parsedData,
-            databaseTypes: parserData.data.databaseTypes,
+          entities = createEntities(parsedData, parserData.data.databaseTypes, {
             microserviceNames: microserviceNames,
             searchEngines: searchEngines
           });
@@ -437,9 +430,7 @@ describe('EntitiesCreator', () => {
               listService[parsedData.classes[clazz].name] = 'serviceClass';
             }
           }
-          entities = createEntities({
-            parsedData: parsedData,
-            databaseTypes: parserData.data.databaseTypes,
+          entities = createEntities(parsedData, parserData.data.databaseTypes, {
             listDTO: listDTO,
             listPagination: listPagination,
             listService: listService
@@ -455,13 +446,12 @@ describe('EntitiesCreator', () => {
       });
       describe('when passing a model with a one-to-many (required)', () => {
         it('does not fail', () => {
-          createEntities({
-            parsedData: invalidParsedData,
-            databaseTypes: invalidRequiredRelationshipParserData.data.databaseTypes
-          });
+          createEntities(
+            invalidParsedData,
+            invalidRequiredRelationshipParserData.data.databaseTypes,
+            {});
         });
       });
     });
   });
 });
-
