@@ -39,14 +39,23 @@ describe('ParserHelper', () => {
     });
   });
   describe('#getXmlElementFromRawIndexes', () => {
-    var root = { packagedElement : [{dumb: 'dumb'}, { packagedElement: [{dumb: 'dumb'},{dumb: 'dumb'},{dumb: 'good'}]}]};
+    var root = {
+      packagedElement: [
+        {dumb: 'dumb'},
+        {
+          packagedElement: [
+            {dumb: 'dumb'},
+            {dumb: 'dumb'},
+            {dumb: 'good'}
+          ]
+        }
+      ]
+    };
     var rawIndexes = [{index: 2, path: [1]}];
-    var i = 0;
-    var xmlElt = getXmlElementFromRawIndexes(root, rawIndexes, i);
+    var xmlElt = getXmlElementFromRawIndexes(root, rawIndexes[0]);
 
     it('returns the right element', () => {
       expect(xmlElt.dumb).to.eq('good');
     });
   });
-
 });
