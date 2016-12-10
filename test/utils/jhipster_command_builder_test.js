@@ -4,13 +4,13 @@ const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder
     expect = require('chai').expect,
     fail = expect.fail;
 
-describe.only('JHipsterCommandBuilder', () => {
+describe('JHipsterCommandBuilder', () => {
   const builder = new JHipsterCommandBuilder();
 
   describe('#force', () => {
     it('adds the --force option', () => {
       builder.force();
-      expect(builder.args.indexOf('--force')).not.to.eq(-1);
+      expect(builder.args.has('--force')).to.be.true;
     });
   });
   describe('#className', () => {
@@ -25,13 +25,13 @@ describe.only('JHipsterCommandBuilder', () => {
           builder.className();
           fail();
         } catch (error) {
-          expect(error).to.eq('IllegalArgumentException');
+          expect(error.name).to.eq('IllegalArgumentException');
         }
         try {
           builder.className('');
           fail();
         } catch (error) {
-          expect(error).to.eq('IllegalArgumentException');
+          expect(error.name).to.eq('IllegalArgumentException');
         }
       });
     });
