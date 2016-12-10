@@ -5,7 +5,12 @@ const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder
     fail = expect.fail;
 
 describe('JHipsterCommandBuilder', () => {
-  const builder = new JHipsterCommandBuilder();
+  let builder = null;
+
+  beforeEach (() => {
+    builder = new JHipsterCommandBuilder()
+  });
+
 
   describe('#force', () => {
     it('adds the --force option', () => {
@@ -16,7 +21,9 @@ describe('JHipsterCommandBuilder', () => {
   describe('#className', () => {
     describe('when passing a valid class name', () => {
       it('adds it', () => {
-
+        const className = 'toto';
+        builder.className(className);
+        expect(builder.build().args.indexOf(className)).not.to.eq(-1);
       });
     });
     describe('when passing an invalid value', () => {
