@@ -6,6 +6,8 @@ const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder
 
 describe('JHipsterCommandBuilder', () => {
   let builder = null;
+  let built = null;
+  const className = 'abc';
 
   beforeEach (() => {
     builder = new JHipsterCommandBuilder()
@@ -21,7 +23,6 @@ describe('JHipsterCommandBuilder', () => {
   describe('#className', () => {
     describe('when passing a valid class name', () => {
       it('adds it', () => {
-        const className = 'toto';
         builder.className(className);
         expect(builder.build().args.indexOf(className)).not.to.eq(-1);
       });
@@ -70,15 +71,84 @@ describe('JHipsterCommandBuilder', () => {
     });
   });
   describe('#skipUserManagement', () => {
-
-  });
-  describe('#skipUserManagement', () => {
-
+    it('adds the --skip-user-management flag', () => {
+      builder.skipUserManagement();
+      expect(builder.args.indexOf('--skip-user-management')).not.to.eq(-1);
+    });
   });
   describe('#skipInstall', () => {
-
+    it('adds the --skip-install flag', () => {
+      builder.skipInstall();
+      expect(builder.args.indexOf('--skip-install')).not.to.eq(-1);
+    });
   });
   describe('#build', () => {
+    describe('if there is no class name', () => {
+      it('fails', () => {
+        try {
+          builder.build();
+          fail();
+        } catch (error) {
+          expect(error.name).to.eq('IllegalStateException');
+        }
+      });
+    });
+    describe('if a class name has been given', () => {
+      beforeEach(() => {
+        built = builder.className(className).build();
+      });
 
+      it('builds the command from the actual platform', () => {
+        if (process.platform === 'win32') {
+          if (process.env.comspec) {
+            expect(built.command).to.eq(process.env.comspec);
+          } else {
+            expect(built.command).to.eq('cmd.exe');
+          }
+        } else {
+          expect(built.command).to.eq('yo');
+        }
+      });
+      it('builds the args array from the actual platform', () => {
+        built = builder
+          .force()
+          .skipClient()
+          .skipServer()
+          .skipInstall()
+          .angularSuffix('suffix')
+          .skipUserManagement()
+          .build();
+        if (process.platform === 'win32') {
+          expect(built.args).to.deep.eq([
+            '/s',
+            '/c',
+            'yo jhipster:entity',
+            className,
+            '--force',
+            '--skip-client',
+            '--skip-server',
+            '--skip-install',
+            '--angular-suffix',
+            'suffix',
+            '--skip-user-management',
+            '--regenerate' ]);
+        } else {
+          expect(built.args).to.deep.eq([
+            'jhipster:entity',
+            className,
+            '--force',
+            '--skip-client',
+            '--skip-server',
+            '--skip-install',
+            '--angular-suffix',
+            'suffix',
+            '--skip-user-management',
+            '--regenerate' ]);
+        }
+      });
+      it('builds the stdio array', () => {
+        expect(built.stdio).to.deep.eq([ process.stdin, process.stdout, process.stderr ]);
+      });
+    });
   });
 });
