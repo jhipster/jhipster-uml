@@ -44,7 +44,7 @@ describe('JHipsterCommandBuilder', () => {
     });
   });
   describe('#skipClient', () => {
-    it('adds the --skip-client flac', () => {
+    it('adds the --skip-client flag', () => {
       builder.skipClient();
       expect(builder.args.has('--skip-client')).to.be.true;
     });
