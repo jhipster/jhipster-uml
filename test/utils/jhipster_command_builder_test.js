@@ -109,7 +109,7 @@ describe('JHipsterCommandBuilder', () => {
           expect(built.command).to.eq('yo');
         }
       });
-      it('builds the args array from the actual platform', () => {
+      it('builds the args array from the actual platform and adds the --regenerate flag', () => {
         built = builder
           .force()
           .skipClient()
