@@ -15,7 +15,7 @@ describe('JHipsterCommandBuilder', () => {
   describe('#force', () => {
     it('adds the --force option', () => {
       builder.force();
-      expect(builder.args.has('--force')).to.be.true;
+      expect(builder.args.indexOf('--force')).not.to.eq(-1);
     });
   });
   describe('#className', () => {
@@ -46,17 +46,28 @@ describe('JHipsterCommandBuilder', () => {
   describe('#skipClient', () => {
     it('adds the --skip-client flag', () => {
       builder.skipClient();
-      expect(builder.args.has('--skip-client')).to.be.true;
+      expect(builder.args.indexOf('--skip-client')).not.to.eq(-1);
     });
   });
   describe('#skipServer', () => {
-
+    it('adds the --skip-server flag', () => {
+      builder.skipServer();
+      expect(builder.args.indexOf('--skip-server')).not.to.eq(-1);
+    });
   });
   describe('#noFluentMethods', () => {
-
+    it('adds the --no-fluent-methods flag', () => {
+      builder.noFluentMethods();
+      expect(builder.args.indexOf('--no-fluent-methods')).not.to.eq(-1);
+    });
   });
   describe('#angularSuffix', () => {
-
+    it('adds the --angular-suffix flag followed by the suffix', () => {
+      builder.angularSuffix('suffix');
+      var index = builder.args.indexOf('--angular-suffix');
+      expect(index).not.to.eq(-1);
+      expect(builder.args[index + 1]).to.eq('suffix');
+    });
   });
   describe('#skipUserManagement', () => {
 
