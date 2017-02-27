@@ -35,7 +35,7 @@ Paste it here!
 
 ### Versions 
 <!-- You have to specify the versions. -->
-| JHipster           | JHipster UML           |
-| ------------------ | ---------------------- |
-| `JHipster Version` |    `jhipster-uml -v`   |
+| JHipster           | JHipster UML           | Editor & version |
+| ------------------ | ---------------------- | ---------------- |
+| `JHipster Version` |    `jhipster-uml -v`   |                  |
 
