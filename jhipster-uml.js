@@ -10,5 +10,7 @@ try {
   console.error(`${chalk.red('Error message:\n\t')}${error.message}`);
   if (error.stack) {
     console.error(`${chalk.red('Stack trace:\n')}${error.stack}`);
+  } else if (error.prototype && error.prototype.stack) {
+    console.error(`${chalk.red('Stack trace:\n')}${error.prototype.stack}`);
   }
 }
