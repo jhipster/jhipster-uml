@@ -6,5 +6,6 @@ out/
 .jhipster/
 .juml
 .sonar
+*.iml
 coverage/*
 sonar-project.properties
