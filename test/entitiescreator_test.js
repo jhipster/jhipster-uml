@@ -1,10 +1,10 @@
 'use strict';
 
 const expect = require('chai').expect,
-    fail = expect.fail,
-    createEntities = require('../lib/entitiescreator').createEntities,
-    ParserFactory = require('../lib/editors/parser_factory'),
-    MongoDBTypes = require('../lib/types/mongodb_types');
+  fail = expect.fail,
+  createEntities = require('../lib/entitiescreator').createEntities,
+  ParserFactory = require('../lib/editors/parser_factory'),
+  MongoDBTypes = require('../lib/types/mongodb_types');
 
 describe('EntitiesCreator', () => {
   describe('#createEntities', () => {
@@ -51,12 +51,12 @@ describe('EntitiesCreator', () => {
         });
       });
       describe('because the user has relationships with a NoSQL database type', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio.xmi',
           databaseType: 'sql'
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('fails', () => {
           try {
@@ -69,28 +69,28 @@ describe('EntitiesCreator', () => {
       });
     });
     describe('when passing valid args', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
-      var entities = null;
-      var invalidRequiredRelationshipParserData = ParserFactory.createParser({
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
+      let entities;
+      const invalidRequiredRelationshipParserData = ParserFactory.createParser({
         file: './test/xmi/modelio_required_one_to_many.xmi',
         databaseType: 'sql'
       });
-      var invalidParser = invalidRequiredRelationshipParserData.parser;
-      var invalidParsedData = invalidParser.parse(invalidRequiredRelationshipParserData.data);
+      const invalidParser = invalidRequiredRelationshipParserData.parser;
+      const invalidParsedData = invalidParser.parse(invalidRequiredRelationshipParserData.data);
 
       it('works', () => {
         entities = createEntities(parsedData, parserData.data.databaseTypes, {});
-        expect(entities == null).to.be.false;
+        expect(entities === null).to.be.false;
         expect(Object.keys(entities).length).to.eq(8);
       });
       describe('with fields and relationships', () => {
         it('sets them', () => {
-          var expectedRegion = {
+          const expectedRegion = {
             fields: [
               {
                 "fieldName": "regionId",
@@ -103,7 +103,7 @@ describe('EntitiesCreator', () => {
             ],
             relationships: []
           };
-          var expectedCountry = {
+          const expectedCountry = {
             fields: [
               {
                 "fieldName": "countryId",
@@ -126,7 +126,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expectedLocation = {
+          const expectedLocation = {
             fields: [
               {
                 "fieldName": "locationId",
@@ -161,7 +161,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expectedDepartment = {
+          const expectedDepartment = {
             fields: [
               {
                 "fieldName": "departmentId",
@@ -190,7 +190,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expectedEmployee = {
+          const expectedEmployee = {
             fields: [
               {
                 "fieldName": "employeeId",
@@ -247,7 +247,7 @@ describe('EntitiesCreator', () => {
 
             ]
           };
-          var expectedJobHistory = {
+          const expectedJobHistory = {
             fields: [
               {
                 "fieldName": "startDate",
@@ -291,7 +291,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expectedJob = {
+          const expectedJob = {
             fields: [
               {
                 "fieldName": "jobId",
@@ -327,7 +327,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expectedTask = {
+          const expectedTask = {
             fields: [
               {
                 "fieldName": "taskId",
@@ -352,7 +352,7 @@ describe('EntitiesCreator', () => {
               }
             ]
           };
-          var expected = {
+          const expected = {
             Region: expectedRegion,
             Country: expectedCountry,
             Location: expectedLocation,
@@ -365,14 +365,14 @@ describe('EntitiesCreator', () => {
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
               expect(
-                  entities[clazz].fields
+                entities[clazz].fields
               ).to.deep.eq(
-                  expected[parsedData.classes[clazz].name].fields
+                expected[parsedData.classes[clazz].name].fields
               );
               expect(
-                  entities[clazz].relationships
+                entities[clazz].relationships
               ).to.deep.eq(
-                  expected[parsedData.classes[clazz].name].relationships
+                expected[parsedData.classes[clazz].name].relationships
               );
             }
           }
@@ -398,8 +398,8 @@ describe('EntitiesCreator', () => {
       });
       describe('with microservice and search engine', () => {
         it('adds the options in the JSON', () => {
-          var microserviceNames = {};
-          var searchEngines = {};
+          const microserviceNames = {};
+          const searchEngines = {};
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
               microserviceNames[parsedData.classes[clazz].name] = 'ms';
@@ -420,9 +420,9 @@ describe('EntitiesCreator', () => {
       });
       describe('with options', () => {
         it('adds them', () => {
-          var listDTO = {};
-          var listPagination = {};
-          var listService = {};
+          const listDTO = {};
+          const listPagination = {};
+          const listService = {};
           for (let clazz in parsedData.classes) {
             if (parsedData.classes.hasOwnProperty(clazz)) {
               listDTO[parsedData.classes[clazz].name] = 'mapstruct';

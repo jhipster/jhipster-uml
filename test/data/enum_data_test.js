@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect,
-    EnumData = require('../../lib/data/enum_data');
+  EnumData = require('../../lib/data/enum_data');
 
 describe('EnumData', () => {
   describe('#new', () => {
@@ -9,7 +9,7 @@ describe('EnumData', () => {
       it('does not fail', () => {
         new EnumData();
       });
-      var data = new EnumData();
+      const data = new EnumData();
 
       it('sets the default values instead', () => {
         expect(data.name).to.eq('');
@@ -17,7 +17,7 @@ describe('EnumData', () => {
       });
     });
     describe('when passing arguments', () => {
-      var data = new EnumData({
+      const data = new EnumData({
         name: 'Abc',
         values: [1, 2]
       });

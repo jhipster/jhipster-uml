@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect,
-    FieldData = require('../../lib/data/field_data');
+  FieldData = require('../../lib/data/field_data');
 
 describe('FieldData', () => {
   describe('#new', () => {
@@ -9,7 +9,7 @@ describe('FieldData', () => {
       it('does not fail', () => {
         new FieldData();
       });
-      var data = new FieldData();
+      const data = new FieldData();
 
       it('sets the default values instead', () => {
         expect(data.name).to.eq('');
@@ -19,7 +19,7 @@ describe('FieldData', () => {
       });
     });
     describe('when passing arguments', () => {
-      var data = new FieldData({
+      const data = new FieldData({
         name: 'Abc',
         comment: '42',
         type: 'None',

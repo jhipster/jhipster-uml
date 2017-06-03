@@ -1,9 +1,9 @@
 'use strict';
 
-var expect = require('chai').expect,
-    isAnId = require('../../lib/editors/parser_helper').isAnId,
-    extractClassName = require('../../lib/editors/parser_helper').extractClassName,
-    getXmlElementFromRawIndexes = require('../../lib/editors/parser_helper').getXmlElementFromRawIndexes;
+const expect = require('chai').expect,
+  isAnId = require('../../lib/editors/parser_helper').isAnId,
+  extractClassName = require('../../lib/editors/parser_helper').extractClassName,
+  getXmlElementFromRawIndexes = require('../../lib/editors/parser_helper').getXmlElementFromRawIndexes;
 
 describe('ParserHelper', () => {
   describe('#isAnId', () => {
@@ -19,7 +19,7 @@ describe('ParserHelper', () => {
 
   describe('#extractClassName', () => {
     describe("when passing a name in the form of 'ENTITY_NAME'", () => {
-      var names = extractClassName('EntityName');
+      const names = extractClassName('EntityName');
 
       it('returns it, plus the formatted table name', () => {
         expect(names.entityName).to.eq('EntityName');
@@ -27,7 +27,7 @@ describe('ParserHelper', () => {
       });
     });
     describe("when passing a name in the form of 'ENTITY_NAME(TABLE_NAME)", () => {
-      var names = extractClassName('EntityName(table_name)');
+      let names = extractClassName('EntityName(table_name)');
 
       it('parses it and returns the right result', () => {
         expect(names.entityName).to.eq('EntityName');
@@ -39,7 +39,7 @@ describe('ParserHelper', () => {
     });
   });
   describe('#getXmlElementFromRawIndexes', () => {
-    var root = {
+    const root = {
       packagedElement: [
         {dumb: 'dumb'},
         {
@@ -51,8 +51,8 @@ describe('ParserHelper', () => {
         }
       ]
     };
-    var rawIndexes = [{index: 2, path: [1]}];
-    var xmlElt = getXmlElementFromRawIndexes(root, rawIndexes[0]);
+    const rawIndexes = [{index: 2, path: [1]}];
+    const xmlElt = getXmlElementFromRawIndexes(root, rawIndexes[0]);
 
     it('returns the right element', () => {
       expect(xmlElt.dumb).to.eq('good');

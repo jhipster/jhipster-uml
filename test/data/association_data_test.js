@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect,
-    AssociationData = require('../../lib/data/association_data');
+  AssociationData = require('../../lib/data/association_data');
 
 describe('AssociationData', () => {
   describe('#new', () => {
@@ -10,7 +10,7 @@ describe('AssociationData', () => {
         new AssociationData();
       });
       it('sets the default values instead', () => {
-        var data = new AssociationData();
+        const data = new AssociationData();
         expect(data.from).to.eq(null);
         expect(data.to).to.eq(null);
         expect(data.injectedFieldInFrom).to.eq(null);
@@ -21,7 +21,7 @@ describe('AssociationData', () => {
       });
     });
     describe('when passing arguments', () => {
-      var data = new AssociationData({
+      const data = new AssociationData({
         from: '1',
         to: '2',
         injectedFieldInFrom: '3',

@@ -1,19 +1,19 @@
 'use strict';
 
-var expect = require('chai').expect,
-    fail = expect.fail,
-    CassandraTypes = require('../../lib/types/cassandra_types');
-
-var cassandraTypes;
+const expect = require('chai').expect,
+  fail = expect.fail,
+  CassandraTypes = require('../../lib/types/cassandra_types');
 
 describe('CassandraTypes', () => {
+  let cassandraTypes;
+
   before(() => {
     cassandraTypes = new CassandraTypes();
   });
 
   describe('#getTypes', () => {
     it('only returns the supported type list', () => {
-      var types = cassandraTypes.getTypes();
+      const types = cassandraTypes.getTypes();
       expect(types).to.deep.have.members(
         [
           'UUID',
@@ -33,7 +33,7 @@ describe('CassandraTypes', () => {
   describe('#getValidationsForType', () => {
     describe('when passing a valid type', () => {
       it('returns only the validation list for it', () => {
-        var validations = cassandraTypes.getValidationsForType('String');
+        const validations = cassandraTypes.getValidationsForType('String');
         expect(validations).to.deep.have.members(
           [
             'required',

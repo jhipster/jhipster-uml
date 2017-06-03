@@ -1,16 +1,16 @@
 'use strict';
 
-var expect = require('chai').expect,
-    getClassNames = require('../../lib/helpers/class_helper').getClassNames;
+const expect = require('chai').expect,
+  getClassNames = require('../../lib/helpers/class_helper').getClassNames;
 
 describe('#getClassNames', () => {
   describe('when passing a valid classes object', () => {
-    var classDataHolder = {};
+    const classDataHolder = {};
     before(() => {
-      classDataHolder[0] = { name: 'a' };
-      classDataHolder[1] = { name: 'b' };
-      classDataHolder[2] = { name: 'c' };
-      classDataHolder[3] = { name: 'd' };
+      classDataHolder[0] = {name: 'a'};
+      classDataHolder[1] = {name: 'b'};
+      classDataHolder[2] = {name: 'c'};
+      classDataHolder[3] = {name: 'd'};
     });
 
     it("returns the classes' names", () => {
@@ -20,7 +20,7 @@ describe('#getClassNames', () => {
 
   describe('when passing an invalid classes object', () => {
     describe('such as an empty object', () => {
-      var classNames = getClassNames({});
+      const classNames = getClassNames({});
 
       it('returns an empty object', () => {
         expect(classNames).to.deep.equal({});

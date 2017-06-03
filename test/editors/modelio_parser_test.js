@@ -1,24 +1,24 @@
 'use strict';
 
 const expect = require('chai').expect,
-    fail = expect.fail,
-    ParserFactory = require('../../lib/editors/parser_factory');
+  fail = expect.fail,
+  ParserFactory = require('../../lib/editors/parser_factory');
 
 describe('ModelioParser', () => {
   describe('when passing a valid diagram', () => {
     describe('taken from the HR example', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
       it('correctly parses the JobHistory class', () => {
-        var jobHistory = parsedData.classes['_0iCy1rieEeW4ip1mZlCqPg'];
+        const jobHistory = parsedData.classes['_0iCy1rieEeW4ip1mZlCqPg'];
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
         expect(jobHistory.fields).to.deep.eq([
@@ -31,7 +31,7 @@ describe('ModelioParser', () => {
         expect(jobHistory.service).to.eq('no');
       });
       it('correctly parses the Job class', () => {
-        var job = parsedData.classes['_0iCy47ieEeW4ip1mZlCqPg'];
+        const job = parsedData.classes['_0iCy47ieEeW4ip1mZlCqPg'];
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
         expect(job.fields).to.deep.eq([
@@ -46,7 +46,7 @@ describe('ModelioParser', () => {
         expect(job.service).to.eq('no');
       });
       it('correctly parses the Department class', () => {
-        var department = parsedData.classes['_0iCy77ieEeW4ip1mZlCqPg'];
+        const department = parsedData.classes['_0iCy77ieEeW4ip1mZlCqPg'];
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
         expect(department.fields).to.deep.eq([
@@ -59,7 +59,7 @@ describe('ModelioParser', () => {
         expect(department.service).to.eq('no');
       });
       it('correctly parses the Employee class', () => {
-        var employee = parsedData.classes['_0iCy-7ieEeW4ip1mZlCqPg'];
+        const employee = parsedData.classes['_0iCy-7ieEeW4ip1mZlCqPg'];
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
         expect(employee.fields).to.deep.eq([
@@ -78,7 +78,7 @@ describe('ModelioParser', () => {
         expect(employee.service).to.eq('no');
       });
       it('correctly parses the Location class', () => {
-        var location = parsedData.classes['_0iCzELieEeW4ip1mZlCqPg'];
+        const location = parsedData.classes['_0iCzELieEeW4ip1mZlCqPg'];
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
         expect(location.fields).to.deep.eq([
@@ -94,7 +94,7 @@ describe('ModelioParser', () => {
         expect(location.service).to.eq('no');
       });
       it('correctly parses the Country class', () => {
-        var country = parsedData.classes['_0iCzGbieEeW4ip1mZlCqPg'];
+        const country = parsedData.classes['_0iCzGbieEeW4ip1mZlCqPg'];
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
         expect(country.fields).to.deep.eq([
@@ -107,7 +107,7 @@ describe('ModelioParser', () => {
         expect(country.service).to.eq('no');
       });
       it('correctly parses the Region class', () => {
-        var region = parsedData.classes['_0iCzH7ieEeW4ip1mZlCqPg'];
+        const region = parsedData.classes['_0iCzH7ieEeW4ip1mZlCqPg'];
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
         expect(region.fields).to.deep.eq([
@@ -120,7 +120,7 @@ describe('ModelioParser', () => {
         expect(region.service).to.eq('no');
       });
       it('correctly parses the Task class', () => {
-        var task = parsedData.classes['_0iCzIrieEeW4ip1mZlCqPg'];
+        const task = parsedData.classes['_0iCzIrieEeW4ip1mZlCqPg'];
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
         expect(task.fields).to.deep.eq([
@@ -147,48 +147,48 @@ describe('ModelioParser', () => {
       });
     });
     describe('with required relationships', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_required_relationships.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('sets the required flag in the AssociationData objects', () => {
         for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
             parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
-              && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
+            && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
           ).to.be.true;
         }
       });
     });
     describe('with a lowercase type', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_lowercased_string_type.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('adds it capitalized', () => {
         expect(parsedData.types['_qlOWCZWyEeWgPqZDqm9Now'].name).to.eq('ZonedDateTime');
       });
     });
     describe('with comments', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_comments.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
       it('adds comments in classes', () => {
         expect(parsedData.classes['_MlHMlHgFEeaD3-9XbEOL5Q'].comment).to.eq(
-`<p>Description for a <strong>class:</strong></p>
+          `<p>Description for a <strong>class:</strong></p>
 
 <ul>
 	<li><strong>one</strong></li>
@@ -198,31 +198,31 @@ describe('ModelioParser', () => {
 <p>&nbsp;</p>`
         );
         expect(parsedData.classes['_MlHMnngFEeaD3-9XbEOL5Q'].comment).to.eq(
-`<p>Another description.</p>`
+          `<p>Another description.</p>`
         );
       });
       it('adds comments in fields', () => {
         expect(parsedData.fields['_MlHMmXgFEeaD3-9XbEOL5Q'].comment).to.eq(
-`<p>Description for an <strong>attribute</strong>.</p>`
+          `<p>Description for an <strong>attribute</strong>.</p>`
         );
       });
       it('adds comments in relationships', () => {
         expect(parsedData.associations['_MlHMm3gFEeaD3-9XbEOL5Q'].commentInFrom).to.eq(
-`<p>Comment for a relationship.</p>`
+          `<p>Comment for a relationship.</p>`
         );
         expect(parsedData.associations['_MlHMm3gFEeaD3-9XbEOL5Q'].commentInTo).to.eq(
-`Another comment for a relationship`
+          `Another comment for a relationship`
         );
       });
     });
     describe('with a user class', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_user_class_test.xmi',
         databaseType: 'sql',
         noUserManagement: true
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
@@ -234,13 +234,13 @@ describe('ModelioParser', () => {
     });
     describe('with enums', () => {
       describe('with values', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_enum_test.xmi',
           databaseType: 'sql',
           noUserManagement: true
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -262,13 +262,13 @@ describe('ModelioParser', () => {
         });
       });
       describe('without values', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_enum_no_value_test.xmi',
           databaseType: 'sql',
           noUserManagement: true
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -280,12 +280,12 @@ describe('ModelioParser', () => {
     });
     describe('with packages', () => {
       describe('simple model', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_packages.xmi',
           databaseType: 'sql'
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -301,12 +301,12 @@ describe('ModelioParser', () => {
         });
       });
       describe('more complex model', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio_packages2.xmi',
           databaseType: 'sql'
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -327,11 +327,11 @@ describe('ModelioParser', () => {
   });
   describe('when passing an invalid diagram', () => {
     describe('as a class has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_class_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -343,11 +343,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as a field has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -359,11 +359,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as a validation has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_no_validation_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -375,11 +375,11 @@ describe('ModelioParser', () => {
       });
     });
     describe("as an enum's value as no name", () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -391,11 +391,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as an enum has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_enum_no_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -407,11 +407,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as a class name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_class_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -423,11 +423,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as a field name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_field_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -439,11 +439,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as a table name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_reserved_table_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -455,11 +455,11 @@ describe('ModelioParser', () => {
       });
     });
     describe('as an invalid type is used', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_wrong_typename.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {

@@ -1,8 +1,8 @@
 'use strict';
 
 const expect = require('chai').expect,
-    fail = expect.fail,
-    ClassData = require('../../lib/data/class_data');
+  fail = expect.fail,
+  ClassData = require('../../lib/data/class_data');
 
 describe('ClassData', () => {
   describe('#new', () => {
@@ -11,7 +11,7 @@ describe('ClassData', () => {
         new ClassData();
       });
       it('sets the default values instead', () => {
-        var data = new ClassData();
+        const data = new ClassData();
         expect(data.name).to.eq('');
         expect(data.comment).to.eq('');
         expect(data.dto).to.eq('no');
@@ -22,7 +22,7 @@ describe('ClassData', () => {
       });
     });
     describe('when passing arguments', () => {
-      var data = new ClassData({
+      const data = new ClassData({
         name: 'Abc',
         comment: '42',
         dto: 'yes',

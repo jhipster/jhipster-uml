@@ -1,8 +1,8 @@
 'use strict';
 
-var expect = require('chai').expect,
-    fail = expect.fail,
-    EditorDetector = require('../../lib/editors/editor_detector');
+const expect = require('chai').expect,
+  fail = expect.fail,
+  EditorDetector = require('../../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', () => {
   describe('when passing an invalid root', () => {
@@ -20,7 +20,7 @@ describe('EditorDetector#detect', () => {
 
   describe('when passing a possibly valid root', () => {
     describe('when passing a root from a recognized editor', () => {
-      var detected = EditorDetector.detect({
+      const detected = EditorDetector.detect({
         eAnnotations: [
           {
             $: {

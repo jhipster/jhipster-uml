@@ -1,19 +1,20 @@
 'use strict';
 
-var expect = require('chai').expect,
-    fail = expect.fail,
-    SQLTypes = require('../../lib/types/sql_types');
+const expect = require('chai').expect,
+  fail = expect.fail,
+  SQLTypes = require('../../lib/types/sql_types');
 
-var sqlTypes;
 
 describe('SQLTypes', () => {
+  let sqlTypes;
+
   before(() => {
     sqlTypes = new SQLTypes();
   });
 
   describe('#getTypes', () => {
     it('only returns the supported type list', () => {
-      var types = sqlTypes.getTypes();
+      const types = sqlTypes.getTypes();
       expect(types).to.deep.have.members(
         [
           'String',
@@ -38,7 +39,7 @@ describe('SQLTypes', () => {
   describe('#getValidationsForType', () => {
     describe('when passing a valid type', () => {
       it('returns only the validation list for it', () => {
-        var validations = sqlTypes.getValidationsForType('String');
+        const validations = sqlTypes.getValidationsForType('String');
         expect(validations).to.deep.have.members(
           [
             'required',

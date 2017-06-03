@@ -1,8 +1,8 @@
 'use strict';
 
-var expect = require('chai').expect,
-    fail = expect.fail,
-    areJHipsterEntitiesEqual = require('../../lib/helpers/object_helper').areJHipsterEntitiesEqual;
+const expect = require('chai').expect,
+  fail = expect.fail,
+  areJHipsterEntitiesEqual = require('../../lib/helpers/object_helper').areJHipsterEntitiesEqual;
 
 describe('ObjectHelper', () => {
   describe('::areJHipsterEntitiesEqual', () => {
@@ -40,7 +40,7 @@ describe('ObjectHelper', () => {
     });
     describe('when comparing objects', () => {
       describe('if they are identical', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -90,7 +90,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -146,7 +146,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if they are both empty', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -156,7 +156,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -172,7 +172,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if they both have the same fields', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -194,7 +194,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -222,7 +222,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if their fields are not ordered the same', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -244,7 +244,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -272,7 +272,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if their field attributes are not ordered the same', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -294,7 +294,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [
@@ -322,7 +322,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if they both have the same relationships', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -360,7 +360,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -404,7 +404,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if their relationships are not ordered the same', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -442,7 +442,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [
     {
@@ -486,7 +486,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if they both have the same options', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -496,7 +496,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -512,7 +512,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe("if they don't have the same options", () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -522,7 +522,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -538,7 +538,7 @@ describe('ObjectHelper', () => {
         });
       });
       describe('if their changelogDate differ', () => {
-        var first = JSON.parse(`{
+        const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],
@@ -548,7 +548,7 @@ describe('ObjectHelper', () => {
   "service": "no",
   "entityTableName": "job_history"
 }`);
-        var second = JSON.parse(`{
+        const second = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
   "fields": [],

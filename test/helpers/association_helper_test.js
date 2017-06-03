@@ -1,8 +1,8 @@
 'use strict';
 
-var expect = require('chai').expect,
-    cardinalities = require('../../lib/cardinalities'),
-    checkValidityOfAssociation = require('../../lib/helpers/association_helper').checkValidityOfAssociation;
+const expect = require('chai').expect,
+  cardinalities = require('../../lib/cardinalities'),
+  checkValidityOfAssociation = require('../../lib/helpers/association_helper').checkValidityOfAssociation;
 
 describe('#checkValidityOfAssociation', () => {
   describe('when passing a valid association', () => {

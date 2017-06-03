@@ -1,19 +1,20 @@
 'use strict';
 
-var expect = require('chai').expect,
-    fail = expect.fail,
-    MongoDBTypes = require('../../lib/types/mongodb_types');
+const expect = require('chai').expect,
+  fail = expect.fail,
+  MongoDBTypes = require('../../lib/types/mongodb_types');
 
-var mongoDBTypes;
 
 describe('MongoDBTypes', () => {
+  let mongoDBTypes;
+
   before(() => {
     mongoDBTypes = new MongoDBTypes();
   });
 
   describe('#getTypes', () => {
     it('only returns the supported type list', () => {
-      var types = mongoDBTypes.getTypes();
+      const types = mongoDBTypes.getTypes();
       expect(types).to.deep.have.members(
         [
           'String',
@@ -38,7 +39,7 @@ describe('MongoDBTypes', () => {
   describe('#getValidationsForType', () => {
     describe('when passing a valid type', () => {
       it('returns only the validation list for it', () => {
-        var validations = mongoDBTypes.getValidationsForType('String');
+        const validations = mongoDBTypes.getValidationsForType('String');
         expect(validations).to.deep.have.members(
           [
             'required',

@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect,
-    ValidationData = require('../../lib/data/validation_data');
+  ValidationData = require('../../lib/data/validation_data');
 
 describe('ValidationData', () => {
   describe('#new', () => {
@@ -9,7 +9,7 @@ describe('ValidationData', () => {
       it('does not fail', () => {
         new ValidationData();
       });
-      var data = new ValidationData();
+      const data = new ValidationData();
 
       it('sets the default values instead', () => {
         expect(data.name).to.eq('');
@@ -17,7 +17,7 @@ describe('ValidationData', () => {
       });
     });
     describe('when passing arguments', () => {
-      var data = new ValidationData({name: 'Abc', value: 'def'});
+      const data = new ValidationData({name: 'Abc', value: 'def'});
 
       it('sets them', () => {
         expect(data.name).to.eq('Abc');

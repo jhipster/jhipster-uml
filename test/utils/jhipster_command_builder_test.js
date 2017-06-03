@@ -1,18 +1,17 @@
 'use strict';
 
 const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder'),
-    expect = require('chai').expect,
-    fail = expect.fail;
+  expect = require('chai').expect,
+  fail = expect.fail;
 
 describe('JHipsterCommandBuilder', () => {
   let builder = null;
   let built = null;
   const className = 'abc';
 
-  beforeEach (() => {
-    builder = new JHipsterCommandBuilder()
+  beforeEach(() => {
+    builder = new JHipsterCommandBuilder();
   });
-
 
   describe('#force', () => {
     it('adds the --force option', () => {
@@ -65,7 +64,7 @@ describe('JHipsterCommandBuilder', () => {
   describe('#angularSuffix', () => {
     it('adds the --angular-suffix flag followed by the suffix', () => {
       builder.angularSuffix('suffix');
-      var index = builder.args.indexOf('--angular-suffix');
+      const index = builder.args.indexOf('--angular-suffix');
       expect(index).not.to.eq(-1);
       expect(builder.args[index + 1]).to.eq('suffix');
     });
@@ -131,7 +130,7 @@ describe('JHipsterCommandBuilder', () => {
             '--angular-suffix',
             'suffix',
             '--skip-user-management',
-            '--regenerate' ]);
+            '--regenerate']);
         } else {
           expect(built.args).to.deep.eq([
             'jhipster:entity',
@@ -143,11 +142,11 @@ describe('JHipsterCommandBuilder', () => {
             '--angular-suffix',
             'suffix',
             '--skip-user-management',
-            '--regenerate' ]);
+            '--regenerate']);
         }
       });
       it('builds the stdio array', () => {
-        expect(built.stdio).to.deep.eq([ process.stdin, process.stdout, process.stderr ]);
+        expect(built.stdio).to.deep.eq([process.stdin, process.stdout, process.stderr]);
       });
     });
   });

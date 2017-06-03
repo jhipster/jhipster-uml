@@ -1,21 +1,21 @@
 'use strict';
 
 const expect = require('chai').expect,
-    fail = expect.fail,
-    fs = require('fs'),
-    JHipsterUtils = require('../../lib/utils/jhipster_utils'),
-    isYoRcFilePresent = JHipsterUtils.isYoRcFilePresent,
-    readJSONFiles = JHipsterUtils.readJSONFiles,
-    checkForReservedClassName = JHipsterUtils.checkForReservedClassName,
-    checkForReservedTableName = JHipsterUtils.checkForReservedTableName,
-    checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName,
-    dateFormatForLiquibase = JHipsterUtils.dateFormatForLiquibase;
+  fail = expect.fail,
+  fs = require('fs'),
+  JHipsterUtils = require('../../lib/utils/jhipster_utils'),
+  isYoRcFilePresent = JHipsterUtils.isYoRcFilePresent,
+  readJSONFiles = JHipsterUtils.readJSONFiles,
+  checkForReservedClassName = JHipsterUtils.checkForReservedClassName,
+  checkForReservedTableName = JHipsterUtils.checkForReservedTableName,
+  checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName,
+  dateFormatForLiquibase = JHipsterUtils.dateFormatForLiquibase;
 
 describe('JHipsterUtils', () => {
   describe('::isYoRcFilePresent', () => {
     it('returns whether the .yo-rc.json file exists', (done) => {
       expect(isYoRcFilePresent()).to.be.false;
-      fs.open('.yo-rc.json', 'w', (error, fileDescriptor) => {
+      fs.open('.yo-rc.json', 'w', (error) => {
         if (error) {
           throw error;
         }
@@ -30,7 +30,7 @@ describe('JHipsterUtils', () => {
       it('reads the files', () => {
         fs.mkdirSync('.jhipster');
         fs.writeFileSync('./.jhipster/A.json', '{"name": "toto"}');
-        var read = readJSONFiles(['A']);
+        const read = readJSONFiles(['A']);
         expect(read.A.name).to.eq('toto');
         fs.unlinkSync('./.jhipster/A.json');
         fs.rmdirSync('.jhipster');
@@ -39,7 +39,7 @@ describe('JHipsterUtils', () => {
     describe('when passing entity names for files that do not exist', () => {
       it('does nothing', () => {
         fs.mkdirSync('.jhipster');
-        var read = readJSONFiles(['A']);
+        const read = readJSONFiles(['A']);
         expect(read).to.deep.eq({});
         fs.rmdirSync('.jhipster');
       });
@@ -190,7 +190,7 @@ describe('JHipsterUtils', () => {
         const now = new Date();
         const increment = 1000042;
         const result =
-          dateFormatForLiquibase({ date: now, increment: increment });
+          dateFormatForLiquibase({date: now, increment: increment});
         now.setSeconds(now.getUTCSeconds() + increment);
         const now_utc = new Date(
           now.getUTCFullYear(),
@@ -233,7 +233,7 @@ describe('JHipsterUtils', () => {
     describe('when not passing the increment', () => {
       it('formats the current time for liquibase with no increment', () => {
         const now = new Date();
-        const result = dateFormatForLiquibase({ date: now });
+        const result = dateFormatForLiquibase({date: now});
         const now_utc = new Date(
           now.getUTCFullYear(),
           now.getUTCMonth(),

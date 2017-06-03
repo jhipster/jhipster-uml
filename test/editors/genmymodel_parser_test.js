@@ -1,25 +1,25 @@
 'use strict';
 
 const expect = require('chai').expect,
-    fail = expect.fail,
-    ParserFactory = require('../../lib/editors/parser_factory');
+  fail = expect.fail,
+  ParserFactory = require('../../lib/editors/parser_factory');
 
 
 describe('GenMyModelParser', () => {
   describe('when passing a valid diagram', () => {
     describe('taken from the HR example', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
       it('correctly parses the JobHistory class', () => {
-        var jobHistory = parsedData.classes['_rasqOrvHEeWM0I0nquuJQA'];
+        const jobHistory = parsedData.classes['_rasqOrvHEeWM0I0nquuJQA'];
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
         expect(jobHistory.fields).to.deep.eq([
@@ -32,7 +32,7 @@ describe('GenMyModelParser', () => {
         expect(jobHistory.service).to.eq('no');
       });
       it('correctly parses the Job class', () => {
-        var job = parsedData.classes['_rasqXLvHEeWM0I0nquuJQA'];
+        const job = parsedData.classes['_rasqXLvHEeWM0I0nquuJQA'];
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
         expect(job.fields).to.deep.eq([
@@ -47,7 +47,7 @@ describe('GenMyModelParser', () => {
         expect(job.service).to.eq('no');
       });
       it('correctly parses the Department class', () => {
-        var department = parsedData.classes['_rasqRrvHEeWM0I0nquuJQA'];
+        const department = parsedData.classes['_rasqRrvHEeWM0I0nquuJQA'];
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
         expect(department.fields).to.deep.eq([
@@ -60,7 +60,7 @@ describe('GenMyModelParser', () => {
         expect(department.service).to.eq('no');
       });
       it('correctly parses the Employee class', () => {
-        var employee = parsedData.classes['_ratRVLvHEeWM0I0nquuJQA'];
+        const employee = parsedData.classes['_ratRVLvHEeWM0I0nquuJQA'];
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
         expect(employee.fields).to.deep.eq([
@@ -79,7 +79,7 @@ describe('GenMyModelParser', () => {
         expect(employee.service).to.eq('no');
       });
       it('correctly parses the Location class', () => {
-        var location = parsedData.classes['_ratRo7vHEeWM0I0nquuJQA'];
+        const location = parsedData.classes['_ratRo7vHEeWM0I0nquuJQA'];
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
         expect(location.fields).to.deep.eq([
@@ -95,7 +95,7 @@ describe('GenMyModelParser', () => {
         expect(location.service).to.eq('no');
       });
       it('correctly parses the Country class', () => {
-        var country = parsedData.classes['_ratRwrvHEeWM0I0nquuJQA'];
+        const country = parsedData.classes['_ratRwrvHEeWM0I0nquuJQA'];
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
         expect(country.fields).to.deep.eq([
@@ -108,7 +108,7 @@ describe('GenMyModelParser', () => {
         expect(country.service).to.eq('no');
       });
       it('correctly parses the Region class', () => {
-        var region = parsedData.classes['_ratR2LvHEeWM0I0nquuJQA'];
+        const region = parsedData.classes['_ratR2LvHEeWM0I0nquuJQA'];
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
         expect(region.fields).to.deep.eq([
@@ -121,7 +121,7 @@ describe('GenMyModelParser', () => {
         expect(region.service).to.eq('no');
       });
       it('correctly parses the Task class', () => {
-        var task = parsedData.classes['_rasqe7vHEeWM0I0nquuJQA'];
+        const task = parsedData.classes['_rasqe7vHEeWM0I0nquuJQA'];
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
         expect(task.fields).to.deep.eq([
@@ -148,75 +148,75 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('with required relationships', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_required_relationships.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('sets the required flag in the AssociationData objects', () => {
         for (let i = 0, associationKeys = Object.keys(parsedData.associations); i < associationKeys.length; i++) {
           expect(
             parsedData.associations[associationKeys[i]].isInjectedFieldInFromRequired
-              && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
+            && parsedData.associations[associationKeys[i]].isInjectedFieldInToRequired
           ).to.be.true;
         }
       });
     });
     describe('with a lowercase type', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_lowercased_string_type.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('adds it capitalized', () => {
         expect(parsedData.types['String'].name).to.eq('String');
       });
     });
     describe('with comments', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_comments.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
       });
       it('adds comments in classes', () => {
         expect(parsedData.classes['_UlHVuVFwEeW5wfYDi5CV9g'].comment).to.eq(
-`This is a class <b>comment</b>!<br>`
+          `This is a class <b>comment</b>!<br>`
         );
         expect(parsedData.classes['_UlHVwVFwEeW5wfYDi5CV9g'].comment).to.eq(
-`Something.`
+          `Something.`
         );
       });
       it('adds comments in fields', () => {
         expect(parsedData.fields['_UlHVvVFwEeW5wfYDi5CV9g'].comment).to.eq(
-`This is an attribute <i>comment</i>.<br>`
+          `This is an attribute <i>comment</i>.<br>`
         );
       });
       it('adds comments in relationships', () => {
         expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInFrom).to.eq(
-`This is yet another comment!<br><br>Weird...<br>`
+          `This is yet another comment!<br><br>Weird...<br>`
         );
         expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInTo).to.eq(
-`This is a relationship comment.<br>`
+          `This is a relationship comment.<br>`
         );
       });
     });
     describe('with a user class', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_user_class_test.xmi',
         databaseType: 'sql',
         noUserManagement: true
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
@@ -228,13 +228,13 @@ describe('GenMyModelParser', () => {
     });
     describe('with enums', () => {
       describe('with values', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/genmymodel_enum_test.xmi',
           databaseType: 'sql',
           noUserManagement: true
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -256,13 +256,13 @@ describe('GenMyModelParser', () => {
         });
       });
       describe('without values', () => {
-        var parserData = ParserFactory.createParser({
+        const parserData = ParserFactory.createParser({
           file: './test/xmi/genmymodel_enum_no_value_test.xmi',
           databaseType: 'sql',
           noUserManagement: true
         });
-        var parser = parserData.parser;
-        var parsedData = parser.parse(parserData.data);
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
 
         it('parses it', () => {
           expect(parsedData).not.to.be.null;
@@ -273,12 +273,12 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('with package', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_package.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
-      var parsedData = parser.parse(parserData.data);
+      const parser = parserData.parser;
+      const parsedData = parser.parse(parserData.data);
 
       it('parses it', () => {
         expect(parsedData).not.to.be.null;
@@ -286,7 +286,7 @@ describe('GenMyModelParser', () => {
       it('includes classes in package', () => {
         expect(parsedData.classes['_z3DqLaFTEeawbN_F_HFDxg']).not.to.be.null;
         expect(parsedData.classes['_z3DqQ6FTEeawbN_F_HFDxg']).not.to.be.null;
-        expect(parsedData.classNames).to.deep.eq(['A','B']);
+        expect(parsedData.classNames).to.deep.eq(['A', 'B']);
         expect(parsedData.enums['_z3DqRqFTEeawbN_F_HFDxg']).not.to.be.null;
         expect(parsedData.associations['_z3DqM6FTEeawbN_F_HFDxg']).not.to.be.null;
       });
@@ -294,11 +294,11 @@ describe('GenMyModelParser', () => {
   });
   describe('when passing an invalid diagram', () => {
     describe('as a class has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_no_class_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -310,11 +310,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as a field has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -326,11 +326,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe("as an enum's value as no name", () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -342,11 +342,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as an enum has no name', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_enum_no_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -358,11 +358,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as a class name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_class_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -374,11 +374,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as a field name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_field_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -390,11 +390,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as a table name is a reserved word', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_reserved_table_name_test.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
@@ -406,11 +406,11 @@ describe('GenMyModelParser', () => {
       });
     });
     describe('as an invalid type is used', () => {
-      var parserData = ParserFactory.createParser({
+      const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_wrong_type.xmi',
         databaseType: 'sql'
       });
-      var parser = parserData.parser;
+      const parser = parserData.parser;
 
       it('fails', () => {
         try {
