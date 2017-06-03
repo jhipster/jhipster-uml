@@ -30,16 +30,16 @@
   "dependencies": {
     "chalk": "1.1.3",
     "deasync": "0.1.9",
-    "inquirer": "2.0.0",
-    "jhipster-core": "1.2.6",
+    "inquirer": "3.0.6",
+    "jhipster-core": "1.3.2",
     "lodash": "4.17.4",
     "xml2js": "0.4.17",
-    "yargs": "7.0.2"
+    "yargs": "8.0.1"
   },
   "devDependencies": {
-    "chai": "3.5.0",
+    "chai": "4.0.1",
     "istanbul": "0.4.5",
-    "mocha": "3.2.0",
+    "mocha": "3.4.2",
     "mocha-clean": "1.0.0"
   },
   "peerDependencies": {},
