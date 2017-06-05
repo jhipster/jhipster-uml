@@ -21,132 +21,17 @@ describe('SQLTypes', () => {
           'Integer',
           'Long',
           'BigDecimal',
+          'Float',
+          'Double',
+          'Enum',
+          'Boolean',
           'LocalDate',
           'ZonedDateTime',
-          'Boolean',
-          'Enum',
           'Blob',
           'AnyBlob',
           'ImageBlob',
           'TextBlob',
-          'Float',
-          'Double'
-        ]
-      );
-    });
-  });
-
-  describe('#getValidationsForType', () => {
-    describe('when passing a valid type', () => {
-      it('returns only the validation list for it', () => {
-        const validations = sqlTypes.getValidationsForType('String');
-        expect(validations).to.deep.have.members(
-          [
-            'required',
-            'minlength',
-            'maxlength',
-            'pattern'
-          ]
-        );
-      });
-    });
-
-    describe('when passing an invalid type', () => {
-      describe('because it is null', () => {
-        it('throws an exception', () => {
-          try {
-            sqlTypes.getValidationsForType(null);
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it is blank', () => {
-        it('throws an exception', () => {
-          try {
-            sqlTypes.getValidationsForType('');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
-            sqlTypes.getValidationsForType('NoTypeAtAll');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-    });
-  });
-
-  describe('#toValueNameObjectArray', () => {
-    it('correctly transposes the type list into a name/value object array', () => {
-      expect(sqlTypes.toValueNameObjectArray()).to.deep.have.members(
-        [
-          {
-            value: 'String',
-            name: 'String'
-          },
-          {
-            value: 'Integer',
-            name: 'Integer'
-          },
-          {
-            value: 'Long',
-            name: 'Long'
-          },
-          {
-            value: 'BigDecimal',
-            name: 'BigDecimal'
-          },
-          {
-            value: 'LocalDate',
-            name: 'LocalDate'
-          },
-          {
-            value: 'ZonedDateTime',
-            name: 'ZonedDateTime'
-          },
-          {
-            value: 'Boolean',
-            name: 'Boolean'
-          },
-          {
-            value: 'Enum',
-            name: 'Enum'
-          },
-          {
-            value: 'Blob',
-            name: 'Blob'
-          },
-          {
-            value: 'AnyBlob',
-            name: 'AnyBlob'
-          },
-          {
-            value: 'ImageBlob',
-            name: 'ImageBlob'
-          },
-          {
-            value: 'TextBlob',
-            name: 'TextBlob'
-          },
-          {
-            value: 'Float',
-            name: 'Float'
-          },
-          {
-            value: 'Double',
-            name: 'Double'
-          }
+          'Instant'
         ]
       );
     });
@@ -196,7 +81,7 @@ describe('SQLTypes', () => {
             sqlTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -207,37 +92,38 @@ describe('SQLTypes', () => {
             sqlTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
-            sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'required');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+        it('returns false', () => {
+          expect(sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'required')).to.be.false;
         });
       });
     });
 
     describe('when the passed validation is invalid', () => {
       describe('because it is null', () => {
-        it('returns false', () => {
-          expect(
-            sqlTypes.isValidationSupportedForType('String', null)
-          ).to.be.false;
+        it('throws an exception', () => {
+          try {
+            sqlTypes.isValidationSupportedForType('String', null);
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
       describe('because it is blank', () => {
-        it('returns false', () => {
-          expect(
-            sqlTypes.isValidationSupportedForType('String', '')
-          ).to.be.false;
+        it('throws an exception', () => {
+          try {
+            sqlTypes.isValidationSupportedForType('String', '');
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
@@ -257,7 +143,7 @@ describe('SQLTypes', () => {
             sqlTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -268,19 +154,14 @@ describe('SQLTypes', () => {
             sqlTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because they do not exist', () => {
-        it('throws an exception', () => {
-          try {
-            sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'NoValidation');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+        it('returns false', () => {
+          expect(sqlTypes.isValidationSupportedForType('NoTypeAtAll', 'NoValidation')).to.be.false;
         });
       });
     });

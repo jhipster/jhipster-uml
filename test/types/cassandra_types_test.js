@@ -16,111 +16,16 @@ describe('CassandraTypes', () => {
       const types = cassandraTypes.getTypes();
       expect(types).to.deep.have.members(
         [
-          'UUID',
           'String',
           'Integer',
           'Long',
           'BigDecimal',
-          'Date',
-          'Boolean',
           'Float',
-          'Double'
-        ]
-      );
-    });
-  });
-
-  describe('#getValidationsForType', () => {
-    describe('when passing a valid type', () => {
-      it('returns only the validation list for it', () => {
-        const validations = cassandraTypes.getValidationsForType('String');
-        expect(validations).to.deep.have.members(
-          [
-            'required',
-            'minlength',
-            'maxlength',
-            'pattern'
-          ]
-        );
-      });
-    });
-
-    describe('when passing an invalid type', () => {
-      describe('because it is null', () => {
-        it('throws an exception', () => {
-          try {
-            cassandraTypes.getValidationsForType(null);
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it is blank', () => {
-        it('throws an exception', () => {
-          try {
-            cassandraTypes.getValidationsForType('');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
-            cassandraTypes.getValidationsForType('NoTypeAtAll');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-    });
-  });
-
-  describe('#toValueNameObjectArray', () => {
-    it('correctly transposes the type list into a name/value object array', () => {
-      expect(cassandraTypes.toValueNameObjectArray()).to.deep.have.members(
-        [
-          {
-            value: 'UUID',
-            name: 'UUID'
-          },
-          {
-            value: 'String',
-            name: 'String'
-          },
-          {
-            value: 'Integer',
-            name: 'Integer'
-          },
-          {
-            value: 'Long',
-            name: 'Long'
-          },
-          {
-            value: 'BigDecimal',
-            name: 'BigDecimal'
-          },
-          {
-            value: 'Date',
-            name: 'Date'
-          },
-          {
-            value: 'Boolean',
-            name: 'Boolean'
-          },
-          {
-            value: 'Float',
-            name: 'Float'
-          },
-          {
-            value: 'Double',
-            name: 'Double'
-          }
+          'Double',
+          'Boolean',
+          'Date',
+          'UUID',
+          'Instant'
         ]
       );
     });
@@ -170,7 +75,7 @@ describe('CassandraTypes', () => {
             cassandraTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -181,39 +86,42 @@ describe('CassandraTypes', () => {
             cassandraTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
+        it('returns false', () => {
+          expect(
             cassandraTypes.isValidationSupportedForType(
               'NoTypeAtAll',
-              'required');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+              'required')
+          ).to.be.false;
         });
       });
     });
 
     describe('when the passed validation is invalid', () => {
       describe('because it is null', () => {
-        it('returns false', () => {
-          expect(
-            cassandraTypes.isValidationSupportedForType('String', null)
-          ).to.be.false;
+        it('throws an exception', () => {
+          try {
+            cassandraTypes.isValidationSupportedForType('String', null);
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
       describe('because it is blank', () => {
-        it('returns false', () => {
-          expect(
-            cassandraTypes.isValidationSupportedForType('String', '')
-          ).to.be.false;
+        it('throws an exception', () => {
+          try {
+            cassandraTypes.isValidationSupportedForType('String', '');
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
@@ -235,7 +143,7 @@ describe('CassandraTypes', () => {
             cassandraTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -246,21 +154,18 @@ describe('CassandraTypes', () => {
             cassandraTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because they do not exist', () => {
-        it('throws an exception', () => {
-          try {
+        it('returns false', () => {
+          expect(
             cassandraTypes.isValidationSupportedForType(
               'NoTypeAtAll',
-              'NoValidation');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+              'NoValidation')
+          ).to.be.false;
         });
       });
     });

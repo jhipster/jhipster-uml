@@ -21,132 +21,17 @@ describe('MongoDBTypes', () => {
           'Integer',
           'Long',
           'BigDecimal',
+          'Float',
+          'Double',
+          'Enum',
+          'Boolean',
           'LocalDate',
           'ZonedDateTime',
-          'Boolean',
-          'Enum',
           'Blob',
           'AnyBlob',
           'ImageBlob',
           'TextBlob',
-          'Float',
-          'Double'
-        ]
-      );
-    });
-  });
-
-  describe('#getValidationsForType', () => {
-    describe('when passing a valid type', () => {
-      it('returns only the validation list for it', () => {
-        const validations = mongoDBTypes.getValidationsForType('String');
-        expect(validations).to.deep.have.members(
-          [
-            'required',
-            'minlength',
-            'maxlength',
-            'pattern'
-          ]
-        );
-      });
-    });
-
-    describe('when passing an invalid type', () => {
-      describe('because it is null', () => {
-        it('throws an exception', () => {
-          try {
-            mongoDBTypes.getValidationsForType(null);
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it is blank', () => {
-        it('throws an exception', () => {
-          try {
-            mongoDBTypes.getValidationsForType('');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-
-      describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
-            mongoDBTypes.getValidationsForType('NoTypeAtAll');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
-        });
-      });
-    });
-  });
-
-  describe('#toValueNameObjectArray', () => {
-    it('correctly transposes the type list into a name/value object array', () => {
-      expect(mongoDBTypes.toValueNameObjectArray()).to.deep.have.members(
-        [
-          {
-            value: 'String',
-            name: 'String'
-          },
-          {
-            value: 'Integer',
-            name: 'Integer'
-          },
-          {
-            value: 'Long',
-            name: 'Long'
-          },
-          {
-            value: 'BigDecimal',
-            name: 'BigDecimal'
-          },
-          {
-            value: 'LocalDate',
-            name: 'LocalDate'
-          },
-          {
-            value: 'ZonedDateTime',
-            name: 'ZonedDateTime'
-          },
-          {
-            value: 'Boolean',
-            name: 'Boolean'
-          },
-          {
-            value: 'Enum',
-            name: 'Enum'
-          },
-          {
-            value: 'Blob',
-            name: 'Blob'
-          },
-          {
-            value: 'AnyBlob',
-            name: 'AnyBlob'
-          },
-          {
-            value: 'ImageBlob',
-            name: 'ImageBlob'
-          },
-          {
-            value: 'TextBlob',
-            name: 'TextBlob'
-          },
-          {
-            value: 'Float',
-            name: 'Float'
-          },
-          {
-            value: 'Double',
-            name: 'Double'
-          }
+          'Instant'
         ]
       );
     });
@@ -196,7 +81,7 @@ describe('MongoDBTypes', () => {
             mongoDBTypes.isValidationSupportedForType(null, 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -207,39 +92,42 @@ describe('MongoDBTypes', () => {
             mongoDBTypes.isValidationSupportedForType('', 'required');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because it does not exist', () => {
-        it('throws an exception', () => {
-          try {
+        it('returns false', () => {
+          expect(
             mongoDBTypes.isValidationSupportedForType(
               'NoTypeAtAll',
-              'required');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+              'required')
+          ).to.be.false;
         });
       });
     });
 
     describe('when the passed validation is invalid', () => {
       describe('because it is null', () => {
-        it('returns false', () => {
-          expect(
-            mongoDBTypes.isValidationSupportedForType('String', null)
-          ).to.be.false;
+        it('throws an exception', () => {
+          try {
+            mongoDBTypes.isValidationSupportedForType('String', null);
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
       describe('because it is blank', () => {
         it('returns false', () => {
-          expect(
-            mongoDBTypes.isValidationSupportedForType('String', '')
-          ).to.be.false;
+          try {
+            mongoDBTypes.isValidationSupportedForType('String', '');
+            fail();
+          } catch (error) {
+            expect(error.name).to.equal('NullPointerException');
+          }
         });
       });
 
@@ -261,7 +149,7 @@ describe('MongoDBTypes', () => {
             mongoDBTypes.isValidationSupportedForType(null, null);
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
@@ -272,21 +160,18 @@ describe('MongoDBTypes', () => {
             mongoDBTypes.isValidationSupportedForType('', '');
             fail();
           } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
+            expect(error.name).to.equal('NullPointerException');
           }
         });
       });
 
       describe('because they do not exist', () => {
-        it('throws an exception', () => {
-          try {
+        it('returns false', () => {
+          expect(
             mongoDBTypes.isValidationSupportedForType(
               'NoTypeAtAll',
-              'NoValidation');
-            fail();
-          } catch (error) {
-            expect(error.name).to.equal('WrongDatabaseTypeException');
-          }
+              'NoValidation')
+          ).to.be.false;
         });
       });
     });
