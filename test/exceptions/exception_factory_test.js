@@ -1,25 +1,24 @@
-'use strict';
-
-const expect = require('chai').expect,
-  buildException = require('../../lib/exceptions/exception_factory').buildException;
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
+const BuildException = require('../../lib/exceptions/exception_factory').BuildException;
 
 describe('ExceptionFactory', () => {
-  describe('#buildException', () => {
-    const exception = buildException('Working', null);
+  describe('#BuildException', () => {
+    const exception = BuildException('Working', null);
 
-    it("adds the 'Exception' suffix to the names", () => {
+    it('adds the \'Exception\' suffix to the names', () => {
       expect(exception.name).to.eq('WorkingException');
     });
     it('builds throwable objects', () => {
       try {
-        throw new buildException('Working', null);
+        throw new BuildException('Working', null);
       } catch (error) {
         expect(error.name).to.eq('WorkingException');
       }
     });
     describe('when only passing a name', () => {
-      const exception1 = buildException('Working', null);
-      const exception2 = buildException('Working', '');
+      const exception1 = BuildException('Working', null);
+      const exception2 = BuildException('Working', '');
 
       it('takes the name and adds no message', () => {
         expect(exception1.name).to.eq('WorkingException');
@@ -29,8 +28,8 @@ describe('ExceptionFactory', () => {
       });
     });
     describe('when only passing a message', () => {
-      const exception1 = buildException(null, 'The message');
-      const exception2 = buildException('', 'The message');
+      const exception1 = BuildException(null, 'The message');
+      const exception2 = BuildException('', 'The message');
 
       it('just adds the suffix and keeps the message', () => {
         expect(exception1.name).to.eq('Exception');
@@ -40,7 +39,7 @@ describe('ExceptionFactory', () => {
       });
     });
     describe('when passing in a name and a message', () => {
-      const exception = buildException('Good', 'The message');
+      const exception = BuildException('Good', 'The message');
 
       it('keeps both', () => {
         expect(exception.name).to.eq('GoodException');
@@ -48,9 +47,9 @@ describe('ExceptionFactory', () => {
       });
     });
     describe('when not passing anything', () => {
-      const exception = buildException(null, null);
+      const exception = BuildException(null, null);
 
-      it("names the exception 'Exception' and puts no message", () => {
+      it('names the exception \'Exception\' and puts no message', () => {
         expect(exception.name).to.eq('Exception');
         expect(exception.message).to.be.empty;
       });

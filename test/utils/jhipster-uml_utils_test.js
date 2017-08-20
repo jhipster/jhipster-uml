@@ -1,9 +1,9 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
+const fs = require('fs');
+const JHipsterUMLUtils = require('../../lib/utils/jhipster-uml_utils');
 
-const expect = require('chai').expect,
-  fs = require('fs'),
-  JHipsterUMLUtils = require('../../lib/utils/jhipster-uml_utils'),
-  isJumlFilePresent = JHipsterUMLUtils.isJumlFilePresent;
+const isJumlFilePresent = JHipsterUMLUtils.isJumlFilePresent;
 
 describe('JHipsterUMLUtils', () => {
   describe('::isJumlFilePresent', () => {

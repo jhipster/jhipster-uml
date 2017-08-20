@@ -1,16 +1,16 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  DatabaseTypes = require('jhipster-core').JHipsterDatabaseTypes.Types,
-  UMLDesignerParser = require('../../lib/editors/umldesigner_parser'),
-  xml2js = require('xml2js'),
-  fs = require('fs'),
-  SQLTypes = require('../../lib/types/sql_types'),
-  MongoDBTypes = require('../../lib/types/mongodb_types'),
-  CassandraTypes = require('../../lib/types/cassandra_types'),
-  buildException = require('../../lib/exceptions/exception_factory').buildException,
-  exceptions = require('../../lib/exceptions/exception_factory').exceptions;
+const fail = expect.fail;
+const DatabaseTypes = require('jhipster-core').JHipsterDatabaseTypes.Types;
+const UMLDesignerParser = require('../../lib/editors/umldesigner_parser');
+const xml2js = require('xml2js');
+const fs = require('fs');
+const SQLTypes = require('../../lib/types/sql_types');
+const MongoDBTypes = require('../../lib/types/mongodb_types');
+const CassandraTypes = require('../../lib/types/cassandra_types');
+const BuildException = require('../../lib/exceptions/exception_factory').BuildException;
+const exceptions = require('../../lib/exceptions/exception_factory').exceptions;
 
 describe('UMLDesignerParser', () => {
   describe('when passing a valid diagram', () => {
@@ -24,7 +24,7 @@ describe('UMLDesignerParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('correctly parses the JobHistory class', () => {
-        const jobHistory = parsedData.classes['_q9OKYLvPEeWmS7iaRSwQeQ'];
+        const jobHistory = parsedData.classes._q9OKYLvPEeWmS7iaRSwQeQ;
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
         expect(jobHistory.fields).to.deep.eq([
@@ -37,7 +37,7 @@ describe('UMLDesignerParser', () => {
         expect(jobHistory.service).to.eq('no');
       });
       it('correctly parses the Job class', () => {
-        const job = parsedData.classes['_4wnzYLvQEeWmS7iaRSwQeQ'];
+        const job = parsedData.classes._4wnzYLvQEeWmS7iaRSwQeQ;
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
         expect(job.fields).to.deep.eq([
@@ -50,7 +50,7 @@ describe('UMLDesignerParser', () => {
         expect(job.service).to.eq('no');
       });
       it('correctly parses the Department class', () => {
-        const department = parsedData.classes['_RAdQ8LvQEeWmS7iaRSwQeQ'];
+        const department = parsedData.classes._RAdQ8LvQEeWmS7iaRSwQeQ;
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
         expect(department.fields).to.deep.eq([
@@ -63,7 +63,7 @@ describe('UMLDesignerParser', () => {
         expect(department.service).to.eq('no');
       });
       it('correctly parses the Employee class', () => {
-        const employee = parsedData.classes['_1_M_MLvREeWmS7iaRSwQeQ'];
+        const employee = parsedData.classes._1_M_MLvREeWmS7iaRSwQeQ;
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
         expect(employee.fields).to.deep.eq([
@@ -82,7 +82,7 @@ describe('UMLDesignerParser', () => {
         expect(employee.service).to.eq('no');
       });
       it('correctly parses the Location class', () => {
-        const location = parsedData.classes['_DCZ6ULvTEeWmS7iaRSwQeQ'];
+        const location = parsedData.classes._DCZ6ULvTEeWmS7iaRSwQeQ;
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
         expect(location.fields).to.deep.eq([
@@ -98,7 +98,7 @@ describe('UMLDesignerParser', () => {
         expect(location.service).to.eq('no');
       });
       it('correctly parses the Country class', () => {
-        const country = parsedData.classes['_igcOgLvTEeWmS7iaRSwQeQ'];
+        const country = parsedData.classes._igcOgLvTEeWmS7iaRSwQeQ;
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
         expect(country.fields).to.deep.eq([
@@ -111,7 +111,7 @@ describe('UMLDesignerParser', () => {
         expect(country.service).to.eq('no');
       });
       it('correctly parses the Region class', () => {
-        const region = parsedData.classes['_tCa_gLvTEeWmS7iaRSwQeQ'];
+        const region = parsedData.classes._tCa_gLvTEeWmS7iaRSwQeQ;
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
         expect(region.fields).to.deep.eq([
@@ -124,7 +124,7 @@ describe('UMLDesignerParser', () => {
         expect(region.service).to.eq('no');
       });
       it('correctly parses the Task class', () => {
-        const task = parsedData.classes['_xC4PILvREeWmS7iaRSwQeQ'];
+        const task = parsedData.classes._xC4PILvREeWmS7iaRSwQeQ;
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
         expect(task.fields).to.deep.eq([
@@ -187,7 +187,7 @@ describe('UMLDesignerParser', () => {
       });
 
       it('adds it capitalized', () => {
-        expect(parsedData.types['_IEL5gLvQEeWmS7iaRSwQeQ'].name).to.eq('String');
+        expect(parsedData.types._IEL5gLvQEeWmS7iaRSwQeQ.name).to.eq('String');
       });
     });
     describe('with comments', () => {
@@ -200,21 +200,21 @@ describe('UMLDesignerParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('adds comments in classes', () => {
-        expect(parsedData.classes['_2q878FFXEeWn8vWfxOEIOg'].comment).to.eq(
+        expect(parsedData.classes._2q878FFXEeWn8vWfxOEIOg.comment).to.eq(
           `This is a class comment.<br/>
 This <b>sucks</b>.`
         );
-        expect(parsedData.classes['_5fY9AFFYEeWn8vWfxOEIOg'].comment).to.eq('Another&nbsp;comment.');
+        expect(parsedData.classes._5fY9AFFYEeWn8vWfxOEIOg.comment).to.eq('Another&nbsp;comment.');
       });
       it('adds comments in fields', () => {
-        expect(parsedData.fields['_MYveEFFYEeWn8vWfxOEIOg'].comment).to.eq(
+        expect(parsedData.fields._MYveEFFYEeWn8vWfxOEIOg.comment).to.eq(
           `This is an attribute comment.<br/>
 <p>This sucks <i>too</i></p>`
         );
       });
       it('adds comments in relationships, but does not support both sides', () => {
-        expect(parsedData.associations['_9ZgpMFFYEeWn8vWfxOEIOg'].commentInFrom).to.eq('Comment on a relationship.');
-        expect(parsedData.associations['_9ZgpMFFYEeWn8vWfxOEIOg'].commentInTo).to.eq('Comment on a relationship.');
+        expect(parsedData.associations._9ZgpMFFYEeWn8vWfxOEIOg.commentInFrom).to.eq('Comment on a relationship.');
+        expect(parsedData.associations._9ZgpMFFYEeWn8vWfxOEIOg.commentInTo).to.eq('Comment on a relationship.');
       });
     });
     describe('with a user class', () => {
@@ -228,7 +228,7 @@ This <b>sucks</b>.`
         expect(parsedData).not.to.be.null;
       });
       it('includes the user class', () => {
-        expect(parsedData.classes['_tCa_gLvTEeWmS7iaRSwQeQ']).not.to.be.null;
+        expect(parsedData.classes._tCa_gLvTEeWmS7iaRSwQeQ).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
@@ -293,7 +293,7 @@ This <b>sucks</b>.`
         }
       });
     });
-    describe("as an enum's value as no name", () => {
+    describe('as an enum\'s value as no name', () => {
       it('fails', () => {
         try {
           UMLDesignerParser.parse({
@@ -381,12 +381,12 @@ This <b>sucks</b>.`
         expect(parsedData).not.to.be.null;
       });
       it('includes classes in package', () => {
-        expect(parsedData.classes['_wx0Db4PVEeaFY_lPQPbINQ']).not.to.be.null;
-        expect(parsedData.classes['_wx0DdoPVEeaFY_lPQPbINQ']).not.to.be.null;
+        expect(parsedData.classes._wx0Db4PVEeaFY_lPQPbINQ).not.to.be.null;
+        expect(parsedData.classes._wx0DdoPVEeaFY_lPQPbINQ).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['B', 'A']);
-        expect(parsedData.enums['_dRpdIKFLEeaWHdu8QjKipg']).not.to.be.null;
-        expect(parsedData.associations['_vB6ZwKFLEeaWHdu8QjKipg']).not.to.be.null;
-        expect(parsedData.associations['_9ZrJgKFLEeaWHdu8QjKipg']).not.to.be.null;
+        expect(parsedData.enums._dRpdIKFLEeaWHdu8QjKipg).not.to.be.null;
+        expect(parsedData.associations._vB6ZwKFLEeaWHdu8QjKipg).not.to.be.null;
+        expect(parsedData.associations._9ZrJgKFLEeaWHdu8QjKipg).not.to.be.null;
       });
     });
   });
@@ -398,7 +398,7 @@ function readFileContent(file) {
   try {
     fs.statSync(file).isFile();
   } catch (error) {
-    throw new buildException(
+    throw new BuildException(
       exceptions.WrongFile,
       `The passed file '${file}' must exist and must not be a directory.`);
   }
@@ -408,13 +408,13 @@ function readFileContent(file) {
 function getRootElement(content) {
   let root;
   const parser = new xml2js.Parser();
-  parser.parseString(content, function (err, result) {
-    if (result.hasOwnProperty('uml:Model')) {
+  parser.parseString(content, (err, result) => {
+    if ('uml:Model' in result) {
       root = result['uml:Model'];
-    } else if (result.hasOwnProperty('xmi:XMI')) {
+    } else if ('xmi:XMI' in result) {
       root = result['xmi:XMI']['uml:Model'][0];
     } else {
-      throw new buildException(
+      throw new BuildException(
         exceptions.NoRoot,
         'The passed document has no immediate root element.');
     }
@@ -431,9 +431,9 @@ function initDatabaseTypeHolder(databaseTypeName) {
   case DatabaseTypes.cassandra:
     return new CassandraTypes();
   default:
-    throw new buildException(exceptions.WrongDatabaseType,
+    throw new BuildException(exceptions.WrongDatabaseType,
       'The passed database type is incorrect. '
-      + "It must either be 'sql', 'mongodb', or 'cassandra'. "
+      + 'It must either be \'sql\', \'mongodb\', or \'cassandra\'. '
       + `Got '${databaseTypeName}'.`);
   }
 }

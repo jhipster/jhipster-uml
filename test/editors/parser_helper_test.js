@@ -1,13 +1,11 @@
-'use strict';
-
-const expect = require('chai').expect,
-  isAnId = require('../../lib/editors/parser_helper').isAnId,
-  extractClassName = require('../../lib/editors/parser_helper').extractClassName,
-  getXmlElementFromRawIndexes = require('../../lib/editors/parser_helper').getXmlElementFromRawIndexes;
+const expect = require('chai').expect;
+const isAnId = require('../../lib/editors/parser_helper').isAnId;
+const extractClassName = require('../../lib/editors/parser_helper').extractClassName;
+const getXmlElementFromRawIndexes = require('../../lib/editors/parser_helper').getXmlElementFromRawIndexes;
 
 describe('ParserHelper', () => {
   describe('#isAnId', () => {
-    describe("when passing fields that match 'id', with non-sensitive case", () => {
+    describe('when passing fields that match \'id\', with non-sensitive case', () => {
       it('returns true', () => {
         expect(isAnId('id')).to.equal(true);
         expect(isAnId('Id')).to.equal(true);
@@ -18,7 +16,7 @@ describe('ParserHelper', () => {
   });
 
   describe('#extractClassName', () => {
-    describe("when passing a name in the form of 'ENTITY_NAME'", () => {
+    describe('when passing a name in the form of \'ENTITY_NAME\'', () => {
       const names = extractClassName('EntityName');
 
       it('returns it, plus the formatted table name', () => {
@@ -26,7 +24,7 @@ describe('ParserHelper', () => {
         expect(names.tableName).to.eq('entity_name');
       });
     });
-    describe("when passing a name in the form of 'ENTITY_NAME(TABLE_NAME)", () => {
+    describe('when passing a name in the form of \'ENTITY_NAME(TABLE_NAME)', () => {
       let names = extractClassName('EntityName(table_name)');
 
       it('parses it and returns the right result', () => {
@@ -41,17 +39,17 @@ describe('ParserHelper', () => {
   describe('#getXmlElementFromRawIndexes', () => {
     const root = {
       packagedElement: [
-        {dumb: 'dumb'},
+        { dumb: 'dumb' },
         {
           packagedElement: [
-            {dumb: 'dumb'},
-            {dumb: 'dumb'},
-            {dumb: 'good'}
+            { dumb: 'dumb' },
+            { dumb: 'dumb' },
+            { dumb: 'good' }
           ]
         }
       ]
     };
-    const rawIndexes = [{index: 2, path: [1]}];
+    const rawIndexes = [{ index: 2, path: [1] }];
     const xmlElt = getXmlElementFromRawIndexes(root, rawIndexes[0]);
 
     it('returns the right element', () => {

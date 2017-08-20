@@ -1,7 +1,6 @@
-'use strict';
-
-const expect = require('chai').expect,
-  TypeData = require('../../lib/data/type_data');
+/* eslint-disable no-new */
+const expect = require('chai').expect;
+const TypeData = require('../../lib/data/type_data');
 
 describe('TypeData', () => {
   describe('#new', () => {
@@ -16,7 +15,7 @@ describe('TypeData', () => {
       });
     });
     describe('when passing arguments', () => {
-      const data = new TypeData({name: 'Abc'});
+      const data = new TypeData({ name: 'Abc' });
 
       it('sets them', () => {
         expect(data.name).to.eq('Abc');

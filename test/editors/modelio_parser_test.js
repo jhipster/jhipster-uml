@@ -1,8 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  ParserFactory = require('../../lib/editors/parser_factory');
+const fail = expect.fail;
+const ParserFactory = require('../../lib/editors/parser_factory');
 
 describe('ModelioParser', () => {
   describe('when passing a valid diagram', () => {
@@ -18,7 +18,7 @@ describe('ModelioParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('correctly parses the JobHistory class', () => {
-        const jobHistory = parsedData.classes['_0iCy1rieEeW4ip1mZlCqPg'];
+        const jobHistory = parsedData.classes._0iCy1rieEeW4ip1mZlCqPg;
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
         expect(jobHistory.fields).to.deep.eq([
@@ -31,7 +31,7 @@ describe('ModelioParser', () => {
         expect(jobHistory.service).to.eq('no');
       });
       it('correctly parses the Job class', () => {
-        const job = parsedData.classes['_0iCy47ieEeW4ip1mZlCqPg'];
+        const job = parsedData.classes._0iCy47ieEeW4ip1mZlCqPg;
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
         expect(job.fields).to.deep.eq([
@@ -46,7 +46,7 @@ describe('ModelioParser', () => {
         expect(job.service).to.eq('no');
       });
       it('correctly parses the Department class', () => {
-        const department = parsedData.classes['_0iCy77ieEeW4ip1mZlCqPg'];
+        const department = parsedData.classes._0iCy77ieEeW4ip1mZlCqPg;
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
         expect(department.fields).to.deep.eq([
@@ -78,7 +78,7 @@ describe('ModelioParser', () => {
         expect(employee.service).to.eq('no');
       });
       it('correctly parses the Location class', () => {
-        const location = parsedData.classes['_0iCzELieEeW4ip1mZlCqPg'];
+        const location = parsedData.classes._0iCzELieEeW4ip1mZlCqPg;
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
         expect(location.fields).to.deep.eq([
@@ -94,7 +94,7 @@ describe('ModelioParser', () => {
         expect(location.service).to.eq('no');
       });
       it('correctly parses the Country class', () => {
-        const country = parsedData.classes['_0iCzGbieEeW4ip1mZlCqPg'];
+        const country = parsedData.classes._0iCzGbieEeW4ip1mZlCqPg;
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
         expect(country.fields).to.deep.eq([
@@ -107,7 +107,7 @@ describe('ModelioParser', () => {
         expect(country.service).to.eq('no');
       });
       it('correctly parses the Region class', () => {
-        const region = parsedData.classes['_0iCzH7ieEeW4ip1mZlCqPg'];
+        const region = parsedData.classes._0iCzH7ieEeW4ip1mZlCqPg;
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
         expect(region.fields).to.deep.eq([
@@ -120,7 +120,7 @@ describe('ModelioParser', () => {
         expect(region.service).to.eq('no');
       });
       it('correctly parses the Task class', () => {
-        const task = parsedData.classes['_0iCzIrieEeW4ip1mZlCqPg'];
+        const task = parsedData.classes._0iCzIrieEeW4ip1mZlCqPg;
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
         expect(task.fields).to.deep.eq([
@@ -172,7 +172,7 @@ describe('ModelioParser', () => {
       const parsedData = parser.parse(parserData.data);
 
       it('adds it capitalized', () => {
-        expect(parsedData.types['_qlOWCZWyEeWgPqZDqm9Now'].name).to.eq('ZonedDateTime');
+        expect(parsedData.types._qlOWCZWyEeWgPqZDqm9Now.name).to.eq('ZonedDateTime');
       });
     });
     describe('with comments', () => {
@@ -191,27 +191,27 @@ describe('ModelioParser', () => {
           `<p>Description for a <strong>class:</strong></p>
 
 <ul>
-	<li><strong>one</strong></li>
-	<li><strong>two</strong></li>
+\t<li><strong>one</strong></li>
+\t<li><strong>two</strong></li>
 </ul>
 
 <p>&nbsp;</p>`
         );
         expect(parsedData.classes['_MlHMnngFEeaD3-9XbEOL5Q'].comment).to.eq(
-          `<p>Another description.</p>`
+          '<p>Another description.</p>'
         );
       });
       it('adds comments in fields', () => {
         expect(parsedData.fields['_MlHMmXgFEeaD3-9XbEOL5Q'].comment).to.eq(
-          `<p>Description for an <strong>attribute</strong>.</p>`
+          '<p>Description for an <strong>attribute</strong>.</p>'
         );
       });
       it('adds comments in relationships', () => {
         expect(parsedData.associations['_MlHMm3gFEeaD3-9XbEOL5Q'].commentInFrom).to.eq(
-          `<p>Comment for a relationship.</p>`
+          '<p>Comment for a relationship.</p>'
         );
         expect(parsedData.associations['_MlHMm3gFEeaD3-9XbEOL5Q'].commentInTo).to.eq(
-          `Another comment for a relationship`
+          'Another comment for a relationship'
         );
       });
     });
@@ -228,7 +228,7 @@ describe('ModelioParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('includes the user class', () => {
-        expect(parsedData.classes['_66WytRBlEeW5RsvjsYghDw']).not.to.be.null;
+        expect(parsedData.classes._66WytRBlEeW5RsvjsYghDw).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
@@ -292,12 +292,11 @@ describe('ModelioParser', () => {
         });
         it('works by adding all the classes', () => {
           expect(parsedData.classNames).to.deep.eq(['Class1', 'Class3', 'Class2']);
-          expect(parsedData.classes['_vC4sxHdfEeaWkfx80xqrTw']).not.to.be.null;
-          expect(parsedData.classes['_vC4syndfEeaWkfx80xqrTw']).not.to.be.null;
-          expect(parsedData.classes['_vC4sz3dfEeaWkfx80xqrTw']).not.to.be.null;
-          expect(parsedData.associations['_vC4sx3dfEeaWkfx80xqrTw']).not.to.be.null;
-          expect(parsedData.associations['_vC4szXdfEeaWkfx80xqrTw']).not.to.be.null;
-
+          expect(parsedData.classes._vC4sxHdfEeaWkfx80xqrTw).not.to.be.null;
+          expect(parsedData.classes._vC4syndfEeaWkfx80xqrTw).not.to.be.null;
+          expect(parsedData.classes._vC4sz3dfEeaWkfx80xqrTw).not.to.be.null;
+          expect(parsedData.associations._vC4sx3dfEeaWkfx80xqrTw).not.to.be.null;
+          expect(parsedData.associations._vC4szXdfEeaWkfx80xqrTw).not.to.be.null;
         });
       });
       describe('more complex model', () => {
@@ -313,14 +312,13 @@ describe('ModelioParser', () => {
         });
         it('works by adding all the classes', () => {
           expect(parsedData.classNames).to.deep.eq(['Class1', 'Class3', 'Class2']);
-          expect(parsedData.classes['_bYuIdaFSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.classes['_bYuviqFSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.classes['_bYuvj6FSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.enums['_bYuvi6FSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.associations['_bYuvhaFSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.associations['_bYuvg6FSEeaVvapPODu8lg']).not.to.be.null;
-          expect(parsedData.associations['_bYuvh6FSEeaVvapPODu8lg']).not.to.be.null;
-
+          expect(parsedData.classes._bYuIdaFSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.classes._bYuviqFSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.classes._bYuvj6FSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.enums._bYuvi6FSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.associations._bYuvhaFSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.associations._bYuvg6FSEeaVvapPODu8lg).not.to.be.null;
+          expect(parsedData.associations._bYuvh6FSEeaVvapPODu8lg).not.to.be.null;
         });
       });
     });
@@ -374,7 +372,7 @@ describe('ModelioParser', () => {
         }
       });
     });
-    describe("as an enum's value as no name", () => {
+    describe('as an enum\'s value as no name', () => {
       const parserData = ParserFactory.createParser({
         file: './test/xmi/modelio_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-'use strict';
 
+/* eslint-disable global-require */
 const chalk = require('chalk');
 
 try {

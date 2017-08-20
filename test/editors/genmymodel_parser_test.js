@@ -1,9 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  ParserFactory = require('../../lib/editors/parser_factory');
-
+const fail = expect.fail;
+const ParserFactory = require('../../lib/editors/parser_factory');
 
 describe('GenMyModelParser', () => {
   describe('when passing a valid diagram', () => {
@@ -19,7 +18,7 @@ describe('GenMyModelParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('correctly parses the JobHistory class', () => {
-        const jobHistory = parsedData.classes['_rasqOrvHEeWM0I0nquuJQA'];
+        const jobHistory = parsedData.classes._rasqOrvHEeWM0I0nquuJQA;
         expect(jobHistory.name).to.eq('JobHistory');
         expect(jobHistory.tableName).to.eq('job_history');
         expect(jobHistory.fields).to.deep.eq([
@@ -32,7 +31,7 @@ describe('GenMyModelParser', () => {
         expect(jobHistory.service).to.eq('no');
       });
       it('correctly parses the Job class', () => {
-        const job = parsedData.classes['_rasqXLvHEeWM0I0nquuJQA'];
+        const job = parsedData.classes._rasqXLvHEeWM0I0nquuJQA;
         expect(job.name).to.eq('Job');
         expect(job.tableName).to.eq('job');
         expect(job.fields).to.deep.eq([
@@ -47,7 +46,7 @@ describe('GenMyModelParser', () => {
         expect(job.service).to.eq('no');
       });
       it('correctly parses the Department class', () => {
-        const department = parsedData.classes['_rasqRrvHEeWM0I0nquuJQA'];
+        const department = parsedData.classes._rasqRrvHEeWM0I0nquuJQA;
         expect(department.name).to.eq('Department');
         expect(department.tableName).to.eq('department');
         expect(department.fields).to.deep.eq([
@@ -60,7 +59,7 @@ describe('GenMyModelParser', () => {
         expect(department.service).to.eq('no');
       });
       it('correctly parses the Employee class', () => {
-        const employee = parsedData.classes['_ratRVLvHEeWM0I0nquuJQA'];
+        const employee = parsedData.classes._ratRVLvHEeWM0I0nquuJQA;
         expect(employee.name).to.eq('Employee');
         expect(employee.tableName).to.eq('employee');
         expect(employee.fields).to.deep.eq([
@@ -79,7 +78,7 @@ describe('GenMyModelParser', () => {
         expect(employee.service).to.eq('no');
       });
       it('correctly parses the Location class', () => {
-        const location = parsedData.classes['_ratRo7vHEeWM0I0nquuJQA'];
+        const location = parsedData.classes._ratRo7vHEeWM0I0nquuJQA;
         expect(location.name).to.eq('Location');
         expect(location.tableName).to.eq('location');
         expect(location.fields).to.deep.eq([
@@ -95,7 +94,7 @@ describe('GenMyModelParser', () => {
         expect(location.service).to.eq('no');
       });
       it('correctly parses the Country class', () => {
-        const country = parsedData.classes['_ratRwrvHEeWM0I0nquuJQA'];
+        const country = parsedData.classes._ratRwrvHEeWM0I0nquuJQA;
         expect(country.name).to.eq('Country');
         expect(country.tableName).to.eq('country');
         expect(country.fields).to.deep.eq([
@@ -108,7 +107,7 @@ describe('GenMyModelParser', () => {
         expect(country.service).to.eq('no');
       });
       it('correctly parses the Region class', () => {
-        const region = parsedData.classes['_ratR2LvHEeWM0I0nquuJQA'];
+        const region = parsedData.classes._ratR2LvHEeWM0I0nquuJQA;
         expect(region.name).to.eq('Region');
         expect(region.tableName).to.eq('region');
         expect(region.fields).to.deep.eq([
@@ -121,7 +120,7 @@ describe('GenMyModelParser', () => {
         expect(region.service).to.eq('no');
       });
       it('correctly parses the Task class', () => {
-        const task = parsedData.classes['_rasqe7vHEeWM0I0nquuJQA'];
+        const task = parsedData.classes._rasqe7vHEeWM0I0nquuJQA;
         expect(task.name).to.eq('Task');
         expect(task.tableName).to.eq('task');
         expect(task.fields).to.deep.eq([
@@ -173,7 +172,7 @@ describe('GenMyModelParser', () => {
       const parsedData = parser.parse(parserData.data);
 
       it('adds it capitalized', () => {
-        expect(parsedData.types['String'].name).to.eq('String');
+        expect(parsedData.types.String.name).to.eq('String');
       });
     });
     describe('with comments', () => {
@@ -188,24 +187,24 @@ describe('GenMyModelParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('adds comments in classes', () => {
-        expect(parsedData.classes['_UlHVuVFwEeW5wfYDi5CV9g'].comment).to.eq(
-          `This is a class <b>comment</b>!<br>`
+        expect(parsedData.classes._UlHVuVFwEeW5wfYDi5CV9g.comment).to.eq(
+          'This is a class <b>comment</b>!<br>'
         );
-        expect(parsedData.classes['_UlHVwVFwEeW5wfYDi5CV9g'].comment).to.eq(
-          `Something.`
+        expect(parsedData.classes._UlHVwVFwEeW5wfYDi5CV9g.comment).to.eq(
+          'Something.'
         );
       });
       it('adds comments in fields', () => {
-        expect(parsedData.fields['_UlHVvVFwEeW5wfYDi5CV9g'].comment).to.eq(
-          `This is an attribute <i>comment</i>.<br>`
+        expect(parsedData.fields._UlHVvVFwEeW5wfYDi5CV9g.comment).to.eq(
+          'This is an attribute <i>comment</i>.<br>'
         );
       });
       it('adds comments in relationships', () => {
-        expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInFrom).to.eq(
-          `This is yet another comment!<br><br>Weird...<br>`
+        expect(parsedData.associations._UlHVxVFwEeW5wfYDi5CV9g.commentInFrom).to.eq(
+          'This is yet another comment!<br><br>Weird...<br>'
         );
-        expect(parsedData.associations['_UlHVxVFwEeW5wfYDi5CV9g'].commentInTo).to.eq(
-          `This is a relationship comment.<br>`
+        expect(parsedData.associations._UlHVxVFwEeW5wfYDi5CV9g.commentInTo).to.eq(
+          'This is a relationship comment.<br>'
         );
       });
     });
@@ -222,7 +221,7 @@ describe('GenMyModelParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('includes the user class', () => {
-        expect(parsedData.classes['_YzPHjORNEeSNGZq_xSbn1w']).not.to.be.null;
+        expect(parsedData.classes._YzPHjORNEeSNGZq_xSbn1w).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['User']);
       });
     });
@@ -240,19 +239,19 @@ describe('GenMyModelParser', () => {
           expect(parsedData).not.to.be.null;
         });
         it('adds the enum and the values', () => {
-          expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q']).not.to.be.null;
-          expect(parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration');
+          expect(parsedData.enums._fxHe2CGGEeW9keBtFZy97Q).not.to.be.null;
+          expect(parsedData.enums._fxHe2CGGEeW9keBtFZy97Q.name).to.eq('MyEnumeration');
           expect(
-            parsedData.enums['_fxHe2CGGEeW9keBtFZy97Q'].values
+            parsedData.enums._fxHe2CGGEeW9keBtFZy97Q.values
           ).to.deep.eq(['LITERAL1', 'LITERAL2']);
-          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q']).not.to.be.null;
-          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].name).to.eq('MyEnumeration2');
-          expect(parsedData.enums['_fxHe4SGGEeW9keBtFZy97Q'].values).to.deep.eq(['LITERAL']);
+          expect(parsedData.enums._fxHe4SGGEeW9keBtFZy97Q).not.to.be.null;
+          expect(parsedData.enums._fxHe4SGGEeW9keBtFZy97Q.name).to.eq('MyEnumeration2');
+          expect(parsedData.enums._fxHe4SGGEeW9keBtFZy97Q.values).to.deep.eq(['LITERAL']);
         });
         it('uses the enums as types for fields', () => {
-          expect(parsedData.fields['_fxHezyGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
-          expect(parsedData.fields['_fxHe0iGGEeW9keBtFZy97Q'].type).to.eq('_fxHe4SGGEeW9keBtFZy97Q');
-          expect(parsedData.fields['_fxHe1SGGEeW9keBtFZy97Q'].type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
+          expect(parsedData.fields._fxHezyGGEeW9keBtFZy97Q.type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
+          expect(parsedData.fields._fxHe0iGGEeW9keBtFZy97Q.type).to.eq('_fxHe4SGGEeW9keBtFZy97Q');
+          expect(parsedData.fields._fxHe1SGGEeW9keBtFZy97Q.type).to.eq('_fxHe2CGGEeW9keBtFZy97Q');
         });
       });
       describe('without values', () => {
@@ -284,11 +283,11 @@ describe('GenMyModelParser', () => {
         expect(parsedData).not.to.be.null;
       });
       it('includes classes in package', () => {
-        expect(parsedData.classes['_z3DqLaFTEeawbN_F_HFDxg']).not.to.be.null;
-        expect(parsedData.classes['_z3DqQ6FTEeawbN_F_HFDxg']).not.to.be.null;
+        expect(parsedData.classes._z3DqLaFTEeawbN_F_HFDxg).not.to.be.null;
+        expect(parsedData.classes._z3DqQ6FTEeawbN_F_HFDxg).not.to.be.null;
         expect(parsedData.classNames).to.deep.eq(['A', 'B']);
-        expect(parsedData.enums['_z3DqRqFTEeawbN_F_HFDxg']).not.to.be.null;
-        expect(parsedData.associations['_z3DqM6FTEeawbN_F_HFDxg']).not.to.be.null;
+        expect(parsedData.enums._z3DqRqFTEeawbN_F_HFDxg).not.to.be.null;
+        expect(parsedData.associations._z3DqM6FTEeawbN_F_HFDxg).not.to.be.null;
       });
     });
   });
@@ -325,7 +324,7 @@ describe('GenMyModelParser', () => {
         }
       });
     });
-    describe("as an enum's value as no name", () => {
+    describe('as an enum\'s value as no name', () => {
       const parserData = ParserFactory.createParser({
         file: './test/xmi/genmymodel_enum_no_attribute_name_test.xmi',
         databaseType: 'sql'

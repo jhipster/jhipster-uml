@@ -1,9 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  MongoDBTypes = require('../../lib/types/mongodb_types');
-
+const fail = expect.fail;
+const MongoDBTypes = require('../../lib/types/mongodb_types');
 
 describe('MongoDBTypes', () => {
   let mongoDBTypes;

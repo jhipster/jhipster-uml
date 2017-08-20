@@ -1,7 +1,6 @@
-'use strict';
-
-const expect = require('chai').expect,
-  AssociationData = require('../../lib/data/association_data');
+/* eslint-disable no-new */
+const expect = require('chai').expect;
+const AssociationData = require('../../lib/data/association_data');
 
 describe('AssociationData', () => {
   describe('#new', () => {

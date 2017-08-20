@@ -1,8 +1,7 @@
-'use strict';
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  EditorDetector = require('../../lib/editors/editor_detector');
+const fail = expect.fail;
+const EditorDetector = require('../../lib/editors/editor_detector');
 
 describe('EditorDetector#detect', () => {
   describe('when passing an invalid root', () => {
@@ -30,7 +29,7 @@ describe('EditorDetector#detect', () => {
         ]
       });
 
-      it("returns the editor's name", () => {
+      it('returns the editor\'s name', () => {
         expect(detected).to.equal('modelio');
       });
     });

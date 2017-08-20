@@ -1,15 +1,16 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  fs = require('fs'),
-  JHipsterUtils = require('../../lib/utils/jhipster_utils'),
-  isYoRcFilePresent = JHipsterUtils.isYoRcFilePresent,
-  readJSONFiles = JHipsterUtils.readJSONFiles,
-  checkForReservedClassName = JHipsterUtils.checkForReservedClassName,
-  checkForReservedTableName = JHipsterUtils.checkForReservedTableName,
-  checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName,
-  dateFormatForLiquibase = JHipsterUtils.dateFormatForLiquibase;
+const fail = expect.fail;
+const fs = require('fs');
+const JHipsterUtils = require('../../lib/utils/jhipster_utils');
+
+const isYoRcFilePresent = JHipsterUtils.isYoRcFilePresent;
+const readJSONFiles = JHipsterUtils.readJSONFiles;
+const checkForReservedClassName = JHipsterUtils.checkForReservedClassName;
+const checkForReservedTableName = JHipsterUtils.checkForReservedTableName;
+const checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName;
+const dateFormatForLiquibase = JHipsterUtils.dateFormatForLiquibase;
 
 describe('JHipsterUtils', () => {
   describe('::isYoRcFilePresent', () => {
@@ -57,13 +58,13 @@ describe('JHipsterUtils', () => {
   });
   describe('::checkForReservedClassName', () => {
     describe('when passing no arg', () => {
-      it("doesn't fail", () => {
+      it('doesn\'t fail', () => {
         checkForReservedClassName();
       });
     });
     describe('when passing valid args', () => {
       describe('with a valid class name', () => {
-        it("doesn't fail", () => {
+        it('doesn\'t fail', () => {
           checkForReservedClassName({
             name: 'Job',
             databaseTypeName: 'sql',
@@ -87,7 +88,7 @@ describe('JHipsterUtils', () => {
           });
         });
         describe('with the shouldThrow flag to false', () => {
-          it("doesn't fail", () => {
+          it('doesn\'t fail', () => {
             checkForReservedClassName({
               name: 'Class',
               databaseTypeName: 'sql',
@@ -100,13 +101,13 @@ describe('JHipsterUtils', () => {
   });
   describe('::checkForReservedTableName', () => {
     describe('when passing no arg', () => {
-      it("doesn't fail", () => {
+      it('doesn\'t fail', () => {
         checkForReservedTableName();
       });
     });
     describe('when passing valid args', () => {
       describe('with a valid class name', () => {
-        it("doesn't fail", () => {
+        it('doesn\'t fail', () => {
           checkForReservedTableName({
             name: 'Job',
             databaseTypeName: 'sql',
@@ -130,7 +131,7 @@ describe('JHipsterUtils', () => {
           });
         });
         describe('with the shouldThrow flag to false', () => {
-          it("doesn't fail", () => {
+          it('doesn\'t fail', () => {
             checkForReservedTableName({
               name: 'ANALYZE',
               databaseTypeName: 'sql',
@@ -143,13 +144,13 @@ describe('JHipsterUtils', () => {
   });
   describe('::checkForReservedFieldName', () => {
     describe('when passing no arg', () => {
-      it("doesn't fail", () => {
+      it('doesn\'t fail', () => {
         checkForReservedFieldName();
       });
     });
     describe('when passing valid args', () => {
       describe('with a valid class name', () => {
-        it("doesn't fail", () => {
+        it('doesn\'t fail', () => {
           checkForReservedFieldName({
             name: 'name',
             databaseTypeName: 'sql',
@@ -173,7 +174,7 @@ describe('JHipsterUtils', () => {
           });
         });
         describe('with the shouldThrow flag to false', () => {
-          it("doesn't fail", () => {
+          it('doesn\'t fail', () => {
             checkForReservedFieldName({
               name: 'continue',
               databaseTypeName: 'sql',
@@ -190,33 +191,33 @@ describe('JHipsterUtils', () => {
         const now = new Date();
         const increment = 1000042;
         const result =
-          dateFormatForLiquibase({date: now, increment: increment});
+          dateFormatForLiquibase({ date: now, increment });
         now.setSeconds(now.getUTCSeconds() + increment);
-        const now_utc = new Date(
+        const nowUTC = new Date(
           now.getUTCFullYear(),
           now.getUTCMonth(),
           now.getUTCDate(),
           now.getUTCHours(),
           now.getUTCMinutes(),
           now.getUTCSeconds());
-        const year = `${now_utc.getFullYear()}`;
-        let month = `${now_utc.getMonth() + 1}`;
+        const year = `${nowUTC.getFullYear()}`;
+        let month = `${nowUTC.getMonth() + 1}`;
         if (month.length === 1) {
           month = `0${month}`;
         }
-        let day = `${now_utc.getDate()}`;
+        let day = `${nowUTC.getDate()}`;
         if (day.length === 1) {
           day = `0${day}`;
         }
-        let hour = `${now_utc.getHours()}`;
+        let hour = `${nowUTC.getHours()}`;
         if (hour.length === 1) {
           hour = `0${hour}`;
         }
-        let minute = `${now_utc.getMinutes()}`;
+        let minute = `${nowUTC.getMinutes()}`;
         if (minute.length === 1) {
           minute = `0${minute}`;
         }
-        let second = `${now_utc.getSeconds()}`;
+        let second = `${nowUTC.getSeconds()}`;
         if (second.length === 1) {
           second = `0${second}`;
         }
@@ -233,32 +234,32 @@ describe('JHipsterUtils', () => {
     describe('when not passing the increment', () => {
       it('formats the current time for liquibase with no increment', () => {
         const now = new Date();
-        const result = dateFormatForLiquibase({date: now});
-        const now_utc = new Date(
+        const result = dateFormatForLiquibase({ date: now });
+        const nowUTC = new Date(
           now.getUTCFullYear(),
           now.getUTCMonth(),
           now.getUTCDate(),
           now.getUTCHours(),
           now.getUTCMinutes(),
           now.getUTCSeconds());
-        const year = `${now_utc.getFullYear()}`;
-        let month = `${now_utc.getMonth() + 1}`;
+        const year = `${nowUTC.getFullYear()}`;
+        let month = `${nowUTC.getMonth() + 1}`;
         if (month.length === 1) {
           month = `0${month}`;
         }
-        let day = `${now_utc.getDate()}`;
+        let day = `${nowUTC.getDate()}`;
         if (day.length === 1) {
           day = `0${day}`;
         }
-        let hour = `${now_utc.getHours()}`;
+        let hour = `${nowUTC.getHours()}`;
         if (hour.length === 1) {
           hour = `0${hour}`;
         }
-        let minute = `${now_utc.getMinutes()}`;
+        let minute = `${nowUTC.getMinutes()}`;
         if (minute.length === 1) {
           minute = `0${minute}`;
         }
-        let second = `${(now_utc.getSeconds()) % 60}`;
+        let second = `${(nowUTC.getSeconds()) % 60}`;
         if (second.length === 1) {
           second = `0${second}`;
         }

@@ -1,8 +1,6 @@
-'use strict';
-
-const expect = require('chai').expect,
-  handle = require('../../lib/jhipsteruml/command_line_handler').handle,
-  fs = require('fs');
+const expect = require('chai').expect;
+const handle = require('../../lib/jhipsteruml/command_line_handler').handle;
+const fs = require('fs');
 
 describe('CommandLineHandler', () => {
   describe('when using command line options without a jumlfile', () => {

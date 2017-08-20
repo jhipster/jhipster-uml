@@ -1,7 +1,6 @@
-'use strict';
-
-const expect = require('chai').expect,
-  ValidationData = require('../../lib/data/validation_data');
+/* eslint-disable no-new */
+const expect = require('chai').expect;
+const ValidationData = require('../../lib/data/validation_data');
 
 describe('ValidationData', () => {
   describe('#new', () => {
@@ -17,7 +16,7 @@ describe('ValidationData', () => {
       });
     });
     describe('when passing arguments', () => {
-      const data = new ValidationData({name: 'Abc', value: 'def'});
+      const data = new ValidationData({ name: 'Abc', value: 'def' });
 
       it('sets them', () => {
         expect(data.name).to.eq('Abc');

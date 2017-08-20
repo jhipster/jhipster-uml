@@ -1,8 +1,7 @@
-'use strict';
+const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder');
+const expect = require('chai').expect;
 
-const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder'),
-  expect = require('chai').expect,
-  fail = expect.fail;
+const fail = expect.fail;
 
 describe('JHipsterCommandBuilder', () => {
   let builder = null;

@@ -1,8 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  CassandraTypes = require('../../lib/types/cassandra_types');
+const fail = expect.fail;
+const CassandraTypes = require('../../lib/types/cassandra_types');
 
 describe('CassandraTypes', () => {
   let cassandraTypes;

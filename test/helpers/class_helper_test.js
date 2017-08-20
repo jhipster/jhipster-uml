@@ -1,20 +1,18 @@
-'use strict';
-
-const expect = require('chai').expect,
-  getClassNames = require('../../lib/helpers/class_helper').getClassNames;
+const expect = require('chai').expect;
+const getClassNames = require('../../lib/helpers/class_helper').getClassNames;
 
 describe('#getClassNames', () => {
   describe('when passing a valid classes object', () => {
     const classDataHolder = {};
     before(() => {
-      classDataHolder[0] = {name: 'a'};
-      classDataHolder[1] = {name: 'b'};
-      classDataHolder[2] = {name: 'c'};
-      classDataHolder[3] = {name: 'd'};
+      classDataHolder[0] = { name: 'a' };
+      classDataHolder[1] = { name: 'b' };
+      classDataHolder[2] = { name: 'c' };
+      classDataHolder[3] = { name: 'd' };
     });
 
-    it("returns the classes' names", () => {
-      expect(getClassNames(classDataHolder)).to.deep.equal({0: 'a', 1: 'b', 2: 'c', 3: 'd'});
+    it('returns the classes\' names', () => {
+      expect(getClassNames(classDataHolder)).to.deep.equal({ 0: 'a', 1: 'b', 2: 'c', 3: 'd' });
     });
   });
 

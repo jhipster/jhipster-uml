@@ -1,7 +1,6 @@
-'use strict';
-
-const expect = require('chai').expect,
-  EnumData = require('../../lib/data/enum_data');
+/* eslint-disable no-new */
+const expect = require('chai').expect;
+const EnumData = require('../../lib/data/enum_data');
 
 describe('EnumData', () => {
   describe('#new', () => {

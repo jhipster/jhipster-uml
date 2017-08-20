@@ -1,8 +1,8 @@
-'use strict';
+/* eslint-disable no-new */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  ClassData = require('../../lib/data/class_data');
+const fail = expect.fail;
+const ClassData = require('../../lib/data/class_data');
 
 describe('ClassData', () => {
   describe('#new', () => {
@@ -57,7 +57,7 @@ describe('ClassData', () => {
         });
       });
       describe('as a table name', () => {
-        it("doesn't fail", () => { // a warning is shown
+        it('doesn\'t fail', () => { // a warning is shown
           new ClassData({
             name: 'MyClass',
             tableName: 'ANALYZE'

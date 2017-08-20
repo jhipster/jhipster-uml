@@ -1,10 +1,10 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  ParserFactory = require('../../lib/editors/parser_factory'),
-  toJDL = require('../../lib/export/jdl_exporter').toJDL,
-  toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
+const fail = expect.fail;
+const ParserFactory = require('../../lib/editors/parser_factory');
+const toJDL = require('../../lib/export/jdl_exporter').toJDL;
+const toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
 
 describe('JDLExporter', () => {
   describe('::toJDL', () => {
@@ -106,7 +106,7 @@ relationship ManyToMany {
         const parsedData = parser.parse(parserData.data);
         const jdl = toJDL(parsedData, {
           listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
-          listPagination: {Employee: 'pager', Job: 'pager'},
+          listPagination: { Employee: 'pager', Job: 'pager' },
           listService: {
             JobHistory: 'serviceClass',
             Job: 'serviceClass',
@@ -114,7 +114,7 @@ relationship ManyToMany {
           },
           listOfNoClient: ['Employee'],
           listOfNoServer: ['Region'],
-          microserviceNames: {Employee: 'MySuperMicroservice'}
+          microserviceNames: { Employee: 'MySuperMicroservice' }
         });
 
         it('adds them', () => {
@@ -134,7 +134,7 @@ relationship ManyToMany {
     const parsedData = parser.parse(parserData.data);
     const jdlString = toJDLString(parsedData, {
       listDTO: ['JobHistory', 'Job', 'Department', 'Employee', 'Location', 'Country', 'Region', 'Task'],
-      listPagination: {Employee: 'pager', Job: 'pager'},
+      listPagination: { Employee: 'pager', Job: 'pager' },
       listService: {
         JobHistory: 'serviceClass',
         Job: 'serviceClass',
@@ -142,7 +142,7 @@ relationship ManyToMany {
       },
       listOfNoClient: ['Employee'],
       listOfNoServer: ['Region'],
-      microserviceNames: {Employee: 'MySuperMicroservice'}
+      microserviceNames: { Employee: 'MySuperMicroservice' }
     });
 
     it('is a stringified version of ::toJDL', () => {

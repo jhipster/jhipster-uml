@@ -1,8 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  SQLTypes = require('../../lib/types/sql_types');
+const fail = expect.fail;
+const SQLTypes = require('../../lib/types/sql_types');
 
 
 describe('SQLTypes', () => {

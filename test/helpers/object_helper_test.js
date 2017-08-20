@@ -1,8 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-expressions */
+const expect = require('chai').expect;
 
-const expect = require('chai').expect,
-  fail = expect.fail,
-  areJHipsterEntitiesEqual = require('../../lib/helpers/object_helper').areJHipsterEntitiesEqual;
+const fail = expect.fail;
+const areJHipsterEntitiesEqual = require('../../lib/helpers/object_helper').areJHipsterEntitiesEqual;
 
 describe('ObjectHelper', () => {
   describe('::areJHipsterEntitiesEqual', () => {
@@ -511,7 +511,7 @@ describe('ObjectHelper', () => {
           expect(areJHipsterEntitiesEqual(first, second)).to.be.true;
         });
       });
-      describe("if they don't have the same options", () => {
+      describe('if they don\'t have the same options', () => {
         const first = JSON.parse(`{
   "fluentMethods": true,
   "relationships": [],
