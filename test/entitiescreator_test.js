@@ -5,6 +5,7 @@ const fail = expect.fail;
 const createEntities = require('../lib/entitiescreator').createEntities;
 const ParserFactory = require('../lib/editors/parser_factory');
 const MongoDBTypes = require('../lib/types/mongodb_types');
+const winston = require('winston');
 
 describe('EntitiesCreator', () => {
   describe('#createEntities', () => {
@@ -45,7 +46,7 @@ describe('EntitiesCreator', () => {
             createEntities('parsedData', null, {});
             fail();
           } catch (error) {
-            console.error(error);
+            winston.error(error);
             expect(error.name).to.eq('NullPointerException');
           }
         });
