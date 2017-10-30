@@ -24,10 +24,10 @@
     "url": "git://github.com/jhipster/jhipster-uml.git"
   },
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js .",
-    "lint-fix": "./node_modules/eslint/bin/eslint.js . --fix",
-    "test": "./node_modules/mocha/bin/mocha test",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha test; ./node_modules/istanbul/lib/cli.js check-coverage"
+    "lint": "./node_modules/.bin/eslint.js .",
+    "lint-fix": "./node_modules/.bin/eslint.js . --fix",
+    "test": "./node_modules/.bin/mocha test",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test; ./node_modules/.bin/istanbul check-coverage"
   },
   "dependencies": {
     "chalk": "2.1.0",
