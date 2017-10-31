@@ -376,7 +376,7 @@ describe('EntitiesCreator', () => {
             );
           });
           for (let i = 0, entityNames = Object.keys(entities); i < entityNames.length; i++) {
-            expect(entities[entityNames[i]].fluentMethods).to.eq(true);
+            expect(entities[entityNames[i]].fluentMethods).to.eq(false);
           }
         });
       });
