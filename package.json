@@ -47,7 +47,9 @@
     "eslint-plugin-import": "2.8.0",
     "istanbul": "0.4.5",
     "mocha": "4.0.1",
-    "mocha-clean": "1.0.0"
+    "mocha-clean": "1.0.0",
+    "sinon": "4.0.2",
+    "sinon-chai": "2.14.0"
   },
   "peerDependencies": {},
   "engines": {
