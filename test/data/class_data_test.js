@@ -1,4 +1,4 @@
-/* eslint-disable no-new */
+/* eslint-disable no-new,no-unused-expressions */
 const expect = require('chai').expect;
 
 const fail = expect.fail;
@@ -12,13 +12,15 @@ describe('ClassData', () => {
       });
       it('sets the default values instead', () => {
         const data = new ClassData();
-        expect(data.name).to.eq('');
-        expect(data.comment).to.eq('');
-        expect(data.dto).to.eq('no');
-        expect(data.pagination).to.eq('no');
-        expect(data.service).to.eq('no');
-        expect(data.fields).to.deep.eq([]);
-        expect(data.tableName).to.eq('');
+        expect(data.name).to.equal('');
+        expect(data.comment).to.equal('');
+        expect(data.dto).to.equal('no');
+        expect(data.pagination).to.equal('no');
+        expect(data.service).to.equal('no');
+        expect(data.fields).to.deep.equal([]);
+        expect(data.tableName).to.equal('');
+        expect(data.fluentMethods).to.be.true;
+        expect(data.jpaMetamodelFiltering).to.be.false;
       });
     });
     describe('when passing arguments', () => {
@@ -33,13 +35,13 @@ describe('ClassData', () => {
       });
 
       it('sets them', () => {
-        expect(data.name).to.eq('Abc');
-        expect(data.comment).to.eq('42');
-        expect(data.dto).to.eq('yes');
-        expect(data.pagination).to.eq('always');
-        expect(data.service).to.eq('never');
+        expect(data.name).to.equal('Abc');
+        expect(data.comment).to.equal('42');
+        expect(data.dto).to.equal('yes');
+        expect(data.pagination).to.equal('always');
+        expect(data.service).to.equal('never');
         expect(data.fields).to.deep.eq([1, 2]);
-        expect(data.tableName).to.eq('something');
+        expect(data.tableName).to.equal('something');
       });
     });
     describe('when passing a reserved word', () => {
@@ -52,7 +54,7 @@ describe('ClassData', () => {
             });
             fail();
           } catch (error) {
-            expect(error.name).to.eq('IllegalNameException');
+            expect(error.name).to.equal('IllegalNameException');
           }
         });
       });
