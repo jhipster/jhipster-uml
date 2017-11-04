@@ -1,9 +1,22 @@
+/* eslint-disable no-unused-expressions */
 const expect = require('chai').expect;
 const CommandLineOptionHandler = require('../../lib/jhipsteruml/command_line_option_handler');
 const JHipsterUMLFileHandler = require('../../lib/jhipsteruml/jhipster_uml_file_handler');
 const fs = require('fs');
 
 describe('CommandLineHandler', () => {
+  describe('#isNumberOfPassedArgumentsInvalid', () => {
+    context(`with less than ${CommandLineOptionHandler.MINIMUM_ARGS_NUMBER} args`, () => {
+      it('returns true', () => {
+        expect(CommandLineOptionHandler.isNumberOfPassedArgumentsInvalid([1, 2])).to.be.true;
+      });
+    });
+    context(`with ${CommandLineOptionHandler.MINIMUM_ARGS_NUMBER} args or more`, () => {
+      it('returns false', () => {
+        expect(CommandLineOptionHandler.isNumberOfPassedArgumentsInvalid([1, 2, 3])).to.be.false;
+      });
+    });
+  });
   describe('#handle', () => {
     context(`without a ${JHipsterUMLFileHandler.JHIPSTER_UML_FILENAME}`, () => {
       let args = null;
