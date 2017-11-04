@@ -10,7 +10,6 @@ const readJSONFiles = JHipsterUtils.readJSONFiles;
 const checkForReservedClassName = JHipsterUtils.checkForReservedClassName;
 const checkForReservedTableName = JHipsterUtils.checkForReservedTableName;
 const checkForReservedFieldName = JHipsterUtils.checkForReservedFieldName;
-const dateFormatForLiquibase = JHipsterUtils.dateFormatForLiquibase;
 
 describe('JHipsterUtils', () => {
   describe('::isYoRcFilePresent', () => {
@@ -182,90 +181,6 @@ describe('JHipsterUtils', () => {
             });
           });
         });
-      });
-    });
-  });
-  describe('::dateFormatForLiquibase', () => {
-    describe('when passing both arguments', () => {
-      it('uses the increment with the passed date', () => {
-        const now = new Date();
-        const increment = 1000042;
-        const result =
-          dateFormatForLiquibase({ date: now, increment });
-        now.setSeconds(now.getUTCSeconds() + increment);
-        const nowUTC = new Date(
-          now.getUTCFullYear(),
-          now.getUTCMonth(),
-          now.getUTCDate(),
-          now.getUTCHours(),
-          now.getUTCMinutes(),
-          now.getUTCSeconds());
-        const year = `${nowUTC.getFullYear()}`;
-        let month = `${nowUTC.getMonth() + 1}`;
-        if (month.length === 1) {
-          month = `0${month}`;
-        }
-        let day = `${nowUTC.getDate()}`;
-        if (day.length === 1) {
-          day = `0${day}`;
-        }
-        let hour = `${nowUTC.getHours()}`;
-        if (hour.length === 1) {
-          hour = `0${hour}`;
-        }
-        let minute = `${nowUTC.getMinutes()}`;
-        if (minute.length === 1) {
-          minute = `0${minute}`;
-        }
-        let second = `${nowUTC.getSeconds()}`;
-        if (second.length === 1) {
-          second = `0${second}`;
-        }
-        expect(
-          result
-        ).to.equal(`${year}${month}${day}${hour}${minute}${second}`);
-      });
-    });
-    describe('when not passing the date', () => {
-      it('does not fail', () => {
-        expect(dateFormatForLiquibase().length).to.equal(14);
-      });
-    });
-    describe('when not passing the increment', () => {
-      it('formats the current time for liquibase with no increment', () => {
-        const now = new Date();
-        const result = dateFormatForLiquibase({ date: now });
-        const nowUTC = new Date(
-          now.getUTCFullYear(),
-          now.getUTCMonth(),
-          now.getUTCDate(),
-          now.getUTCHours(),
-          now.getUTCMinutes(),
-          now.getUTCSeconds());
-        const year = `${nowUTC.getFullYear()}`;
-        let month = `${nowUTC.getMonth() + 1}`;
-        if (month.length === 1) {
-          month = `0${month}`;
-        }
-        let day = `${nowUTC.getDate()}`;
-        if (day.length === 1) {
-          day = `0${day}`;
-        }
-        let hour = `${nowUTC.getHours()}`;
-        if (hour.length === 1) {
-          hour = `0${hour}`;
-        }
-        let minute = `${nowUTC.getMinutes()}`;
-        if (minute.length === 1) {
-          minute = `0${minute}`;
-        }
-        let second = `${(nowUTC.getSeconds()) % 60}`;
-        if (second.length === 1) {
-          second = `0${second}`;
-        }
-        expect(
-          result
-        ).to.equal(`${year}${month}${day}${hour}${minute}${second}`);
       });
     });
   });
