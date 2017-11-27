@@ -1,0 +1,15 @@
+{
+  "cache": true,
+  "check-coverage": true,
+  "exclude": [
+    "test/**/*.js"
+  ],
+  "reporter": [
+    "lcov",
+    "html"
+  ],
+  "lines": 75,
+  "statements": 75,
+  "functions": 75,
+  "branches": 75
+}

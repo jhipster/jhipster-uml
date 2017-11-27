@@ -26,8 +26,8 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint.js .",
     "lint-fix": "./node_modules/.bin/eslint.js . --fix",
-    "test": "./node_modules/.bin/mocha test",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test; ./node_modules/.bin/istanbul check-coverage"
+    "test": "nyc mocha test",
+    "coverage": "nyc --reporter=text-summary report"
   },
   "dependencies": {
     "chalk": "2.3.0",
@@ -45,9 +45,9 @@
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-import": "2.8.0",
-    "istanbul": "0.4.5",
     "mocha": "4.0.1",
     "mocha-clean": "1.0.0",
+    "nyc": "11.3.0",
     "sinon": "4.1.1",
     "sinon-chai": "2.14.0"
   },

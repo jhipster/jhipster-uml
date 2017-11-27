@@ -9,3 +9,4 @@ jumlfile
 *.iml
 coverage/*
 sonar-project.properties
+.nyc_output/*
