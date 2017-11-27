@@ -10,8 +10,6 @@ You'll be able to create your entities by supplying a UML file (made with your f
 We support: Modelio, UML Designer and GenMyModel.
 Moreover, we can convert your XMI file to a JDL one, so that you can use it with [JDL Studio](https://github.com/jhipster/jdl-studio)!
 
+Sparx EA UML models can also be converted to JDL thanks to the awesome work available [here](https://github.com/guillaumefinance/MDG-Sparx-EA-UML-JHipster) made by Guillaume Finance.
+
 For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
-
-**Pretty important note**: v2.0.0 only supports JHipster v3.0+. The versions before v2.0.0 still support anterior versions of JHipster.
-
-**Another pretty important note**: if you don't supply all the information we ask (JHipster UML's version, XMI file, etc.)  when submitting an issue, nobody can help you... So please, provide us with all the data we need. Thanks.
