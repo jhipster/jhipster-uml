@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "chalk": "2.3.0",
-    "deasync": "0.1.10",
-    "inquirer": "3.3.0",
+    "deasync": "0.1.11",
+    "inquirer": "4.0.0",
     "jhipster-core": "1.4.0",
     "lodash": "4.17.4",
     "winston": "2.4.0",
@@ -41,14 +41,14 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
-    "eslint": "4.10.0",
+    "eslint": "4.12.0",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-import": "2.8.0",
     "mocha": "4.0.1",
     "mocha-clean": "1.0.0",
     "nyc": "11.3.0",
-    "sinon": "4.1.1",
+    "sinon": "4.1.2",
     "sinon-chai": "2.14.0"
   },
   "peerDependencies": {},
