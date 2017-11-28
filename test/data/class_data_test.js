@@ -6,7 +6,7 @@ const ClassData = require('../../lib/data/class_data');
 
 describe('ClassData', () => {
   describe('#new', () => {
-    describe('when not passing any argument', () => {
+    context('when not passing any argument', () => {
       it('does not fail', () => {
         new ClassData();
       });
@@ -21,9 +21,11 @@ describe('ClassData', () => {
         expect(data.tableName).to.equal('');
         expect(data.fluentMethods).to.be.true;
         expect(data.jpaMetamodelFiltering).to.be.false;
+        expect(data.microserviceName).to.be.undefined;
+        expect(data.searchEngine).to.be.undefined;
       });
     });
-    describe('when passing arguments', () => {
+    context('when passing arguments', () => {
       const data = new ClassData({
         name: 'Abc',
         comment: '42',
@@ -31,21 +33,29 @@ describe('ClassData', () => {
         pagination: 'always',
         service: 'never',
         fields: [1, 2],
-        tableName: 'something'
+        tableName: 'something',
+        microserviceName: 'toto',
+        searchEngine: 'titi'
       });
 
-      it('sets them', () => {
-        expect(data.name).to.equal('Abc');
-        expect(data.comment).to.equal('42');
-        expect(data.dto).to.equal('yes');
-        expect(data.pagination).to.equal('always');
-        expect(data.service).to.equal('never');
-        expect(data.fields).to.deep.eq([1, 2]);
-        expect(data.tableName).to.equal('something');
+      it('sets them all', () => {
+        expect(data).to.deep.equal({
+          name: 'Abc',
+          comment: '42',
+          dto: 'yes',
+          pagination: 'always',
+          service: 'never',
+          fields: [1, 2],
+          tableName: 'something',
+          microserviceName: 'toto',
+          searchEngine: 'titi',
+          fluentMethods: true,
+          jpaMetamodelFiltering: false
+        });
       });
     });
-    describe('when passing a reserved word', () => {
-      describe('as class name', () => {
+    context('when passing a reserved word', () => {
+      context('as class name', () => {
         it('fails', () => {
           try {
             new ClassData({
@@ -58,7 +68,7 @@ describe('ClassData', () => {
           }
         });
       });
-      describe('as a table name', () => {
+      context('as a table name', () => {
         it('doesn\'t fail', () => { // a warning is shown
           new ClassData({
             name: 'MyClass',
