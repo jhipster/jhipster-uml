@@ -8,7 +8,7 @@ const toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
 
 describe('JDLExporter', () => {
   describe('::toJDL', () => {
-    describe('when passing nil parsed data', () => {
+    context('when passing nil parsed data', () => {
       it('fails', () => {
         try {
           toJDL();
@@ -18,8 +18,8 @@ describe('JDLExporter', () => {
         }
       });
     });
-    describe('when passing a valid parsed data', () => {
-      describe('with no option', () => {
+    context('when passing a valid parsed data', () => {
+      context('with no option', () => {
         const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio.xmi',
           databaseType: 'sql'
@@ -97,7 +97,7 @@ relationship ManyToMany {
 `);
         });
       });
-      describe('with options', () => {
+      context('with options', () => {
         const parserData = ParserFactory.createParser({
           file: './test/xmi/modelio.xmi',
           databaseType: 'sql'
@@ -118,9 +118,40 @@ relationship ManyToMany {
         });
 
         it('adds them', () => {
-          expect(jdl.toString().indexOf('dto * with mapstruct') !== -1).to.be.true;
-          expect(jdl.toString().indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
-          expect(jdl.toString().indexOf('service Employee with serviceImpl') !== -1).to.be.true;
+          expect(jdl.toString().includes('dto * with mapstruct')).to.be.true;
+          expect(jdl.toString().includes('service JobHistory, Job with serviceClass')).to.be.true;
+          expect(jdl.toString().includes('service Employee with serviceImpl')).to.be.true;
+        });
+      });
+      context('with an enum', () => {
+        const parserData = ParserFactory.createParser({
+          file: './test/xmi/modelio_enum_test.xmi',
+          databaseType: 'sql'
+        });
+        const parser = parserData.parser;
+        const parsedData = parser.parse(parserData.data);
+        const jdl = toJDL(parsedData);
+
+        it('converts it', () => {
+          expect(jdl.toString()).to.equal(
+            `entity MyClass (my_class) {
+  myAttribute String,
+  mySecondAttribute MyEnumeration,
+  myThirdAttribute MySecondEnumeration,
+  myFourthAttribute MyEnumeration
+}
+
+enum MyEnumeration {
+  VALUE_A,
+  VALUE_B
+}
+
+enum MySecondEnumeration {
+  VALUE_A
+}
+
+
+`);
         });
       });
     });
