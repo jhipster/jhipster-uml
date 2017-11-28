@@ -114,13 +114,17 @@ relationship ManyToMany {
           },
           listOfNoClient: ['Employee'],
           listOfNoServer: ['Region'],
-          microserviceNames: { Employee: 'MySuperMicroservice' }
+          microserviceNames: { Employee: 'MySuperMicroservice' },
+          angularSuffixes: { Employee: 'ahah' },
+          searchEngines: ['Employee']
         });
 
         it('adds them', () => {
           expect(jdl.toString().includes('dto * with mapstruct')).to.be.true;
           expect(jdl.toString().includes('service JobHistory, Job with serviceClass')).to.be.true;
           expect(jdl.toString().includes('service Employee with serviceImpl')).to.be.true;
+          expect(jdl.toString().includes('angularSuffix Employee with ahah')).to.be.true;
+          expect(jdl.toString().includes('search Employee with elasticsearch')).to.be.true;
         });
       });
       context('with an enum', () => {
@@ -177,9 +181,9 @@ enum MySecondEnumeration {
     });
 
     it('is a stringified version of ::toJDL', () => {
-      expect(jdlString.indexOf('dto * with mapstruct') !== -1).to.be.true;
-      expect(jdlString.indexOf('service JobHistory, Job with serviceClass') !== -1).to.be.true;
-      expect(jdlString.indexOf('service Employee with serviceImpl') !== -1).to.be.true;
+      expect(jdlString.includes('dto * with mapstruct')).to.be.true;
+      expect(jdlString.includes('service JobHistory, Job with serviceClass')).to.be.true;
+      expect(jdlString.includes('service Employee with serviceImpl')).to.be.true;
     });
   });
 });
