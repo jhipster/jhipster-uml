@@ -4,7 +4,7 @@ const CommandLineOptionHandler = require('../../lib/jhipsteruml/command_line_opt
 const JHipsterUMLFileHandler = require('../../lib/jhipsteruml/jhipster_uml_file_handler');
 const fs = require('fs');
 
-describe('CommandLineHandler', () => {
+describe('CommandLineOptionHandler', () => {
   describe('#isNumberOfPassedArgumentsInvalid', () => {
     context(`with less than ${CommandLineOptionHandler.MINIMUM_ARGS_NUMBER} args`, () => {
       it('returns true', () => {

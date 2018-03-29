@@ -3,8 +3,10 @@ const expect = require('chai').expect;
 
 const fail = expect.fail;
 const ParserFactory = require('../../lib/editors/parser_factory');
-const toJDL = require('../../lib/export/jdl_exporter').toJDL;
-const toJDLString = require('../../lib/export/jdl_exporter').toJDLString;
+const JDLExporter = require('../../lib/export/jdl_exporter');
+
+const toJDL = JDLExporter.toJDL;
+const toJDLString = JDLExporter.toJDLString;
 
 describe('JDLExporter', () => {
   describe('::toJDL', () => {
@@ -74,7 +76,6 @@ entity Task (task) {
   title String,
   description String
 }
-
 relationship OneToOne {
   JobHistory{job} to Job,
   JobHistory{department} to Department,
@@ -153,7 +154,6 @@ enum MyEnumeration {
 enum MySecondEnumeration {
   VALUE_A
 }
-
 
 `);
         });
