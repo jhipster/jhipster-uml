@@ -32,12 +32,12 @@
     "coverage": "nyc --reporter=text-summary report"
   },
   "dependencies": {
-    "chalk": "2.3.0",
-    "deasync": "0.1.11",
+    "chalk": "2.3.2",
+    "deasync": "0.1.12",
     "inquirer": "4.0.0",
     "jhipster-core": "1.4.0",
-    "lodash": "4.17.4",
-    "winston": "2.4.0",
+    "lodash": "4.17.5",
+    "winston": "2.4.1",
     "xml2js": "0.4.19",
     "yargs": "10.0.3"
   },
