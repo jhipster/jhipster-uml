@@ -24,9 +24,9 @@
     "url": "git://github.com/jhipster/jhipster-uml.git"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint.js .",
-    "lint-fix": "./node_modules/.bin/eslint.js . --fix",
-    "test": "nyc mocha test",
+    "lint": "eslint .",
+    "lint-fix": "yarn lint -- --fix",
+    "test": "yarn lint && nyc mocha test",
     "coverage": "nyc --reporter=text-summary report"
   },
   "dependencies": {

@@ -12,7 +12,9 @@ describe('#getClassNames', () => {
     });
 
     it('returns the classes\' names', () => {
-      expect(getClassNames(classDataHolder)).to.deep.equal({ 0: 'a', 1: 'b', 2: 'c', 3: 'd' });
+      expect(getClassNames(classDataHolder)).to.deep.equal({
+        0: 'a', 1: 'b', 2: 'c', 3: 'd'
+      });
     });
   });
 
