@@ -27,6 +27,8 @@
     "lint": "eslint .",
     "lint-fix": "yarn lint -- --fix",
     "test": "yarn lint && nyc mocha test",
+    "posttest": "yarn coverage",
+    "test:watch": "mocha test --watch --reporter min",
     "coverage": "nyc --reporter=text-summary report"
   },
   "dependencies": {
