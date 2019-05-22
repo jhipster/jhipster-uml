@@ -25,6 +25,9 @@ steps:
   inputs:
     versionSpec: '8.x'
   displayName: 'Install Node.js'
+  
+- bash: yarn
+  displayName: 'Install dependencies'
 
 - bash: yarn test
   displayName: 'Run tests'
