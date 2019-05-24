@@ -1,5 +1,5 @@
-const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder');
 const expect = require('chai').expect;
+const JHipsterCommandBuilder = require('../../lib/utils/jhipster_command_builder');
 
 const fail = expect.fail;
 

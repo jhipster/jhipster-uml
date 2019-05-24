@@ -32,9 +32,9 @@
     "coverage": "nyc --reporter=text-summary report"
   },
   "dependencies": {
-    "chalk": "2.3.2",
-    "deasync": "0.1.12",
-    "inquirer": "5.2.0",
+    "chalk": "2.4.2",
+    "deasync": "0.1.15",
+    "inquirer": "6.3.1",
     "jhipster-core": "2.0.1",
     "lodash": "4.17.11",
     "winston": "2.4.1",
@@ -43,15 +43,15 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-mocha": "5.0.0",
-    "eslint-plugin-import": "2.9.0",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-mocha": "5.3.0",
+    "eslint-plugin-import": "2.17.2",
     "mocha": "5.0.5",
     "mocha-clean": "1.0.0",
     "nyc": "11.6.0",
     "sinon": "4.4.9",
-    "sinon-chai": "3.0.0"
+    "sinon-chai": "3.3.0"
   },
   "peerDependencies": {},
   "engines": {

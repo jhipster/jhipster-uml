@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
 const expect = require('chai').expect;
+const fs = require('fs');
 const CommandLineOptionHandler = require('../../lib/jhipsteruml/command_line_option_handler');
 const JHipsterUMLFileHandler = require('../../lib/jhipsteruml/jhipster_uml_file_handler');
-const fs = require('fs');
 
 describe('CommandLineOptionHandler', () => {
   describe('#isNumberOfPassedArgumentsInvalid', () => {

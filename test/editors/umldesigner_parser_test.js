@@ -3,9 +3,9 @@ const expect = require('chai').expect;
 
 const fail = expect.fail;
 const DatabaseTypes = require('jhipster-core').JHipsterDatabaseTypes;
-const UMLDesignerParser = require('../../lib/editors/umldesigner_parser');
 const xml2js = require('xml2js');
 const fs = require('fs');
+const UMLDesignerParser = require('../../lib/editors/umldesigner_parser');
 const SQLTypes = require('../../lib/types/sql_types');
 const MongoDBTypes = require('../../lib/types/mongodb_types');
 const CassandraTypes = require('../../lib/types/cassandra_types');
