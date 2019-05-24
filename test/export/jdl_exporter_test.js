@@ -32,21 +32,21 @@ describe('JDLExporter', () => {
 
         it('creates the corresponding JDL', () => {
           expect(jdl.toString()).to.eq(
-            `entity JobHistory (job_history) {
+            `entity JobHistory {
   startDate ZonedDateTime required,
   endDate ZonedDateTime
 }
-entity Job (job) {
+entity Job {
   jobId Long,
   jobTitle String,
   minSalary Long,
   maxSalary Long
 }
-entity Department (department) {
+entity Department {
   departmentId Long,
   departmentName String
 }
-entity Employee (employee) {
+entity Employee {
   employeeId Long,
   firstName String,
   lastName String,
@@ -56,22 +56,22 @@ entity Employee (employee) {
   salary Long,
   commissionPct Long
 }
-entity Location (location) {
+entity Location {
   locationId Long,
   streetAddress String,
   postalCode String,
   city String,
   stateProvince String
 }
-entity Country (country) {
+entity Country {
   countryId Long,
   countryName String
 }
-entity Region (region) {
+entity Region {
   regionId Long,
   regionName String
 }
-entity Task (task) {
+entity Task {
   taskId Long,
   title String,
   description String
@@ -139,18 +139,16 @@ relationship ManyToMany {
 
         it('converts it', () => {
           expect(jdl.toString()).to.equal(
-            `entity MyClass (my_class) {
+            `entity MyClass {
   myAttribute String,
   mySecondAttribute MyEnumeration,
   myThirdAttribute MySecondEnumeration,
   myFourthAttribute MyEnumeration
 }
-
 enum MyEnumeration {
   VALUE_A,
   VALUE_B
 }
-
 enum MySecondEnumeration {
   VALUE_A
 }

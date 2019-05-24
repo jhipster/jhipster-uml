@@ -35,7 +35,7 @@
     "chalk": "2.4.2",
     "deasync": "0.1.15",
     "inquirer": "6.3.1",
-    "jhipster-core": "2.0.1",
+    "jhipster-core": "3.6.14",
     "lodash": "4.17.11",
     "winston": "3.2.1",
     "xml2js": "0.4.19",

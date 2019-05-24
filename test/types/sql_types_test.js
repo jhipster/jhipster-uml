@@ -31,7 +31,8 @@ describe('SQLTypes', () => {
           'AnyBlob',
           'ImageBlob',
           'TextBlob',
-          'Instant'
+          'Instant',
+          'Duration'
         ]
       );
     });

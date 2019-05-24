@@ -30,7 +30,8 @@ describe('MongoDBTypes', () => {
           'AnyBlob',
           'ImageBlob',
           'TextBlob',
-          'Instant'
+          'Instant',
+          'Duration'
         ]
       );
     });
