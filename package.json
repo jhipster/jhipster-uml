@@ -39,7 +39,7 @@
     "lodash": "4.17.11",
     "winston": "3.2.1",
     "xml2js": "0.4.19",
-    "yargs": "11.0.0"
+    "yargs": "13.2.4"
   },
   "devDependencies": {
     "chai": "4.1.2",
