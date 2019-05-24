@@ -2,7 +2,6 @@
 const expect = require('chai').expect;
 
 const fail = expect.fail;
-const winston = require('winston');
 const createEntities = require('../lib/entitiescreator').createEntities;
 const ParserFactory = require('../lib/editors/parser_factory');
 const MongoDBTypes = require('../lib/types/mongodb_types');
@@ -46,7 +45,8 @@ describe('EntitiesCreator', () => {
             createEntities('parsedData', null, {});
             fail();
           } catch (error) {
-            winston.error(error);
+            // eslint-disable-next-line no-console
+            console.error(error);
             expect(error.name).to.eq('NullPointerException');
           }
         });

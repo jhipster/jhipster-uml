@@ -37,7 +37,7 @@
     "inquirer": "6.3.1",
     "jhipster-core": "2.0.1",
     "lodash": "4.17.11",
-    "winston": "2.4.1",
+    "winston": "3.2.1",
     "xml2js": "0.4.19",
     "yargs": "11.0.0"
   },
