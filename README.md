@@ -1,5 +1,5 @@
 ![version](https://badge.fury.io/js/jhipster-uml.svg)
-[![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml)  [![devDependency Status](https://david-dm.org/jhipster/jhipster-uml/dev-status.svg)](https://david-dm.org/jhipster/jhipster-uml#info=devDependencies)  [![peerDependency Status](https://david-dm.org/jhipster/jhipster-uml/peer-status.svg)](https://david-dm.org/jhipster/jhipster-uml#info=peerDependencies)
+[![Azure DevOps Build Status][azure-devops-image]][azure-devops-url-main] [![Build Status](https://travis-ci.org/jhipster/jhipster-uml.svg?branch=master)](https://travis-ci.org/jhipster/jhipster-uml) [![Dependencies status](https://david-dm.org/jhipster/jhipster-uml.svg)](https://david-dm.org/jhipster/jhipster-uml)  [![devDependency Status](https://david-dm.org/jhipster/jhipster-uml/dev-status.svg)](https://david-dm.org/jhipster/jhipster-uml#info=devDependencies)  [![peerDependency Status](https://david-dm.org/jhipster/jhipster-uml/peer-status.svg)](https://david-dm.org/jhipster/jhipster-uml#info=peerDependencies)
 
 Welcome to JHipster UML!
 
@@ -15,3 +15,6 @@ Moreover, we can convert your XMI file to a JDL one, so that you can use it with
 Sparx EA UML models can also be converted to JDL thanks to the awesome work available [here](https://github.com/guillaumefinance/MDG-Sparx-EA-UML-JHipster) made by Guillaume Finance.
 
 For more information, visit our [Wiki page](https://jhipster.github.io/jhipster-uml/) in JHipster's wiki.
+
+[azure-devops-image]: https://dev.azure.com/jhipster/jhipster-uml/_apis/build/status/jhipster.jhipster-uml?branchName=master
+[azure-devops-url-main]: https://dev.azure.com/jhipster/jhipster-uml/_build
