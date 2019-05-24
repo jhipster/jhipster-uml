@@ -25,9 +25,9 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint-fix": "yarn lint -- --fix",
-    "test": "yarn lint && nyc mocha test",
-    "posttest": "yarn coverage",
+    "lint-fix": "npm run lint -- --fix",
+    "test": "npm run lint && nyc mocha test",
+    "posttest": "npm run coverage",
     "test:watch": "mocha test --watch --reporter min",
     "coverage": "nyc --reporter=text-summary report"
   },
