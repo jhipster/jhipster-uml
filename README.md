@@ -3,7 +3,17 @@
 
 Welcome to JHipster UML!
 
-Please read our [guidelines](/CONTRIBUTING.md#submitting-an-issue) before submitting an issue. If your issue is a bug, please use the bug template pre-populated [here](https://github.com/jhipster/jhipster-uml/issues/new). For feature requests and queries you can use [this template][feature-template].
+
+Please note that this project is deprecated and shouldn't be used anymore.
+
+Instead, we suggest you use the JDL export feature of this project to export your XMI files
+to a JDL file that you can use and make models of your entities with JDL Studio.
+
+To learn more about the JDL, head [here](https://www.jhipster.tech/jdl/).
+
+---
+
+Please read our [guidelines](/CONTRIBUTING.md#submitting-an-issue) before submitting an issue. If your issue is a bug, please use the bug template pre-populated [here](https://github.com/jhipster/jhipster-uml/issues/new).
 
 This project's main goal is to bring support of UML (more precisely, XMI) files (from various editors) to JHipster so that it can read the files, without you answering the questions.
 
