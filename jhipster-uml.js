@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --max-old-space-size=2048
 
 /* eslint-disable global-require */
 const chalk = require('chalk');
